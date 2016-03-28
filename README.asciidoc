@@ -4,7 +4,8 @@ image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link=
 
 Java memoizationfootnote:[https://en.wikipedia.org/wiki/Memoization] library.
 
-Mirrors:
+Mirrors
+
 - https://github.com/sebhoss/memoization.java (https://github.com/sebhoss/memoization.java.git)
 - https://bitbucket.org/sebhoss/memoization.java (https://bitbucket.org/sebhoss/memoization.java.git)
 - https://gitlab.com/sebastian.hoss/memoization.java (https://gitlab.com/sebastian.hoss/memoization.java.git)
