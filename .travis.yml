@@ -1,0 +1,14 @@
+# see http://docs.travis-ci.com/user/languages/java/
+language: java
+jdk:
+  - oraclejdk8
+
+# see http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: false
+
+# see http://docs.travis-ci.com/user/caching/#Arbitrary-directories
+cache:
+  directories:
+  - $HOME/.m2
+
+# see http://docs.travis-ci.com/user/notifications/

@@ -1,0 +1,5 @@
+= memoization.java
+
+image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link="https://creativecommons.org/publicdomain/zero/1.0/"]
+
+Java memoizationfootnote:[https://en.wikipedia.org/wiki/Memoization] library.
