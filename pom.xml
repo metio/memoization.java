@@ -5,6 +5,32 @@
   <artifactId>memoization.java</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>Memoization</name>
+  <packaging>pom</packaging>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.github.sebhoss.utils.memoization</groupId>
+        <artifactId>memoization-shared</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.sebhoss.utils.memoization</groupId>
+        <artifactId>memoization-guava</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.sebhoss.utils.memoization</groupId>
+        <artifactId>memoization-jsr107</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.sebhoss.utils.memoization</groupId>
+        <artifactId>memoization-map</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -23,6 +49,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -30,5 +57,12 @@
       </plugin>
     </plugins>
   </build>
+
+  <modules>
+    <module>memoization-guava</module>
+    <module>memoization-map</module>
+    <module>memoization-jsr107</module>
+    <module>memoization-shared</module>
+  </modules>
 
 </project>
