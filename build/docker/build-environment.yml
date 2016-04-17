@@ -9,7 +9,8 @@ build:
   image: maven:3.3.3-jdk-8
   volumes:
    - "../../:/code"
+   - "~/.m2/repository/:/repository"
   working_dir: /code
   external_links:
    - nexus_nexus_1:nexus
-  command: mvn clean verify -s build/docker/settings.xml
+  command: mvn clean verify -s build/docker/settings.xml -Dmaven.repo.local=/repository
