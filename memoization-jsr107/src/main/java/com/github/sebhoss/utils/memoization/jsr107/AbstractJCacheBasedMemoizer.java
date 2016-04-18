@@ -1,10 +1,9 @@
 package com.github.sebhoss.utils.memoization.jsr107;
 
-import java.util.function.Function;
+import com.github.sebhoss.utils.memoization.shared.MemoizationException;
 
 import javax.cache.Cache;
-
-import com.github.sebhoss.utils.memoization.shared.MemoizationException;
+import java.util.function.Function;
 
 abstract class AbstractJCacheBasedMemoizer<KEY, VALUE> {
 
@@ -20,14 +19,16 @@ abstract class AbstractJCacheBasedMemoizer<KEY, VALUE> {
 		} catch (final Throwable throwable) {
 			throw new MemoizationException(throwable);
 		}
-	}
+    }
 
 	protected final VALUE putIfAbsent(final KEY key, Function<KEY, VALUE> mappingFunction) {
 		try {
-			if (!cache.containsKey(key)) {
-				cache.put(key, mappingFunction.apply(key));
+			synchronized (cache) {
+				if (!cache.containsKey(key)) {
+					cache.put(key, mappingFunction.apply(key));
+				}
+				return cache.get(key);
 			}
-			return cache.get(key);
 		} catch (final Throwable throwable) {
 			throw new MemoizationException(throwable);
 		}

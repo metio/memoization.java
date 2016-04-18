@@ -3,15 +3,37 @@ package com.github.sebhoss.utils.memoization.shared;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+/**
+ * @param <FIRST>
+ *            The type of the first input parameter.
+ * @param <SECOND>
+ *            The type of the second input parameter.
+ * @param <KEY>
+ *            The type of the key to use for memoization.
+ * @param <VALUE>
+ *            The type of the value to calculate.
+ */
 public interface MemoizingBiFunction<FIRST, SECOND, KEY, VALUE> extends BiFunction<FIRST, SECOND, VALUE> {
 
-	BiFunction<FIRST, SECOND, KEY> getKeyFunction();
-	BiFunction<KEY, Function<KEY, VALUE>, VALUE> getMemoizingFunction();
-	BiFunction<FIRST, SECOND, VALUE> getBiFunction();
+    /**
+     * @return The function to calculate the key.
+     */
+    BiFunction<FIRST, SECOND, KEY> getKeyFunction();
 
-	default VALUE apply(final FIRST first, final SECOND second) {
-		final KEY key = getKeyFunction().apply(first, second);
-		return getMemoizingFunction().apply(key, givenKey -> getBiFunction().apply(first, second));
-	}
+    /**
+     * @return The {@link BiFunction} that controls how to memoize the actual {@link BiFunction}.
+     */
+    BiFunction<KEY, Function<KEY, VALUE>, VALUE> getMemoizingFunction();
+
+    /**
+     * @return The {@link BiFunction} to wrap/memoize.
+     */
+    BiFunction<FIRST, SECOND, VALUE> getBiFunction();
+
+    @Override
+    default VALUE apply(final FIRST first, final SECOND second) {
+        final KEY key = getKeyFunction().apply(first, second);
+        return getMemoizingFunction().apply(key, givenKey -> getBiFunction().apply(first, second));
+    }
 
 }

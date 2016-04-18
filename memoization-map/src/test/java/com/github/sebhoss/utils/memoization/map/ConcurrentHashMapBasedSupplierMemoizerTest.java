@@ -1,5 +1,10 @@
 package com.github.sebhoss.utils.memoization.map;
 
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -9,27 +14,41 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * Unit tests for ConcurrentHashMapBasedSupplierMemoizer.
+ */
+@SuppressWarnings("nls")
 public class ConcurrentHashMapBasedSupplierMemoizerTest {
 
+    /** Captures expected exceptions. */
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    /**
+     * Ensures that a new instance can be created, given that pre-computed values, a key-supplier and the actual value
+     * supplier to memoize is present. If any of those values is <code>null</code>, an exception should be thrown.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void shouldAcceptPreComputedValuesKeySupplierAndValueSupplier() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
         final Supplier<String> keySupplier = () -> "key";
         final Supplier<String> supplier = () -> "value";
-        ConcurrentHashMapBasedSupplierMemoizer<String, String> memoizer;
 
         // when
-        memoizer = new ConcurrentHashMapBasedSupplierMemoizer<>(precomputedValues, keySupplier, supplier);
+        final ConcurrentHashMapBasedSupplierMemoizer<String, String> memoizer = new ConcurrentHashMapBasedSupplierMemoizer<>(
+                precomputedValues, keySupplier, supplier);
 
         // then
         Assert.assertNotNull(memoizer);
     }
 
+    /**
+     *
+     */
     @Test
+    @SuppressWarnings("unused")
     public void shouldRequireNonNullPreComputedValues() {
         // given
         final Map<String, String> precomputedValues = null;
@@ -44,7 +63,11 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
         new ConcurrentHashMapBasedSupplierMemoizer<>(precomputedValues, keySupplier, supplier);
     }
 
+    /**
+     *
+     */
     @Test
+    @SuppressWarnings("unused")
     public void shouldRequireNonNullKeySupplier() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -59,7 +82,11 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
         new ConcurrentHashMapBasedSupplierMemoizer<>(precomputedValues, keySupplier, supplier);
     }
 
+    /**
+     *
+     */
     @Test
+    @SuppressWarnings("unused")
     public void shouldRequireNonNullValueSupplier() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -74,7 +101,11 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
         new ConcurrentHashMapBasedSupplierMemoizer<>(precomputedValues, keySupplier, supplier);
     }
 
+    /**
+     *
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void shouldMemoizeSuppliedValue() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -82,14 +113,18 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
         final Supplier<String> supplier = () -> "value";
 
         // when
-        final ConcurrentHashMapBasedSupplierMemoizer<String, String> memoizer = new
-                ConcurrentHashMapBasedSupplierMemoizer<>(precomputedValues, keySupplier, supplier);
+        final ConcurrentHashMapBasedSupplierMemoizer<String, String> memoizer = new ConcurrentHashMapBasedSupplierMemoizer<>(
+                precomputedValues, keySupplier, supplier);
 
         // then
         Assert.assertEquals("value", memoizer.get());
     }
 
+    /**
+     *
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void shouldUseSuppliedKey() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -97,14 +132,38 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
         final Supplier<String> supplier = () -> "value";
 
         // when
-        final ConcurrentHashMapBasedSupplierMemoizer<String, String> memoizer = new
-                ConcurrentHashMapBasedSupplierMemoizer<>(precomputedValues, keySupplier, supplier);
+        final ConcurrentHashMapBasedSupplierMemoizer<String, String> memoizer = new ConcurrentHashMapBasedSupplierMemoizer<>(
+                precomputedValues, keySupplier, supplier);
 
         // then
         Assert.assertTrue(memoizer.viewCacheForTest().isEmpty());
         Assert.assertEquals("value", memoizer.get()); // trigger once
         Assert.assertFalse(memoizer.viewCacheForTest().isEmpty());
         Assert.assertEquals("key", memoizer.viewCacheForTest().keySet().iterator().next());
+    }
+
+    /**
+     *
+     */
+    @Test
+    @SuppressWarnings({ "unchecked", "static-method" })
+    public void shouldTriggerOnce() {
+        // given
+        final Map<String, String> precomputedValues = new HashMap<>();
+        final Supplier<String> keySupplier = () -> "key";
+        final Supplier<String> supplier = mock(Supplier.class);
+        given(supplier.get()).willReturn("mocked");
+
+        // when
+        final ConcurrentHashMapBasedSupplierMemoizer<String, String> memoizer = new ConcurrentHashMapBasedSupplierMemoizer<>(
+                precomputedValues, keySupplier, supplier);
+
+        // then
+        Assert.assertEquals("mocked", memoizer.get()); // triggers
+        Assert.assertEquals("mocked", memoizer.get()); // memoized
+        Assert.assertEquals("mocked", memoizer.get()); // memoized
+        Assert.assertEquals("mocked", memoizer.get()); // memoized
+        verify(supplier, times(1)).get(); // real supplier triggered once, all other calls were memoized
     }
 
 }
