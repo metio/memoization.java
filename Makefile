@@ -34,4 +34,3 @@ release:
 
 docker-verify:
 	@docker-compose -f build/docker/build-environment.yml run --rm --user=$(UID) build
-
