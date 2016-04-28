@@ -1,6 +1,6 @@
 package com.github.sebhoss.utils.memoization.map;
 
-import static com.github.sebhoss.utils.memoization.shared.MemoizationDefaults.defaultSupplierKey;
+import static com.github.sebhoss.utils.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 import static com.github.sebhoss.utils.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 import static java.util.Collections.emptyMap;
 import static java.util.function.Function.identity;
@@ -29,7 +29,7 @@ public final class MapMemoization {
      * @return The wrapped {@link Supplier}.
      */
     public static final <VALUE> Supplier<VALUE> memoize(final Supplier<VALUE> supplier) {
-        return memoize(supplier, defaultSupplierKey());
+        return memoize(supplier, defaultKeySupplier());
     }
 
     /**

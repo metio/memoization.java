@@ -24,7 +24,7 @@ public class MemoizationDefaultsTest {
         Supplier<String> keySupplier;
 
         // when
-        keySupplier = MemoizationDefaults.defaultSupplierKey();
+        keySupplier = MemoizationDefaults.defaultKeySupplier();
 
         // then
         Assert.assertNotNull(keySupplier);
@@ -36,7 +36,7 @@ public class MemoizationDefaultsTest {
     @Test
     public void shouldDefineDefaultKey() {
         // given
-        final Supplier<String> keySupplier = MemoizationDefaults.defaultSupplierKey();
+        final Supplier<String> keySupplier = MemoizationDefaults.defaultKeySupplier();
 
         // when
         final String defaultSuppliedKey = keySupplier.get();

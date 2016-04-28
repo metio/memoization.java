@@ -12,7 +12,7 @@ public final class MemoizationDefaults {
     /**
      * @return The default key supplier used throughout the library.
      */
-    public static Supplier<String> defaultSupplierKey() {
+    public static Supplier<String> defaultKeySupplier() {
         return () -> "SUPPLIED"; //$NON-NLS-1$
     }
 
