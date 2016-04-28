@@ -16,19 +16,31 @@
  */
 package com.github.sebhoss.utils.memoization.guava;
 
+import java.util.function.Function;
+
 import com.google.common.cache.CacheLoader;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.function.Function;
-
+/**
+ *
+ *
+ */
 public class FunctionBasedCacheLoaderTest {
 
+    /**
+     *
+     */
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    /**
+     *
+     */
+    @SuppressWarnings("static-method")
     @Test
     public void shouldRequireFunctionToConstruct() {
         // given
@@ -41,6 +53,10 @@ public class FunctionBasedCacheLoaderTest {
         Assert.assertNotNull(cacheLoader);
     }
 
+    /**
+     *
+     */
+    @SuppressWarnings("unused")
     @Test
     public void shouldDeclineNullFunction() {
         // given
@@ -48,22 +64,27 @@ public class FunctionBasedCacheLoaderTest {
 
         // when
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage("Provide a function to load values into the cache!");
+        thrown.expectMessage("Provide a function to load values into the cache!"); //$NON-NLS-1$
 
         // then
         new FunctionBasedCacheLoader<>(function);
     }
 
+    /**
+     * @throws Exception
+     *             If the cache is unable to load the result
+     */
+    @SuppressWarnings("static-method")
     @Test
     public void shouldCallProvidedFunctionDuringLoad() throws Exception {
         // given
         final CacheLoader<String, String> cacheLoader = new FunctionBasedCacheLoader<>(Function.identity());
 
         // when
-        final String loadedValue = cacheLoader.load("test");
+        final String loadedValue = cacheLoader.load("test"); //$NON-NLS-1$
 
         // then
-        Assert.assertEquals("test", loadedValue);
+        Assert.assertEquals("test", loadedValue); //$NON-NLS-1$
     }
 
 }

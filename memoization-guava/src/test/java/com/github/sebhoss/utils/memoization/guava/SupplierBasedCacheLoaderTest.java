@@ -16,23 +16,35 @@
  */
 package com.github.sebhoss.utils.memoization.guava;
 
+import java.util.function.Supplier;
+
 import com.google.common.cache.CacheLoader;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.function.Supplier;
-
+/**
+ *
+ *
+ */
 public class SupplierBasedCacheLoaderTest {
 
+    /**
+     *
+     */
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    /**
+     *
+     */
+    @SuppressWarnings("static-method")
     @Test
     public void shouldRequireSupplierToConstruct() {
         // given
-        final Supplier<String> supplier = () -> "test";
+        final Supplier<String> supplier = () -> "test"; //$NON-NLS-1$
 
         // when
         final CacheLoader<String, String> cacheLoader = new SupplierBasedCacheLoader<>(supplier);
@@ -41,6 +53,10 @@ public class SupplierBasedCacheLoaderTest {
         Assert.assertNotNull(cacheLoader);
     }
 
+    /**
+     *
+     */
+    @SuppressWarnings("unused")
     @Test
     public void shouldDeclineNullSupplier() {
         // given
@@ -48,12 +64,17 @@ public class SupplierBasedCacheLoaderTest {
 
         // when
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage("Provide a supplier to load values into the cache!");
+        thrown.expectMessage("Provide a supplier to load values into the cache!"); //$NON-NLS-1$
 
         // then
         new SupplierBasedCacheLoader<>(supplier);
     }
 
+    /**
+     * @throws Exception
+     *             If the cache is unable to load the result.
+     */
+    @SuppressWarnings({ "nls", "static-method" })
     @Test
     public void shouldCallProvidedSupplierDuringLoad() throws Exception {
         // given
