@@ -25,37 +25,43 @@ public final class MapMemoization {
     /**
      * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param supplier The {@link Supplier} to memoize.
+     * @param supplier
+     *            The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <VALUE> Supplier<VALUE> memoize(final Supplier<VALUE> supplier) {
+    public static <VALUE> Supplier<VALUE> memoize(final Supplier<VALUE> supplier) {
         return memoize(supplier, defaultKeySupplier());
     }
 
     /**
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier.
+     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
+     * result under a specific cache key provided by a key-supplier.
      *
-     * @param supplier The {@link Supplier} to memoize.
-     * @param keySupplier The {@link Supplier} for the cache key.
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <KEY, VALUE> Supplier<VALUE> memoize(
+    public static <KEY, VALUE> Supplier<VALUE> memoize(
             final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier) {
         return memoize(supplier, keySupplier, emptyMap());
     }
 
     /**
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
+     * result under a specific cache key provided by a key-supplier. Skips previously computed values.
      *
-     * @param supplier The {@link Supplier} to memoize.
-     * @param keySupplier The {@link Supplier} for the cache key.
-     * @param preComputedValues Map of already computed values.
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param preComputedValues
+     *            Map of already computed values.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <KEY, VALUE> Supplier<VALUE> memoize(
+    public static <KEY, VALUE> Supplier<VALUE> memoize(
             final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier,
             final Map<KEY, VALUE> preComputedValues) {
@@ -65,10 +71,11 @@ public final class MapMemoization {
     /**
      * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param function The {@link Function} to memoize.
+     * @param function
+     *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static final <KEY, VALUE> Function<KEY, VALUE> memoize(final Function<KEY, VALUE> function) {
+    public static <KEY, VALUE> Function<KEY, VALUE> memoize(final Function<KEY, VALUE> function) {
         return memoize(function, emptyMap());
     }
 
@@ -76,11 +83,13 @@ public final class MapMemoization {
      * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
      * previously computed values.
      *
-     * @param function The {@link Function} to memoize.
-     * @param preComputedValues Map of already computed values.
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
      * @return The wrapped {@link Function}.
      */
-    public static final <KEY, VALUE> Function<KEY, VALUE> memoize(
+    public static <KEY, VALUE> Function<KEY, VALUE> memoize(
             final Function<KEY, VALUE> function,
             final Map<KEY, VALUE> preComputedValues) {
         return new ConcurrentHashMapBasedFunctionMemoizer<>(preComputedValues, function);
@@ -89,37 +98,44 @@ public final class MapMemoization {
     /**
      * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param biFunction The {@link BiFunction} to memoize.
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(final BiFunction<FIRST, SECOND, VALUE> biFunction) {
+    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+            final BiFunction<FIRST, SECOND, VALUE> biFunction) {
         return memoize(biFunction, hashCodeKeyFunction());
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier.
+     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
+     * result under a specific cache key provided by a key-supplier.
      *
-     * @param biFunction The {@link BiFunction} to memoize.
-     * @param keyFunction The {@link BiFunction} to compute the cache key.
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
             final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
         return memoize(biFunction, keyFunction, emptyMap());
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
+     * result under a specific cache key provided by a key-supplier. Skips previously computed values.
      *
-     * @param biFunction The {@link BiFunction} to memoize.
-     * @param keyFunction The {@link BiFunction} to compute the cache key.
-     * @param preComputedValues Map of already computed values.
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param preComputedValues
+     *            Map of already computed values.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
             final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, VALUE> preComputedValues) {
@@ -129,10 +145,11 @@ public final class MapMemoization {
     /**
      * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param consumer The {@link Consumer} to memoize.
+     * @param consumer
+     *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
      */
-    public static final <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> consumer) {
+    public static <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> consumer) {
         return memoize(consumer, emptyMap());
     }
 
@@ -140,11 +157,13 @@ public final class MapMemoization {
      * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
      * previously computed values.
      *
-     * @param consumer The {@link Consumer} to memoize.
-     * @param preComputedValues Map of already computed values.
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
      * @return The wrapped {@link Consumer}.
      */
-    public static final <VALUE> Consumer<VALUE> memoize(
+    public static <VALUE> Consumer<VALUE> memoize(
             final Consumer<VALUE> consumer,
             final Map<VALUE, VALUE> preComputedValues) {
         return new ConcurrentHashMapBasedConsumerMemoizer<>(preComputedValues, identity(), consumer);
