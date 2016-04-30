@@ -53,9 +53,9 @@
 
   <modules>
     <module>memoization-shared</module>
-    <module>memoization-guava</module>
     <module>memoization-map</module>
     <!--
+    <module>memoization-guava</module>
     <module>memoization-jsr107</module>
     -->
   </modules>
