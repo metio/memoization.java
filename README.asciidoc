@@ -1,12 +1,98 @@
 = memoization.java
+Sebastian Hoß <https://github.com/sebhoss[@sebhoss]>
+:github-org: sebhoss
+:project-name: memoization.java
+:project-group: com.github.sebhoss.utils.memoization
+:toc:
+:toc-placement: preamble
 
-image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link="https://creativecommons.org/publicdomain/zero/1.0/"]
+image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link="http://creativecommons.org/publicdomain/zero/1.0/"]
+image:https://img.shields.io/maven-central/v/{project-group}/{project-name}.svg?style=flat-square["Maven Central", link="https://maven-badges.herokuapp.com/maven-central/{project-group}/{project-name}"]
+image:https://www.openhub.net/p/{project-name}/widgets/project_thin_badge.gif["Open Hub statistics", link="https://www.openhub.net/p/{project-name}"]
+image:https://img.shields.io/travis/{github-org}/{project-name}/master.svg?style=flat-square["Build Status", link="https://travis-ci.org/{github-org}/{project-name}"]
+image:https://img.shields.io/gitter/room/{github-org}/{project-name}.svg?style=flat-square["join chat", link="https://gitter.im/{github-org}/{project-name}"]
 
 Java memoizationfootnote:[https://en.wikipedia.org/wiki/Memoization] library.
 
-Mirrors
+== Features
 
-- https://github.com/sebhoss/memoization.java (https://github.com/sebhoss/memoization.java.git)
-- https://bitbucket.org/sebhoss/memoization.java (https://bitbucket.org/sebhoss/memoization.java.git)
-- https://gitlab.com/sebastian.hoss/memoization.java (https://gitlab.com/sebastian.hoss/memoization.java.git)
-- http://repo.or.cz/memoization.java.git (http://repo.or.cz/memoization.java.git)
+* Memoize calls to `Supplier`, `Function`, `BiFunction` and `Consumer`
+* `ConcurrentHashMap` based implementation
+
+== Development Status
+
+The map based implementation works as expected, Guava and JSR107 is pushed back to a later date.
+
+== Usage
+
+Memoize any of the supported types by using the static factory methods supplied by e.g. `MapMemoization` (the `ConcurrentHashMap` based implementation) like this:
+
+[source, java]
+----
+Supplier<T> supplier = ...;
+Supplier<T> memoizedSupplier = MapMemoization.memoize(supplier);
+
+Function<I, O> function = ...;
+Function<I, O> memoizedFunction = MapMemoization.memoize(function);
+
+BiFunction<I, O, R> biFunction = ...;
+BiFunction<I, O, R> memoizedBiFunction = MapMemoization.memoize(biFunction);
+
+Consumer<T> consumer = ...;
+Consumer<T> memoizedConsumer = MapMemoization.memoize(consumer);
+----
+
+Use static imports to simplify this further to:
+
+[source, java]
+----
+Supplier<T> memoizedSupplier = memoize(supplier);
+Function<I, O> memoizedFunction = memoize(function);
+BiFunction<I, O, R> memoizedBiFunction = memoize(biFunction);
+Consumer<T> memoizedConsumer = memoize(consumer);
+----
+
+=== Integration
+
+To use this project just declare the following dependency inside your POM:
+
+[source, xml]
+----
+<dependencies>
+  <dependency>
+    <groupId>com.github.sebhoss.utils.memoization</groupId>
+    <artifactId>memoization.java</artifactId>
+    <version>${version.memoization}</version>
+  </dependency>
+</dependencies>
+----
+
+Replace ${version.memoization} with the link:http://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.github.sebhoss.utils.memoization%20a%3Amemoization.java[latest release]. This project follows the link:http://semver.org/[semantic versioning guidelines].
+
+=== Compatibility
+
+This project is compatible with the following Java versions:
+
+.Java compatibility
+|===
+| | 1.X.Y
+
+| Java 8
+| ✓
+|===
+
+== License
+
+To the extent possible under law, the author(s) have dedicated all copyright
+and related and neighboring rights to this software to the public domain
+worldwide. This software is distributed without any warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication along
+with this software. If not, see http://creativecommons.org/publicdomain/zero/1.0/.
+
+== Mirrors
+
+* https://github.com/sebhoss/memoization.java
+* https://bitbucket.org/sebhoss/memoization.java
+* https://gitlab.com/sebastian.hoss/memoization.java
+* http://repo.or.cz/memoization.java.git
