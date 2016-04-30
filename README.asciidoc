@@ -12,7 +12,7 @@ image:https://www.openhub.net/p/{project-name}/widgets/project_thin_badge.gif["O
 image:https://img.shields.io/travis/{github-org}/{project-name}/master.svg?style=flat-square["Build Status", link="https://travis-ci.org/{github-org}/{project-name}"]
 image:https://img.shields.io/gitter/room/{github-org}/{project-name}.svg?style=flat-square["join chat", link="https://gitter.im/{github-org}/{project-name}"]
 
-Java memoizationfootnote:[https://en.wikipedia.org/wiki/Memoization] library.
+Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 
 == Features
 
