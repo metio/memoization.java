@@ -67,7 +67,7 @@ To use this project just declare the following dependency inside your POM:
 </dependencies>
 ----
 
-Replace ${version.memoization} with the link:http://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.github.sebhoss.utils.memoization%20a%3Amemoization.java[latest release]. This project follows the link:http://semver.org/[semantic versioning guidelines].
+Replace `${version.memoization}` with the link:http://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.github.sebhoss.utils.memoization%20a%3Amemoization.java[latest release]. This project follows the link:http://semver.org/[semantic versioning guidelines].
 
 === Compatibility
 
