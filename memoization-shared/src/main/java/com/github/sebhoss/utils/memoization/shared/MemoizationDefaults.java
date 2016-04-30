@@ -5,7 +5,7 @@ import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 /**
- *
+ * Defaults used throughout the library.
  */
 public final class MemoizationDefaults {
 
