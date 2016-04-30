@@ -22,6 +22,10 @@ import java.util.function.Supplier;
  */
 public final class MapMemoization {
 
+    private MapMemoization() {
+        // factory class
+    }
+
     /**
      * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
@@ -167,10 +171,6 @@ public final class MapMemoization {
             final Consumer<VALUE> consumer,
             final Map<VALUE, VALUE> preComputedValues) {
         return new ConcurrentHashMapBasedConsumerMemoizer<>(preComputedValues, identity(), consumer);
-    }
-
-    private MapMemoization() {
-        // factory class
     }
 
 }

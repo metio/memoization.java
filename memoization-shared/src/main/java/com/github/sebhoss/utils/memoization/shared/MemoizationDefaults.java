@@ -9,6 +9,10 @@ import java.util.function.Supplier;
  */
 public final class MemoizationDefaults {
 
+    private MemoizationDefaults() {
+        // utility class
+    }
+
     /**
      * @return The default key supplier used throughout the library.
      */
@@ -25,10 +29,6 @@ public final class MemoizationDefaults {
             final int secondHashCode = Objects.hashCode(second);
             return firstHashCode + " " + secondHashCode; //$NON-NLS-1$
         };
-    }
-
-    private MemoizationDefaults() {
-        // utility class
     }
 
 }
