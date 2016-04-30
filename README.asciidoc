@@ -1,4 +1,6 @@
 = memoization.java
+
+image:https://badges.gitter.im/sebhoss/memoization.java.svg[link="https://gitter.im/sebhoss/memoization.java?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"]
 Sebastian Hoß <https://github.com/sebhoss[@sebhoss]>
 :github-org: sebhoss
 :project-name: memoization.java
