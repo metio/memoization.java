@@ -111,4 +111,63 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
         new ConcurrentHashMapBasedBiFunctionMemoizer<>(precomputedValues, keyFunction, biFunction);
     }
 
+    /**
+    *
+    */
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldReturnGivenBiFunction() {
+        // given
+        final Map<String, String> precomputedValues = new HashMap<>();
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
+        final BiFunction<String, String, String> biFunction = (a, b) -> "value";
+
+        // when
+        final ConcurrentHashMapBasedBiFunctionMemoizer<String, String, String, String> memoizer = new ConcurrentHashMapBasedBiFunctionMemoizer<>(
+                precomputedValues, keyFunction, biFunction);
+
+        // then
+        Assert.assertNotNull(memoizer.getBiFunction());
+        Assert.assertSame(biFunction, memoizer.getBiFunction());
+    }
+
+    /**
+    *
+    */
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldReturnGivenKeyFunction() {
+        // given
+        final Map<String, String> precomputedValues = new HashMap<>();
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
+        final BiFunction<String, String, String> biFunction = (a, b) -> "value";
+
+        // when
+        final ConcurrentHashMapBasedBiFunctionMemoizer<String, String, String, String> memoizer = new ConcurrentHashMapBasedBiFunctionMemoizer<>(
+                precomputedValues, keyFunction, biFunction);
+
+        // then
+        Assert.assertNotNull(memoizer.getKeyFunction());
+        Assert.assertSame(keyFunction, memoizer.getKeyFunction());
+    }
+
+    /**
+    *
+    */
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldReturnNonNullMemoizationFunction() {
+        // given
+        final Map<String, String> precomputedValues = new HashMap<>();
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
+        final BiFunction<String, String, String> biFunction = (a, b) -> "value";
+
+        // when
+        final ConcurrentHashMapBasedBiFunctionMemoizer<String, String, String, String> memoizer = new ConcurrentHashMapBasedBiFunctionMemoizer<>(
+                precomputedValues, keyFunction, biFunction);
+
+        // then
+        Assert.assertNotNull(memoizer.getMemoizingFunction());
+    }
+
 }
