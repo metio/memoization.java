@@ -10,7 +10,7 @@ import java.util.function.Function;
 import com.github.sebhoss.utils.memoization.shared.MemoizingConsumer;
 
 final class ConcurrentHashMapBasedConsumerMemoizer<KEY, VALUE>
-        extends AbstractConcurrentHashMapBasedMemoizer<KEY, VALUE>
+        extends ConcurrentHashMapBasedMemoizer<KEY, VALUE>
         implements MemoizingConsumer<KEY, VALUE> {
 
     private final Function<VALUE, KEY> keyFunction;

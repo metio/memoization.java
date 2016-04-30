@@ -41,7 +41,7 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
                 precomputedValues, keySupplier, supplier);
 
         // then
-        Assert.assertNotNull(memoizer);
+        Assert.assertNotNull("Memoizer is NULL", memoizer);
     }
 
     /**
@@ -117,7 +117,7 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
                 precomputedValues, keySupplier, supplier);
 
         // then
-        Assert.assertEquals("value", memoizer.get());
+        Assert.assertEquals("Memoized value does not match expectations", "value", memoizer.get());
     }
 
     /**
@@ -136,10 +136,11 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
                 precomputedValues, keySupplier, supplier);
 
         // then
-        Assert.assertTrue(memoizer.viewCacheForTest().isEmpty());
-        Assert.assertEquals("value", memoizer.get()); // trigger once
-        Assert.assertFalse(memoizer.viewCacheForTest().isEmpty());
-        Assert.assertEquals("key", memoizer.viewCacheForTest().keySet().iterator().next());
+        Assert.assertTrue("Cache is not empty before memoization", memoizer.viewCacheForTest().isEmpty());
+        Assert.assertEquals("Memoized value does not match expectations", "value", memoizer.get()); // trigger once
+        Assert.assertFalse("Cache is still empty after memoization", memoizer.viewCacheForTest().isEmpty());
+        Assert.assertEquals("Memoization key does not match expectations", "key",
+                memoizer.viewCacheForTest().keySet().iterator().next());
     }
 
     /**
@@ -159,10 +160,10 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
                 precomputedValues, keySupplier, supplier);
 
         // then
-        Assert.assertEquals("mocked", memoizer.get()); // triggers
-        Assert.assertEquals("mocked", memoizer.get()); // memoized
-        Assert.assertEquals("mocked", memoizer.get()); // memoized
-        Assert.assertEquals("mocked", memoizer.get()); // memoized
+        Assert.assertEquals("Memoized value does not match expectations", "mocked", memoizer.get()); // triggers
+        Assert.assertEquals("Memoized value does not match expectations", "mocked", memoizer.get()); // memoized
+        Assert.assertEquals("Memoized value does not match expectations", "mocked", memoizer.get()); // memoized
+        Assert.assertEquals("Memoized value does not match expectations", "mocked", memoizer.get()); // memoized
         verify(supplier, times(1)).get(); // real supplier triggered once, all other calls were memoized
     }
 

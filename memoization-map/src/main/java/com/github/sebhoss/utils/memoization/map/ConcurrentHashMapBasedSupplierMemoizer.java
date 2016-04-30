@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 final class ConcurrentHashMapBasedSupplierMemoizer<KEY, VALUE>
-        extends AbstractConcurrentHashMapBasedMemoizer<KEY, VALUE>
+        extends ConcurrentHashMapBasedMemoizer<KEY, VALUE>
         implements Supplier<VALUE> {
 
     private final Supplier<KEY>   keySupplier;

@@ -9,7 +9,7 @@ import java.util.function.Function;
 import com.github.sebhoss.utils.memoization.shared.MemoizingBiFunction;
 
 final class ConcurrentHashMapBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
-        extends AbstractConcurrentHashMapBasedMemoizer<KEY, VALUE>
+        extends ConcurrentHashMapBasedMemoizer<KEY, VALUE>
         implements MemoizingBiFunction<FIRST, SECOND, KEY, VALUE> {
 
     private final BiFunction<FIRST, SECOND, KEY>   keyFunction;

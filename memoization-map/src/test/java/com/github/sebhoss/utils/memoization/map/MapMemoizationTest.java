@@ -21,60 +21,57 @@ import org.junit.Test;
  *
  *
  */
+@SuppressWarnings({ "static-method", "nls" })
 public class MapMemoizationTest {
 
     /**
     *
     */
-    @SuppressWarnings("static-method")
     @Test
     public void shouldMemoizeSupplier() {
         // given
-        final Supplier<String> supplier = () -> "test"; //$NON-NLS-1$
+        final Supplier<String> supplier = () -> "test";
 
         // when
         final Supplier<String> memoize = MapMemoization.memoize(supplier);
 
         // then
-        Assert.assertNotNull(memoize);
+        Assert.assertNotNull("Memoized supplier is NULL", memoize);
     }
 
     /**
     *
     */
-    @SuppressWarnings("static-method")
     @Test
     public void shouldMemoizeFunction() {
         // given
-        final Function<String, String> function = a -> "test"; //$NON-NLS-1$
+        final Function<String, String> function = a -> "test";
 
         // when
         final Function<String, String> memoize = MapMemoization.memoize(function);
 
         // then
-        Assert.assertNotNull(memoize);
+        Assert.assertNotNull("Memoized function is NULL", memoize);
     }
 
     /**
     *
     */
-    @SuppressWarnings("static-method")
     @Test
     public void shouldMemoizeBiFunction() {
         // given
-        final BiFunction<String, String, String> function = (a, b) -> "test"; //$NON-NLS-1$
+        final BiFunction<String, String, String> bifunction = (a, b) -> "test";
 
         // when
-        final BiFunction<String, String, String> memoize = MapMemoization.memoize(function);
+        final BiFunction<String, String, String> memoize = MapMemoization.memoize(bifunction);
 
         // then
-        Assert.assertNotNull(memoize);
+        Assert.assertNotNull("Memoized bifunction is NULL", memoize);
     }
 
     /**
     *
     */
-    @SuppressWarnings("static-method")
     @Test
     public void shouldMemoizeConsumer() {
         // given
@@ -84,7 +81,7 @@ public class MapMemoizationTest {
         final Consumer<String> memoize = MapMemoization.memoize(consumer);
 
         // then
-        Assert.assertNotNull(memoize);
+        Assert.assertNotNull("Memoized consumer is NULL", memoize);
     }
 
     /**
@@ -97,7 +94,6 @@ public class MapMemoizationTest {
      * @throws InstantiationException
      *             Reflection problemt
      */
-    @SuppressWarnings("static-method")
     @Test
     public void shouldDeclarePrivateConstructor()
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -108,7 +104,7 @@ public class MapMemoizationTest {
         final boolean isPrivate = Modifier.isPrivate(constructor.getModifiers());
 
         // then
-        Assert.assertTrue("Constructor is not private", isPrivate); //$NON-NLS-1$
+        Assert.assertTrue("Constructor is not private", isPrivate);
         constructor.setAccessible(true);
         constructor.newInstance();
     }

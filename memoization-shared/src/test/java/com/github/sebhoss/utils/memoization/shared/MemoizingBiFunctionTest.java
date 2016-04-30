@@ -64,7 +64,7 @@ public class MemoizingBiFunctionTest {
         final String calculatedValue = memoizingBiFunction.apply(first, second);
 
         // then
-        Assert.assertEquals("testjunit", calculatedValue);
+        Assert.assertEquals("Calculated key does not match expectations", "testjunit", calculatedValue);
     }
 
     /**

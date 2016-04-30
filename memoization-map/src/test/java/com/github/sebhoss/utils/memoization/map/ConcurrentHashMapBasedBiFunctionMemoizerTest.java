@@ -51,7 +51,7 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
                 precomputedValues, keyFunction, biFunction);
 
         // then
-        Assert.assertNotNull(memoizer);
+        Assert.assertNotNull("Memoizer is NULL", memoizer);
     }
 
     /**
@@ -127,8 +127,8 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
                 precomputedValues, keyFunction, biFunction);
 
         // then
-        Assert.assertNotNull(memoizer.getBiFunction());
-        Assert.assertSame(biFunction, memoizer.getBiFunction());
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoizer.getBiFunction());
+        Assert.assertSame("Memoized BiFunction is not the same", biFunction, memoizer.getBiFunction());
     }
 
     /**
@@ -147,8 +147,8 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
                 precomputedValues, keyFunction, biFunction);
 
         // then
-        Assert.assertNotNull(memoizer.getKeyFunction());
-        Assert.assertSame(keyFunction, memoizer.getKeyFunction());
+        Assert.assertNotNull("Key function is NULL", memoizer.getKeyFunction());
+        Assert.assertSame("Key function is not the same", keyFunction, memoizer.getKeyFunction());
     }
 
     /**
@@ -167,7 +167,7 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
                 precomputedValues, keyFunction, biFunction);
 
         // then
-        Assert.assertNotNull(memoizer.getMemoizingFunction());
+        Assert.assertNotNull("Memoizing function is NULL", memoizer.getMemoizingFunction());
     }
 
 }

@@ -54,7 +54,7 @@ public class ConcurrentHashMapBasedConsumerMemoizerTest {
                 precomputedValues, keyFunction, consumer);
 
         // then
-        Assert.assertNotNull(memoizer);
+        Assert.assertNotNull("Memoizer is NULL", memoizer);
     }
 
     /**

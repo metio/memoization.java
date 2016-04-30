@@ -28,7 +28,7 @@ public class MemoizationExceptionTest {
     /**
      *
      */
-    @SuppressWarnings("static-method")
+    @SuppressWarnings({ "static-method", "nls" })
     @Test
     public void shouldWrapThrowable() {
         // given
@@ -38,7 +38,7 @@ public class MemoizationExceptionTest {
         final MemoizationException exception = new MemoizationException(throwable);
 
         // then
-        Assert.assertNotNull(exception);
+        Assert.assertNotNull("Wrapped exception is NULL", exception);
     }
 
 }

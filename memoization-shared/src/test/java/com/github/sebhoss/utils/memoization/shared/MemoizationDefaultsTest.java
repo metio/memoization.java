@@ -12,7 +12,7 @@ import org.junit.Test;
 /**
  * Unit tests for {@link MemoizationDefaults}.
  */
-@SuppressWarnings("static-method")
+@SuppressWarnings({ "static-method", "nls" })
 public class MemoizationDefaultsTest {
 
     /**
@@ -27,7 +27,7 @@ public class MemoizationDefaultsTest {
         keySupplier = MemoizationDefaults.defaultKeySupplier();
 
         // then
-        Assert.assertNotNull(keySupplier);
+        Assert.assertNotNull("Default key supplier is NULL", keySupplier);
     }
 
     /**
@@ -42,8 +42,8 @@ public class MemoizationDefaultsTest {
         final String defaultSuppliedKey = keySupplier.get();
 
         // then
-        Assert.assertNotNull(defaultSuppliedKey);
-        Assert.assertEquals("SUPPLIED", defaultSuppliedKey); //$NON-NLS-1$
+        Assert.assertNotNull("Default supplied key is NULL", defaultSuppliedKey);
+        Assert.assertEquals("Default supplied key does not match expectations", "SUPPLIED", defaultSuppliedKey); //$NON-NLS-1$
     }
 
     /**
@@ -58,7 +58,7 @@ public class MemoizationDefaultsTest {
         keyFunction = MemoizationDefaults.hashCodeKeyFunction();
 
         // when
-        Assert.assertNotNull(keyFunction);
+        Assert.assertNotNull("Default key function is NULL", keyFunction);
     }
 
     /**
@@ -73,7 +73,7 @@ public class MemoizationDefaultsTest {
         final String calculatedKey = keyFunction.apply(Integer.valueOf(1), Integer.valueOf(2));
 
         // when
-        Assert.assertEquals("1 2", calculatedKey); //$NON-NLS-1$
+        Assert.assertEquals("Calculated key does not match expectations", "1 2", calculatedKey); //$NON-NLS-1$
     }
 
     /**

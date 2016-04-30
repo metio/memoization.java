@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-abstract class AbstractConcurrentHashMapBasedMemoizer<KEY, VALUE> {
+class ConcurrentHashMapBasedMemoizer<KEY, VALUE> {
 
     private final Map<KEY, VALUE> cache;
 
-    AbstractConcurrentHashMapBasedMemoizer(final Map<KEY, VALUE> preComputedValues) {
+    ConcurrentHashMapBasedMemoizer(final Map<KEY, VALUE> preComputedValues) {
         this.cache = new ConcurrentHashMap<>(preComputedValues);
     }
 

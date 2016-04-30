@@ -52,7 +52,7 @@ public class ConcurrentHashMapBasedFunctionMemoizerTest {
                 precomputedValues, function);
 
         // then
-        Assert.assertNotNull(memoizer);
+        Assert.assertNotNull("Memoizer is NULL", memoizer);
     }
 
     /**
@@ -106,7 +106,7 @@ public class ConcurrentHashMapBasedFunctionMemoizerTest {
                 precomputedValues, function);
 
         // then
-        Assert.assertEquals("output", memoizer.apply("test"));
+        Assert.assertEquals("Memoized value does not match expectations", "output", memoizer.apply("test"));
     }
 
 }
