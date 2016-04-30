@@ -1,5 +1,6 @@
 package com.github.sebhoss.utils.memoization.shared;
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -30,7 +31,8 @@ public interface MemoizingConsumer<KEY, VALUE> extends Consumer<VALUE> {
     @Override
     default void accept(final VALUE input) {
         final KEY key = getKeyFunction().apply(input);
-        getMemoizingFunction().apply(key, givenKey -> {
+        final BiFunction<KEY, Function<KEY, VALUE>, VALUE> memoizer = Objects.requireNonNull(getMemoizingFunction());
+        memoizer.apply(key, givenKey -> {
             getConsumer().accept(input);
             return input;
         });

@@ -1,5 +1,6 @@
 package com.github.sebhoss.utils.memoization.shared;
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -33,7 +34,8 @@ public interface MemoizingBiFunction<FIRST, SECOND, KEY, VALUE> extends BiFuncti
     @Override
     default VALUE apply(final FIRST first, final SECOND second) {
         final KEY key = getKeyFunction().apply(first, second);
-        return getMemoizingFunction().apply(key, givenKey -> getBiFunction().apply(first, second));
+        final BiFunction<KEY, Function<KEY, VALUE>, VALUE> memoizer = Objects.requireNonNull(getMemoizingFunction());
+        return memoizer.apply(key, givenKey -> getBiFunction().apply(first, second));
     }
 
 }
