@@ -6,7 +6,7 @@
 #
 
 build:
-  image: maven:3.3.3-jdk-8
+  image: maven:3.3.9-jdk-8
   volumes:
    - "../../:/code"
    - "~/.m2/repository/:/repository"
