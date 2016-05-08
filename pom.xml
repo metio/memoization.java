@@ -5,9 +5,9 @@
   <!--                                 PARENT                                  -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <parent>
-    <groupId>com.github.sebhoss</groupId>
-    <artifactId>java-parent</artifactId>
-    <version>3.0.0</version>
+    <groupId>de.xn__ho_hia.maven.parents</groupId>
+    <artifactId>maven-parents-java-stable</artifactId>
+    <version>0.0.0-SNAPSHOT</version>
   </parent>
 
   <groupId>com.github.sebhoss.utils.memoization</groupId>
@@ -18,14 +18,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>com.github.sebhoss.bom</groupId>
-        <artifactId>auto-managed</artifactId>
-        <version>2016.02.07</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
       <dependency>
         <groupId>com.github.sebhoss.utils.memoization</groupId>
         <artifactId>memoization-shared</artifactId>
