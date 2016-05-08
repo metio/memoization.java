@@ -10,7 +10,7 @@
     <version>0.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.github.sebhoss.utils.memoization</groupId>
+  <groupId>de.xn__ho_hia.utils.memoization</groupId>
   <artifactId>memoization.java</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>Memoization</name>
@@ -19,24 +19,24 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.github.sebhoss.utils.memoization</groupId>
+        <groupId>de.xn__ho_hia.utils.memoization</groupId>
         <artifactId>memoization-shared</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.github.sebhoss.utils.memoization</groupId>
+        <groupId>de.xn__ho_hia.utils.memoization</groupId>
         <artifactId>memoization-guava</artifactId>
         <version>${project.version}</version>
       </dependency>
       <!--
       <dependency>
-        <groupId>com.github.sebhoss.utils.memoization</groupId>
+        <groupId>de.xn__ho_hia.utils.memoization</groupId>
         <artifactId>memoization-jsr107</artifactId>
         <version>${project.version}</version>
       </dependency>
       -->
       <dependency>
-        <groupId>com.github.sebhoss.utils.memoization</groupId>
+        <groupId>de.xn__ho_hia.utils.memoization</groupId>
         <artifactId>memoization-map</artifactId>
         <version>${project.version}</version>
       </dependency>
