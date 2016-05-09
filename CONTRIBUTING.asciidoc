@@ -1,2 +1,3 @@
 = Making a contribution
 
+Just send me a pull request or open up a ticket & we will take it from there together.
