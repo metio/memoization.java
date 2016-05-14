@@ -28,13 +28,11 @@
         <artifactId>memoization-guava</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <!--
       <dependency>
         <groupId>de.xn__ho_hia.utils.memoization</groupId>
         <artifactId>memoization-jsr107</artifactId>
         <version>${project.version}</version>
       </dependency>
-      -->
       <dependency>
         <groupId>de.xn__ho_hia.utils.memoization</groupId>
         <artifactId>memoization-map</artifactId>
