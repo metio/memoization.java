@@ -1,46 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    This file is part of memoization.java. It is subject to the license terms in the LICENSE file found in the top-level
+    directory of this distribution and at http://creativecommons.org/publicdomain/zero/1.0/. No part of memoization.java,
+    including this file, may be copied, modified, propagated, or distributed except according to the terms contained
+    in the LICENSE file.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
+  <!-- ordering follows https://maven.apache.org/developers/conventions/code.html#POM_Code_Convention -->
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                                 PARENT                                  -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Inheritance -->
   <parent>
     <groupId>de.xn__ho_hia.maven.parents</groupId>
     <artifactId>maven-parents-java-stable</artifactId>
     <version>0.0.0-SNAPSHOT</version>
   </parent>
 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                               COORDINATES                               -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
   <groupId>de.xn__ho_hia.utils.memoization</groupId>
   <artifactId>memoization.java</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>Memoization</name>
   <packaging>pom</packaging>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>de.xn__ho_hia.utils.memoization</groupId>
-        <artifactId>memoization-shared</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>de.xn__ho_hia.utils.memoization</groupId>
-        <artifactId>memoization-guava</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>de.xn__ho_hia.utils.memoization</groupId>
-        <artifactId>memoization-jsr107</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>de.xn__ho_hia.utils.memoization</groupId>
-        <artifactId>memoization-map</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                               INFORMATIONS                              -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#More_Project_Information -->
+  <name>memoization.java</name>
+  <description>Java memoization library</description>
+  <url>http://seb.hoß.de/memoization.java</url>
+  <inceptionYear>2016</inceptionYear>
 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                 MODULES                                 -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Aggregation -->
   <modules>
     <module>memoization-shared</module>
     <module>memoization-map</module>
@@ -49,5 +52,30 @@
     <module>memoization-jsr107</module>
     -->
   </modules>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                    SCM                                  -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#SCM -->
+  <scm>
+    <connection>scm:git:git://github.com/sebhoss/memoization.java.git</connection>
+    <developerConnection>scm:git:git@github.com:sebhoss/memoization.java.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/sebhoss/memoization.java</url>
+  </scm>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                            DEPENDENCY MANAGEMENT                        -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Dependency_Management -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>de.xn__ho_hia.utils.memoization</groupId>
+        <artifactId>memoization-shared</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
 </project>
