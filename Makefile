@@ -12,7 +12,7 @@ help:
 sonar-analysis:
 	# http://docs.sonarqube.org/display/SONAR/Analyzing+with+Maven
 	@mvn clean install
-	@mvn sonar:sonar -Dsonar.host.url=http://localhost:59000
+	@mvn sonar:sonar -Dsonar.host.url=http://localhost:59000 -Dsonar.pitest.mode=reuseReport
 
 sign-waiver:
 	@gpg2 --no-version --armor --sign AUTHORS/WAIVER
