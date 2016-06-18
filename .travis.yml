@@ -30,4 +30,6 @@ addons:
     build_command:   "mvn -DskipTests=true compile"
     branch_pattern: master
 
-# see http://docs.travis-ci.com/user/notifications/
+# see https://docs.travis-ci.com/user/notifications/#IRC-notification
+notifications:
+  irc: "chat.freenode.net#metio.wtf"
