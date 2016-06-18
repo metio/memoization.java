@@ -17,9 +17,9 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#Inheritance -->
   <parent>
-    <groupId>de.xn__ho_hia.maven.parents</groupId>
+    <groupId>de.xn--ho-hia.maven.parents</groupId>
     <artifactId>maven-parents-java-stable</artifactId>
-    <version>0.0.0-SNAPSHOT</version>
+    <version>9999.99.99-SNAPSHOT</version>
   </parent>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
