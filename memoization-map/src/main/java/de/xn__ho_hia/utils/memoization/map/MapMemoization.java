@@ -6,6 +6,7 @@ import static java.util.Collections.emptyMap;
 import static java.util.function.Function.identity;
 
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -171,6 +172,36 @@ public final class MapMemoization {
             final Consumer<VALUE> consumer,
             final Map<VALUE, VALUE> preComputedValues) {
         return new ConcurrentHashMapBasedConsumerMemoizer<>(preComputedValues, identity(), consumer);
+    }
+
+    /**
+     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
+     * @return The wrapped {@link BiConsumer}.
+     */
+    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> memoize(final BiConsumer<FIRST, SECOND> biConsumer) {
+        return memoize(biConsumer, hashCodeKeyFunction(), emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link BiConsumer}.
+     */
+    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> memoize(
+            final BiConsumer<FIRST, SECOND> biConsumer,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, KEY> preComputedValues) {
+        return new ConcurrentHashMapBasedBiConsumerMemoizer<>(preComputedValues, keyFunction, biConsumer);
     }
 
 }
