@@ -9,15 +9,15 @@ package de.xn__ho_hia.utils.memoization.map;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import de.xn__ho_hia.utils.memoization.map.MapMemoization;
 
 /**
  *
@@ -84,6 +84,36 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiConsumer() {
+        // given
+        final BiConsumer<String, String> biConsumer = (first, second) -> System.out.println(first + second);
+
+        // when
+        final BiConsumer<String, String> memoize = MapMemoization.memoize(biConsumer);
+
+        // then
+        Assert.assertNotNull("Memoized biConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizePredicate() {
+        // given
+        final Predicate<String> predicate = input -> true;
+
+        // when
+        final Predicate<String> memoize = MapMemoization.memoize(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized predicate is NULL", memoize);
     }
 
     /**

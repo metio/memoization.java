@@ -2,6 +2,7 @@ package de.xn__ho_hia.utils.memoization.map;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
@@ -33,6 +34,10 @@ final class ConcurrentHashMapBasedBiConsumerMemoizer<FIRST, SECOND, KEY>
             biConsumer.accept(second, first);
             return givenKey;
         });
+    }
+
+    final Map<KEY, KEY> viewCacheForTest() {
+        return Collections.unmodifiableMap(cache);
     }
 
 }

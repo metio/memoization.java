@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 /**
  *
@@ -131,6 +132,50 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
 
         // then
         memoizer.accept("first", "second");
+    }
+
+    /**
+    *
+    */
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldUseSetCacheKeyAndValue() {
+        // given
+        final Map<String, String> precomputedValues = new HashMap<>();
+        final BiFunction<String, String, String> keyFunction = (first, second) -> first + second;
+        final BiConsumer<String, String> biConsumer = (first, second) -> System.out.println(first + second);
+
+        // when
+        final ConcurrentHashMapBasedBiConsumerMemoizer<String, String, String> memoizer = new ConcurrentHashMapBasedBiConsumerMemoizer<>(
+                precomputedValues, keyFunction, biConsumer);
+
+        // then
+        memoizer.accept("first", "second");
+        Assert.assertFalse("Cache is still empty after memoization", memoizer.viewCacheForTest().isEmpty());
+        Assert.assertEquals("Memoization key does not match expectations", "firstsecond",
+                memoizer.viewCacheForTest().keySet().iterator().next());
+        Assert.assertEquals("Memoization value does not match expectations", "firstsecond",
+                memoizer.viewCacheForTest().values().iterator().next());
+    }
+
+    /**
+    *
+    */
+    @Test
+    @SuppressWarnings({ "unchecked", "static-method" })
+    public void shouldUseCallWrappedBiConsumer() {
+        // given
+        final Map<String, String> precomputedValues = new HashMap<>();
+        final BiFunction<String, String, String> keyFunction = (first, second) -> first + second;
+        final BiConsumer<String, String> biConsumer = Mockito.mock(BiConsumer.class);
+
+        // when
+        final ConcurrentHashMapBasedBiConsumerMemoizer<String, String, String> memoizer = new ConcurrentHashMapBasedBiConsumerMemoizer<>(
+                precomputedValues, keyFunction, biConsumer);
+
+        // then
+        memoizer.accept("first", "second");
+        Mockito.verify(biConsumer).accept("first", "second");
     }
 
 }

@@ -10,6 +10,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
@@ -202,6 +203,17 @@ public final class MapMemoization {
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, KEY> preComputedValues) {
         return new ConcurrentHashMapBasedBiConsumerMemoizer<>(preComputedValues, keyFunction, biConsumer);
+    }
+
+    /**
+     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <VALUE> Predicate<VALUE> memoize(final Predicate<VALUE> predicate) {
+        return new ConcurrentHashMapBasedPredicateMemoizer<>(emptyMap(), predicate);
     }
 
 }
