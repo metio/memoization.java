@@ -213,7 +213,23 @@ public final class MapMemoization {
      * @return The wrapped {@link Predicate}.
      */
     public static <VALUE> Predicate<VALUE> memoize(final Predicate<VALUE> predicate) {
-        return new ConcurrentHashMapBasedPredicateMemoizer<>(emptyMap(), predicate);
+        return memoize(predicate, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <VALUE> Predicate<VALUE> memoize(
+            final Predicate<VALUE> predicate,
+            final Map<VALUE, Boolean> preComputedValues) {
+        return new ConcurrentHashMapBasedPredicateMemoizer<>(preComputedValues, predicate);
     }
 
 }
