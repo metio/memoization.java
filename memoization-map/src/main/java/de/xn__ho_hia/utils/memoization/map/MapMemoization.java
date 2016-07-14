@@ -8,6 +8,7 @@ import static java.util.function.Function.identity;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -230,6 +231,36 @@ public final class MapMemoization {
             final Predicate<VALUE> predicate,
             final Map<VALUE, Boolean> preComputedValues) {
         return new ConcurrentHashMapBasedPredicateMemoizer<>(preComputedValues, predicate);
+    }
+
+    /**
+     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> memoize(final BiPredicate<FIRST, SECOND> predicate) {
+        return memoize(predicate, hashCodeKeyFunction(), emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> memoize(
+            final BiPredicate<FIRST, SECOND> predicate,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, Boolean> preComputedValues) {
+        return new ConcurrentHashMapBasedBiPredicateMemoizer<>(preComputedValues, keyFunction, predicate);
     }
 
 }

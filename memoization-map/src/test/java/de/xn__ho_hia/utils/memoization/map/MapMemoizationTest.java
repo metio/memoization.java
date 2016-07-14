@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -114,6 +115,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiPredicate() {
+        // given
+        final BiPredicate<String, String> predicate = (first, second) -> true;
+
+        // when
+        final BiPredicate<String, String> memoize = MapMemoization.memoize(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized biPredicate is NULL", memoize);
     }
 
     /**
