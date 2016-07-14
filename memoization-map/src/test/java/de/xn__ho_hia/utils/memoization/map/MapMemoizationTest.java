@@ -13,7 +13,10 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.DoublePredicate;
 import java.util.function.Function;
+import java.util.function.IntPredicate;
+import java.util.function.LongPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -39,7 +42,7 @@ public class MapMemoizationTest {
         final Supplier<String> memoize = MapMemoization.memoize(supplier);
 
         // then
-        Assert.assertNotNull("Memoized supplier is NULL", memoize);
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
     }
 
     /**
@@ -54,7 +57,7 @@ public class MapMemoizationTest {
         final Function<String, String> memoize = MapMemoization.memoize(function);
 
         // then
-        Assert.assertNotNull("Memoized function is NULL", memoize);
+        Assert.assertNotNull("Memoized Function is NULL", memoize);
     }
 
     /**
@@ -69,7 +72,7 @@ public class MapMemoizationTest {
         final BiFunction<String, String, String> memoize = MapMemoization.memoize(bifunction);
 
         // then
-        Assert.assertNotNull("Memoized bifunction is NULL", memoize);
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
     }
 
     /**
@@ -84,7 +87,7 @@ public class MapMemoizationTest {
         final Consumer<String> memoize = MapMemoization.memoize(consumer);
 
         // then
-        Assert.assertNotNull("Memoized consumer is NULL", memoize);
+        Assert.assertNotNull("Memoized Consumer is NULL", memoize);
     }
 
     /**
@@ -99,7 +102,7 @@ public class MapMemoizationTest {
         final BiConsumer<String, String> memoize = MapMemoization.memoize(biConsumer);
 
         // then
-        Assert.assertNotNull("Memoized biConsumer is NULL", memoize);
+        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
     }
 
     /**
@@ -114,7 +117,7 @@ public class MapMemoizationTest {
         final Predicate<String> memoize = MapMemoization.memoize(predicate);
 
         // then
-        Assert.assertNotNull("Memoized predicate is NULL", memoize);
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
     }
 
     /**
@@ -129,7 +132,52 @@ public class MapMemoizationTest {
         final BiPredicate<String, String> memoize = MapMemoization.memoize(predicate);
 
         // then
-        Assert.assertNotNull("Memoized biPredicate is NULL", memoize);
+        Assert.assertNotNull("Memoized BiPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoublePredicate() {
+        // given
+        final DoublePredicate predicate = input -> true;
+
+        // when
+        final DoublePredicate memoize = MapMemoization.memoize(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized DoublePredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntPredicate() {
+        // given
+        final IntPredicate predicate = input -> true;
+
+        // when
+        final IntPredicate memoize = MapMemoization.memoize(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized IntPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongPredicate() {
+        // given
+        final LongPredicate predicate = input -> true;
+
+        // when
+        final LongPredicate memoize = MapMemoization.memoize(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
     }
 
     /**

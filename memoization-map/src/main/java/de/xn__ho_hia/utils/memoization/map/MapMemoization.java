@@ -10,7 +10,10 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.DoublePredicate;
 import java.util.function.Function;
+import java.util.function.IntPredicate;
+import java.util.function.LongPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -261,6 +264,87 @@ public final class MapMemoization {
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, Boolean> preComputedValues) {
         return new ConcurrentHashMapBasedBiPredicateMemoizer<>(preComputedValues, keyFunction, predicate);
+    }
+
+    /**
+     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static IntPredicate memoize(final IntPredicate predicate) {
+        return memoize(predicate, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static IntPredicate memoize(
+            final IntPredicate predicate,
+            final Map<Integer, Boolean> preComputedValues) {
+        return new ConcurrentHashMapBasedIntPredicateMemoizer(preComputedValues, predicate);
+    }
+
+    /**
+     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static LongPredicate memoize(final LongPredicate predicate) {
+        return memoize(predicate, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static LongPredicate memoize(
+            final LongPredicate predicate,
+            final Map<Long, Boolean> preComputedValues) {
+        return new ConcurrentHashMapBasedLongPredicateMemoizer(preComputedValues, predicate);
+    }
+
+    /**
+     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static DoublePredicate memoize(final DoublePredicate predicate) {
+        return memoize(predicate, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static DoublePredicate memoize(
+            final DoublePredicate predicate,
+            final Map<Double, Boolean> preComputedValues) {
+        return new ConcurrentHashMapBasedDoublePredicateMemoizer(preComputedValues, predicate);
     }
 
 }
