@@ -14,13 +14,19 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
+import java.util.function.ObjDoubleConsumer;
+import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -169,6 +175,96 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjDoubleConsumer() {
+        // given
+        final ObjDoubleConsumer<String> consumer = (first, second) -> System.out.println(first + second);
+
+        // when
+        final ObjDoubleConsumer<String> memoize = MapMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized ObjDoubleConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleConsumer() {
+        // given
+        final DoubleConsumer consumer = System.out::println;
+
+        // when
+        final DoubleConsumer memoize = MapMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldIntMemoizeConsumer() {
+        // given
+        final IntConsumer consumer = System.out::println;
+
+        // when
+        final IntConsumer memoize = MapMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongConsumer() {
+        // given
+        final LongConsumer consumer = System.out::println;
+
+        // when
+        final LongConsumer memoize = MapMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjIntConsumer() {
+        // given
+        final ObjIntConsumer<String> consumer = (first, second) -> System.out.println(first + second);
+
+        // when
+        final ObjIntConsumer<String> memoize = MapMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized ObjIntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjLongConsumer() {
+        // given
+        final ObjLongConsumer<String> consumer = (first, second) -> System.out.println(first + second);
+
+        // when
+        final ObjLongConsumer<String> memoize = MapMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized ObjLongConsumer is NULL", memoize);
     }
 
     /**

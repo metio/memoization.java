@@ -11,15 +11,23 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
+import java.util.function.ObjDoubleConsumer;
+import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import de.xn__ho_hia.utils.memoization.shared.MemoizationDefaults;
 
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
@@ -29,6 +37,7 @@ import java.util.function.Supplier;
  * @see BiPredicate
  * @see BooleanSupplier
  * @see Consumer
+ * @see DoubleConsumer
  * @see DoublePredicate
  * @see DoubleSupplier
  * @see Function
@@ -375,6 +384,171 @@ public final class MapMemoization {
             final Consumer<VALUE> consumer,
             final Map<VALUE, VALUE> preComputedValues) {
         return new ConcurrentHashMapBasedConsumerMemoizer<>(preComputedValues, identity(), consumer);
+    }
+
+    /**
+     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static DoubleConsumer memoize(final DoubleConsumer consumer) {
+        return memoize(consumer, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static DoubleConsumer memoize(
+            final DoubleConsumer consumer,
+            final Map<Double, Double> preComputedValues) {
+        return new ConcurrentHashMapBasedDoubleConsumerMemoizer(preComputedValues, consumer);
+    }
+
+    /**
+     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static IntConsumer memoize(final IntConsumer consumer) {
+        return memoize(consumer, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static IntConsumer memoize(
+            final IntConsumer consumer,
+            final Map<Integer, Integer> preComputedValues) {
+        return new ConcurrentHashMapBasedIntConsumerMemoizer(preComputedValues, consumer);
+    }
+
+    /**
+     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param consumer
+     *            The {@link LongConsumer} to memoize.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static LongConsumer memoize(final LongConsumer consumer) {
+        return memoize(consumer, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param consumer
+     *            The {@link LongConsumer} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static LongConsumer memoize(
+            final LongConsumer consumer,
+            final Map<Long, Long> preComputedValues) {
+        return new ConcurrentHashMapBasedLongConsumerMemoizer(preComputedValues, consumer);
+    }
+
+    /**
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param consumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <VALUE> ObjDoubleConsumer<VALUE> memoize(final ObjDoubleConsumer<VALUE> consumer) {
+        return memoize(consumer, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param consumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
+            final ObjDoubleConsumer<VALUE> consumer,
+            final Map<String, String> preComputedValues) {
+        return new ConcurrentHashMapBasedObjDoubleConsumerMemoizer<>(preComputedValues,
+                MemoizationDefaults.objDoubleConsumerHashCodeKeyFunction(), consumer);
+    }
+
+    /**
+     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <VALUE> ObjIntConsumer<VALUE> memoize(final ObjIntConsumer<VALUE> consumer) {
+        return memoize(consumer, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <VALUE> ObjIntConsumer<VALUE> memoize(
+            final ObjIntConsumer<VALUE> consumer,
+            final Map<String, String> preComputedValues) {
+        return new ConcurrentHashMapBasedObjIntConsumerMemoizer<>(preComputedValues,
+                MemoizationDefaults.objIntConsumerHashCodeKeyFunction(), consumer);
+    }
+
+    /**
+     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <VALUE> ObjLongConsumer<VALUE> memoize(final ObjLongConsumer<VALUE> consumer) {
+        return memoize(consumer, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <VALUE> ObjLongConsumer<VALUE> memoize(
+            final ObjLongConsumer<VALUE> consumer,
+            final Map<String, String> preComputedValues) {
+        return new ConcurrentHashMapBasedObjLongConsumerMemoizer<>(preComputedValues,
+                MemoizationDefaults.objLongConsumerHashCodeKeyFunction(), consumer);
     }
 
     /**

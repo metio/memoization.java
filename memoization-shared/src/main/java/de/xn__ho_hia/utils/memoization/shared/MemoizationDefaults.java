@@ -31,4 +31,37 @@ public final class MemoizationDefaults {
         };
     }
 
+    /**
+     * @return The default key function for {@link java.util.function.ObjDoubleConsumer}.
+     */
+    public static <VALUE> ObjDoubleFunction<VALUE, String> objDoubleConsumerHashCodeKeyFunction() {
+        return (first, second) -> {
+            final int firstHashCode = Objects.hashCode(first);
+            final int secondHashCode = Double.valueOf(second).hashCode();
+            return firstHashCode + " " + secondHashCode; //$NON-NLS-1$
+        };
+    }
+
+    /**
+     * @return The default key function for {@link java.util.function.ObjIntConsumer}.
+     */
+    public static <VALUE> ObjIntFunction<VALUE, String> objIntConsumerHashCodeKeyFunction() {
+        return (first, second) -> {
+            final int firstHashCode = Objects.hashCode(first);
+            final int secondHashCode = Integer.valueOf(second).hashCode();
+            return firstHashCode + " " + secondHashCode; //$NON-NLS-1$
+        };
+    }
+
+    /**
+     * @return The default key function for {@link java.util.function.ObjLongConsumer}.
+     */
+    public static <VALUE> ObjLongFunction<VALUE, String> objLongConsumerHashCodeKeyFunction() {
+        return (first, second) -> {
+            final int firstHashCode = Objects.hashCode(first);
+            final int secondHashCode = Long.valueOf(second).hashCode();
+            return firstHashCode + " " + secondHashCode; //$NON-NLS-1$
+        };
+    }
+
 }

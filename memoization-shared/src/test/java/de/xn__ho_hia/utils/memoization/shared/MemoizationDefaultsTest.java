@@ -9,8 +9,6 @@ import java.util.function.Supplier;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.xn__ho_hia.utils.memoization.shared.MemoizationDefaults;
-
 /**
  * Unit tests for {@link MemoizationDefaults}.
  */
@@ -76,6 +74,102 @@ public class MemoizationDefaultsTest {
 
         // when
         Assert.assertEquals("Calculated key does not match expectations", "1 2", calculatedKey); //$NON-NLS-1$
+    }
+
+    /**
+     * Ensures that a hash-code based key function is defined for ObjDoubleConsumer.
+     */
+    @Test
+    public void shouldDefineObjDoubleConsumerHashCodeKeyFunction() {
+        // given
+        ObjDoubleFunction<Object, String> keyFunction;
+
+        // when
+        keyFunction = MemoizationDefaults.objDoubleConsumerHashCodeKeyFunction();
+
+        // when
+        Assert.assertNotNull("Default key function is NULL", keyFunction);
+    }
+
+    /**
+     * Ensures that the default key function for ObjDoubleConsumer concats the hash-codes of its two inputs by placing a
+     * whitespace inbetween.
+     */
+    @Test
+    public void shouldConcatObjDoubleConsumerHashCodesWithWhitespaceInbetween() {
+        // given
+        final ObjDoubleFunction<Object, String> keyFunction = MemoizationDefaults
+                .objDoubleConsumerHashCodeKeyFunction();
+
+        // when
+        final String calculatedKey = keyFunction.apply(Integer.valueOf(1), 123.456D);
+
+        // when
+        Assert.assertEquals("Calculated key does not match expectations", "1 1522623320", calculatedKey); //$NON-NLS-1$
+    }
+
+    /**
+     * Ensures that a hash-code based key function is defined for ObjIntConsumer.
+     */
+    @Test
+    public void shouldDefineObjIntConsumerHashCodeKeyFunction() {
+        // given
+        ObjIntFunction<Object, String> keyFunction;
+
+        // when
+        keyFunction = MemoizationDefaults.objIntConsumerHashCodeKeyFunction();
+
+        // when
+        Assert.assertNotNull("Default key function is NULL", keyFunction);
+    }
+
+    /**
+     * Ensures that the default key function for ObjIntConsumer concats the hash-codes of its two inputs by placing a
+     * whitespace inbetween.
+     */
+    @Test
+    public void shouldConcatObjIntConsumerHashCodesWithWhitespaceInbetween() {
+        // given
+        final ObjIntFunction<Object, String> keyFunction = MemoizationDefaults
+                .objIntConsumerHashCodeKeyFunction();
+
+        // when
+        final String calculatedKey = keyFunction.apply(Integer.valueOf(1), 123);
+
+        // when
+        Assert.assertEquals("Calculated key does not match expectations", "1 123", calculatedKey); //$NON-NLS-1$
+    }
+
+    /**
+     * Ensures that a hash-code based key function is defined for ObjLongConsumer.
+     */
+    @Test
+    public void shouldDefineObjLongConsumerHashCodeKeyFunction() {
+        // given
+        ObjLongFunction<Object, String> keyFunction;
+
+        // when
+        keyFunction = MemoizationDefaults.objLongConsumerHashCodeKeyFunction();
+
+        // when
+        Assert.assertNotNull("Default key function is NULL", keyFunction);
+    }
+
+    /**
+     * Ensures that the default key function for ObjLongConsumer concats the hash-codes of its two inputs by placing a
+     * whitespace inbetween.
+     */
+    @Test
+    public void shouldConcatObjLongConsumerHashCodesWithWhitespaceInbetween() {
+        // given
+        final ObjLongFunction<Object, String> keyFunction = MemoizationDefaults
+                .objLongConsumerHashCodeKeyFunction();
+
+        // when
+        final String calculatedKey = keyFunction.apply(Integer.valueOf(1), 123L);
+
+        // when
+        Assert.assertEquals("Calculated key does not match expectations", "1 123", calculatedKey); //$NON-NLS-1$
     }
 
     /**
