@@ -12,11 +12,15 @@ import java.lang.reflect.Modifier;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoublePredicate;
+import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
+import java.util.function.IntSupplier;
 import java.util.function.LongPredicate;
+import java.util.function.LongSupplier;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -43,6 +47,66 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBooleanSupplier() {
+        // given
+        final BooleanSupplier supplier = () -> true;
+
+        // when
+        final BooleanSupplier memoize = MapMemoization.memoize(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleSupplier() {
+        // given
+        final DoubleSupplier supplier = () -> 123.456D;
+
+        // when
+        final DoubleSupplier memoize = MapMemoization.memoize(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntSupplier() {
+        // given
+        final IntSupplier supplier = () -> 123;
+
+        // when
+        final IntSupplier memoize = MapMemoization.memoize(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongSupplier() {
+        // given
+        final LongSupplier supplier = () -> 123L;
+
+        // when
+        final LongSupplier memoize = MapMemoization.memoize(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
     }
 
     /**

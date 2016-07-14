@@ -9,11 +9,15 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoublePredicate;
+import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
+import java.util.function.IntSupplier;
 import java.util.function.LongPredicate;
+import java.util.function.LongSupplier;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -76,6 +80,190 @@ public final class MapMemoization {
             final Supplier<KEY> keySupplier,
             final Map<KEY, VALUE> preComputedValues) {
         return new ConcurrentHashMapBasedSupplierMemoizer<>(preComputedValues, keySupplier, supplier);
+    }
+
+    /**
+     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static BooleanSupplier memoize(final BooleanSupplier supplier) {
+        return memoize(supplier, defaultKeySupplier());
+    }
+
+    /**
+     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
+     * the result under a specific cache key provided by a key-supplier.
+     *
+     * @param supplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static <KEY> BooleanSupplier memoize(
+            final BooleanSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return memoize(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
+     * the result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     *
+     * @param supplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static <KEY> BooleanSupplier memoize(
+            final BooleanSupplier supplier,
+            final Supplier<KEY> keySupplier,
+            final Map<KEY, Boolean> preComputedValues) {
+        return new ConcurrentHashMapBasedBooleanSupplierMemoizer<>(preComputedValues, keySupplier, supplier);
+    }
+
+    /**
+     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static DoubleSupplier memoize(final DoubleSupplier supplier) {
+        return memoize(supplier, defaultKeySupplier());
+    }
+
+    /**
+     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
+     * the result under a specific cache key provided by a key-supplier.
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static <KEY> DoubleSupplier memoize(
+            final DoubleSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return memoize(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
+     * the result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static <KEY> DoubleSupplier memoize(
+            final DoubleSupplier supplier,
+            final Supplier<KEY> keySupplier,
+            final Map<KEY, Double> preComputedValues) {
+        return new ConcurrentHashMapBasedDoubleSupplierMemoizer<>(preComputedValues, keySupplier, supplier);
+    }
+
+    /**
+     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static IntSupplier memoize(final IntSupplier supplier) {
+        return memoize(supplier, defaultKeySupplier());
+    }
+
+    /**
+     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
+     * result under a specific cache key provided by a key-supplier.
+     *
+     * @param supplier
+     *            The {@link IntSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static <KEY> IntSupplier memoize(
+            final IntSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return memoize(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
+     * result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     *
+     * @param supplier
+     *            The {@link IntSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static <KEY> IntSupplier memoize(
+            final IntSupplier supplier,
+            final Supplier<KEY> keySupplier,
+            final Map<KEY, Integer> preComputedValues) {
+        return new ConcurrentHashMapBasedIntSupplierMemoizer<>(preComputedValues, keySupplier, supplier);
+    }
+
+    /**
+     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static LongSupplier memoize(final LongSupplier supplier) {
+        return memoize(supplier, defaultKeySupplier());
+    }
+
+    /**
+     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
+     * result under a specific cache key provided by a key-supplier.
+     *
+     * @param supplier
+     *            The {@link LongSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static <KEY> LongSupplier memoize(
+            final LongSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return memoize(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
+     * result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     *
+     * @param supplier
+     *            The {@link LongSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static <KEY> LongSupplier memoize(
+            final LongSupplier supplier,
+            final Supplier<KEY> keySupplier,
+            final Map<KEY, Long> preComputedValues) {
+        return new ConcurrentHashMapBasedLongSupplierMemoizer<>(preComputedValues, keySupplier, supplier);
     }
 
     /**
