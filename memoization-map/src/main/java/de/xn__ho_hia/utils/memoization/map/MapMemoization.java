@@ -24,10 +24,20 @@ import java.util.function.Supplier;
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
  *
- * @see Supplier
- * @see Function
+ * @see BiConsumer
  * @see BiFunction
+ * @see BiPredicate
+ * @see BooleanSupplier
  * @see Consumer
+ * @see DoublePredicate
+ * @see DoubleSupplier
+ * @see Function
+ * @see IntPredicate
+ * @see IntSupplier
+ * @see LongPredicate
+ * @see LongSupplier
+ * @see Predicate
+ * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class MapMemoization {
