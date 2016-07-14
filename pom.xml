@@ -26,7 +26,7 @@
   <!--                               COORDINATES                               -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
-  <groupId>de.xn--ho-hia.utils.memoization</groupId>
+  <groupId>de.xn--ho-hia.memoization</groupId>
   <artifactId>memoization.java</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
