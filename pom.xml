@@ -37,7 +37,7 @@
   <!-- https://maven.apache.org/pom.html#More_Project_Information -->
   <name>memoization.java</name>
   <description>Java memoization library</description>
-  <url>http://seb.hoß.de/memoization.java</url>
+  <url>http://seb.xn--ho-hia.de/memoization.java</url>
   <inceptionYear>2016</inceptionYear>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
