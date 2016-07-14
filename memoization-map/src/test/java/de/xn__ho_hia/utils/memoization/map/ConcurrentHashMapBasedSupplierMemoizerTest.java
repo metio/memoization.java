@@ -14,8 +14,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.xn__ho_hia.utils.memoization.map.ConcurrentHashMapBasedSupplierMemoizer;
-
 /**
  * Unit tests for ConcurrentHashMapBasedSupplierMemoizer.
  */
@@ -78,7 +76,7 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
 
         // when
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage("Provide a constant key supplier like this '() -> \"myValue\"'.");
+        thrown.expectMessage("Provide a key function, might just be 'MemoizationDefaults.defaultKeySupplier()'.");
 
         // then
         new ConcurrentHashMapBasedSupplierMemoizer<>(precomputedValues, keySupplier, supplier);
@@ -97,7 +95,7 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
 
         // when
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage("Cannot memoize a NULL supplier - provide an actual supplier to fix this.");
+        thrown.expectMessage("Cannot memoize a NULL Supplier - provide an actual Supplier to fix this.");
 
         // then
         new ConcurrentHashMapBasedSupplierMemoizer<>(precomputedValues, keySupplier, supplier);

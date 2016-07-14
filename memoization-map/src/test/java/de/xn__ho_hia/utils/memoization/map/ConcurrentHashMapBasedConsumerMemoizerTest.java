@@ -26,8 +26,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.xn__ho_hia.utils.memoization.map.ConcurrentHashMapBasedConsumerMemoizer;
-
 /**
  *
  */
@@ -110,7 +108,7 @@ public class ConcurrentHashMapBasedConsumerMemoizerTest {
 
         // when
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage("Cannot memoize a NULL consumer - provide an actual consumer to fix this.");
+        thrown.expectMessage("Cannot memoize a NULL Consumer - provide an actual Consumer to fix this.");
 
         // then
         new ConcurrentHashMapBasedConsumerMemoizer<>(precomputedValues, keyFunction, consumer);

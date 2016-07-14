@@ -25,8 +25,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.xn__ho_hia.utils.memoization.map.ConcurrentHashMapBasedFunctionMemoizer;
-
 /**
  *
  */
@@ -87,7 +85,7 @@ public class ConcurrentHashMapBasedFunctionMemoizerTest {
 
         // when
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage("Cannot memoize a NULL function - provide an actual function to fix this.");
+        thrown.expectMessage("Cannot memoize a NULL Function - provide an actual Function to fix this.");
 
         // then
         new ConcurrentHashMapBasedFunctionMemoizer<>(precomputedValues, function);

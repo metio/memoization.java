@@ -18,7 +18,7 @@ final class ConcurrentHashMapBasedFunctionMemoizer<KEY, VALUE>
         super(requireNonNull(preComputedValues,
                 "Provide an empty map instead of NULL in case you don't have any precomputed values."));
         this.function = requireNonNull(function,
-                "Cannot memoize a NULL function - provide an actual function to fix this.");
+                "Cannot memoize a NULL Function - provide an actual Function to fix this.");
     }
 
     @Override

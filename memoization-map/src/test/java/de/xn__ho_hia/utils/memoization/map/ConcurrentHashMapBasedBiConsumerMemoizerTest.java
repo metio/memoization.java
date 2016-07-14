@@ -44,7 +44,7 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
      */
     @Test
     @SuppressWarnings("static-method")
-    public void shouldAcceptPreComputedValuesKeyFunctionAndConsumer() {
+    public void shouldAcceptPreComputedValuesKeyFunctionAndBiConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
         final BiFunction<String, String, String> keyFunction = (first, second) -> first + second;
@@ -101,7 +101,7 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
      */
     @Test
     @SuppressWarnings("unused")
-    public void shouldRequireNonNullConsumer() {
+    public void shouldRequireNonNullBiConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
         final BiFunction<String, String, String> keyFunction = (first, second) -> first + second;
@@ -120,7 +120,7 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
      */
     @Test
     @SuppressWarnings("static-method")
-    public void shouldMemoizeConsumer() {
+    public void shouldMemoizeBiConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
         final BiFunction<String, String, String> keyFunction = (first, second) -> first + second;

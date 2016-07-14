@@ -25,8 +25,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.xn__ho_hia.utils.memoization.map.ConcurrentHashMapBasedBiFunctionMemoizer;
-
 /**
  *
  */
@@ -88,7 +86,7 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
 
         // when
         thrown.expect(NullPointerException.class);
-        thrown.expectMessage("Provide a key function, might just be 'Function.identity()'.");
+        thrown.expectMessage("Provide a key function, might just be 'MemoizationDefaults.hashCodeKeyFunction()'.");
 
         // then
         new ConcurrentHashMapBasedBiFunctionMemoizer<>(precomputedValues, keyFunction, biFunction);

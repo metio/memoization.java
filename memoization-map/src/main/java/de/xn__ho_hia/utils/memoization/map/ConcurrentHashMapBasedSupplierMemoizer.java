@@ -20,9 +20,9 @@ final class ConcurrentHashMapBasedSupplierMemoizer<KEY, VALUE>
         super(requireNonNull(preComputedValues,
                 "Provide an empty map instead of NULL in case you don't have any precomputed values."));
         this.keySupplier = requireNonNull(keySupplier,
-                "Provide a constant key supplier like this '() -> \"myValue\"'.");
+                "Provide a key function, might just be 'MemoizationDefaults.defaultKeySupplier()'.");
         this.supplier = requireNonNull(supplier,
-                "Cannot memoize a NULL supplier - provide an actual supplier to fix this.");
+                "Cannot memoize a NULL Supplier - provide an actual Supplier to fix this.");
     }
 
     @Override
