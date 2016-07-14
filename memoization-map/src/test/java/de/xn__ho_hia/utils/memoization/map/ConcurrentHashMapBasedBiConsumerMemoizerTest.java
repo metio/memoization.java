@@ -27,10 +27,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 /**
  *
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
 
     /**
@@ -43,7 +45,6 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldAcceptPreComputedValuesKeyFunctionAndBiConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -62,7 +63,7 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullPreComputedValues() {
         // given
         final Map<String, String> precomputedValues = null;
@@ -81,7 +82,7 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullKeyFunction() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -100,7 +101,7 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullBiConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -119,7 +120,6 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldMemoizeBiConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -138,7 +138,6 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldUseSetCacheKeyAndValue() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -162,7 +161,7 @@ public class ConcurrentHashMapBasedBiConsumerMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings({ "unchecked", "static-method" })
+    @SuppressWarnings(CompilerWarnings.UNCHECKED)
     public void shouldUseCallWrappedBiConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();

@@ -9,10 +9,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 /**
  *
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class ConcurrentHashMapBasedIntPredicateMemoizerTest {
 
     /**
@@ -25,7 +27,6 @@ public class ConcurrentHashMapBasedIntPredicateMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldAcceptPreComputedValuesAndPredicate() {
         // given
         final Map<Integer, Boolean> precomputedValues = new HashMap<>();
@@ -43,7 +44,7 @@ public class ConcurrentHashMapBasedIntPredicateMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullPreComputedValues() {
         // given
         final Map<Integer, Boolean> precomputedValues = null;
@@ -61,7 +62,7 @@ public class ConcurrentHashMapBasedIntPredicateMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullPredicate() {
         // given
         final Map<Integer, Boolean> precomputedValues = new HashMap<>();
@@ -79,7 +80,6 @@ public class ConcurrentHashMapBasedIntPredicateMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldMemoizePredicateCall() {
         // given
         final Map<Integer, Boolean> precomputedValues = new HashMap<>();

@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedDoubleSupplierMemoizer<KEY>
         extends ConcurrentHashMapBasedMemoizer<KEY, Double>
         implements DoubleSupplier {
@@ -13,7 +15,7 @@ final class ConcurrentHashMapBasedDoubleSupplierMemoizer<KEY>
     private final Supplier<KEY>  keySupplier;
     private final DoubleSupplier supplier;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedDoubleSupplierMemoizer(
             final Map<KEY, Double> preComputedValues,
             final Supplier<KEY> keySupplier,

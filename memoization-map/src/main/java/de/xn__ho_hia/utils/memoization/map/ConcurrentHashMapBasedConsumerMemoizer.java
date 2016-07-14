@@ -7,6 +7,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 import de.xn__ho_hia.utils.memoization.shared.MemoizingConsumer;
 
 final class ConcurrentHashMapBasedConsumerMemoizer<KEY, VALUE>
@@ -16,7 +17,7 @@ final class ConcurrentHashMapBasedConsumerMemoizer<KEY, VALUE>
     private final Function<VALUE, KEY> keyFunction;
     private final Consumer<VALUE>      consumer;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedConsumerMemoizer(
             final Map<KEY, VALUE> preComputedValues,
             final Function<VALUE, KEY> keyFunction,

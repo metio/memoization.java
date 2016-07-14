@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedLongSupplierMemoizer<KEY>
         extends ConcurrentHashMapBasedMemoizer<KEY, Long>
         implements LongSupplier {
@@ -13,7 +15,7 @@ final class ConcurrentHashMapBasedLongSupplierMemoizer<KEY>
     private final Supplier<KEY> keySupplier;
     private final LongSupplier  supplier;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedLongSupplierMemoizer(
             final Map<KEY, Long> preComputedValues,
             final Supplier<KEY> keySupplier,

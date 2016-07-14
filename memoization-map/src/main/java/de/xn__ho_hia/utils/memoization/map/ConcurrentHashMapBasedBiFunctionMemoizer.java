@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 import de.xn__ho_hia.utils.memoization.shared.MemoizingBiFunction;
 
 final class ConcurrentHashMapBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
@@ -15,7 +16,7 @@ final class ConcurrentHashMapBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
     private final BiFunction<FIRST, SECOND, KEY>   keyFunction;
     private final BiFunction<FIRST, SECOND, VALUE> biFunction;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedBiFunctionMemoizer(
             final Map<KEY, VALUE> preComputedValues,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,

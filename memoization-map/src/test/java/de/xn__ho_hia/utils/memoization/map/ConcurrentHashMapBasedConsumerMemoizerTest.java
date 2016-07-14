@@ -26,10 +26,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 /**
  *
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class ConcurrentHashMapBasedConsumerMemoizerTest {
 
     /**
@@ -42,7 +44,6 @@ public class ConcurrentHashMapBasedConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldAcceptPreComputedValuesKeyFunctionAndConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -61,7 +62,7 @@ public class ConcurrentHashMapBasedConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullPreComputedValues() {
         // given
         final Map<String, String> precomputedValues = null;
@@ -80,7 +81,7 @@ public class ConcurrentHashMapBasedConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullKeyFunction() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -99,7 +100,7 @@ public class ConcurrentHashMapBasedConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -118,7 +119,6 @@ public class ConcurrentHashMapBasedConsumerMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldMemoizeConsumer() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();

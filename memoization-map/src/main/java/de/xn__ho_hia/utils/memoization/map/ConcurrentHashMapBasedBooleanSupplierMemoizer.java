@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedBooleanSupplierMemoizer<KEY>
         extends ConcurrentHashMapBasedMemoizer<KEY, Boolean>
         implements BooleanSupplier {
@@ -13,7 +15,7 @@ final class ConcurrentHashMapBasedBooleanSupplierMemoizer<KEY>
     private final Supplier<KEY>   keySupplier;
     private final BooleanSupplier supplier;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedBooleanSupplierMemoizer(
             final Map<KEY, Boolean> preComputedValues,
             final Supplier<KEY> keySupplier,

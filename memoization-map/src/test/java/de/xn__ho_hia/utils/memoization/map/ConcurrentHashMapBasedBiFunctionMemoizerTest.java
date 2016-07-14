@@ -25,10 +25,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 /**
  *
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
 
     /** */
@@ -39,7 +41,6 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldAcceptPreComputedValuesKeyBiFunctionAndBiFunction() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -58,7 +59,7 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullPreComputedValues() {
         // given
         final Map<String, String> precomputedValues = null;
@@ -77,7 +78,7 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullKeyBiFunction() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -96,7 +97,7 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullBiFunction() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -115,7 +116,6 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldReturnGivenBiFunction() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -135,7 +135,6 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldReturnGivenKeyFunction() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -155,7 +154,6 @@ public class ConcurrentHashMapBasedBiFunctionMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldReturnNonNullMemoizationFunction() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();

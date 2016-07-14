@@ -27,11 +27,13 @@ import java.util.function.Supplier;
 import org.junit.Assert;
 import org.junit.Test;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 /**
  *
  *
  */
-@SuppressWarnings({ "static-method", "nls" })
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class MapMemoizationTest {
 
     /**

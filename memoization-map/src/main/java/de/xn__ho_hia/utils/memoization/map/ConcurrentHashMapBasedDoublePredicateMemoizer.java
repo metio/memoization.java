@@ -5,13 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import java.util.function.DoublePredicate;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedDoublePredicateMemoizer
         extends ConcurrentHashMapBasedMemoizer<Double, Boolean>
         implements DoublePredicate {
 
     private final DoublePredicate predicate;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedDoublePredicateMemoizer(
             final Map<Double, Boolean> cache,
             final DoublePredicate predicate) {

@@ -5,13 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import java.util.function.LongPredicate;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedLongPredicateMemoizer
         extends ConcurrentHashMapBasedMemoizer<Long, Boolean>
         implements LongPredicate {
 
     private final LongPredicate predicate;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedLongPredicateMemoizer(
             final Map<Long, Boolean> cache,
             final LongPredicate predicate) {

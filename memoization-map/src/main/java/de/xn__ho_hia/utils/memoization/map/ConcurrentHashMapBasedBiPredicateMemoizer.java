@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedBiPredicateMemoizer<FIRST, SECOND, KEY>
         extends ConcurrentHashMapBasedMemoizer<KEY, Boolean>
         implements BiPredicate<FIRST, SECOND> {
@@ -13,7 +15,7 @@ final class ConcurrentHashMapBasedBiPredicateMemoizer<FIRST, SECOND, KEY>
     private final BiFunction<FIRST, SECOND, KEY> keyFunction;
     private final BiPredicate<FIRST, SECOND>     biPredicate;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     public ConcurrentHashMapBasedBiPredicateMemoizer(
             final Map<KEY, Boolean> preComputedValues,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,

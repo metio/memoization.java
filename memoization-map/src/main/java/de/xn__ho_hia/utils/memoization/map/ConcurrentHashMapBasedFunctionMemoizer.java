@@ -5,13 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import java.util.function.Function;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedFunctionMemoizer<KEY, VALUE>
         extends ConcurrentHashMapBasedMemoizer<KEY, VALUE>
         implements Function<KEY, VALUE> {
 
     private final Function<KEY, VALUE> function;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedFunctionMemoizer(
             final Map<KEY, VALUE> preComputedValues,
             final Function<KEY, VALUE> function) {

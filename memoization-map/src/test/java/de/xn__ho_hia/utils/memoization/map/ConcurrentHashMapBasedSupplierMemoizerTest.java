@@ -14,10 +14,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 /**
  * Unit tests for ConcurrentHashMapBasedSupplierMemoizer.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class ConcurrentHashMapBasedSupplierMemoizerTest {
 
     /** Captures expected exceptions. */
@@ -29,7 +31,6 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
      * supplier to memoize is present. If any of those values is <code>null</code>, an exception should be thrown.
      */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldAcceptPreComputedValuesKeySupplierAndValueSupplier() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -48,7 +49,7 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullPreComputedValues() {
         // given
         final Map<String, String> precomputedValues = null;
@@ -67,7 +68,7 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullKeySupplier() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -86,7 +87,7 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("unused")
+    @SuppressWarnings(CompilerWarnings.UNUSED)
     public void shouldRequireNonNullValueSupplier() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -105,7 +106,6 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldMemoizeSuppliedValue() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -124,7 +124,6 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldUseSuppliedKey() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();
@@ -147,7 +146,7 @@ public class ConcurrentHashMapBasedSupplierMemoizerTest {
      *
      */
     @Test
-    @SuppressWarnings({ "unchecked", "static-method" })
+    @SuppressWarnings(CompilerWarnings.UNCHECKED)
     public void shouldTriggerOnce() {
         // given
         final Map<String, String> precomputedValues = new HashMap<>();

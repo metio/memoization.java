@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedIntSupplierMemoizer<KEY>
         extends ConcurrentHashMapBasedMemoizer<KEY, Integer>
         implements IntSupplier {
@@ -13,7 +15,7 @@ final class ConcurrentHashMapBasedIntSupplierMemoizer<KEY>
     private final Supplier<KEY> keySupplier;
     private final IntSupplier   supplier;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentHashMapBasedIntSupplierMemoizer(
             final Map<KEY, Integer> preComputedValues,
             final Supplier<KEY> keySupplier,

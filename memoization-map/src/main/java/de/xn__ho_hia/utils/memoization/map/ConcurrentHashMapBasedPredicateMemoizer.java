@@ -5,13 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedPredicateMemoizer<VALUE>
         extends ConcurrentHashMapBasedMemoizer<VALUE, Boolean>
         implements Predicate<VALUE> {
 
     private final Predicate<VALUE> predicate;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     public ConcurrentHashMapBasedPredicateMemoizer(
             final Map<VALUE, Boolean> preComputedValues,
             final Predicate<VALUE> predicate) {

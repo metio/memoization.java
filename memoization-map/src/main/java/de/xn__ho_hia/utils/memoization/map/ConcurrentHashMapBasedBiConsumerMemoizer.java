@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 final class ConcurrentHashMapBasedBiConsumerMemoizer<FIRST, SECOND, KEY>
         extends ConcurrentHashMapBasedMemoizer<KEY, KEY>
         implements BiConsumer<FIRST, SECOND> {
@@ -13,7 +15,7 @@ final class ConcurrentHashMapBasedBiConsumerMemoizer<FIRST, SECOND, KEY>
     private final BiFunction<FIRST, SECOND, KEY> keyFunction;
     private final BiConsumer<FIRST, SECOND>      biConsumer;
 
-    @SuppressWarnings("nls")
+    @SuppressWarnings(CompilerWarnings.NLS)
     public ConcurrentHashMapBasedBiConsumerMemoizer(
             final Map<KEY, KEY> preComputedValues,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
