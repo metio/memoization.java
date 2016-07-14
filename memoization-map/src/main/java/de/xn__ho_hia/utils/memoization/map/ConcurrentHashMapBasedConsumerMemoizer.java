@@ -21,8 +21,7 @@ final class ConcurrentHashMapBasedConsumerMemoizer<KEY, VALUE>
             final Map<KEY, VALUE> preComputedValues,
             final Function<VALUE, KEY> keyFunction,
             final Consumer<VALUE> consumer) {
-        super(requireNonNull(preComputedValues,
-                "Provide an empty map instead of NULL in case you don't have any precomputed values."));
+        super(preComputedValues);
         this.keyFunction = requireNonNull(keyFunction, "Provide a key function, might just be 'Function.identity()'.");
         this.consumer = requireNonNull(consumer,
                 "Cannot memoize a NULL Consumer - provide an actual Consumer to fix this.");

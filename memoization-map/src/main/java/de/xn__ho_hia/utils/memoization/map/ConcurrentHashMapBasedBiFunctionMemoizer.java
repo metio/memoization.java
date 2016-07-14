@@ -20,8 +20,7 @@ final class ConcurrentHashMapBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
             final Map<KEY, VALUE> preComputedValues,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final BiFunction<FIRST, SECOND, VALUE> biFunction) {
-        super(requireNonNull(preComputedValues,
-                "Provide an empty map instead of NULL in case you don't have any precomputed values."));
+        super(preComputedValues);
         this.keyFunction = requireNonNull(keyFunction,
                 "Provide a key function, might just be 'MemoizationDefaults.hashCodeKeyFunction()'.");
         this.biFunction = requireNonNull(biFunction,
