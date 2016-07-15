@@ -16,8 +16,8 @@ image:https://www.openhub.net/p/memoization-java/widgets/project_thin_badge.gif[
 
 image:https://img.shields.io/travis/{github-org}/{project-name}/master.svg?style=flat-square["Build Status", link="https://travis-ci.org/{github-org}/{project-name}"]
 image:https://img.shields.io/coveralls/{github-org}/{project-name}/master.svg?style=flat-square["Code Coverage", link="https://coveralls.io/github/{github-org}/{project-name}"]
-image:https://img.shields.io/coverity/scan/{coverity-project}.svg?style=flat-square["Coverity Scan Result", link="https://scan.coverity.com/projects/{github-org}-{project-name}"]
-image:https://img.shields.io/codacy/grade/{codacy-project}.svg?style=flat-square["Codacy Code Quality", link="https://www.codacy.com/app/mail_7/{project-name}"]
+image:https://img.shields.io/coverity/scan/{coverity-project}.svg?style=flat-square["Coverity Scan Result", link="https://scan.coverity.com/projects/{github-org}-memoization-java"]
+image:https://img.shields.io/codacy/grade/{codacy-project}.svg?style=flat-square["Codacy Code Quality", link="https://www.codacy.com/app/mail_7/memoization-java"]
 image:https://img.shields.io/badge/forkable-yes-brightgreen.svg?style=flat-square["Can this project be forked?", link="https://basicallydan.github.io/forkability/?u={github-org}&r={project-name}"]
 image:https://img.shields.io/maintenance/yes/2016.svg?style=flat-square["Is this thing still maintained?"]
 image:https://img.shields.io/bountysource/team/metio/activity.svg?style=flat-square["Bounties on open tickets", link="https://www.bountysource.com/teams/metio"]
