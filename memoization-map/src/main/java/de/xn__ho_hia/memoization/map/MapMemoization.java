@@ -15,6 +15,7 @@ import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
+import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
@@ -759,7 +760,7 @@ public final class MapMemoization {
      * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
      * @param operator
-     *            The {@link DoubleBinaryOperator} to memoize.
+     *            The {@link IntBinaryOperator} to memoize.
      * @return The wrapped {@link IntBinaryOperator}.
      */
     public static IntBinaryOperator memoize(final IntBinaryOperator operator) {
@@ -787,7 +788,7 @@ public final class MapMemoization {
      * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
      * @param operator
-     *            The {@link DoubleBinaryOperator} to memoize.
+     *            The {@link LongBinaryOperator} to memoize.
      * @return The wrapped {@link LongBinaryOperator}.
      */
     public static LongBinaryOperator memoize(final LongBinaryOperator operator) {
@@ -809,6 +810,33 @@ public final class MapMemoization {
             final Map<String, Long> preComputedValues) {
         return new ConcurrentHashMapBasedLongBinaryOperatorMemoizer<>(preComputedValues,
                 MemoizationDefaults.longBinaryOperatorHashCodeKeyFunction(), operator);
+    }
+
+    /**
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param operator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static DoubleUnaryOperator memoize(final DoubleUnaryOperator operator) {
+        return memoize(operator, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * Skips previously computed values.
+     *
+     * @param operator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static DoubleUnaryOperator memoize(
+            final DoubleUnaryOperator operator,
+            final Map<Double, Double> preComputedValues) {
+        return new ConcurrentHashMapBasedDoubleUnaryOperatorMemoizer(preComputedValues, operator);
     }
 
 }
