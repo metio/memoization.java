@@ -12,7 +12,7 @@ image:https://img.shields.io/badge/license-cc%20zero-000000.svg?style=flat-squar
 pass:[<span class="image"><a class="image" href="https://maven-badges.herokuapp.com/maven-central/de.xn--ho-hia.memoization/memoization.java"><img src="https://img.shields.io/maven-central/v/de.xn--ho-hia.memoization/memoization.java.svg?style=flat-square" alt="Maven Central"></a></span>]
 pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization.java"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization.java.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
 image:https://reposs.herokuapp.com/?path={github-org}/{project-name}&style=flat-square["Repository size"]
-image:https://www.openhub.net/p/{project-name}/widgets/project_thin_badge.gif["Open Hub statistics", link="https://www.ohloh.net/p/{project-name}"]
+image:https://www.openhub.net/p/memoization-java/widgets/project_thin_badge.gif["Open Hub statistics", link="https://www.ohloh.net/p/memoization-java"]
 
 image:https://img.shields.io/travis/{github-org}/{project-name}/master.svg?style=flat-square["Build Status", link="https://travis-ci.org/{github-org}/{project-name}"]
 image:https://img.shields.io/coveralls/{github-org}/{project-name}/master.svg?style=flat-square["Code Coverage", link="https://coveralls.io/github/{github-org}/{project-name}"]
