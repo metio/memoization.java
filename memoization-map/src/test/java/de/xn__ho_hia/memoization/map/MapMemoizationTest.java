@@ -13,6 +13,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
@@ -350,6 +351,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntBinaryOperator() {
+        // given
+        final IntBinaryOperator operator = (first, second) -> first + second;
+
+        // when
+        final IntBinaryOperator memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized IntBinaryOperator is NULL", memoize);
     }
 
     /**

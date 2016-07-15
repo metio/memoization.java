@@ -75,4 +75,15 @@ public final class MemoizationDefaults {
         };
     }
 
+    /**
+     * @return The default key function for {@link java.util.function.IntBinaryOperator}.
+     */
+    public static IntBinaryFunction<String> intBinaryOperatorHashCodeKeyFunction() {
+        return (first, second) -> {
+            final int firstHashCode = Integer.valueOf(first).hashCode();
+            final int secondHashCode = Integer.valueOf(second).hashCode();
+            return firstHashCode + " " + secondHashCode; //$NON-NLS-1$
+        };
+    }
+
 }

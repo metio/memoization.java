@@ -16,6 +16,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
@@ -751,6 +752,34 @@ public final class MapMemoization {
             final Map<String, Double> preComputedValues) {
         return new ConcurrentHashMapBasedDoubleBinaryOperatorMemoizer<>(preComputedValues,
                 MemoizationDefaults.doubleBinaryOperatorHashCodeKeyFunction(), operator);
+    }
+
+    /**
+     * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static IntBinaryOperator memoize(final IntBinaryOperator operator) {
+        return memoize(operator, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param operator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static IntBinaryOperator memoize(
+            final IntBinaryOperator operator,
+            final Map<String, Integer> preComputedValues) {
+        return new ConcurrentHashMapBasedIntBinaryOperatorMemoizer<>(preComputedValues,
+                MemoizationDefaults.intBinaryOperatorHashCodeKeyFunction(), operator);
     }
 
 }
