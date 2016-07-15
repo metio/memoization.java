@@ -23,6 +23,7 @@ import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
+import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
@@ -414,6 +415,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized IntUnaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongUnaryOperator() {
+        // given
+        final LongUnaryOperator operator = input -> 123L;
+
+        // when
+        final LongUnaryOperator memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized LongUnaryOperator is NULL", memoize);
     }
 
     /**

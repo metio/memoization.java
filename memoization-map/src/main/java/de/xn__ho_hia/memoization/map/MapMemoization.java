@@ -26,6 +26,7 @@ import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
+import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
@@ -865,6 +866,33 @@ public final class MapMemoization {
             final IntUnaryOperator operator,
             final Map<Integer, Integer> preComputedValues) {
         return new ConcurrentHashMapBasedIntUnaryOperatorMemoizer(preComputedValues, operator);
+    }
+
+    /**
+     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static LongUnaryOperator memoize(final LongUnaryOperator operator) {
+        return memoize(operator, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static LongUnaryOperator memoize(
+            final LongUnaryOperator operator,
+            final Map<Long, Long> preComputedValues) {
+        return new ConcurrentHashMapBasedLongUnaryOperatorMemoizer(preComputedValues, operator);
     }
 
 }
