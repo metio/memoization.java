@@ -41,10 +41,15 @@ import de.xn__ho_hia.utils.memoization.shared.MemoizationDefaults;
  * @see DoublePredicate
  * @see DoubleSupplier
  * @see Function
+ * @see IntConsumer
  * @see IntPredicate
  * @see IntSupplier
+ * @see LongConsumer
  * @see LongPredicate
  * @see LongSupplier
+ * @see ObjDoubleConsumer
+ * @see ObjIntConsumer
+ * @see ObjLongConsumer
  * @see Predicate
  * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
