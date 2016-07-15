@@ -28,7 +28,7 @@
   <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
   <groupId>de.xn--ho-hia.memoization</groupId>
   <artifactId>memoization.java</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0-${revision}</version>
   <packaging>pom</packaging>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -93,6 +93,14 @@
       <url>https://seb.xn--ho-hia.de/memoization.java/</url>
     </site>
   </distributionManagement>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                PROPERTIES                               -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Properties -->
+  <properties>
+    <revision>SNAPSHOT</revision>
+  </properties>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                            DEPENDENCY MANAGEMENT                        -->

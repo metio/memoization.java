@@ -19,7 +19,7 @@
   <parent>
     <groupId>de.xn--ho-hia.memoization</groupId>
     <artifactId>memoization.java</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-${revision}</version>
   </parent>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
