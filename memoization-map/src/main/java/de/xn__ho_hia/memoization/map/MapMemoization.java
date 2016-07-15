@@ -40,6 +40,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
@@ -1177,6 +1178,37 @@ public final class MapMemoization {
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, Double> preComputedValues) {
         return new ConcurrentHashMapBasedToDoubleBiFunctionMemoizer<>(preComputedValues, keyFunction, function);
+    }
+
+    /**
+     * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param function
+     *            The {@link ToIntBiFunction} to memoize.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> memoize(
+            final ToIntBiFunction<FIRST, SECOND> function) {
+        return memoize(function, hashCodeKeyFunction(), emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param function
+     *            The {@link ToIntBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param preComputedValues
+     *            {@link Map} of already computed values.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> memoize(
+            final ToIntBiFunction<FIRST, SECOND> function,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, Integer> preComputedValues) {
+        return new ConcurrentHashMapBasedToIntBiFunctionMemoizer<>(preComputedValues, keyFunction, function);
     }
 
 }
