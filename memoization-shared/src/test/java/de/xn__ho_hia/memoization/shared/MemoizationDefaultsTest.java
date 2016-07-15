@@ -207,6 +207,23 @@ public class MemoizationDefaultsTest {
     }
 
     /**
+     * Ensures that the default key function for LongBinaryOperator concats the hash-codes of its two inputs by placing
+     * a whitespace inbetween.
+     */
+    @Test
+    public void shouldConcatLongBinaryOperatorHashCodesWithWhitespaceInbetween() {
+        // given
+        final LongBinaryFunction<String> keyFunction = MemoizationDefaults
+                .longBinaryOperatorHashCodeKeyFunction();
+
+        // when
+        final String calculatedKey = keyFunction.apply(123L, 456L);
+
+        // when
+        Assert.assertEquals("Calculated key does not match expectations", "123 456", calculatedKey); //$NON-NLS-1$
+    }
+
+    /**
      * Ensures that the constructor of the {@link MemoizationDefaults} class is private.
      * <p>
      * The class should never be instantiated.

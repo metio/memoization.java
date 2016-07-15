@@ -20,6 +20,7 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
@@ -780,6 +781,34 @@ public final class MapMemoization {
             final Map<String, Integer> preComputedValues) {
         return new ConcurrentHashMapBasedIntBinaryOperatorMemoizer<>(preComputedValues,
                 MemoizationDefaults.intBinaryOperatorHashCodeKeyFunction(), operator);
+    }
+
+    /**
+     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static LongBinaryOperator memoize(final LongBinaryOperator operator) {
+        return memoize(operator, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * Skips previously computed values.
+     *
+     * @param operator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static LongBinaryOperator memoize(
+            final LongBinaryOperator operator,
+            final Map<String, Long> preComputedValues) {
+        return new ConcurrentHashMapBasedLongBinaryOperatorMemoizer<>(preComputedValues,
+                MemoizationDefaults.longBinaryOperatorHashCodeKeyFunction(), operator);
     }
 
 }

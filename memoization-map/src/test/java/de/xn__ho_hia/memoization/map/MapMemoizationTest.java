@@ -17,6 +17,7 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
@@ -366,6 +367,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized IntBinaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongBinaryOperator() {
+        // given
+        final LongBinaryOperator operator = (first, second) -> first + second;
+
+        // when
+        final LongBinaryOperator memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized LongBinaryOperator is NULL", memoize);
     }
 
     /**

@@ -86,4 +86,15 @@ public final class MemoizationDefaults {
         };
     }
 
+    /**
+     * @return The default key function for {@link java.util.function.LongBinaryOperator}.
+     */
+    public static LongBinaryFunction<String> longBinaryOperatorHashCodeKeyFunction() {
+        return (first, second) -> {
+            final int firstHashCode = Long.valueOf(first).hashCode();
+            final int secondHashCode = Long.valueOf(second).hashCode();
+            return firstHashCode + " " + secondHashCode; //$NON-NLS-1$
+        };
+    }
+
 }
