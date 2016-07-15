@@ -36,6 +36,7 @@ import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -542,6 +543,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized ToDoubleFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToIntFunction() {
+        // given
+        final ToIntFunction<String> operator = Integer::parseInt;
+
+        // when
+        final ToIntFunction<String> memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized ToIntFunction is NULL", memoize);
     }
 
     /**
