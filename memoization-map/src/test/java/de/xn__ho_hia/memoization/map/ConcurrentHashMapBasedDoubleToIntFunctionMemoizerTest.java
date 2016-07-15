@@ -28,14 +28,14 @@ public class ConcurrentHashMapBasedDoubleToIntFunctionMemoizerTest {
     *
     */
     @Test
-    public void shouldAcceptPreComputedValuesKeyFunctionAndOperator() {
+    public void shouldAcceptPreComputedValuesAndFunction() {
         // given
         final Map<Double, Integer> precomputedValues = new HashMap<>();
-        final DoubleToIntFunction operator = input -> 123;
+        final DoubleToIntFunction function = input -> 123;
 
         // when
         final ConcurrentHashMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(
-                precomputedValues, operator);
+                precomputedValues, function);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -49,14 +49,14 @@ public class ConcurrentHashMapBasedDoubleToIntFunctionMemoizerTest {
     public void shouldRequireNonNullPreComputedValues() {
         // given
         final Map<Double, Integer> precomputedValues = null;
-        final DoubleToIntFunction operator = input -> 123;
+        final DoubleToIntFunction function = input -> 123;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL in case you don't have any precomputed values.");
 
         // then
-        new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(precomputedValues, operator);
+        new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(precomputedValues, function);
     }
 
     /**
@@ -64,10 +64,10 @@ public class ConcurrentHashMapBasedDoubleToIntFunctionMemoizerTest {
     */
     @Test
     @SuppressWarnings(CompilerWarnings.UNUSED)
-    public void shouldRequireNonNullOperator() {
+    public void shouldRequireNonNullFunction() {
         // given
         final Map<Double, Integer> precomputedValues = new HashMap<>();
-        final DoubleToIntFunction operator = null;
+        final DoubleToIntFunction function = null;
 
         // when
         thrown.expect(NullPointerException.class);
@@ -75,21 +75,21 @@ public class ConcurrentHashMapBasedDoubleToIntFunctionMemoizerTest {
                 "Cannot memoize a NULL DoubleToIntFunction - provide an actual DoubleToIntFunction to fix this.");
 
         // then
-        new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(precomputedValues, operator);
+        new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(precomputedValues, function);
     }
 
     /**
     *
     */
     @Test
-    public void shouldMemoizeOperator() {
+    public void shouldMemoizeFunction() {
         // given
         final Map<Double, Integer> precomputedValues = new HashMap<>();
-        final DoubleToIntFunction operator = input -> 123;
+        final DoubleToIntFunction function = input -> 123;
 
         // when
         final ConcurrentHashMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(
-                precomputedValues, operator);
+                precomputedValues, function);
 
         // then
         memoizer.applyAsInt(123.456D);
@@ -102,11 +102,11 @@ public class ConcurrentHashMapBasedDoubleToIntFunctionMemoizerTest {
     public void shouldUseSetCacheKeyAndValue() {
         // given
         final Map<Double, Integer> precomputedValues = new HashMap<>();
-        final DoubleToIntFunction operator = input -> 123;
+        final DoubleToIntFunction function = input -> 123;
 
         // when
         final ConcurrentHashMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(
-                precomputedValues, operator);
+                precomputedValues, function);
 
         // then
         memoizer.applyAsInt(123D);
@@ -121,32 +121,32 @@ public class ConcurrentHashMapBasedDoubleToIntFunctionMemoizerTest {
     *
     */
     @Test
-    public void shouldUseCallWrappedOperator() {
+    public void shouldUseCallWrappedFunction() {
         // given
         final Map<Double, Integer> precomputedValues = new HashMap<>();
-        final DoubleToIntFunction operator = Mockito.mock(DoubleToIntFunction.class);
+        final DoubleToIntFunction function = Mockito.mock(DoubleToIntFunction.class);
 
         // when
         final ConcurrentHashMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(
-                precomputedValues, operator);
+                precomputedValues, function);
 
         // then
         memoizer.applyAsInt(123D);
-        Mockito.verify(operator).applyAsInt(123D);
+        Mockito.verify(function).applyAsInt(123D);
     }
 
     /**
     *
     */
     @Test
-    public void shouldUseReturnOperatorResult() {
+    public void shouldUseReturnFunctionResult() {
         // given
         final Map<Double, Integer> precomputedValues = new HashMap<>();
-        final DoubleToIntFunction operator = input -> 123;
+        final DoubleToIntFunction function = input -> 123;
 
         // when
         final ConcurrentHashMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(
-                precomputedValues, operator);
+                precomputedValues, function);
 
         // then
         Assert.assertEquals(123, memoizer.applyAsInt(123D));
