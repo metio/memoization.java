@@ -38,6 +38,7 @@ import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
@@ -111,7 +112,7 @@ public final class MapMemoization {
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link Supplier}.
      */
     public static <KEY, VALUE> Supplier<VALUE> memoize(
@@ -157,7 +158,7 @@ public final class MapMemoization {
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link BooleanSupplier}.
      */
     public static <KEY> BooleanSupplier memoize(
@@ -203,7 +204,7 @@ public final class MapMemoization {
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link DoubleSupplier}.
      */
     public static <KEY> DoubleSupplier memoize(
@@ -249,7 +250,7 @@ public final class MapMemoization {
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link IntSupplier}.
      */
     public static <KEY> IntSupplier memoize(
@@ -295,7 +296,7 @@ public final class MapMemoization {
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link LongSupplier}.
      */
     public static <KEY> LongSupplier memoize(
@@ -323,7 +324,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link Function} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link Function}.
      */
     public static <KEY, VALUE> Function<KEY, VALUE> memoize(
@@ -369,7 +370,7 @@ public final class MapMemoization {
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link BiFunction}.
      */
     public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
@@ -397,7 +398,7 @@ public final class MapMemoization {
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link Consumer}.
      */
     public static <VALUE> Consumer<VALUE> memoize(
@@ -424,7 +425,7 @@ public final class MapMemoization {
      * @param consumer
      *            The {@link DoubleConsumer} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link DoubleConsumer}.
      */
     public static DoubleConsumer memoize(
@@ -451,7 +452,7 @@ public final class MapMemoization {
      * @param consumer
      *            The {@link IntConsumer} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link IntConsumer}.
      */
     public static IntConsumer memoize(
@@ -478,7 +479,7 @@ public final class MapMemoization {
      * @param consumer
      *            The {@link LongConsumer} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link LongConsumer}.
      */
     public static LongConsumer memoize(
@@ -505,7 +506,7 @@ public final class MapMemoization {
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
     public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
@@ -533,7 +534,7 @@ public final class MapMemoization {
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link ObjIntConsumer}.
      */
     public static <VALUE> ObjIntConsumer<VALUE> memoize(
@@ -561,7 +562,7 @@ public final class MapMemoization {
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link ObjLongConsumer}.
      */
     public static <VALUE> ObjLongConsumer<VALUE> memoize(
@@ -591,7 +592,7 @@ public final class MapMemoization {
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link BiConsumer}.
      */
     public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> memoize(
@@ -619,7 +620,7 @@ public final class MapMemoization {
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link Predicate}.
      */
     public static <VALUE> Predicate<VALUE> memoize(
@@ -648,7 +649,7 @@ public final class MapMemoization {
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link BiPredicate}.
      */
     public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> memoize(
@@ -676,7 +677,7 @@ public final class MapMemoization {
      * @param predicate
      *            The {@link IntPredicate} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link IntPredicate}.
      */
     public static IntPredicate memoize(
@@ -703,7 +704,7 @@ public final class MapMemoization {
      * @param predicate
      *            The {@link LongPredicate} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link LongPredicate}.
      */
     public static LongPredicate memoize(
@@ -730,7 +731,7 @@ public final class MapMemoization {
      * @param predicate
      *            The {@link DoublePredicate} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link DoublePredicate}.
      */
     public static DoublePredicate memoize(
@@ -757,7 +758,7 @@ public final class MapMemoization {
      * @param operator
      *            The {@link DoubleBinaryOperator} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link DoubleBinaryOperator}.
      */
     public static DoubleBinaryOperator memoize(
@@ -785,7 +786,7 @@ public final class MapMemoization {
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link IntBinaryOperator}.
      */
     public static IntBinaryOperator memoize(
@@ -813,7 +814,7 @@ public final class MapMemoization {
      * @param operator
      *            The {@link LongBinaryOperator} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link LongBinaryOperator}.
      */
     public static LongBinaryOperator memoize(
@@ -841,7 +842,7 @@ public final class MapMemoization {
      * @param operator
      *            The {@link DoubleUnaryOperator} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link DoubleUnaryOperator}.
      */
     public static DoubleUnaryOperator memoize(
@@ -868,7 +869,7 @@ public final class MapMemoization {
      * @param operator
      *            The {@link IntUnaryOperator} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link IntUnaryOperator}.
      */
     public static IntUnaryOperator memoize(
@@ -895,7 +896,7 @@ public final class MapMemoization {
      * @param operator
      *            The {@link LongUnaryOperator} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link LongUnaryOperator}.
      */
     public static LongUnaryOperator memoize(
@@ -922,7 +923,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link DoubleToIntFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link DoubleToIntFunction}.
      */
     public static DoubleToIntFunction memoize(
@@ -949,7 +950,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link DoubleToLongFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link DoubleToLongFunction}.
      */
     public static DoubleToLongFunction memoize(
@@ -976,7 +977,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link IntToDoubleFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link IntToDoubleFunction}.
      */
     public static IntToDoubleFunction memoize(
@@ -1003,7 +1004,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link IntToLongFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link IntToLongFunction}.
      */
     public static IntToLongFunction memoize(
@@ -1030,7 +1031,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link LongToDoubleFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link LongToDoubleFunction}.
      */
     public static LongToDoubleFunction memoize(
@@ -1057,7 +1058,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link LongToIntFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link LongToIntFunction}.
      */
     public static LongToIntFunction memoize(
@@ -1084,7 +1085,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link ToDoubleFunction}.
      */
     public static <VALUE> ToDoubleFunction<VALUE> memoize(
@@ -1111,7 +1112,7 @@ public final class MapMemoization {
      * @param function
      *            The {@link ToIntFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link ToIntFunction}.
      */
     public static <VALUE> ToIntFunction<VALUE> memoize(
@@ -1138,13 +1139,44 @@ public final class MapMemoization {
      * @param function
      *            The {@link ToLongFunction} to memoize.
      * @param preComputedValues
-     *            Map of already computed values.
+     *            {@link Map} of already computed values.
      * @return The wrapped {@link ToLongFunction}.
      */
     public static <VALUE> ToLongFunction<VALUE> memoize(
             final ToLongFunction<VALUE> function,
             final Map<VALUE, Long> preComputedValues) {
         return new ConcurrentHashMapBasedToLongFunctionMemoizer<>(preComputedValues, function);
+    }
+
+    /**
+     * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param function
+     *            The {@link ToDoubleBiFunction} to memoize.
+     * @return The wrapped {@link ToDoubleBiFunction}.
+     */
+    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> memoize(
+            final ToDoubleBiFunction<FIRST, SECOND> function) {
+        return memoize(function, hashCodeKeyFunction(), emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * Skips previously computed values.
+     *
+     * @param function
+     *            The {@link ToDoubleBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param preComputedValues
+     *            {@link Map} of already computed values.
+     * @return The wrapped {@link ToDoubleBiFunction}.
+     */
+    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> memoize(
+            final ToDoubleBiFunction<FIRST, SECOND> function,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, Double> preComputedValues) {
+        return new ConcurrentHashMapBasedToDoubleBiFunctionMemoizer<>(preComputedValues, keyFunction, function);
     }
 
 }

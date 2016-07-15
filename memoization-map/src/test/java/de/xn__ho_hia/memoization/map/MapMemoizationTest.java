@@ -35,6 +35,7 @@ import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
@@ -574,6 +575,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized ToLongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToDoubleBiFunction() {
+        // given
+        final ToDoubleBiFunction<String, String> operator = (first, second) -> 123.456D;
+
+        // when
+        final ToDoubleBiFunction<String, String> memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
     }
 
     /**
