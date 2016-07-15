@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import de.xn__ho_hia.memoization.shared.MemoizingBiFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
-import de.xn__ho_hia.utils.memoization.shared.MemoizingBiFunction;
 
 final class ConcurrentHashMapBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
         extends ConcurrentHashMapBasedMemoizer<KEY, VALUE>

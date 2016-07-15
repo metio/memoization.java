@@ -64,4 +64,15 @@ public final class MemoizationDefaults {
         };
     }
 
+    /**
+     * @return The default key function for {@link java.util.function.DoubleBinaryOperator}.
+     */
+    public static DoubleBinaryFunction<String> doubleBinaryOperatorHashCodeKeyFunction() {
+        return (first, second) -> {
+            final int firstHashCode = Double.valueOf(first).hashCode();
+            final int secondHashCode = Double.valueOf(second).hashCode();
+            return firstHashCode + " " + secondHashCode; //$NON-NLS-1$
+        };
+    }
+
 }

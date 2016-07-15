@@ -7,8 +7,8 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import de.xn__ho_hia.memoization.shared.MemoizingConsumer;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
-import de.xn__ho_hia.utils.memoization.shared.MemoizingConsumer;
 
 final class ConcurrentHashMapBasedConsumerMemoizer<KEY, VALUE>
         extends ConcurrentHashMapBasedMemoizer<KEY, VALUE>

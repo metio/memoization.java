@@ -10,9 +10,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import de.xn__ho_hia.memoization.map.ConcurrentHashMapBasedObjDoubleConsumerMemoizer;
+import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
-import de.xn__ho_hia.utils.memoization.shared.ObjDoubleFunction;
 
 /**
  *

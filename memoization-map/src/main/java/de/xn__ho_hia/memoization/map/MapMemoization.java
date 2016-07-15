@@ -1,7 +1,7 @@
 package de.xn__ho_hia.memoization.map;
 
-import static de.xn__ho_hia.utils.memoization.shared.MemoizationDefaults.defaultKeySupplier;
-import static de.xn__ho_hia.utils.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 import static java.util.Collections.emptyMap;
 import static java.util.function.Function.identity;
 
@@ -11,6 +11,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
@@ -27,7 +28,7 @@ import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import de.xn__ho_hia.utils.memoization.shared.MemoizationDefaults;
+import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
@@ -722,6 +723,34 @@ public final class MapMemoization {
             final DoublePredicate predicate,
             final Map<Double, Boolean> preComputedValues) {
         return new ConcurrentHashMapBasedDoublePredicateMemoizer(preComputedValues, predicate);
+    }
+
+    /**
+     * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static DoubleBinaryOperator memoize(final DoubleBinaryOperator operator) {
+        return memoize(operator, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * Skips previously computed values.
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static DoubleBinaryOperator memoize(
+            final DoubleBinaryOperator operator,
+            final Map<String, Double> preComputedValues) {
+        return new ConcurrentHashMapBasedDoubleBinaryOperatorMemoizer<>(preComputedValues,
+                MemoizationDefaults.doubleBinaryOperatorHashCodeKeyFunction(), operator);
     }
 
 }

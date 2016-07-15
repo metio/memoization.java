@@ -15,7 +15,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import de.xn__ho_hia.memoization.map.ConcurrentHashMapBasedLongSupplierMemoizer;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**

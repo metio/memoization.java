@@ -9,11 +9,6 @@ import java.util.function.Supplier;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
-import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
-import de.xn__ho_hia.memoization.shared.ObjIntFunction;
-import de.xn__ho_hia.memoization.shared.ObjLongFunction;
-
 /**
  * Unit tests for {@link MemoizationDefaults}.
  */
@@ -175,6 +170,23 @@ public class MemoizationDefaultsTest {
 
         // when
         Assert.assertEquals("Calculated key does not match expectations", "1 123", calculatedKey); //$NON-NLS-1$
+    }
+
+    /**
+     * Ensures that the default key function for DoubleBinaryOperator concats the hash-codes of its two inputs by
+     * placing a whitespace inbetween.
+     */
+    @Test
+    public void shouldConcatDoubleBinaryOperatorHashCodesWithWhitespaceInbetween() {
+        // given
+        final DoubleBinaryFunction<String> keyFunction = MemoizationDefaults
+                .doubleBinaryOperatorHashCodeKeyFunction();
+
+        // when
+        final String calculatedKey = keyFunction.apply(123.456D, 789.123D);
+
+        // when
+        Assert.assertEquals("Calculated key does not match expectations", "1522623320 -1478220865", calculatedKey); //$NON-NLS-1$
     }
 
     /**

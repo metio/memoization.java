@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import java.util.function.ObjDoubleConsumer;
 
+import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
-import de.xn__ho_hia.utils.memoization.shared.ObjDoubleFunction;
 
 final class ConcurrentHashMapBasedObjDoubleConsumerMemoizer<VALUE, KEY>
         extends ConcurrentHashMapBasedMemoizer<KEY, KEY>

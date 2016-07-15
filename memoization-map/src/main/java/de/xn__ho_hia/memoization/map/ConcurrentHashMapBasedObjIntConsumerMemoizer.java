@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import java.util.function.ObjIntConsumer;
 
+import de.xn__ho_hia.memoization.shared.ObjIntFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
-import de.xn__ho_hia.utils.memoization.shared.ObjIntFunction;
 
 final class ConcurrentHashMapBasedObjIntConsumerMemoizer<VALUE, KEY>
         extends ConcurrentHashMapBasedMemoizer<KEY, KEY>

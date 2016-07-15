@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import de.xn__ho_hia.memoization.map.ConcurrentHashMapBasedBiPredicateMemoizer;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**
