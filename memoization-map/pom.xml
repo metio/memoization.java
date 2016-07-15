@@ -40,7 +40,7 @@
   <!-- https://maven.apache.org/pom.html#Dependencies -->
   <dependencies>
     <dependency>
-      <groupId>de.xn--ho-hia.utils.memoization</groupId>
+      <groupId>de.xn--ho-hia.memoization</groupId>
       <artifactId>memoization-shared</artifactId>
     </dependency>
     <dependency>
