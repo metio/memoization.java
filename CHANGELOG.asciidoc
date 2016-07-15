@@ -9,3 +9,7 @@ All notable changes to this project will be documented in this file.
 === Added
 
 * initial contribution w/ ConcurrentMap implementation
+
+=== Issues closed
+
+link:https://github.com/sebhoss/memoization.java/milestone/1?closed=1["See list of closed issues"].
