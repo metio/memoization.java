@@ -18,6 +18,7 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongPredicate;
@@ -398,6 +399,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleUnaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntUnaryOperator() {
+        // given
+        final IntUnaryOperator operator = input -> 123;
+
+        // when
+        final IntUnaryOperator memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized IntUnaryOperator is NULL", memoize);
     }
 
     /**
