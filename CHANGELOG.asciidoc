@@ -1,0 +1,9 @@
+= Change Log
+
+All notable changes to this project will be documented in this file.
+
+== link:++https://github.com/sebhoss/memoization.java/compare/ad369f6c589569f2d153c14c21f1872df0687111...master++[Unreleased]
+
+=== Added
+
+* initial contribution w/ ConcurrentMap implementation
