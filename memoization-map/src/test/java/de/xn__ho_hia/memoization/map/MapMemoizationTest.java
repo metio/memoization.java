@@ -8,6 +8,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
@@ -334,6 +335,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleBinaryOperator() {
+        // given
+        final DoubleBinaryOperator operator = (first, second) -> first + second;
+
+        // when
+        final DoubleBinaryOperator memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
     }
 
     /**
