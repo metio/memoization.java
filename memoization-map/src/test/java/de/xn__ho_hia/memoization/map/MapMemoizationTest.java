@@ -12,6 +12,7 @@ import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
+import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
@@ -430,6 +431,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized LongUnaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleToIntFunction() {
+        // given
+        final DoubleToIntFunction operator = input -> 123;
+
+        // when
+        final DoubleToIntFunction memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleToIntFunction is NULL", memoize);
     }
 
     /**
