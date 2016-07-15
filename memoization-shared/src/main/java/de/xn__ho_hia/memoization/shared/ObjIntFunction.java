@@ -20,7 +20,7 @@ public interface ObjIntFunction<VALUE, RESULT> {
      *            The value to apply.
      * @param i
      *            The integer value to apply.
-     * @return The result of applying the given value & integer.
+     * @return The result of applying the given value and integer.
      */
     RESULT apply(VALUE value, int i);
 

@@ -20,7 +20,7 @@ public interface ObjLongFunction<VALUE, RESULT> {
      *            The value to apply.
      * @param i
      *            The long value to apply.
-     * @return The result of applying the given value & long.
+     * @return The result of applying the given value and long.
      */
     RESULT apply(VALUE value, long i);
 

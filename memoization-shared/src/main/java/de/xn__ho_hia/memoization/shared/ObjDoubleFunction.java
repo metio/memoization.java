@@ -20,7 +20,7 @@ public interface ObjDoubleFunction<VALUE, RESULT> {
      *            The value to apply.
      * @param d
      *            The double value to apply.
-     * @return The result of applying the given value & double.
+     * @return The result of applying the given value and double.
      */
     RESULT apply(VALUE value, double d);
 

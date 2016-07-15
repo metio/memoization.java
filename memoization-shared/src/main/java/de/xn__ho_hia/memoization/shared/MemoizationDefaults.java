@@ -27,6 +27,10 @@ public final class MemoizationDefaults {
     }
 
     /**
+     * @param <T>
+     *            the type of the first argument to the function
+     * @param <U>
+     *            the type of the second argument to the function
      * @return The default key function used throughout the library.
      */
     public static <T, U> BiFunction<T, U, String> hashCodeKeyFunction() {
@@ -38,6 +42,8 @@ public final class MemoizationDefaults {
     }
 
     /**
+     * @param <VALUE>
+     *            the type of the first argument to the function
      * @return The default key function for {@link java.util.function.ObjDoubleConsumer}.
      */
     public static <VALUE> ObjDoubleFunction<VALUE, String> objDoubleConsumerHashCodeKeyFunction() {
@@ -49,6 +55,8 @@ public final class MemoizationDefaults {
     }
 
     /**
+     * @param <VALUE>
+     *            the type of the first argument to the function
      * @return The default key function for {@link java.util.function.ObjIntConsumer}.
      */
     public static <VALUE> ObjIntFunction<VALUE, String> objIntConsumerHashCodeKeyFunction() {
@@ -60,6 +68,8 @@ public final class MemoizationDefaults {
     }
 
     /**
+     * @param <VALUE>
+     *            the type of the first argument to the function
      * @return The default key function for {@link java.util.function.ObjLongConsumer}.
      */
     public static <VALUE> ObjLongFunction<VALUE, String> objLongConsumerHashCodeKeyFunction() {
