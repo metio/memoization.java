@@ -39,6 +39,7 @@ import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
+import java.util.function.ToLongBiFunction;
 import java.util.function.ToLongFunction;
 
 import org.junit.Assert;
@@ -606,6 +607,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized ToIntBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToLongBiFunction() {
+        // given
+        final ToLongBiFunction<String, String> operator = (first, second) -> 123;
+
+        // when
+        final ToLongBiFunction<String, String> memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized ToLongBiFunction is NULL", memoize);
     }
 
     /**
