@@ -1,25 +1,32 @@
-= memoization.java
-Sebastian Hoß <https://github.com/sebhoss[@sebhoss]>
+= memoization.java image:https://img.shields.io/badge/email-%40metio-brightgreen.svg?style=social&label=mail["Discuss on Google Groups", link="https://groups.google.com/forum/#!forum/metio"] image:https://img.shields.io/badge/irc-%23metio.wtf-brightgreen.svg?style=social&label=IRC["Chat on IRC", link="http://webchat.freenode.net/?channels=metio.wtf"]
+Sebastian Hoß <http://seb.xn--ho-hia.de/[@sebhoss]>
 :github-org: sebhoss
 :project-name: memoization.java
-:project-group: com.github.sebhoss.utils.memoization
+:project-group: de.xn--ho-hia.memoization
 :coverity-project: 8732
+:codacy-project: 0ed810b7f2514f0ea1c8e86e97c803c4
 :toc:
 :toc-placement: preamble
 
-image:https://img.shields.io/badge/license-cc%20zero-000000.svg["CC Zero", link="http://creativecommons.org/publicdomain/zero/1.0/"]
-image:https://img.shields.io/maven-central/v/{project-group}/{project-name}.svg?style=flat-square["Maven Central", link="https://maven-badges.herokuapp.com/maven-central/{project-group}/{project-name}"]
-image:https://www.openhub.net/p/memoization-java/widgets/project_thin_badge.gif["Open Hub statistics", link="https://www.openhub.net/p/memoization-java"]
+image:https://img.shields.io/badge/license-cc%20zero-000000.svg?style=flat-square["CC Zero", link="http://creativecommons.org/publicdomain/zero/1.0/"]
+pass:[<span class="image"><a class="image" href="https://maven-badges.herokuapp.com/maven-central/de.xn--ho-hia.memoization/memoization.java"><img src="https://img.shields.io/maven-central/v/de.xn--ho-hia.memoization/memoization.java.svg?style=flat-square" alt="Maven Central"></a></span>]
+pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization.java"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization.java.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
+image:https://reposs.herokuapp.com/?path={github-org}/{project-name}&style=flat-square["Repository size"]
+image:https://www.openhub.net/p/{project-name}/widgets/project_thin_badge.gif["Open Hub statistics", link="https://www.ohloh.net/p/{project-name}"]
+
 image:https://img.shields.io/travis/{github-org}/{project-name}/master.svg?style=flat-square["Build Status", link="https://travis-ci.org/{github-org}/{project-name}"]
-image:https://img.shields.io/coveralls/{github-org}/{project-name}/master.svg?style=flat-square["", link="https://coveralls.io/github/{github-org}/{project-name}"]
-image:https://scan.coverity.com/projects/{coverity-project}/badge.svg["Coverity Scan Result", link="https://scan.coverity.com/projects/{coverity-project}"]
-image:https://img.shields.io/gitter/room/{github-org}/{project-name}.svg?style=flat-square["join chat", link="https://gitter.im/{github-org}/{project-name}"]
+image:https://img.shields.io/coveralls/{github-org}/{project-name}/master.svg?style=flat-square["Code Coverage", link="https://coveralls.io/github/{github-org}/{project-name}"]
+image:https://img.shields.io/coverity/scan/{coverity-project}.svg?style=flat-square["Coverity Scan Result", link="https://scan.coverity.com/projects/{github-org}-{project-name}"]
+image:https://img.shields.io/codacy/grade/{codacy-project}.svg?style=flat-square["Codacy Code Quality", link="https://www.codacy.com/app/mail_7/{project-name}"]
+image:https://img.shields.io/badge/forkable-yes-brightgreen.svg?style=flat-square["Can this project be forked?", link="https://basicallydan.github.io/forkability/?u={github-org}&r={project-name}"]
+image:https://img.shields.io/maintenance/yes/2016.svg?style=flat-square["Is this thing still maintained?"]
+image:https://img.shields.io/bountysource/team/metio/activity.svg?style=flat-square["Bounties on open tickets", link="https://www.bountysource.com/teams/metio"]
 
 Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 
 == Features
 
-* Memoize calls to `Supplier`, `Function`, `BiFunction` and `Consumer`
+* Memoize calls to `Supplier`, `Function`, `BiFunction`, `Consumer` and all other functional interfaces in `java.util.function`
 * `ConcurrentHashMap` based implementation
 
 == Development Status
@@ -45,32 +52,22 @@ Consumer<T> consumer = ...;
 Consumer<T> memoizedConsumer = MapMemoization.memoize(consumer);
 ----
 
-Use static imports to simplify this further to:
-
-[source, java]
-----
-Supplier<T> memoizedSupplier = memoize(supplier);
-Function<I, O> memoizedFunction = memoize(function);
-BiFunction<I, O, R> memoizedBiFunction = memoize(biFunction);
-Consumer<T> memoizedConsumer = memoize(consumer);
-----
-
 === Integration
 
 To use this project just declare the following dependency inside your POM:
 
-[source, xml]
+[source, xml, subs="attributes,verbatim"]
 ----
 <dependencies>
   <dependency>
-    <groupId>com.github.sebhoss.utils.memoization</groupId>
-    <artifactId>memoization.java</artifactId>
+    <groupId>{project-group}</groupId>
+    <artifactId>{project-name}</artifactId>
     <version>${version.memoization}</version>
   </dependency>
 </dependencies>
 ----
 
-Replace `${version.memoization}` with the link:http://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.github.sebhoss.utils.memoization%20a%3Amemoization.java[latest release]. This project follows the link:http://semver.org/[semantic versioning guidelines].
+Replace `${version.memoization}` with the pass:[<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization%20a%3Amemoization.java">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
 
 === Compatibility
 
