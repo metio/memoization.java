@@ -37,6 +37,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -558,6 +559,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized ToIntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToLongFunction() {
+        // given
+        final ToLongFunction<String> operator = Long::parseLong;
+
+        // when
+        final ToLongFunction<String> memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized ToLongFunction is NULL", memoize);
     }
 
     /**

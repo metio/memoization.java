@@ -40,6 +40,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
@@ -1117,6 +1118,33 @@ public final class MapMemoization {
             final ToIntFunction<VALUE> function,
             final Map<VALUE, Integer> preComputedValues) {
         return new ConcurrentHashMapBasedToIntFunctionMemoizer<>(preComputedValues, function);
+    }
+
+    /**
+     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param function
+     *            The {@link ToLongFunction} to memoize.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static <VALUE> ToLongFunction<VALUE> memoize(final ToLongFunction<VALUE> function) {
+        return memoize(function, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param function
+     *            The {@link ToLongFunction} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static <VALUE> ToLongFunction<VALUE> memoize(
+            final ToLongFunction<VALUE> function,
+            final Map<VALUE, Long> preComputedValues) {
+        return new ConcurrentHashMapBasedToLongFunctionMemoizer<>(preComputedValues, function);
     }
 
 }
