@@ -23,6 +23,7 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.IntToDoubleFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
@@ -949,6 +950,33 @@ public final class MapMemoization {
             final DoubleToLongFunction operator,
             final Map<Double, Long> preComputedValues) {
         return new ConcurrentHashMapBasedDoubleToLongFunctionMemoizer(preComputedValues, operator);
+    }
+
+    /**
+     * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param operator
+     *            The {@link IntToDoubleFunction} to memoize.
+     * @return The wrapped {@link IntToDoubleFunction}.
+     */
+    public static IntToDoubleFunction memoize(final IntToDoubleFunction operator) {
+        return memoize(operator, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * Skips previously computed values.
+     *
+     * @param operator
+     *            The {@link IntToDoubleFunction} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link IntToDoubleFunction}.
+     */
+    public static IntToDoubleFunction memoize(
+            final IntToDoubleFunction operator,
+            final Map<Integer, Double> preComputedValues) {
+        return new ConcurrentHashMapBasedIntToDoubleFunctionMemoizer(preComputedValues, operator);
     }
 
 }

@@ -20,6 +20,7 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.IntToDoubleFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
@@ -462,6 +463,21 @@ public class MapMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleToLongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntToDoubleFunction() {
+        // given
+        final IntToDoubleFunction operator = input -> 123.456D;
+
+        // when
+        final IntToDoubleFunction memoize = MapMemoization.memoize(operator);
+
+        // then
+        Assert.assertNotNull("Memoized IntToDoubleFunction is NULL", memoize);
     }
 
     /**
