@@ -38,6 +38,7 @@ import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToDoubleFunction;
 
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
@@ -904,163 +905,190 @@ public final class MapMemoization {
     /**
      * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param operator
+     * @param function
      *            The {@link DoubleToIntFunction} to memoize.
      * @return The wrapped {@link DoubleToIntFunction}.
      */
-    public static DoubleToIntFunction memoize(final DoubleToIntFunction operator) {
-        return memoize(operator, emptyMap());
+    public static DoubleToIntFunction memoize(final DoubleToIntFunction function) {
+        return memoize(function, emptyMap());
     }
 
     /**
      * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      * Skips previously computed values.
      *
-     * @param operator
+     * @param function
      *            The {@link DoubleToIntFunction} to memoize.
      * @param preComputedValues
      *            Map of already computed values.
      * @return The wrapped {@link DoubleToIntFunction}.
      */
     public static DoubleToIntFunction memoize(
-            final DoubleToIntFunction operator,
+            final DoubleToIntFunction function,
             final Map<Double, Integer> preComputedValues) {
-        return new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(preComputedValues, operator);
+        return new ConcurrentHashMapBasedDoubleToIntFunctionMemoizer(preComputedValues, function);
     }
 
     /**
      * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param operator
+     * @param function
      *            The {@link DoubleToLongFunction} to memoize.
      * @return The wrapped {@link DoubleToLongFunction}.
      */
-    public static DoubleToLongFunction memoize(final DoubleToLongFunction operator) {
-        return memoize(operator, emptyMap());
+    public static DoubleToLongFunction memoize(final DoubleToLongFunction function) {
+        return memoize(function, emptyMap());
     }
 
     /**
      * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      * Skips previously computed values.
      *
-     * @param operator
+     * @param function
      *            The {@link DoubleToLongFunction} to memoize.
      * @param preComputedValues
      *            Map of already computed values.
      * @return The wrapped {@link DoubleToLongFunction}.
      */
     public static DoubleToLongFunction memoize(
-            final DoubleToLongFunction operator,
+            final DoubleToLongFunction function,
             final Map<Double, Long> preComputedValues) {
-        return new ConcurrentHashMapBasedDoubleToLongFunctionMemoizer(preComputedValues, operator);
+        return new ConcurrentHashMapBasedDoubleToLongFunctionMemoizer(preComputedValues, function);
     }
 
     /**
      * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param operator
+     * @param function
      *            The {@link IntToDoubleFunction} to memoize.
      * @return The wrapped {@link IntToDoubleFunction}.
      */
-    public static IntToDoubleFunction memoize(final IntToDoubleFunction operator) {
-        return memoize(operator, emptyMap());
+    public static IntToDoubleFunction memoize(final IntToDoubleFunction function) {
+        return memoize(function, emptyMap());
     }
 
     /**
      * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      * Skips previously computed values.
      *
-     * @param operator
+     * @param function
      *            The {@link IntToDoubleFunction} to memoize.
      * @param preComputedValues
      *            Map of already computed values.
      * @return The wrapped {@link IntToDoubleFunction}.
      */
     public static IntToDoubleFunction memoize(
-            final IntToDoubleFunction operator,
+            final IntToDoubleFunction function,
             final Map<Integer, Double> preComputedValues) {
-        return new ConcurrentHashMapBasedIntToDoubleFunctionMemoizer(preComputedValues, operator);
+        return new ConcurrentHashMapBasedIntToDoubleFunctionMemoizer(preComputedValues, function);
     }
 
     /**
      * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param operator
+     * @param function
      *            The {@link IntToLongFunction} to memoize.
      * @return The wrapped {@link IntToLongFunction}.
      */
-    public static IntToLongFunction memoize(final IntToLongFunction operator) {
-        return memoize(operator, emptyMap());
+    public static IntToLongFunction memoize(final IntToLongFunction function) {
+        return memoize(function, emptyMap());
     }
 
     /**
      * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
      * previously computed values.
      *
-     * @param operator
+     * @param function
      *            The {@link IntToLongFunction} to memoize.
      * @param preComputedValues
      *            Map of already computed values.
      * @return The wrapped {@link IntToLongFunction}.
      */
     public static IntToLongFunction memoize(
-            final IntToLongFunction operator,
+            final IntToLongFunction function,
             final Map<Integer, Long> preComputedValues) {
-        return new ConcurrentHashMapBasedIntToLongFunctionMemoizer(preComputedValues, operator);
+        return new ConcurrentHashMapBasedIntToLongFunctionMemoizer(preComputedValues, function);
     }
 
     /**
      * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param operator
+     * @param function
      *            The {@link LongToDoubleFunction} to memoize.
      * @return The wrapped {@link LongToDoubleFunction}.
      */
-    public static LongToDoubleFunction memoize(final LongToDoubleFunction operator) {
-        return memoize(operator, emptyMap());
+    public static LongToDoubleFunction memoize(final LongToDoubleFunction function) {
+        return memoize(function, emptyMap());
     }
 
     /**
      * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      * Skips previously computed values.
      *
-     * @param operator
+     * @param function
      *            The {@link LongToDoubleFunction} to memoize.
      * @param preComputedValues
      *            Map of already computed values.
      * @return The wrapped {@link LongToDoubleFunction}.
      */
     public static LongToDoubleFunction memoize(
-            final LongToDoubleFunction operator,
+            final LongToDoubleFunction function,
             final Map<Long, Double> preComputedValues) {
-        return new ConcurrentHashMapBasedLongToDoubleFunctionMemoizer(preComputedValues, operator);
+        return new ConcurrentHashMapBasedLongToDoubleFunctionMemoizer(preComputedValues, function);
     }
 
     /**
      * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
      *
-     * @param operator
+     * @param function
      *            The {@link LongToIntFunction} to memoize.
      * @return The wrapped {@link LongToIntFunction}.
      */
-    public static LongToIntFunction memoize(final LongToIntFunction operator) {
-        return memoize(operator, emptyMap());
+    public static LongToIntFunction memoize(final LongToIntFunction function) {
+        return memoize(function, emptyMap());
     }
 
     /**
      * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
      * previously computed values.
      *
-     * @param operator
+     * @param function
      *            The {@link LongToIntFunction} to memoize.
      * @param preComputedValues
      *            Map of already computed values.
      * @return The wrapped {@link LongToIntFunction}.
      */
     public static LongToIntFunction memoize(
-            final LongToIntFunction operator,
+            final LongToIntFunction function,
             final Map<Long, Integer> preComputedValues) {
-        return new ConcurrentHashMapBasedLongToIntFunctionMemoizer(preComputedValues, operator);
+        return new ConcurrentHashMapBasedLongToIntFunctionMemoizer(preComputedValues, function);
+    }
+
+    /**
+     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     *
+     * @param function
+     *            The {@link ToDoubleFunction} to memoize.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static <VALUE> ToDoubleFunction<VALUE> memoize(final ToDoubleFunction<VALUE> function) {
+        return memoize(function, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param function
+     *            The {@link ToDoubleFunction} to memoize.
+     * @param preComputedValues
+     *            Map of already computed values.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static <VALUE> ToDoubleFunction<VALUE> memoize(
+            final ToDoubleFunction<VALUE> function,
+            final Map<VALUE, Double> preComputedValues) {
+        return new ConcurrentHashMapBasedToDoubleFunctionMemoizer<>(preComputedValues, function);
     }
 
 }
