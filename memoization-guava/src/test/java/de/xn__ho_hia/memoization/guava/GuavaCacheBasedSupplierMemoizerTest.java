@@ -21,8 +21,8 @@ public class GuavaCacheBasedSupplierMemoizerTest {
     public ExpectedException thrown = ExpectedException.none();
 
     /**
-     *
-     */
+    *
+    */
     @Test
     @SuppressWarnings("static-method")
     public void shouldAcceptLoadingCacheAndKeySupplier() {
@@ -38,6 +38,26 @@ public class GuavaCacheBasedSupplierMemoizerTest {
 
         // then
         Assert.assertNotNull(memoizer);
+    }
+
+    /**
+    *
+    */
+    @Test
+    @SuppressWarnings({ "static-method", "nls" })
+    public void shouldReturnSuppliedValue() {
+        // given
+        final Supplier<String> keySupplier = () -> "key"; //$NON-NLS-1$
+        final Supplier<String> supplier = () -> "value"; //$NON-NLS-1$
+        final LoadingCache<String, String> cache = CacheBuilder.newBuilder()
+                .build(new SupplierBasedCacheLoader<>(supplier));
+
+        // when
+        final GuavaCacheBasedSupplierMemoizer<String, String> memoizer = new GuavaCacheBasedSupplierMemoizer<>(cache,
+                keySupplier);
+
+        // then
+        Assert.assertEquals("value", memoizer.get());
     }
 
 }

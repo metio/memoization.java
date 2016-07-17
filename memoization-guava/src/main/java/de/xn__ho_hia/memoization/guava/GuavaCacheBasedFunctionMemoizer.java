@@ -13,8 +13,8 @@ final class GuavaCacheBasedFunctionMemoizer<KEY, VALUE>
     }
 
     @Override
-    public VALUE apply(final KEY input) {
-        return get(input);
+    public VALUE apply(final KEY key) {
+        return get(key);
     }
 
 }

@@ -137,23 +137,7 @@ public final class GuavaMemoization {
      */
     public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
             final BiFunction<FIRST, SECOND, VALUE> biFunction) {
-        return memoize(biFunction, hashCodeKeyFunction());
-    }
-
-    /**
-     * Memoizes a {@link BiFunction} in a Guava {@link Cache}. Saves results under a specific cache key computed by a
-     * key-function.
-     *
-     * @param biFunction
-     *            The {@link BiFunction} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @return The wrapped {@link BiFunction}.
-     */
-    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(biFunction, keyFunction, DEFAULT_MAXIMUM_CACHE_SIZE);
+        return memoize(biFunction, DEFAULT_MAXIMUM_CACHE_SIZE);
     }
 
     /**
@@ -162,17 +146,14 @@ public final class GuavaMemoization {
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
      * @param maximumCacheSize
      *            The maximum number of computed values to cache.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
             final BiFunction<FIRST, SECOND, VALUE> biFunction,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final long maximumCacheSize) {
-        return memoize(biFunction, keyFunction, CacheBuilder.newBuilder()
+        return memoize(biFunction, CacheBuilder.newBuilder()
                 .maximumSize(maximumCacheSize)
                 .build());
     }

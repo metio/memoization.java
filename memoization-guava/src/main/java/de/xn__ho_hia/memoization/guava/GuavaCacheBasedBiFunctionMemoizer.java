@@ -23,7 +23,7 @@ final class GuavaCacheBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
     @Override
     public VALUE apply(final FIRST first, final SECOND second) {
         final KEY key = keyFunction.apply(first, second);
-        return get(key, input -> biFunction.apply(first, second));
+        return get(key, givenKey -> biFunction.apply(first, second));
     }
 
 }
