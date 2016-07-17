@@ -5,6 +5,7 @@ Sebastian Hoß <http://seb.xn--ho-hia.de/[@sebhoss]>
 :project-group: de.xn--ho-hia.memoization
 :coverity-project: 8732
 :codacy-project: 0ed810b7f2514f0ea1c8e86e97c803c4
+:jdk-api: https://docs.oracle.com/javase/8/docs/api
 :toc:
 :toc-placement: preamble
 
@@ -33,229 +34,229 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 |===
 | | Caffeine | Guava | JSR107 | Map
 
-| BiConsumer
+| link:{jdk-api}/java/util/function/BiConsumer.html[BiConsumer]
 | 
 | 
 | 
 | ✓
 
-| BiFunction
+| link:{jdk-api}/java/util/function/BiFunction.html[BiFunction]
 | 
 | 
 | 
 | ✓
 
-| BiPredicate
+| link:{jdk-api}/java/util/function/BiPredicate.html[BiPredicate]
 | 
 | 
 | 
 | ✓
 
-| BooleanSupplier
+| link:{jdk-api}/java/util/function/BooleanSupplier.html[BooleanSupplier]
 | 
 | 
 | 
 | ✓
 
-| Consumer
+| link:{jdk-api}/java/util/function/Consumer.html[Consumer]
 | 
 | 
 | 
 | ✓
 
-| DoubleBinaryOperator
+| link:{jdk-api}/java/util/function/DoubleBinaryOperator.html[DoubleBinaryOperator]
 | 
 | 
 | 
 | ✓
 
-| DoubleConsumer
+| link:{jdk-api}/java/util/function/DoubleConsumer.html[DoubleConsumer]
 | 
 | 
 | 
 | ✓
 
-| DoublePredicate
+| link:{jdk-api}/java/util/function/DoublePredicate.html[DoublePredicate]
 | 
 | 
 | 
 | ✓
 
-| DoubleSupplier
+| link:{jdk-api}/java/util/function/DoubleSupplier.html[DoubleSupplier]
 | 
 | 
 | 
 | ✓
 
-| DoubleToIntFunction
+| link:{jdk-api}/java/util/function/DoubleToIntFunction.html[DoubleToIntFunction]
 | 
 | 
 | 
 | ✓
 
-| DoubleToLongFunction
+| link:{jdk-api}/java/util/function/DoubleToLongFunction.html[DoubleToLongFunction]
 | 
 | 
 | 
 | ✓
 
-| DoubleUnaryOperator
+| link:{jdk-api}/java/util/function/DoubleUnaryOperator.html[DoubleUnaryOperator]
 | 
 | 
 | 
 | ✓
 
-| Function
+| link:{jdk-api}/java/util/function/Function.html[Function]
 | 
 | 
 | 
 | ✓
 
-| IntBinaryOperator
+| link:{jdk-api}/java/util/function/IntBinaryOperator.html[IntBinaryOperator]
 | 
 | 
 | 
 | ✓
 
-| IntConsumer
+| link:{jdk-api}/java/util/function/IntConsumer.html[IntConsumer]
 | 
 | 
 | 
 | ✓
 
-| IntPredicate
+| link:{jdk-api}/java/util/function/IntPredicate.html[IntPredicate]
 | 
 | 
 | 
 | ✓
 
-| IntSupplier
+| link:{jdk-api}/java/util/function/IntSupplier.html[IntSupplier]
 | 
 | 
 | 
 | ✓
 
-| IntToDoubleFunction
+| link:{jdk-api}/java/util/function/IntToDoubleFunction.html[IntToDoubleFunction]
 | 
 | 
 | 
 | ✓
 
-| IntToLongFunction
+| link:{jdk-api}/java/util/function/IntToLongFunction.html[IntToLongFunction]
 | 
 | 
 | 
 | ✓
 
-| IntUnaryOperator
+| link:{jdk-api}/java/util/function/IntUnaryOperator.html[IntUnaryOperator]
 | 
 | 
 | 
 | ✓
 
-| LongBinaryOperator
+| link:{jdk-api}/java/util/function/LongBinaryOperator.html[LongBinaryOperator]
 | 
 | 
 | 
 | ✓
 
-| LongConsumer
+| link:{jdk-api}/java/util/function/LongConsumer.html[LongConsumer]
 | 
 | 
 | 
 | ✓
 
-| LongPredicate
+| link:{jdk-api}/java/util/function/LongPredicate.html[LongPredicate]
 | 
 | 
 | 
 | ✓
 
-| LongSupplier
+| link:{jdk-api}/java/util/function/LongSupplier.html[LongSupplier]
 | 
 | 
 | 
 | ✓
 
-| LongToDoubleFunction
+| link:{jdk-api}/java/util/function/LongToDoubleFunction.html[LongToDoubleFunction]
 | 
 | 
 | 
 | ✓
 
-| LongToIntFunction
+| link:{jdk-api}/java/util/function/LongToIntFunction.html[LongToIntFunction]
 | 
 | 
 | 
 | ✓
 
-| LongUnaryOperator
+| link:{jdk-api}/java/util/function/LongUnaryOperator.html[LongUnaryOperator]
 | 
 | 
 | 
 | ✓
 
-| ObjDoubleConsumer
+| link:{jdk-api}/java/util/function/ObjDoubleConsumer.html[ObjDoubleConsumer
 | 
 | 
 | 
 | ✓
 
-| ObjIntConsumer
+| link:{jdk-api}/java/util/function/ObjIntConsumer.html[ObjIntConsumer]
 | 
 | 
 | 
 | ✓
 
-| ObjLongConsumer
+| link:{jdk-api}/java/util/function/ObjLongConsumer.html[ObjLongConsumer]
 | 
 | 
 | 
 | ✓
 
-| Predicate
+| link:{jdk-api}/java/util/function/Predicate.html[Predicate]
 | 
 | 
 | 
 | ✓
 
-| Supplier
+| link:{jdk-api}/java/util/function/Supplier.html[Supplier]
 | 
 | 
 | 
 | ✓
 
-| ToDoubleBiFunction
+| link:{jdk-api}/java/util/function/ToDoubleBiFunction.html[ToDoubleBiFunction]
 | 
 | 
 | 
 | ✓
 
-| ToIntBiFunction
+| link:{jdk-api}/java/util/function/ToIntBiFunction.html[ToIntBiFunction]
 | 
 | 
 | 
 | ✓
 
-| ToLongBiFunction
+| link:{jdk-api}/java/util/function/ToLongBiFunction.html[ToLongBiFunction]
 | 
 | 
 | 
 | ✓
 
-| ToDoubleFunction
+| link:{jdk-api}/java/util/function/ToDoubleFunction.html[ToDoubleFunction]
 | 
 | 
 | 
 | ✓
 
-| ToIntFunction
+| link:{jdk-api}/java/util/function/ToIntFunction.html[ToIntFunction]
 | 
 | 
 | 
 | ✓
 
-| ToLongFunction
+| link:{jdk-api}/java/util/function/ToLongFunction.html[ToLongFunction]
 | 
 | 
 | 
