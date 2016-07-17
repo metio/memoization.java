@@ -50,6 +50,7 @@
     <!--
     <module>memoization-guava</module>
     <module>memoization-jsr107</module>
+    <module>memoization-caffeine</module>
     -->
   </modules>
 
