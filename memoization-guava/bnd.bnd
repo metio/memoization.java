@@ -4,4 +4,6 @@ Bundle-Description: ${project.description}
 Bundle-DocURL: ${project.url}
 Bundle-Version: ${project.version}
 Export-Package: de.xn__ho_hia.memoization.guava
-Import-Package: de.xn__ho_hia.memoization.shared
+Import-Package: \
+	de.xn__ho_hia.memoization.shared,\
+	*
