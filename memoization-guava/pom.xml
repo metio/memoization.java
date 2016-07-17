@@ -19,7 +19,7 @@
   <parent>
     <groupId>de.xn--ho-hia.memoization</groupId>
     <artifactId>memoization.java</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-${revision}</version>
   </parent>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -40,8 +40,12 @@
   <!-- https://maven.apache.org/pom.html#Dependencies -->
   <dependencies>
     <dependency>
-      <groupId>com.github.sebhoss.utils.memoization</groupId>
+      <groupId>de.xn--ho-hia.memoization</groupId>
       <artifactId>memoization-shared</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.xn--ho-hia.quality</groupId>
+      <artifactId>suppress-warnings</artifactId>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>

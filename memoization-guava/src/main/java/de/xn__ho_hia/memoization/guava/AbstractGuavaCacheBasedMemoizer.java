@@ -1,10 +1,11 @@
-package com.github.sebhoss.utils.memoization.guava;
-
-import com.github.sebhoss.utils.memoization.shared.MemoizationException;
-import com.google.common.cache.Cache;
+package de.xn__ho_hia.memoization.guava;
 
 import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
+
+import com.google.common.cache.Cache;
+
+import de.xn__ho_hia.memoization.shared.MemoizationException;
 
 abstract class AbstractGuavaCacheBasedMemoizer<KEY, VALUE> {
 

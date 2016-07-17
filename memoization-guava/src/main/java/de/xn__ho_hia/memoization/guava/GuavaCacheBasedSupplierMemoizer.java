@@ -1,4 +1,4 @@
-package com.github.sebhoss.utils.memoization.guava;
+package de.xn__ho_hia.memoization.guava;
 
 import com.google.common.cache.LoadingCache;
 
