@@ -29,7 +29,10 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 == Features
 
 * Memoize calls to `Supplier`, `Function`, `BiFunction`, `Consumer` and all other functional interfaces in `java.util.function`
-* `ConcurrentHashMap` based implementation
+* link:{jdk-api}/java/util/concurrent/ConcurrentHashMap.html[`ConcurrentHashMap`] based implementation
+* link:https://github.com/ben-manes/caffeine[Caffeine] based implementation
+* link:https://github.com/google/guava/wiki/CachesExplained[Guava] based implementation
+* link:https://jcp.org/en/jsr/detail?id=107[JSR107] based implementation
 
 .Coverage of `java.util.function`
 |===
@@ -308,7 +311,7 @@ This project is split into multiple modules in order to offer the least amount o
 </dependencies>
 ----
 
-Replace `${kind}` with one of the available implementations (*map*, *guava*, *caffeine*, *jsr107*). Replace `${version.memoization}` with the pass:[<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization%20a%3Amemoization.java">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
+Replace `${kind}` with one of the available implementations (*map*, *guava*, *caffeine*, *jsr107*). Replace `${version.memoization}` with the pass:[<a href="https://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
 
 === Compatibility
 
