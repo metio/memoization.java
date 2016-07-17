@@ -334,4 +334,5 @@ with this software. If not, see http://creativecommons.org/publicdomain/zero/1.0
 * https://github.com/sebhoss/memoization.java
 * https://bitbucket.org/sebhoss/memoization.java
 * https://gitlab.com/sebastian.hoss/memoization.java
+* http://v2.pikacode.com/sebhoss/memoization.java
 * http://repo.or.cz/memoization.java.git
