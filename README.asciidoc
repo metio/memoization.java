@@ -288,7 +288,7 @@ Consumer<T> memoizedConsumer = MapMemoization.memoize(consumer);
 
 === Integration
 
-This project is split into multiple modules in order to offer the least amount of dependencies to import for any given consumer project. In order to use this project, declare the following inside your POM:
+This project is split into multiple modules in order to offer the least amount of dependencies to import for any given consumer project. In order to use this project, declare the following inside your POM. The `memoization-shared` module is not strictly necessary as it gets pulled in transitively by any of `memoization-${kind}`, however in general it is good practive to include all of your direct dependencies.
 
 [source, xml, subs="attributes,verbatim"]
 ----
