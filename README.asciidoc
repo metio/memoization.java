@@ -196,7 +196,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | 
 | ✓
 
-| link:{jdk-api}/java/util/function/ObjDoubleConsumer.html[ObjDoubleConsumer
+| link:{jdk-api}/java/util/function/ObjDoubleConsumer.html[ObjDoubleConsumer]
 | 
 | 
 | 
