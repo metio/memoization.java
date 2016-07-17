@@ -30,9 +30,9 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 
 * Memoize calls to `Supplier`, `Function`, `BiFunction`, `Consumer` and all other functional interfaces in `java.util.function`
 * link:{jdk-api}/java/util/concurrent/ConcurrentHashMap.html[`ConcurrentHashMap`] based implementation
-* link:https://github.com/ben-manes/caffeine[Caffeine] based implementation
-* link:https://github.com/google/guava/wiki/CachesExplained[Guava] based implementation
-* link:https://jcp.org/en/jsr/detail?id=107[JSR107] based implementation
+* [WIP]: link:https://github.com/ben-manes/caffeine[Caffeine] based implementation
+* [WIP]: link:https://github.com/google/guava/wiki/CachesExplained[Guava] based implementation
+* [WIP]: link:https://jcp.org/en/jsr/detail?id=107[JSR107] based implementation
 
 .Coverage of `java.util.function`
 |===
