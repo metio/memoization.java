@@ -36,229 +36,229 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | | Caffeine | Guava | JSR107 | Map
 
 | link:{jdk-api}/java/util/function/BiConsumer.html[BiConsumer]
-| 
+| link:{issue}/88[#88]
 | link:{issue}/54[#54]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/BiFunction.html[BiFunction]
-| 
+| link:{issue}/89[#89]
 | ✓
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/BiPredicate.html[BiPredicate]
-| 
+| link:{issue}/90[#90]
 | link:{issue}/55[#55]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/BooleanSupplier.html[BooleanSupplier]
-| 
+| link:{issue}/91[#91]
 | link:{issue}/56[#56]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/Consumer.html[Consumer]
-| 
+| link:{issue}/92[#92]
 | ✓
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleBinaryOperator.html[DoubleBinaryOperator]
-| 
+| link:{issue}/93[#93]
 | link:{issue}/57[#57]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleConsumer.html[DoubleConsumer]
-| 
+| link:{issue}/94[#94]
 | link:{issue}/58[#58]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/DoublePredicate.html[DoublePredicate]
-| 
+| link:{issue}/95[#95]
 | link:{issue}/59[#59]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleSupplier.html[DoubleSupplier]
-| 
+| link:{issue}/96[#96]
 | link:{issue}/60[#60]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleToIntFunction.html[DoubleToIntFunction]
-| 
+| link:{issue}/97[#97]
 | link:{issue}/61[#61]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleToLongFunction.html[DoubleToLongFunction]
-| 
+| link:{issue}/98[#98]
 | link:{issue}/62[#62]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleUnaryOperator.html[DoubleUnaryOperator]
-| 
+| link:{issue}/99[#99]
 | link:{issue}/63[#63]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/Function.html[Function]
-| 
+| link:{issue}/100[#100]
 | ✓
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/IntBinaryOperator.html[IntBinaryOperator]
-| 
+| link:{issue}/101[#101]
 | link:{issue}/64[#64]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/IntConsumer.html[IntConsumer]
-| 
+| link:{issue}/102[#102]
 | link:{issue}/65[#65]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/IntPredicate.html[IntPredicate]
-| 
+| link:{issue}/103[#103]
 | link:{issue}/66[#66]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/IntSupplier.html[IntSupplier]
-| 
+| link:{issue}/104[#104]
 | link:{issue}/67[#67]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/IntToDoubleFunction.html[IntToDoubleFunction]
-| 
+| link:{issue}/105[#105]
 | link:{issue}/68[#68]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/IntToLongFunction.html[IntToLongFunction]
-| 
+| link:{issue}/106[#106]
 | link:{issue}/69[#69]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/IntUnaryOperator.html[IntUnaryOperator]
-| 
+| link:{issue}/107[#107]
 | link:{issue}/70[#70]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/LongBinaryOperator.html[LongBinaryOperator]
-| 
+| link:{issue}/108[#108]
 | link:{issue}/71[#71]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/LongConsumer.html[LongConsumer]
-| 
+| link:{issue}/109[#109]
 | link:{issue}/72[#72]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/LongPredicate.html[LongPredicate]
-| 
+| link:{issue}/110[#110]
 | link:{issue}/73[#73]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/LongSupplier.html[LongSupplier]
-| 
+| link:{issue}/111[#111]
 | link:{issue}/74[#74]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/LongToDoubleFunction.html[LongToDoubleFunction]
-| 
+| link:{issue}/112[#112]
 | link:{issue}/75[#75]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/LongToIntFunction.html[LongToIntFunction]
-| 
+| link:{issue}/113[#113]
 | link:{issue}/76[#76]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/LongUnaryOperator.html[LongUnaryOperator]
-| 
+| link:{issue}/114[#114]
 | link:{issue}/77[#77]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ObjDoubleConsumer.html[ObjDoubleConsumer]
-| 
+| link:{issue}/115[#115]
 | link:{issue}/78[#78]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ObjIntConsumer.html[ObjIntConsumer]
-| 
+| link:{issue}/116[#116]
 | link:{issue}/79[#79]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ObjLongConsumer.html[ObjLongConsumer]
-| 
+| link:{issue}/117[#117]
 | link:{issue}/80[#80]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/Predicate.html[Predicate]
-| 
+| link:{issue}/118[#118]
 | link:{issue}/81[#81]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/Supplier.html[Supplier]
-| 
+| link:{issue}/119[#119]
 | ✓
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ToDoubleBiFunction.html[ToDoubleBiFunction]
-| 
+| link:{issue}/120[#120]
 | link:{issue}/82[#82]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ToIntBiFunction.html[ToIntBiFunction]
-| 
+| link:{issue}/121[#121]
 | link:{issue}/83[#83]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ToLongBiFunction.html[ToLongBiFunction]
-| 
+| link:{issue}/122[#122]
 | link:{issue}/84[#84]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ToDoubleFunction.html[ToDoubleFunction]
-| 
+| link:{issue}/123[#123]
 | link:{issue}/85[#85]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ToIntFunction.html[ToIntFunction]
-| 
+| link:{issue}/124[#124]
 | link:{issue}/86[#86]
 | 
 | ✓
 
 | link:{jdk-api}/java/util/function/ToLongFunction.html[ToLongFunction]
-| 
+| link:{issue}/125[#125]
 | link:{issue}/87[#87]
 | 
 | ✓
