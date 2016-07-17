@@ -1,10 +1,11 @@
 package de.xn__ho_hia.memoization.guava;
 
-import com.google.common.cache.LoadingCache;
-
 import java.util.function.Supplier;
 
-final class GuavaCacheBasedSupplierMemoizer<KEY, VALUE> extends AbstractGuavaLoadingCacheBasedMemoizer<KEY, VALUE>
+import com.google.common.cache.LoadingCache;
+
+final class GuavaCacheBasedSupplierMemoizer<KEY, VALUE>
+        extends AbstractGuavaLoadingCacheBasedMemoizer<KEY, VALUE>
         implements Supplier<VALUE> {
 
     private final Supplier<KEY> keySupplier;

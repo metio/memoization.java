@@ -8,7 +8,8 @@ import com.google.common.cache.Cache;
 
 import de.xn__ho_hia.memoization.shared.MemoizingConsumer;
 
-final class GuavaCacheBasedConsumerMemoizer<KEY, VALUE> extends AbstractGuavaCacheBasedMemoizer<KEY, VALUE>
+final class GuavaCacheBasedConsumerMemoizer<KEY, VALUE>
+        extends AbstractGuavaCacheBasedMemoizer<KEY, VALUE>
         implements MemoizingConsumer<KEY, VALUE> {
 
     private final Function<VALUE, KEY> keyFunction;

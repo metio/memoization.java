@@ -1,13 +1,14 @@
 package de.xn__ho_hia.memoization.guava;
 
-import com.google.common.cache.Cache;
-
 import java.util.function.BiFunction;
 
-final class GuavaCacheBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE> extends AbstractGuavaCacheBasedMemoizer<KEY, VALUE>
+import com.google.common.cache.Cache;
+
+final class GuavaCacheBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
+        extends AbstractGuavaCacheBasedMemoizer<KEY, VALUE>
         implements BiFunction<FIRST, SECOND, VALUE> {
 
-    private final BiFunction<FIRST, SECOND, KEY> keyFunction;
+    private final BiFunction<FIRST, SECOND, KEY>   keyFunction;
     private final BiFunction<FIRST, SECOND, VALUE> biFunction;
 
     GuavaCacheBasedBiFunctionMemoizer(
