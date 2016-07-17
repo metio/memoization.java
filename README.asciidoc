@@ -29,9 +29,243 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 * Memoize calls to `Supplier`, `Function`, `BiFunction`, `Consumer` and all other functional interfaces in `java.util.function`
 * `ConcurrentHashMap` based implementation
 
+.Coverage of `java.util.function`
+|===
+| | Caffeine | Guava | JSR107 | Map
+
+| BiConsumer
+| 
+| 
+| 
+| ✓
+
+| BiFunction
+| 
+| 
+| 
+| ✓
+
+| BiPredicate
+| 
+| 
+| 
+| ✓
+
+| BooleanSupplier
+| 
+| 
+| 
+| ✓
+
+| Consumer
+| 
+| 
+| 
+| ✓
+
+| DoubleBinaryOperator
+| 
+| 
+| 
+| ✓
+
+| DoubleConsumer
+| 
+| 
+| 
+| ✓
+
+| DoublePredicate
+| 
+| 
+| 
+| ✓
+
+| DoubleSupplier
+| 
+| 
+| 
+| ✓
+
+| DoubleToIntFunction
+| 
+| 
+| 
+| ✓
+
+| DoubleToLongFunction
+| 
+| 
+| 
+| ✓
+
+| DoubleUnaryOperator
+| 
+| 
+| 
+| ✓
+
+| Function
+| 
+| 
+| 
+| ✓
+
+| IntBinaryOperator
+| 
+| 
+| 
+| ✓
+
+| IntConsumer
+| 
+| 
+| 
+| ✓
+
+| IntPredicate
+| 
+| 
+| 
+| ✓
+
+| IntSupplier
+| 
+| 
+| 
+| ✓
+
+| IntToDoubleFunction
+| 
+| 
+| 
+| ✓
+
+| IntToLongFunction
+| 
+| 
+| 
+| ✓
+
+| IntUnaryOperator
+| 
+| 
+| 
+| ✓
+
+| LongBinaryOperator
+| 
+| 
+| 
+| ✓
+
+| LongConsumer
+| 
+| 
+| 
+| ✓
+
+| LongPredicate
+| 
+| 
+| 
+| ✓
+
+| LongSupplier
+| 
+| 
+| 
+| ✓
+
+| LongToDoubleFunction
+| 
+| 
+| 
+| ✓
+
+| LongToIntFunction
+| 
+| 
+| 
+| ✓
+
+| LongUnaryOperator
+| 
+| 
+| 
+| ✓
+
+| ObjDoubleConsumer
+| 
+| 
+| 
+| ✓
+
+| ObjIntConsumer
+| 
+| 
+| 
+| ✓
+
+| ObjLongConsumer
+| 
+| 
+| 
+| ✓
+
+| Predicate
+| 
+| 
+| 
+| ✓
+
+| Supplier
+| 
+| 
+| 
+| ✓
+
+| ToDoubleBiFunction
+| 
+| 
+| 
+| ✓
+
+| ToIntBiFunction
+| 
+| 
+| 
+| ✓
+
+| ToLongBiFunction
+| 
+| 
+| 
+| ✓
+
+| ToDoubleFunction
+| 
+| 
+| 
+| ✓
+
+| ToIntFunction
+| 
+| 
+| 
+| ✓
+
+| ToLongFunction
+| 
+| 
+| 
+| ✓
+|===
+
+
 == Development Status
 
-The map based implementation works as expected, Caffeine, Guava and JSR107 are pushed back to a later date. Take a look at the link:https://github.com/sebhoss/memoization.java/issues[open tickets].
+The map based implementation covers all functional interfaces from `java.util.function`, Caffeine, Guava and JSR107 are pushed back to a later date. Take a look at the link:https://github.com/sebhoss/memoization.java/issues[open tickets].
 
 == Usage
 
@@ -54,20 +288,25 @@ Consumer<T> memoizedConsumer = MapMemoization.memoize(consumer);
 
 === Integration
 
-To use this project just declare the following dependency inside your POM:
+This project is split into multiple modules in order to offer the least amount of dependencies to import for any given consumer project. In order to use this project, declare the following inside your POM:
 
 [source, xml, subs="attributes,verbatim"]
 ----
 <dependencies>
   <dependency>
     <groupId>{project-group}</groupId>
-    <artifactId>{project-name}</artifactId>
+    <artifactId>memoization-shared</artifactId>
+    <version>${version.memoization}</version>
+  </dependency>
+  <dependency>
+    <groupId>{project-group}</groupId>
+    <artifactId>memoization-${kind}</artifactId>
     <version>${version.memoization}</version>
   </dependency>
 </dependencies>
 ----
 
-Replace `${version.memoization}` with the pass:[<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization%20a%3Amemoization.java">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
+Replace `${kind}` with one of the available implementations (*map*, *guava*, *caffeine*, *jsr107*). Replace `${version.memoization}` with the pass:[<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization%20a%3Amemoization.java">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
 
 === Compatibility
 
