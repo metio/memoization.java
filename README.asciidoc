@@ -42,7 +42,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 
 | link:{jdk-api}/java/util/function/BiFunction.html[BiFunction]
 | 
-| 
+| ✓
 | 
 | ✓
 
@@ -60,7 +60,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 
 | link:{jdk-api}/java/util/function/Consumer.html[Consumer]
 | 
-| 
+| ✓
 | 
 | ✓
 
@@ -108,7 +108,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 
 | link:{jdk-api}/java/util/function/Function.html[Function]
 | 
-| 
+| ✓
 | 
 | ✓
 
@@ -222,7 +222,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 
 | link:{jdk-api}/java/util/function/Supplier.html[Supplier]
 | 
-| 
+| ✓
 | 
 | ✓
 
