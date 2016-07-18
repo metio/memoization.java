@@ -47,7 +47,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | link:{jdk-api}/java/util/function/BiFunction.html[BiFunction]
 | link:{issue}/89[#89]
 | ✓
-| ✓
+| link:{issue}/160[#160]
 | ✓
 
 | link:{jdk-api}/java/util/function/BiPredicate.html[BiPredicate]
@@ -65,7 +65,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | link:{jdk-api}/java/util/function/Consumer.html[Consumer]
 | link:{issue}/92[#92]
 | ✓
-| ✓
+| link:{issue}/161[#161]
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleBinaryOperator.html[DoubleBinaryOperator]
