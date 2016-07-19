@@ -9,7 +9,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 final class CaffeineBasedDoubleUnaryOperatorMemoizer
-        extends CaffeineBasedMemoizer<Double, Double>
+        extends AbstractCaffeineBasedMemoizer<Double, Double>
         implements DoubleUnaryOperator {
 
     private final DoubleUnaryOperator operator;

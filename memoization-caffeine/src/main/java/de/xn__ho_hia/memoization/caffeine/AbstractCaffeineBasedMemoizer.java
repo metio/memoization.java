@@ -13,12 +13,12 @@ import com.github.benmanes.caffeine.cache.Cache;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-class CaffeineBasedMemoizer<KEY, VALUE> {
+abstract class AbstractCaffeineBasedMemoizer<KEY, VALUE> {
 
     private final Cache<KEY, VALUE> cache;
 
     @SuppressWarnings(CompilerWarnings.NLS)
-    CaffeineBasedMemoizer(final Cache<KEY, VALUE> cache) {
+    AbstractCaffeineBasedMemoizer(final Cache<KEY, VALUE> cache) {
         this.cache = Objects.requireNonNull(cache, "Cannot use a NULL cache - provide an actual cache to fix this.");
     }
 

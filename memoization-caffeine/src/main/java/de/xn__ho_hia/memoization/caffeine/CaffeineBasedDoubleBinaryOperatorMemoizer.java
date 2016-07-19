@@ -10,7 +10,7 @@ import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 final class CaffeineBasedDoubleBinaryOperatorMemoizer<KEY>
-        extends CaffeineBasedMemoizer<KEY, Double>
+        extends AbstractCaffeineBasedMemoizer<KEY, Double>
         implements DoubleBinaryOperator {
 
     private final DoubleBinaryFunction<KEY> keyFunction;
