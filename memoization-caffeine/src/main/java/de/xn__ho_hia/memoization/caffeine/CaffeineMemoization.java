@@ -2,6 +2,7 @@ package de.xn__ho_hia.memoization.caffeine;
 
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleToIntFunction;
+import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 
@@ -68,6 +69,32 @@ public final class CaffeineMemoization {
             final DoubleToIntFunction function,
             final Cache<Double, Integer> cache) {
         return new CaffeineBasedDoubleToIntFunctionMemoizer(cache, function);
+    }
+
+    /**
+     * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     *
+     * @param function
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @return The wrapped {@link Function}.
+     */
+    public static DoubleToLongFunction memoize(final DoubleToLongFunction function) {
+        return memoize(function, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link DoubleToLongFunction} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param function
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static DoubleToLongFunction memoize(
+            final DoubleToLongFunction function,
+            final Cache<Double, Long> cache) {
+        return new CaffeineBasedDoubleToLongFunctionMemoizer(cache, function);
     }
 
     /**
