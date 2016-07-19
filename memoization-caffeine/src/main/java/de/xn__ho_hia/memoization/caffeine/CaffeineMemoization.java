@@ -25,7 +25,7 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Function} in a pre-configured Caffeine {@link Cache}.
      *
      * @param function
      *            The {@link Function} to memoize.
