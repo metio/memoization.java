@@ -46,12 +46,10 @@
   <!-- https://maven.apache.org/pom.html#Aggregation -->
   <modules>
     <module>memoization-shared</module>
-    <module>memoization-map</module>
+    <module>memoization-caffeine</module>
     <module>memoization-guava</module>
     <module>memoization-jsr107</module>
-    <!--
-    <module>memoization-caffeine</module>
-    -->
+    <module>memoization-map</module>
   </modules>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
