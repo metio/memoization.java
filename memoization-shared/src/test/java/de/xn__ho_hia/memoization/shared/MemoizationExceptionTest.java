@@ -9,16 +9,18 @@ package de.xn__ho_hia.memoization.shared;
 import org.junit.Assert;
 import org.junit.Test;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 /**
  *
  *
  */
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class MemoizationExceptionTest {
 
     /**
-     *
-     */
-    @SuppressWarnings({ "static-method", "nls" })
+    *
+    */
     @Test
     public void shouldWrapThrowable() {
         // given
@@ -26,6 +28,21 @@ public class MemoizationExceptionTest {
 
         // when
         final MemoizationException exception = new MemoizationException(throwable);
+
+        // then
+        Assert.assertNotNull("Wrapped exception is NULL", exception);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldAcceptMessage() {
+        // given
+        final String message = "kaboom";
+
+        // when
+        final MemoizationException exception = new MemoizationException(message);
 
         // then
         Assert.assertNotNull("Wrapped exception is NULL", exception);

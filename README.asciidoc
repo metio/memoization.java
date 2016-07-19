@@ -93,7 +93,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleToIntFunction.html[DoubleToIntFunction]
-| link:{issue}/97[#97]
+| ✓
 | link:{issue}/61[#61]
 | link:{issue}/133[#133]
 | ✓

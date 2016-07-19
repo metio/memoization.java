@@ -40,6 +40,10 @@
   <!-- https://maven.apache.org/pom.html#Dependencies -->
   <dependencies>
     <dependency>
+      <groupId>de.xn--ho-hia.quality</groupId>
+      <artifactId>suppress-warnings</artifactId>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>

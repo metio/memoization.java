@@ -11,6 +11,7 @@ import java.util.function.Function;
 
 import com.github.benmanes.caffeine.cache.Cache;
 
+import de.xn__ho_hia.memoization.shared.MemoizationException;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 @SuppressWarnings(CompilerWarnings.NLS)
@@ -25,7 +26,7 @@ abstract class AbstractCaffeineBasedMemoizer<KEY, VALUE> {
     protected final VALUE get(final KEY key, final Function<KEY, VALUE> mappingFunction) {
         final VALUE value = cache.get(key, mappingFunction);
         if (value == null) {
-            throw new NullPointerException("The calculated value is NULL");
+            throw new MemoizationException("The calculated value is NULL");
         }
         return value;
     }

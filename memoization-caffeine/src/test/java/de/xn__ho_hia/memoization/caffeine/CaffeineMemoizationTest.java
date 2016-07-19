@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 
@@ -31,6 +32,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleToIntFunction() {
+        // given
+        final DoubleToIntFunction function = a -> 123;
+
+        // when
+        final DoubleToIntFunction memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleToIntFunction is NULL", memoize);
     }
 
     /**

@@ -21,4 +21,12 @@ public final class MemoizationException extends RuntimeException {
         super(throwable);
     }
 
+    /**
+     * @param string
+     *            The exception message.
+     */
+    public MemoizationException(final String string) {
+        super(string);
+    }
+
 }
