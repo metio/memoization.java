@@ -1,10 +1,13 @@
 package de.xn__ho_hia.memoization.caffeine;
 
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+
+import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
@@ -64,6 +67,33 @@ public final class CaffeineMemoization {
             final DoubleUnaryOperator operator,
             final Cache<Double, Double> cache) {
         return new CaffeineBasedDoubleUnaryOperatorMemoizer(cache, operator);
+    }
+
+    /**
+     * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @return The wrapped {@link Function}.
+     */
+    public static DoubleBinaryOperator memoize(final DoubleBinaryOperator operator) {
+        return memoize(operator, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link DoubleBinaryOperator} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static DoubleBinaryOperator memoize(
+            final DoubleBinaryOperator operator,
+            final Cache<String, Double> cache) {
+        return new CaffeineBasedDoubleBinaryOperatorMemoizer<>(cache,
+                MemoizationDefaults.doubleBinaryOperatorHashCodeKeyFunction(), operator);
     }
 
     private CaffeineMemoization() {

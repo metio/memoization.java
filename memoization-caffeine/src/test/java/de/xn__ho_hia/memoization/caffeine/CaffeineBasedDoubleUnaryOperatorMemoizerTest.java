@@ -37,7 +37,7 @@ public class CaffeineBasedDoubleUnaryOperatorMemoizerTest {
     *
     */
     @Test
-    public void shouldCallFunction() {
+    public void shouldCallOperator() {
         // given
         final DoubleUnaryOperator operator = DoubleUnaryOperator.identity();
         final Cache<Double, Double> cache = Caffeine.newBuilder().build();
