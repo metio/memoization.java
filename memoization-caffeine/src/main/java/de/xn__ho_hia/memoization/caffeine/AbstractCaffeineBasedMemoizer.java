@@ -13,17 +13,21 @@ import com.github.benmanes.caffeine.cache.Cache;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
+@SuppressWarnings(CompilerWarnings.NLS)
 abstract class AbstractCaffeineBasedMemoizer<KEY, VALUE> {
 
     private final Cache<KEY, VALUE> cache;
 
-    @SuppressWarnings(CompilerWarnings.NLS)
     AbstractCaffeineBasedMemoizer(final Cache<KEY, VALUE> cache) {
         this.cache = Objects.requireNonNull(cache, "Cannot use a NULL cache - provide an actual cache to fix this.");
     }
 
     protected final VALUE get(final KEY key, final Function<KEY, VALUE> mappingFunction) {
-        return cache.get(key, mappingFunction);
+        final VALUE value = cache.get(key, mappingFunction);
+        if (value == null) {
+            throw new NullPointerException("The calculated value is NULL");
+        }
+        return value;
     }
 
 }
