@@ -13,12 +13,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-class ConcurrentHashMapBasedMemoizer<KEY, VALUE> {
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
+abstract class ConcurrentHashMapBasedMemoizer<KEY, VALUE> {
 
     private final Map<KEY, VALUE> cache;
 
-    @SuppressWarnings("nls")
-    ConcurrentHashMapBasedMemoizer(final Map<KEY, VALUE> preComputedValues) {
+    @SuppressWarnings(CompilerWarnings.NLS)
+    protected ConcurrentHashMapBasedMemoizer(final Map<KEY, VALUE> preComputedValues) {
         this.cache = new ConcurrentHashMap<>(requireNonNull(preComputedValues,
                 "Provide an empty map instead of NULL in case you don't have any precomputed values."));
     }
