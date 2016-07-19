@@ -3,6 +3,7 @@ package de.xn__ho_hia.memoization.caffeine;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 
 import org.junit.Assert;
@@ -29,6 +30,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleUnaryOperator() {
+        // given
+        final DoubleUnaryOperator function = DoubleUnaryOperator.identity();
+
+        // when
+        final DoubleUnaryOperator memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleUnaryOperator is NULL", memoize);
     }
 
     /**

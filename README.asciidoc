@@ -105,7 +105,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleUnaryOperator.html[DoubleUnaryOperator]
-| link:{issue}/99[#99]
+| ✓
 | link:{issue}/63[#63]
 | link:{issue}/135[#135]
 | ✓

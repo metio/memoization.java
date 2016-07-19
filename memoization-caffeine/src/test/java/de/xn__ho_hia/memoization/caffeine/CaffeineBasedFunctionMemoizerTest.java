@@ -20,7 +20,7 @@ public class CaffeineBasedFunctionMemoizerTest {
     *
     */
     @Test
-    public void shouldAcceptLoadingCache() {
+    public void shouldAcceptCacheAndFunction() {
         // given
         final Function<String, String> function = Function.identity();
         final Cache<String, String> cache = Caffeine.newBuilder().build();
