@@ -325,6 +325,15 @@ This project is compatible with the following Java versions:
 | ✓
 |===
 
+== Alternatives
+
+* link:http://www.tek271.com/software/java/memoizer[Tek271 Memoizer]
+* link:http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html[Spring's `@Cacheable`]
+* link:https://github.com/kelvinguu/gitmemoizer[GitMemoizer]
+* link:http://docs.groovy-lang.org/latest/html/gapi/groovy/transform/Memoized.html[Groovy's `@Memoized`]
+* link:https://clojuredocs.org/clojure.core/memoize[Clojure's `(memoize f)`]
+* link:https://github.com/marmelo/chili[Chili's `@Memoize`]
+
 == License
 
 To the extent possible under law, the author(s) have dedicated all copyright
