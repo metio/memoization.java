@@ -1,4 +1,4 @@
-package de.xn__ho_hia.memoization.jsr107;
+package de.xn__ho_hia.memoization.jcache;
 
 import javax.cache.Cache;
 

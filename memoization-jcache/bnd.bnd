@@ -3,5 +3,5 @@ Bundle-Name: ${project.artifactId}
 Bundle-Description: ${project.description}
 Bundle-DocURL: ${project.url}
 Bundle-Version: ${project.version}
-Export-Package: de.xn__ho_hia.memoization.jsr107
+Export-Package: de.xn__ho_hia.memoization.jcache
 Import-Package: de.xn__ho_hia.memoization.shared

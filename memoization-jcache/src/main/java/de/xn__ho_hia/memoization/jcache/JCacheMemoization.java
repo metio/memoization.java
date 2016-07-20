@@ -4,7 +4,7 @@
  * including this file, may be copied, modified, propagated, or distributed except according to the terms contained
  * in the LICENSE file.
  */
-package de.xn__ho_hia.memoization.jsr107;
+package de.xn__ho_hia.memoization.jcache;
 
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 

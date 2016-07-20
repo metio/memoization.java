@@ -1,4 +1,4 @@
-package de.xn__ho_hia.memoization.jsr107;
+package de.xn__ho_hia.memoization.jcache;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -12,6 +12,7 @@ import javax.cache.integration.CacheLoader;
 import org.junit.Assert;
 import org.junit.Test;
 
+import de.xn__ho_hia.memoization.jcache.JCacheMemoization;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**

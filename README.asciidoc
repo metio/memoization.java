@@ -32,11 +32,11 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 * link:{jdk-api}/java/util/concurrent/ConcurrentHashMap.html[`ConcurrentHashMap`] based implementation
 * link:https://github.com/ben-manes/caffeine[Caffeine] based implementation
 * link:https://github.com/google/guava/wiki/CachesExplained[Guava] based implementation
-* link:https://jcp.org/en/jsr/detail?id=107[JSR107] based implementation
+* link:https://jcp.org/en/jsr/detail?id=107[JCache] based implementation
 
 .Coverage of `java.util.function`
 |===
-| | Caffeine | Guava | JSR107 | Map
+| | Caffeine | Guava | JCache | Map
 
 | link:{jdk-api}/java/util/function/BiConsumer.html[BiConsumer]
 | link:{issue}/88[#88]
@@ -270,7 +270,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 
 == Development Status
 
-The map based implementation covers all functional interfaces from `java.util.function`, Caffeine, Guava and JSR107 are currently in progress. Take a look at the link:https://github.com/sebhoss/memoization.java/issues[open tickets].
+The map based implementation covers all functional interfaces from `java.util.function`, Caffeine, Guava and JCache are currently in progress. Take a look at the link:https://github.com/sebhoss/memoization.java/issues[open tickets].
 
 == Usage
 
@@ -343,7 +343,7 @@ This project is split into multiple modules in order to offer the least amount o
 </dependencies>
 ----
 
-==== JSR107
+==== JCache
 
 [source, xml, subs="attributes,verbatim"]
 ----
@@ -355,7 +355,7 @@ This project is split into multiple modules in order to offer the least amount o
   </dependency>
   <dependency>
     <groupId>{project-group}</groupId>
-    <artifactId>memoization-jsr107</artifactId>
+    <artifactId>memoization-jcache</artifactId>
     <version>${version.memoization}</version>
   </dependency>
 

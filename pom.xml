@@ -48,7 +48,7 @@
     <module>memoization-shared</module>
     <module>memoization-caffeine</module>
     <module>memoization-guava</module>
-    <module>memoization-jsr107</module>
+    <module>memoization-jcache</module>
     <module>memoization-map</module>
   </modules>
 

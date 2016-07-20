@@ -1,4 +1,4 @@
-package de.xn__ho_hia.memoization.jsr107;
+package de.xn__ho_hia.memoization.jcache;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
+import de.xn__ho_hia.memoization.jcache.JCacheBasedFunctionMemoizer;
+import de.xn__ho_hia.memoization.jcache.JCacheMemoization;
 import de.xn__ho_hia.memoization.shared.MemoizationException;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 

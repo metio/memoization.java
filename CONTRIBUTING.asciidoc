@@ -21,7 +21,7 @@ The *Cache* category is used to classify which cache implementation is used.
 * Cache: Caffeine - used for tickets that are related to the Caffeine implementation
 * Cache: ConcurrentHashMap - used for tickets that are related to the ConcurrentHashMap implementation
 * Cache: Guava - used for tickets that are related to the Guava implementation
-* Cache: JSR107 - used for tickets that are related to the JSR107 implementation
+* Cache: JCache - used for tickets that are related to the JCache implementation
 
 === Component
 

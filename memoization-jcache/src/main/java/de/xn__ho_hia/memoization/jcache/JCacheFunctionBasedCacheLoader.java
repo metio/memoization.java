@@ -1,25 +1,24 @@
-package de.xn__ho_hia.memoization.jsr107;
+package de.xn__ho_hia.memoization.jcache;
 
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javax.cache.integration.CacheLoader;
 import javax.cache.integration.CacheLoaderException;
 
-final class JCacheSupplierBasedCacheLoader<KEY, VALUE> implements CacheLoader<KEY, VALUE> {
+final class JCacheFunctionBasedCacheLoader<KEY, VALUE> implements CacheLoader<KEY, VALUE> {
 
-    private final Supplier<VALUE> supplier;
+    private final Function<KEY, VALUE> function;
 
-    JCacheSupplierBasedCacheLoader(final Supplier<VALUE> supplier) {
-        this.supplier = supplier;
+    JCacheFunctionBasedCacheLoader(final Function<KEY, VALUE> function) {
+        this.function = function;
     }
 
     @Override
     public VALUE load(final KEY key) throws CacheLoaderException {
-        return supplier.get();
+        return function.apply(key);
     }
 
     @Override
