@@ -236,13 +236,13 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/ToIntBiFunction.html[ToIntBiFunction]
-| link:{issue}/121[#121]
+| ✓
 | link:{issue}/83[#83]
 | link:{issue}/155[#155]
 | ✓
 
 | link:{jdk-api}/java/util/function/ToLongBiFunction.html[ToLongBiFunction]
-| link:{issue}/122[#122]
+| ✓
 | link:{issue}/84[#84]
 | link:{issue}/156[#156]
 | ✓

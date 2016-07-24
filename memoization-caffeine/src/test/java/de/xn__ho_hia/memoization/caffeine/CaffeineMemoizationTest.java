@@ -13,7 +13,9 @@ import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
+import java.util.function.ToLongBiFunction;
 import java.util.function.ToLongFunction;
 
 import org.junit.Assert;
@@ -133,6 +135,72 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToIntBiFunction() {
+        // given
+        final ToIntBiFunction<Integer, Integer> function = (first, second) -> first.intValue()
+                + second.intValue();
+
+        // when
+        final ToIntBiFunction<Integer, Integer> memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized ToIntBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToIntBiFunctionWithKeyFunction() {
+        // given
+        final ToIntBiFunction<Integer, Integer> function = (first, second) -> first.intValue()
+                + second.intValue();
+        final BiFunction<Integer, Integer, String> keyFunction = hashCodeKeyFunction();
+
+        // when
+        final ToIntBiFunction<Integer, Integer> memoize = CaffeineMemoization.memoize(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ToIntBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToLongBiFunction() {
+        // given
+        final ToLongBiFunction<Long, Long> function = (first, second) -> first.longValue()
+                + second.longValue();
+
+        // when
+        final ToLongBiFunction<Long, Long> memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized ToLongBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToLongBiFunctionWithKeyFunction() {
+        // given
+        final ToLongBiFunction<Long, Long> function = (first, second) -> first.longValue()
+                + second.longValue();
+        final BiFunction<Long, Long, String> keyFunction = hashCodeKeyFunction();
+
+        // when
+        final ToLongBiFunction<Long, Long> memoize = CaffeineMemoization.memoize(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ToLongBiFunction is NULL", memoize);
     }
 
     /**
