@@ -32,6 +32,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
@@ -76,6 +77,8 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see LongToIntFunction
  * @see LongUnaryOperator
  * @see ObjDoubleConsumer
+ * @see ObjIntConsumer
+ * @see ObjLongConsumer
  * @see Predicate
  * @see Supplier
  * @see ToDoubleBiFunction
@@ -202,6 +205,33 @@ public final class CaffeineMemoization {
      */
     public static <VALUE> ObjIntConsumer<VALUE> memoize(
             final ObjIntConsumer<VALUE> consumer,
+            final Cache<String, String> cache) {
+        return MapMemoization.memoize(consumer, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <VALUE> ObjLongConsumer<VALUE> memoize(
+            final ObjLongConsumer<VALUE> consumer) {
+        return memoize(consumer, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link ObjLongConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <VALUE> ObjLongConsumer<VALUE> memoize(
+            final ObjLongConsumer<VALUE> consumer,
             final Cache<String, String> cache) {
         return MapMemoization.memoize(consumer, cache.asMap());
     }
