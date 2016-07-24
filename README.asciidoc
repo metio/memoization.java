@@ -146,7 +146,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/IntToLongFunction.html[IntToLongFunction]
-| link:{issue}/106[#106]
+| ✓
 | link:{issue}/69[#69]
 | link:{issue}/141[#141]
 | ✓
