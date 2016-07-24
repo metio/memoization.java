@@ -122,7 +122,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/IntConsumer.html[IntConsumer]
-| link:{issue}/102[#102]
+| ✓
 | link:{issue}/65[#65]
 | link:{issue}/137[#137]
 | ✓

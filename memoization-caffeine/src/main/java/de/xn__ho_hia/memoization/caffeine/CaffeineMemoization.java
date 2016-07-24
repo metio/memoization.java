@@ -15,6 +15,7 @@ import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
+import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
@@ -54,6 +55,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see DoubleUnaryOperator
  * @see Function
  * @see IntBinaryOperator
+ * @see IntConsumer
  * @see IntPredicate
  * @see IntSupplier
  * @see IntToDoubleFunction
@@ -190,6 +192,32 @@ public final class CaffeineMemoization {
     public static DoubleConsumer memoize(
             final DoubleConsumer consumer,
             final Cache<Double, Double> cache) {
+        return MapMemoization.memoize(consumer, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     *
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static IntConsumer memoize(final IntConsumer consumer) {
+        return memoize(consumer, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link IntConsumer} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static IntConsumer memoize(
+            final IntConsumer consumer,
+            final Cache<Integer, Integer> cache) {
         return MapMemoization.memoize(consumer, cache.asMap());
     }
 

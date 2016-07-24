@@ -18,6 +18,7 @@ import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
+import java.util.function.IntConsumer;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
@@ -631,6 +632,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntConsumer() {
+        // given
+        final IntConsumer consumer = System.out::println;
+
+        // when
+        final IntConsumer memoize = CaffeineMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
     }
 
     /**
