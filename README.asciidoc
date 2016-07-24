@@ -260,7 +260,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/ToLongFunction.html[ToLongFunction]
-| link:{issue}/125[#125]
+| ✓
 | link:{issue}/87[#87]
 | link:{issue}/159[#159]
 | ✓
