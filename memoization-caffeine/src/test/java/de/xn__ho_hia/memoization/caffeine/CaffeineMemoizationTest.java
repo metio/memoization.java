@@ -20,6 +20,7 @@ import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
+import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
@@ -551,6 +552,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongPredicate() {
+        // given
+        final LongPredicate function = a -> true;
+
+        // when
+        final LongPredicate memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
     }
 
     /**

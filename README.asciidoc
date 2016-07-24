@@ -170,7 +170,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/LongPredicate.html[LongPredicate]
-| link:{issue}/110[#110]
+| ✓
 | link:{issue}/73[#73]
 | link:{issue}/145[#145]
 | ✓

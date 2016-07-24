@@ -17,6 +17,7 @@ import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
+import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
@@ -51,6 +52,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see IntToLongFunction
  * @see IntUnaryOperator
  * @see LongBinaryOperator
+ * @see LongPredicate
  * @see LongSupplier
  * @see LongToDoubleFunction
  * @see LongToIntFunction
@@ -654,7 +656,7 @@ public final class CaffeineMemoization {
      *
      * @param predicate
      *            The {@link Predicate} to memoize.
-     * @return The wrapped {@link Function}.
+     * @return The wrapped {@link Predicate}.
      */
     public static <VALUE> Predicate<VALUE> memoize(final Predicate<VALUE> predicate) {
         return memoize(predicate, Caffeine.newBuilder().build());
@@ -672,6 +674,32 @@ public final class CaffeineMemoization {
     public static <VALUE> Predicate<VALUE> memoize(
             final Predicate<VALUE> predicate,
             final Cache<VALUE, Boolean> cache) {
+        return MapMemoization.memoize(predicate, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static LongPredicate memoize(final LongPredicate predicate) {
+        return memoize(predicate, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link LongPredicate} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static LongPredicate memoize(
+            final LongPredicate predicate,
+            final Cache<Long, Boolean> cache) {
         return MapMemoization.memoize(predicate, cache.asMap());
     }
 
