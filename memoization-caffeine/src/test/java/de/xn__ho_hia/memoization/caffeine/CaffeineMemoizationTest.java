@@ -8,6 +8,7 @@ import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
 import java.util.function.ToLongFunction;
 
 import org.junit.Assert;
@@ -94,6 +95,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToDoubleFunction() {
+        // given
+        final ToDoubleFunction<String> function = Double::parseDouble;
+
+        // when
+        final ToDoubleFunction<String> memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized ToDoubleFunction is NULL", memoize);
     }
 
     /**
