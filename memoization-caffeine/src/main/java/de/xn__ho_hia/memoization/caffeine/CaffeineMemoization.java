@@ -12,6 +12,7 @@ import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
+import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
@@ -47,6 +48,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see DoubleUnaryOperator
  * @see Function
  * @see IntBinaryOperator
+ * @see IntPredicate
  * @see IntSupplier
  * @see IntToDoubleFunction
  * @see IntToLongFunction
@@ -700,6 +702,32 @@ public final class CaffeineMemoization {
     public static LongPredicate memoize(
             final LongPredicate predicate,
             final Cache<Long, Boolean> cache) {
+        return MapMemoization.memoize(predicate, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static IntPredicate memoize(final IntPredicate predicate) {
+        return memoize(predicate, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link IntPredicate} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static IntPredicate memoize(
+            final IntPredicate predicate,
+            final Cache<Integer, Boolean> cache) {
         return MapMemoization.memoize(predicate, cache.asMap());
     }
 

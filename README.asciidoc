@@ -128,7 +128,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/IntPredicate.html[IntPredicate]
-| link:{issue}/103[#103]
+| ✓
 | link:{issue}/66[#66]
 | link:{issue}/138[#138]
 | ✓

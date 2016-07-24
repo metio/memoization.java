@@ -15,6 +15,7 @@ import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
+import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
@@ -567,6 +568,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntPredicate() {
+        // given
+        final IntPredicate function = a -> true;
+
+        // when
+        final IntPredicate memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized IntPredicate is NULL", memoize);
     }
 
     /**
