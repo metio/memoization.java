@@ -21,6 +21,7 @@ import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
@@ -54,6 +55,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see LongToDoubleFunction
  * @see LongToIntFunction
  * @see LongUnaryOperator
+ * @see Predicate
  * @see Supplier
  * @see ToDoubleBiFunction
  * @see ToDoubleFunction
@@ -645,6 +647,32 @@ public final class CaffeineMemoization {
             final LongUnaryOperator operator,
             final Cache<Long, Long> cache) {
         return MapMemoization.memoize(operator, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @return The wrapped {@link Function}.
+     */
+    public static <VALUE> Predicate<VALUE> memoize(final Predicate<VALUE> predicate) {
+        return memoize(predicate, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link Predicate} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <VALUE> Predicate<VALUE> memoize(
+            final Predicate<VALUE> predicate,
+            final Cache<VALUE, Boolean> cache) {
+        return MapMemoization.memoize(predicate, cache.asMap());
     }
 
     /**
