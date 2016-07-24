@@ -31,6 +31,7 @@ import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
+import java.util.function.ObjIntConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
@@ -94,49 +95,49 @@ public final class CaffeineMemoization {
     /**
      * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
      *
-     * @param predicate
+     * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @return The wrapped {@link BiConsumer}.
      */
     public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> memoize(
-            final BiConsumer<FIRST, SECOND> predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+            final BiConsumer<FIRST, SECOND> biConsumer) {
+        return memoize(biConsumer, Caffeine.newBuilder().build());
     }
 
     /**
      * Memoizes a {@link BiConsumer} in a pre-configured Caffeine {@link Cache}.
      *
-     * @param predicate
+     * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiConsumer}.
      */
     public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> memoize(
-            final BiConsumer<FIRST, SECOND> predicate,
+            final BiConsumer<FIRST, SECOND> biConsumer,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(predicate, keyFunction, Caffeine.newBuilder().build());
+        return memoize(biConsumer, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
      * Memoizes a {@link BiConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
      *
-     * @param predicate
+     * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiConsumer}.
      */
     public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> memoize(
-            final BiConsumer<FIRST, SECOND> predicate,
+            final BiConsumer<FIRST, SECOND> biConsumer,
             final Cache<String, String> cache) {
-        return memoize(predicate, hashCodeKeyFunction(), cache);
+        return memoize(biConsumer, hashCodeKeyFunction(), cache);
     }
 
     /**
      * Memoizes a {@link BiConsumer} in a pre-configured Caffeine {@link Cache}.
      *
-     * @param predicate
+     * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
@@ -145,37 +146,64 @@ public final class CaffeineMemoization {
      * @return The wrapped {@link BiConsumer}.
      */
     public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> memoize(
-            final BiConsumer<FIRST, SECOND> predicate,
+            final BiConsumer<FIRST, SECOND> biConsumer,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
-        return MapMemoization.memoize(predicate, keyFunction, cache.asMap());
+        return MapMemoization.memoize(biConsumer, keyFunction, cache.asMap());
     }
 
     /**
      * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
      *
-     * @param predicate
+     * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
     public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
-            final ObjDoubleConsumer<VALUE> predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+            final ObjDoubleConsumer<VALUE> consumer) {
+        return memoize(consumer, Caffeine.newBuilder().build());
     }
 
     /**
      * Memoizes a {@link ObjDoubleConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
      *
-     * @param predicate
+     * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
     public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
-            final ObjDoubleConsumer<VALUE> predicate,
+            final ObjDoubleConsumer<VALUE> consumer,
             final Cache<String, String> cache) {
-        return MapMemoization.memoize(predicate, cache.asMap());
+        return MapMemoization.memoize(consumer, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <VALUE> ObjIntConsumer<VALUE> memoize(
+            final ObjIntConsumer<VALUE> consumer) {
+        return memoize(consumer, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link ObjIntConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <VALUE> ObjIntConsumer<VALUE> memoize(
+            final ObjIntConsumer<VALUE> consumer,
+            final Cache<String, String> cache) {
+        return MapMemoization.memoize(consumer, cache.asMap());
     }
 
     /**
