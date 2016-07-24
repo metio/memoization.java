@@ -1,18 +1,26 @@
 = Change Log
+:milestone: https://github.com/sebhoss/memoization.java/milestone
 
 All notable changes to this project will be documented in this file.
 
 == link:++https://github.com/sebhoss/memoization.java/compare/memoization.java-1.0.0-20160715205956...master++[Unreleased]
 
+== link:++https://github.com/sebhoss/memoization.java/compare/memoization.java-1.0.0-20160715205956...master++[2.0.0] - TBD
+
 === Added
 
 * Caffeine module
-* Guava module
-* JCache module
+* Guava module (incomplete)
+* JCache module (incomplete)
 
 === Changed
 
-* merged 'shared' & 'map' module into new 'core'
+* merged 'shared' & 'map' module into new 'core' module
+
+=== Issues closed
+
+link:{milestone}/2?closed=1[See list of closed issues].
+
 
 == link:++https://github.com/sebhoss/memoization.java/compare/ad369f6c589569f2d153c14c21f1872df0687111...memoization.java-1.0.0-20160715205956++[1.0.0] - 2016-07-15
 
@@ -22,4 +30,4 @@ All notable changes to this project will be documented in this file.
 
 === Issues closed
 
-link:https://github.com/sebhoss/memoization.java/milestone/1?closed=1[See list of closed issues].
+link:{milestone}/1?closed=1[See list of closed issues].
