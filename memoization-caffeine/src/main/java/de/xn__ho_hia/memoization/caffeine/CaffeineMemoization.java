@@ -6,6 +6,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFu
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
@@ -36,6 +37,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  *
  * @see BooleanSupplier
  * @see DoubleBinaryOperator
+ * @see DoubleSupplier
  * @see DoubleToIntFunction
  * @see DoubleToLongFunction
  * @see DoubleUnaryOperator
@@ -91,13 +93,13 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     * Memoizes a {@link BooleanSupplier} in a pre-configured Caffeine {@link Cache}.
      *
      * @param supplier
-     *            The {@link Supplier} to memoize.
+     *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
-     * @return The wrapped {@link Supplier}.
+     * @return The wrapped {@link BooleanSupplier}.
      */
     public static <KEY> BooleanSupplier memoize(
             final BooleanSupplier supplier,
@@ -106,20 +108,80 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     * Memoizes a {@link BooleanSupplier} in a pre-configured Caffeine {@link Cache}.
      *
      * @param supplier
-     *            The {@link Supplier} to memoize.
+     *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
      * @param cache
      *            The {@link Cache} to use.
-     * @return The wrapped {@link Supplier}.
+     * @return The wrapped {@link BooleanSupplier}.
      */
     public static <KEY> BooleanSupplier memoize(
             final BooleanSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Boolean> cache) {
+        return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static DoubleSupplier memoize(
+            final DoubleSupplier supplier) {
+        return memoize(supplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link DoubleSupplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static DoubleSupplier memoize(
+            final DoubleSupplier supplier,
+            final Cache<String, Double> cache) {
+        return memoize(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * Memoizes a {@link DoubleSupplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static <KEY> DoubleSupplier memoize(
+            final DoubleSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return memoize(supplier, keySupplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link DoubleSupplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static <KEY> DoubleSupplier memoize(
+            final DoubleSupplier supplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, Double> cache) {
         return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
     }
 

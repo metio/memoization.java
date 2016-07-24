@@ -86,7 +86,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleSupplier.html[DoubleSupplier]
-| link:{issue}/96[#96]
+| ✓
 | link:{issue}/60[#60]
 | link:{issue}/132[#132]
 | ✓
