@@ -359,9 +359,10 @@ This project is compatible with the following Java versions:
 
 .Java compatibility
 |===
-| | 1.X.Y
+| | 1.X.Y | 2.X.Y
 
 | Java 8
+| ✓
 | ✓
 |===
 
