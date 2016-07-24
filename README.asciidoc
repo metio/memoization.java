@@ -38,7 +38,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | | Caffeine | Guava | JCache | ConcurrentMap
 
 | link:{jdk-api}/java/util/function/BiConsumer.html[BiConsumer]
-| link:{issue}/88[#88]
+| ✓
 | link:{issue}/54[#54]
 | link:{issue}/126[#126]
 | ✓

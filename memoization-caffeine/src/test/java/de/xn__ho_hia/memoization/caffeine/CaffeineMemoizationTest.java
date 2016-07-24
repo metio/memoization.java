@@ -6,6 +6,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFu
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
@@ -726,6 +727,37 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiConsumer() {
+        // given
+        final BiConsumer<Long, Long> function = (first, second) -> System.out.println(first + " " + second);
+
+        // when
+        final BiConsumer<Long, Long> memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiConsumerWithKeyFunction() {
+        // given
+        final BiConsumer<Long, Long> function = (first, second) -> System.out.println(first + " " + second);
+        final BiFunction<Long, Long, String> keyFunction = hashCodeKeyFunction();
+
+        // when
+        final BiConsumer<Long, Long> memoize = CaffeineMemoization.memoize(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
     }
 
     /**
