@@ -20,6 +20,7 @@ import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
+import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
@@ -359,6 +360,37 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongSupplier() {
+        // given
+        final LongSupplier supplier = () -> 123L;
+
+        // when
+        final LongSupplier memoize = CaffeineMemoization.memoize(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongSupplierWithKeyFunction() {
+        // given
+        final LongSupplier supplier = () -> 123L;
+        final Supplier<String> keySupplier = defaultKeySupplier();
+
+        // when
+        final LongSupplier memoize = CaffeineMemoization.memoize(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
     }
 
     /**

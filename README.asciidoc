@@ -176,7 +176,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/LongSupplier.html[LongSupplier]
-| link:{issue}/111[#111]
+| ✓
 | link:{issue}/74[#74]
 | link:{issue}/146[#146]
 | ✓
