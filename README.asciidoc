@@ -152,7 +152,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/IntUnaryOperator.html[IntUnaryOperator]
-| link:{issue}/107[#107]
+| ✓
 | link:{issue}/70[#70]
 | link:{issue}/142[#142]
 | ✓

@@ -11,6 +11,7 @@ import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
+import java.util.function.IntUnaryOperator;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
@@ -251,6 +252,32 @@ public final class CaffeineMemoization {
     public static IntToLongFunction memoize(
             final IntToLongFunction function,
             final Cache<Integer, Long> cache) {
+        return MapMemoization.memoize(function, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     *
+     * @param function
+     *            The {@link IntUnaryOperator} to memoize.
+     * @return The wrapped {@link Function}.
+     */
+    public static IntUnaryOperator memoize(final IntUnaryOperator function) {
+        return memoize(function, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link IntToLongFunction} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param function
+     *            The {@link IntToLongFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static IntUnaryOperator memoize(
+            final IntUnaryOperator function,
+            final Cache<Integer, Integer> cache) {
         return MapMemoization.memoize(function, cache.asMap());
     }
 
