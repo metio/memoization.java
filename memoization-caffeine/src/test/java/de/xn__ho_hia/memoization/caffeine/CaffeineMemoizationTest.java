@@ -698,6 +698,37 @@ public class CaffeineMemoizationTest {
     }
 
     /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiFunction() {
+        // given
+        final BiFunction<Long, Long, String> function = (first, second) -> "test";
+
+        // when
+        final BiFunction<Long, Long, String> memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiFunctionWithKeyFunction() {
+        // given
+        final BiFunction<Long, Long, String> function = (first, second) -> "test";
+        final BiFunction<Long, Long, String> keyFunction = hashCodeKeyFunction();
+
+        // when
+        final BiFunction<Long, Long, String> memoize = CaffeineMemoization.memoize(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
+    }
+
+    /**
      * @throws NoSuchMethodException
      *             Reflection problemt
      * @throws IllegalAccessException

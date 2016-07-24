@@ -44,7 +44,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/BiFunction.html[BiFunction]
-| link:{issue}/89[#89]
+| ✓
 | ✓
 | link:{issue}/160[#160]
 | ✓
