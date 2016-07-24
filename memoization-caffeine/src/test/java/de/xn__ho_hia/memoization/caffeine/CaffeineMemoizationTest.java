@@ -33,6 +33,7 @@ import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
+import java.util.function.ObjDoubleConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
@@ -758,6 +759,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjDoubleConsumer() {
+        // given
+        final ObjDoubleConsumer<Long> function = (first, second) -> System.out.println(first + " " + second);
+
+        // when
+        final ObjDoubleConsumer<Long> memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized ObjDoubleConsumer is NULL", memoize);
     }
 
     /**

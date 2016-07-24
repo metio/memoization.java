@@ -30,6 +30,7 @@ import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
+import java.util.function.ObjDoubleConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
@@ -73,6 +74,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see LongToDoubleFunction
  * @see LongToIntFunction
  * @see LongUnaryOperator
+ * @see ObjDoubleConsumer
  * @see Predicate
  * @see Supplier
  * @see ToDoubleBiFunction
@@ -147,6 +149,33 @@ public final class CaffeineMemoization {
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
         return MapMemoization.memoize(predicate, keyFunction, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
+            final ObjDoubleConsumer<VALUE> predicate) {
+        return memoize(predicate, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link ObjDoubleConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     *
+     * @param predicate
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
+            final ObjDoubleConsumer<VALUE> predicate,
+            final Cache<String, String> cache) {
+        return MapMemoization.memoize(predicate, cache.asMap());
     }
 
     /**
