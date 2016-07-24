@@ -15,6 +15,7 @@ import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
+import java.util.function.LongUnaryOperator;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
@@ -42,6 +43,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see LongBinaryOperator
  * @see LongToDoubleFunction
  * @see LongToIntFunction
+ * @see LongUnaryOperator
  * @see ToDoubleBiFunction
  * @see ToDoubleFunction
  * @see ToIntBiFunction
@@ -365,6 +367,32 @@ public final class CaffeineMemoization {
     public static LongToIntFunction memoize(
             final LongToIntFunction operator,
             final Cache<Long, Integer> cache) {
+        return MapMemoization.memoize(operator, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     *
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @return The wrapped {@link Function}.
+     */
+    public static LongUnaryOperator memoize(final LongUnaryOperator operator) {
+        return memoize(operator, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link LongUnaryOperator} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static LongUnaryOperator memoize(
+            final LongUnaryOperator operator,
+            final Cache<Long, Long> cache) {
         return MapMemoization.memoize(operator, cache.asMap());
     }
 
