@@ -10,6 +10,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySup
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 import static java.util.function.Function.identity;
 
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -20,21 +21,62 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
+import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
+
 /**
- * Factory for lightweight wrappers that store the result of a potentially expensive function call.
+ * <p>
+ * Factory for lightweight wrappers that store the result of a potentially expensive function call. Each method of this
+ * class exposes zero or more of the following features:
+ * </p>
+ * <strong>Default cache</strong>
+ * <p>
+ * The memoizer uses the default cache of this factory. Current implementation creates a new {@link ConcurrentMap} per
+ * memoizer.
+ * </p>
+ * <strong>Default cache key</strong>
+ * <p>
+ * The memoizer uses the default {@link BiFunction} or {@link Supplier} to calculate the cache key for each call. Either
+ * uses the natural key (e.g. the input itself) or one of the methods in {@link MemoizationDefaults}.
+ * </p>
+ * <strong>Custom cache</strong>
+ * <p>
+ * The memoizer uses a user-provided {@link ConcurrentMap} as its cache. It is possible to add values to the cache both
+ * before and after the memoizer was created.
+ * </p>
+ * <strong>Custom cache key</strong>
+ * <p>
+ * The memoizer uses a user-defined {@link BiFunction} or {@link Supplier} to calculate the cache key for each call.
+ * Take a look at {@link MemoizationDefaults} for a possible key functions and suppliers.
+ * </p>
+ * <strong>Limits entries</strong>
+ * <p>
+ * The memoizer limits the number of entries it will memoize. Adding more values, will lead to cache eviction of
+ * previously calculated values.
+ * </p>
  *
- * @see Supplier
- * @see Function
  * @see BiFunction
  * @see Consumer
+ * @see Function
+ * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class GuavaMemoization {
 
     private static final long DEFAULT_MAXIMUM_CACHE_SIZE = 1000L;
 
+    private GuavaMemoization() {
+        // factory class
+    }
+
     /**
+     * <p>
      * Memoizes a {@link Supplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -45,8 +87,14 @@ public final class GuavaMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a Guava {@link Cache}. Saves the result under a specific cache key provided by a
-     * key-supplier.
+     * <p>
+     * Memoizes a {@link Supplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -63,8 +111,14 @@ public final class GuavaMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a previously constructed Guava {@link LoadingCache}. Saves the result under a
-     * specific cache key provided by a key-supplier.
+     * <p>
+     * Memoizes a {@link Supplier} in a previously constructed Guava {@link LoadingCache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
@@ -79,7 +133,14 @@ public final class GuavaMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Function} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link Function} to memoize.
@@ -90,7 +151,15 @@ public final class GuavaMemoization {
     }
 
     /**
-     * Memoizes a {@link Function} in a Guava {@link Cache}. Restricts the number of computed values to cache.
+     * <p>
+     * Memoizes a {@link Function} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Limits entries</li>
+     * </ul>
      *
      * @param function
      *            The {@link Function} to memoize.
@@ -105,8 +174,15 @@ public final class GuavaMemoization {
     }
 
     /**
-     * Memoizes a {@link Function} in a previously constructed Guava {@link CacheLoader}. Restricts the number of
-     * computed values to cache.
+     * <p>
+     * Memoizes a {@link Function} in a previously constructed Guava {@link CacheLoader}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * <li>Limits entries</li>
+     * </ul>
      *
      * @param loader
      *            The {@link CacheLoader} to use.
@@ -123,7 +199,14 @@ public final class GuavaMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Function} in a previously constructed Guava {@link LoadingCache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param cache
      *            The {@link LoadingCache} to use.
@@ -135,7 +218,14 @@ public final class GuavaMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
@@ -147,8 +237,15 @@ public final class GuavaMemoization {
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a Guava {@link Cache}. Saves results under a specific cache key computed by a
-     * key-function. Restricts the number of computed values to cache.
+     * <p>
+     * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Limits entries</li>
+     * </ul>
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
@@ -165,7 +262,14 @@ public final class GuavaMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link BiFunction} in a previously constructed Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
@@ -180,8 +284,14 @@ public final class GuavaMemoization {
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a previously constructed Guava {@link Cache}. Saves results under a specific
-     * cache key computed by a key-function.
+     * <p>
+     * Memoizes a {@link BiFunction} in a previously constructed Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
@@ -199,7 +309,14 @@ public final class GuavaMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Consumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link Consumer} to memoize.
@@ -210,7 +327,15 @@ public final class GuavaMemoization {
     }
 
     /**
-     * Memoizes a {@link Consumer} in a Guava {@link Cache}. Restricts the number of computed values to cache.
+     * <p>
+     * Memoizes a {@link Consumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Limits entries</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link Consumer} to memoize.
@@ -227,7 +352,14 @@ public final class GuavaMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Consumer} in a previously constructed {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link Consumer} to memoize.
@@ -239,10 +371,6 @@ public final class GuavaMemoization {
             final Consumer<VALUE> consumer,
             final Cache<VALUE, VALUE> cache) {
         return new GuavaCacheBasedConsumerMemoizer<>(cache, identity(), consumer);
-    }
-
-    private GuavaMemoization() {
-        // factory class
     }
 
 }

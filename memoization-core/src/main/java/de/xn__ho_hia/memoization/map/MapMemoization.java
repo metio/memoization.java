@@ -56,7 +56,36 @@ import java.util.function.ToLongFunction;
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
 /**
- * Factory for lightweight wrappers that store the result of a potentially expensive function call.
+ * <p>
+ * Factory for lightweight wrappers that store the result of a potentially expensive function call. Each method of this
+ * class exposes zero or more of the following features:
+ * </p>
+ * <strong>Default cache</strong>
+ * <p>
+ * The memoizer uses the default cache of this factory. Current implementation creates a new {@link ConcurrentMap} per
+ * memoizer.
+ * </p>
+ * <strong>Default cache key</strong>
+ * <p>
+ * The memoizer uses the default {@link BiFunction} or {@link Supplier} to calculate the cache key for each call. Either
+ * uses the natural key (e.g. the input itself) or one of the methods in {@link MemoizationDefaults}.
+ * </p>
+ * <strong>Custom cache</strong>
+ * <p>
+ * The memoizer uses a user-provided {@link ConcurrentMap} as its cache. It is possible to add values to the cache both
+ * before and after the memoizer was created.
+ * </p>
+ * <strong>Custom cache key</strong>
+ * <p>
+ * The memoizer uses a user-defined {@link BiFunction} or {@link Supplier} to calculate the cache key for each call.
+ * Take a look at {@link MemoizationDefaults} for a possible key functions and suppliers.
+ * </p>
+ * <strong>Skips previously computed values</strong>
+ * <p>
+ * The memoizer will skip calls for previously computed values. The provided {@link Map} will undergo a defensive copy
+ * and thus cannot be used to add more values to the memoizer. However this might be useful in case you want to warm-up
+ * your memoizer with some values.
+ * </p>
  *
  * @see BiConsumer
  * @see BiFunction
@@ -105,7 +134,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -116,8 +152,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -132,8 +175,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier.
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -148,8 +197,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -167,8 +223,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier. Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache key</li>
+     * <li>Custom cache</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -186,7 +248,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -197,8 +266,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier.
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
@@ -213,8 +288,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
@@ -232,9 +314,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier. Skips previously computed values. Uses given
-     * cache.
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
@@ -252,7 +339,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -263,8 +357,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier.
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
@@ -279,8 +379,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
@@ -298,9 +405,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves
-     * the result under a specific cache key provided by a key-supplier. Skips previously computed values. Uses given
-     * cache.
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
@@ -318,7 +430,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link IntSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -329,8 +448,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier.
+     * <p>
+     * Memoizes a {@link IntSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link IntSupplier} to memoize.
@@ -345,8 +470,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     * <p>
+     * Memoizes a {@link IntSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link IntSupplier} to memoize.
@@ -364,8 +496,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier. Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link IntSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link IntSupplier} to memoize.
@@ -383,7 +521,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link LongSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -394,8 +539,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier.
+     * <p>
+     * Memoizes a {@link LongSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link LongSupplier} to memoize.
@@ -410,8 +561,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     * <p>
+     * Memoizes a {@link LongSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link LongSupplier} to memoize.
@@ -429,8 +587,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier. Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link LongSupplier} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link LongSupplier} to memoize.
@@ -448,7 +612,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link Function} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link Function} to memoize.
@@ -459,8 +630,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link Function} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link Function} to memoize.
@@ -475,8 +653,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link Function} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link Function} to memoize.
@@ -491,7 +675,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link BiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
@@ -503,8 +694,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier.
+     * <p>
+     * Memoizes a {@link BiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
@@ -519,8 +716,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier. Skips previously computed values.
+     * <p>
+     * Memoizes a {@link BiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
@@ -538,8 +742,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Saves the
-     * result under a specific cache key provided by a key-supplier. Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link BiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param biFunction
      *            The {@link BiFunction} to memoize.
@@ -557,7 +767,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link Consumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link Consumer} to memoize.
@@ -568,8 +785,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link Consumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link Consumer} to memoize.
@@ -584,8 +808,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link Consumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link Consumer} to memoize.
@@ -600,7 +830,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link DoubleConsumer} to memoize.
@@ -611,8 +848,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link DoubleConsumer} to memoize.
@@ -627,8 +871,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link DoubleConsumer} to memoize.
@@ -643,7 +893,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link IntConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link IntConsumer} to memoize.
@@ -654,8 +911,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link IntConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link IntConsumer} to memoize.
@@ -670,8 +934,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link IntConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link IntConsumer} to memoize.
@@ -686,7 +956,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link LongConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link LongConsumer} to memoize.
@@ -697,8 +974,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link LongConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link LongConsumer} to memoize.
@@ -713,8 +997,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link LongConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link LongConsumer} to memoize.
@@ -729,7 +1019,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
@@ -740,8 +1037,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
@@ -756,8 +1060,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
@@ -773,7 +1083,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
@@ -784,8 +1101,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
@@ -800,8 +1124,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
@@ -817,7 +1147,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
@@ -828,8 +1165,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
@@ -844,8 +1188,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
@@ -861,7 +1211,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link BiConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
@@ -872,8 +1229,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link BiConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
@@ -891,8 +1255,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link BiConsumer} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
@@ -910,7 +1280,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link Predicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link Predicate} to memoize.
@@ -921,8 +1298,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link Predicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link Predicate} to memoize.
@@ -937,8 +1321,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link Predicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link Predicate} to memoize.
@@ -953,7 +1343,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link BiPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link BiPredicate} to memoize.
@@ -964,8 +1361,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link BiPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link BiPredicate} to memoize.
@@ -983,8 +1387,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link BiPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link BiPredicate} to memoize.
@@ -1002,7 +1412,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link IntPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link IntPredicate} to memoize.
@@ -1013,8 +1430,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link IntPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link IntPredicate} to memoize.
@@ -1029,8 +1453,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link IntPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link IntPredicate} to memoize.
@@ -1045,7 +1475,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link LongPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link LongPredicate} to memoize.
@@ -1056,8 +1493,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link LongPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link LongPredicate} to memoize.
@@ -1072,8 +1516,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link LongPredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link LongPredicate} to memoize.
@@ -1088,7 +1538,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link DoublePredicate} to memoize.
@@ -1099,8 +1556,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link DoublePredicate} to memoize.
@@ -1115,8 +1579,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link DoublePredicate} to memoize.
@@ -1131,7 +1601,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleBinaryOperator} to memoize.
@@ -1142,8 +1619,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values.
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleBinaryOperator} to memoize.
@@ -1158,8 +1642,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleBinaryOperator} to memoize.
@@ -1175,7 +1665,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
@@ -1186,8 +1683,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
@@ -1202,8 +1706,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
@@ -1219,7 +1729,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongBinaryOperator} to memoize.
@@ -1230,8 +1747,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values.
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongBinaryOperator} to memoize.
@@ -1246,8 +1770,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongBinaryOperator} to memoize.
@@ -1263,7 +1793,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleUnaryOperator} to memoize.
@@ -1274,8 +1811,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values.
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleUnaryOperator} to memoize.
@@ -1290,8 +1834,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleUnaryOperator} to memoize.
@@ -1306,7 +1856,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link IntUnaryOperator} to memoize.
@@ -1317,8 +1874,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param operator
      *            The {@link IntUnaryOperator} to memoize.
@@ -1333,8 +1897,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link IntUnaryOperator} to memoize.
@@ -1349,7 +1919,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongUnaryOperator} to memoize.
@@ -1360,8 +1937,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongUnaryOperator} to memoize.
@@ -1376,8 +1960,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongUnaryOperator} to memoize.
@@ -1392,7 +1982,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToIntFunction} to memoize.
@@ -1403,8 +2000,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values.
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToIntFunction} to memoize.
@@ -1419,8 +2023,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToIntFunction} to memoize.
@@ -1435,7 +2045,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToLongFunction} to memoize.
@@ -1446,8 +2063,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values.
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToLongFunction} to memoize.
@@ -1462,8 +2086,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToLongFunction} to memoize.
@@ -1478,7 +2108,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link IntToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToDoubleFunction} to memoize.
@@ -1489,8 +2126,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values.
+     * <p>
+     * Memoizes a {@link IntToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToDoubleFunction} to memoize.
@@ -1505,8 +2149,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link IntToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToDoubleFunction} to memoize.
@@ -1521,7 +2171,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToLongFunction} to memoize.
@@ -1532,8 +2189,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToLongFunction} to memoize.
@@ -1548,8 +2212,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToLongFunction} to memoize.
@@ -1564,7 +2234,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link LongToDoubleFunction} to memoize.
@@ -1575,8 +2252,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values.
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link LongToDoubleFunction} to memoize.
@@ -1591,8 +2275,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link LongToDoubleFunction} to memoize.
@@ -1607,7 +2297,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link LongToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link LongToIntFunction} to memoize.
@@ -1618,8 +2315,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link LongToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link LongToIntFunction} to memoize.
@@ -1634,8 +2338,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link LongToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link LongToIntFunction} to memoize.
@@ -1650,7 +2360,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
@@ -1661,8 +2378,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
@@ -1677,8 +2401,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
@@ -1693,7 +2423,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntFunction} to memoize.
@@ -1704,8 +2441,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntFunction} to memoize.
@@ -1720,8 +2464,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntFunction} to memoize.
@@ -1736,7 +2486,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongFunction} to memoize.
@@ -1747,8 +2504,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongFunction} to memoize.
@@ -1763,8 +2527,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongFunction} to memoize.
@@ -1779,7 +2549,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ToDoubleBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
@@ -1791,8 +2568,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values.
+     * <p>
+     * Memoizes a {@link ToDoubleBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
@@ -1810,8 +2594,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
-     * Skips previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link ToDoubleBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
@@ -1829,7 +2619,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
@@ -1841,8 +2638,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
@@ -1860,8 +2664,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
@@ -1879,7 +2689,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}.
+     * <p>
+     * Memoizes a {@link ToLongBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
@@ -1891,8 +2708,15 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values.
+     * <p>
+     * Memoizes a {@link ToLongBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * <li>Skips previously computed values</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
@@ -1910,8 +2734,14 @@ public final class MapMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
-     * previously computed values. Uses given cache.
+     * <p>
+     * Memoizes a {@link ToLongBiFunction} in a {@link ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongBiFunction} to memoize.

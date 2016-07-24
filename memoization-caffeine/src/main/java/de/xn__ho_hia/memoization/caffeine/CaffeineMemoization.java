@@ -3,6 +3,7 @@ package de.xn__ho_hia.memoization.caffeine;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
@@ -46,9 +47,33 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
 import de.xn__ho_hia.memoization.map.MapMemoization;
+import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
 /**
- * Factory for lightweight wrappers that store the result of a potentially expensive function call.
+ * <p>
+ * Factory for lightweight wrappers that store the result of a potentially expensive function call. Each method of this
+ * class exposes zero or more of the following features:
+ * </p>
+ * <strong>Default cache</strong>
+ * <p>
+ * The memoizer uses the default cache of this factory. Current implementation creates a new {@link ConcurrentMap} per
+ * memoizer.
+ * </p>
+ * <strong>Default cache key</strong>
+ * <p>
+ * The memoizer uses the default {@link BiFunction} or {@link Supplier} to calculate the cache key for each call. Either
+ * uses the natural key (e.g. the input itself) or one of the methods in {@link MemoizationDefaults}.
+ * </p>
+ * <strong>Custom cache</strong>
+ * <p>
+ * The memoizer uses a user-provided {@link ConcurrentMap} as its cache. It is possible to add values to the cache both
+ * before and after the memoizer was created.
+ * </p>
+ * <strong>Custom cache key</strong>
+ * <p>
+ * The memoizer uses a user-defined {@link BiFunction} or {@link Supplier} to calculate the cache key for each call.
+ * Take a look at {@link MemoizationDefaults} for a possible key functions and suppliers.
+ * </p>
  *
  * @see BiConsumer
  * @see BiFunction
@@ -96,7 +121,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
@@ -108,7 +140,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BiConsumer} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
@@ -123,7 +162,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BiConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
@@ -138,7 +184,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BiConsumer} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
@@ -156,7 +209,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
@@ -168,7 +228,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjDoubleConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
@@ -183,7 +250,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
@@ -195,7 +269,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjIntConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
@@ -210,7 +291,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
@@ -222,7 +310,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ObjLongConsumer} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
@@ -237,51 +332,79 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link BiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
-     * @param predicate
+     * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
      */
     public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
-            final BiFunction<FIRST, SECOND, VALUE> predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+            final BiFunction<FIRST, SECOND, VALUE> biFunction) {
+        return memoize(biFunction, Caffeine.newBuilder().build());
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
-     * @param predicate
+     * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiFunction}.
      */
     public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
-            final BiFunction<FIRST, SECOND, VALUE> predicate,
+            final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(predicate, keyFunction, Caffeine.newBuilder().build());
+        return memoize(biFunction, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link BiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
-     * @param predicate
+     * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiFunction}.
      */
     public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
-            final BiFunction<FIRST, SECOND, VALUE> predicate,
+            final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final Cache<String, VALUE> cache) {
-        return memoize(predicate, hashCodeKeyFunction(), cache);
+        return memoize(biFunction, hashCodeKeyFunction(), cache);
     }
 
     /**
-     * Memoizes a {@link BiFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
-     * @param predicate
+     * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
@@ -290,14 +413,21 @@ public final class CaffeineMemoization {
      * @return The wrapped {@link BiFunction}.
      */
     public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
-            final BiFunction<FIRST, SECOND, VALUE> predicate,
+            final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, VALUE> cache) {
-        return MapMemoization.memoize(predicate, keyFunction, cache.asMap());
+        return MapMemoization.memoize(biFunction, keyFunction, cache.asMap());
     }
 
     /**
+     * <p>
      * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link BiPredicate} to memoize.
@@ -309,7 +439,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BiPredicate} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link BiPredicate} to memoize.
@@ -324,7 +461,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BiPredicate} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link BiPredicate} to memoize.
@@ -339,7 +483,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BiPredicate} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link BiPredicate} to memoize.
@@ -357,7 +508,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
@@ -369,7 +527,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BooleanSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
@@ -384,7 +549,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BooleanSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
@@ -399,7 +571,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link BooleanSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
@@ -417,7 +596,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link Consumer} to memoize.
@@ -428,7 +614,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Consumer} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link Consumer} to memoize.
@@ -443,7 +636,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link DoubleConsumer} to memoize.
@@ -454,7 +654,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleConsumer} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link DoubleConsumer} to memoize.
@@ -469,7 +676,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link IntConsumer} to memoize.
@@ -480,7 +694,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link IntConsumer} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link IntConsumer} to memoize.
@@ -495,7 +716,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link LongConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link LongConsumer} to memoize.
@@ -506,7 +734,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link LongConsumer} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param consumer
      *            The {@link LongConsumer} to memoize.
@@ -521,7 +756,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
@@ -533,7 +775,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
@@ -548,7 +797,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
@@ -563,7 +819,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
@@ -581,7 +844,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link IntSupplier} to memoize.
@@ -593,7 +863,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link IntSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link IntSupplier} to memoize.
@@ -608,7 +885,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link IntSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link IntSupplier} to memoize.
@@ -623,7 +907,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link IntSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link IntSupplier} to memoize.
@@ -641,7 +932,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link LongSupplier} to memoize.
@@ -653,7 +951,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link LongSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link LongSupplier} to memoize.
@@ -668,7 +973,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link LongSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link LongSupplier} to memoize.
@@ -683,7 +995,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link LongSupplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link LongSupplier} to memoize.
@@ -701,7 +1020,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link Function} to memoize.
@@ -712,7 +1038,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Function} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link Function} to memoize.
@@ -727,7 +1060,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link DoubleToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToIntFunction} to memoize.
@@ -738,7 +1078,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleToIntFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToIntFunction} to memoize.
@@ -753,7 +1100,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToLongFunction} to memoize.
@@ -764,7 +1118,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleToLongFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link DoubleToLongFunction} to memoize.
@@ -779,7 +1140,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleUnaryOperator} to memoize.
@@ -790,7 +1158,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleUnaryOperator} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleUnaryOperator} to memoize.
@@ -805,7 +1180,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleBinaryOperator} to memoize.
@@ -816,7 +1198,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoubleBinaryOperator} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link DoubleBinaryOperator} to memoize.
@@ -831,7 +1220,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
@@ -842,7 +1238,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link IntBinaryOperator} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
@@ -857,7 +1260,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link IntToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToDoubleFunction} to memoize.
@@ -868,7 +1278,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link IntToDoubleFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToDoubleFunction} to memoize.
@@ -883,7 +1300,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link IntToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToLongFunction} to memoize.
@@ -894,7 +1318,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link IntToLongFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link IntToLongFunction} to memoize.
@@ -909,44 +1340,72 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
-     * @param function
+     * @param operator
      *            The {@link IntUnaryOperator} to memoize.
-     * @return The wrapped {@link Function}.
+     * @return The wrapped {@link IntUnaryOperator}.
      */
-    public static IntUnaryOperator memoize(final IntUnaryOperator function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static IntUnaryOperator memoize(final IntUnaryOperator operator) {
+        return memoize(operator, Caffeine.newBuilder().build());
     }
 
     /**
-     * Memoizes a {@link IntToLongFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
-     * @param function
-     *            The {@link IntToLongFunction} to memoize.
+     * @param operator
+     *            The {@link IntUnaryOperator} to memoize.
      * @param cache
      *            The {@link Cache} to use.
-     * @return The wrapped {@link IntToLongFunction}.
+     * @return The wrapped {@link IntUnaryOperator}.
      */
     public static IntUnaryOperator memoize(
-            final IntUnaryOperator function,
+            final IntUnaryOperator operator,
             final Cache<Integer, Integer> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoization.memoize(operator, cache.asMap());
     }
 
     /**
+     * <p>
      * Memoizes a {@link LongBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongBinaryOperator} to memoize.
-     * @return The wrapped {@link Function}.
+     * @return The wrapped {@link LongBinaryOperator}.
      */
     public static LongBinaryOperator memoize(final LongBinaryOperator operator) {
         return memoize(operator, Caffeine.newBuilder().build());
     }
 
     /**
-     * Memoizes a {@link LongBinaryOperator} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongBinaryOperator} to memoize.
@@ -961,70 +1420,112 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link LongToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
-     * @param operator
+     * @param function
      *            The {@link LongToDoubleFunction} to memoize.
-     * @return The wrapped {@link Function}.
+     * @return The wrapped {@link LongToDoubleFunction}.
      */
-    public static LongToDoubleFunction memoize(final LongToDoubleFunction operator) {
-        return memoize(operator, Caffeine.newBuilder().build());
+    public static LongToDoubleFunction memoize(final LongToDoubleFunction function) {
+        return memoize(function, Caffeine.newBuilder().build());
     }
 
     /**
-     * Memoizes a {@link LongToDoubleFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
-     * @param operator
+     * @param function
      *            The {@link LongToDoubleFunction} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongToDoubleFunction}.
      */
     public static LongToDoubleFunction memoize(
-            final LongToDoubleFunction operator,
+            final LongToDoubleFunction function,
             final Cache<Long, Double> cache) {
-        return MapMemoization.memoize(operator, cache.asMap());
+        return MapMemoization.memoize(function, cache.asMap());
     }
 
     /**
+     * <p>
      * Memoizes a {@link LongToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
-     * @param operator
+     * @param function
      *            The {@link LongToIntFunction} to memoize.
-     * @return The wrapped {@link Function}.
+     * @return The wrapped {@link LongToIntFunction}.
      */
-    public static LongToIntFunction memoize(final LongToIntFunction operator) {
-        return memoize(operator, Caffeine.newBuilder().build());
+    public static LongToIntFunction memoize(final LongToIntFunction function) {
+        return memoize(function, Caffeine.newBuilder().build());
     }
 
     /**
-     * Memoizes a {@link LongToIntFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
-     * @param operator
+     * @param function
      *            The {@link LongToIntFunction} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongToIntFunction}.
      */
     public static LongToIntFunction memoize(
-            final LongToIntFunction operator,
+            final LongToIntFunction function,
             final Cache<Long, Integer> cache) {
-        return MapMemoization.memoize(operator, cache.asMap());
+        return MapMemoization.memoize(function, cache.asMap());
     }
 
     /**
+     * <p>
      * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongUnaryOperator} to memoize.
-     * @return The wrapped {@link Function}.
+     * @return The wrapped {@link LongUnaryOperator}.
      */
     public static LongUnaryOperator memoize(final LongUnaryOperator operator) {
         return memoize(operator, Caffeine.newBuilder().build());
     }
 
     /**
-     * Memoizes a {@link LongUnaryOperator} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param operator
      *            The {@link LongUnaryOperator} to memoize.
@@ -1039,7 +1540,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link Predicate} to memoize.
@@ -1050,7 +1558,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Predicate} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link Predicate} to memoize.
@@ -1065,7 +1580,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link LongPredicate} to memoize.
@@ -1076,7 +1598,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link LongPredicate} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link LongPredicate} to memoize.
@@ -1091,7 +1620,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link IntPredicate} to memoize.
@@ -1102,7 +1638,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link IntPredicate} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link IntPredicate} to memoize.
@@ -1117,7 +1660,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link DoublePredicate} to memoize.
@@ -1128,7 +1678,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link DoublePredicate} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param predicate
      *            The {@link DoublePredicate} to memoize.
@@ -1143,7 +1700,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -1155,7 +1719,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -1170,7 +1741,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -1185,7 +1763,8 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -1203,7 +1782,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
@@ -1215,7 +1801,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleBiFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
@@ -1230,7 +1823,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleBiFunction} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
@@ -1245,7 +1845,8 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleBiFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
      *
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
@@ -1263,7 +1864,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ToIntBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
@@ -1275,7 +1883,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntBiFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
@@ -1290,7 +1905,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntBiFunction} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
@@ -1305,7 +1927,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntBiFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
@@ -1323,7 +1952,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ToLongBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
@@ -1335,7 +1971,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongBiFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToLongBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
@@ -1350,7 +1993,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongBiFunction} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     * <p>
+     * Memoizes a {@link ToLongBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
@@ -1365,7 +2015,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongBiFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToLongBiFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
@@ -1383,7 +2040,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
@@ -1394,7 +2058,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToDoubleFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
@@ -1409,7 +2080,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntFunction} to memoize.
@@ -1420,7 +2098,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToIntFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToIntFunction} to memoize.
@@ -1435,7 +2120,14 @@ public final class CaffeineMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link ToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongFunction} to memoize.
@@ -1446,7 +2138,14 @@ public final class CaffeineMemoization {
     }
 
     /**
-     * Memoizes a {@link ToLongFunction} in a pre-configured Caffeine {@link Cache}.
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link ToLongFunction} to memoize.

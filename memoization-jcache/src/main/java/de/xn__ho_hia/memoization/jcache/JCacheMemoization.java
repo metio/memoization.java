@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.jcache;
 
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -21,13 +22,38 @@ import javax.cache.configuration.Factory;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.integration.CacheLoader;
 
+import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
+
 /**
- * Factory for lightweight wrappers that store the result of a potentially expensive function call.
+ * <p>
+ * Factory for lightweight wrappers that store the result of a potentially expensive function call. Each method of this
+ * class exposes zero or more of the following features:
+ * </p>
+ * <strong>Default cache</strong>
+ * <p>
+ * The memoizer uses the default cache of this factory. Current implementation creates a new {@link ConcurrentMap} per
+ * memoizer.
+ * </p>
+ * <strong>Default cache key</strong>
+ * <p>
+ * The memoizer uses the default {@link BiFunction} or {@link Supplier} to calculate the cache key for each call. Either
+ * uses the natural key (e.g. the input itself) or one of the methods in {@link MemoizationDefaults}.
+ * </p>
+ * <strong>Custom cache</strong>
+ * <p>
+ * The memoizer uses a user-provided {@link ConcurrentMap} as its cache. It is possible to add values to the cache both
+ * before and after the memoizer was created.
+ * </p>
+ * <strong>Custom cache key</strong>
+ * <p>
+ * The memoizer uses a user-defined {@link BiFunction} or {@link Supplier} to calculate the cache key for each call.
+ * Take a look at {@link MemoizationDefaults} for a possible key functions and suppliers.
+ * </p>
  *
- * @see Supplier
- * @see Function
  * @see BiFunction
  * @see Consumer
+ * @see Function
+ * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class JCacheMemoization {
@@ -35,8 +61,19 @@ public final class JCacheMemoization {
     private static final AtomicLong   CACHE_COUNTER = new AtomicLong(0);
     private static final CacheManager CACHE_MANAGER = Caching.getCachingProvider().getCacheManager();
 
+    private JCacheMemoization() {
+        // factory class
+    }
+
     /**
+     * <p>
      * Memoizes a {@link Supplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -47,8 +84,14 @@ public final class JCacheMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a JCache {@link Cache}. Saves the result under a specific cache key provided by a
-     * key-supplier.
+     * <p>
+     * Memoizes a {@link Supplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param supplier
      *            The {@link Supplier} to memoize.
@@ -63,8 +106,14 @@ public final class JCacheMemoization {
     }
 
     /**
-     * Memoizes a {@link Supplier} in a previously constructed JCache {@link Cache}. Saves the result under a specific
-     * cache key provided by a key-supplier.
+     * <p>
+     * Memoizes a {@link Supplier} in a previously constructed JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
@@ -79,7 +128,14 @@ public final class JCacheMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Function} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
      *
      * @param function
      *            The {@link Function} to memoize.
@@ -90,7 +146,14 @@ public final class JCacheMemoization {
     }
 
     /**
+     * <p>
      * Memoizes a {@link Function} in a previously constructed JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
      *
      * @param cache
      *            The {@link Cache} to use.
@@ -120,10 +183,6 @@ public final class JCacheMemoization {
 
     static <KEY, VALUE> Factory<CacheLoader<KEY, VALUE>> functionFactory(final Function<KEY, VALUE> function) {
         return () -> new JCacheFunctionBasedCacheLoader<>(function);
-    }
-
-    private JCacheMemoization() {
-        // factory class
     }
 
 }

@@ -5,8 +5,9 @@
  * in the LICENSE file.
  */
 /**
- * Memoize members of <code>java.util.function</code> with a {@link java.util.concurrent.ConcurrentMap}.
+ * Memoize members of <code>java.util.function</code> with a Guava based cache.
  *
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
+ * @see <a href="https://github.com/google/guava/wiki/CachesExplained">Guava Caches explained</a>
  */
-package de.xn__ho_hia.memoization.map;
+package de.xn__ho_hia.memoization.guava;
