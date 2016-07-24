@@ -140,7 +140,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/IntToDoubleFunction.html[IntToDoubleFunction]
-| link:{issue}/105[#105]
+| ✓
 | link:{issue}/68[#68]
 | link:{issue}/140[#140]
 | ✓

@@ -12,6 +12,7 @@ import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
+import java.util.function.IntToDoubleFunction;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
@@ -118,6 +119,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized IntBinaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntToDoubleFunction() {
+        // given
+        final IntToDoubleFunction function = a -> 123D;
+
+        // when
+        final IntToDoubleFunction memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized IntToDoubleFunction is NULL", memoize);
     }
 
     /**
