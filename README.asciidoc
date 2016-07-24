@@ -273,21 +273,21 @@ The `ConcurrentMap` and Caffeine based implementations cover all functional inte
 
 == Usage
 
-Memoize any of the supported types by using the static factory methods supplied by either using `MapMemoization` or `CaffeineMemoization` like this:
+Memoize any of the supported types by using the static factory methods supplied by either using `CaffeineMemoization`, `GuavaMemoization`, `JCacheMemoization` or `MapMemoization` like this:
 
 [source, java]
 ----
-Supplier<T> supplier = ...;
-Supplier<T> memoizedSupplier = MapMemoization.memoize(supplier);
-
-Function<I, O> function = ...;
-Function<I, O> memoizedFunction = CaffeineMemoization.memoize(function);
-
-BiFunction<I, O, R> biFunction = ...;
-BiFunction<I, O, R> memoizedBiFunction = MapMemoization.memoize(biFunction);
-
 Consumer<T> consumer = ...;
 Consumer<T> memoizedConsumer = CaffeineMemoization.memoize(consumer);
+
+Function<I, O> function = ...;
+Function<I, O> memoizedFunction = GuavaMemoization.memoize(function);
+
+Predicate<T> predicate = ...;
+Predicate<T> memoizedPredicate = MapMemoization.memoize(biFunction);
+
+Supplier<T> supplier = ...;
+Supplier<T> memoizedSupplier = JCacheMemoization.memoize(supplier);
 ----
 
 === Integration
