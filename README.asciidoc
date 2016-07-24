@@ -80,7 +80,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/DoublePredicate.html[DoublePredicate]
-| link:{issue}/95[#95]
+| ✓
 | link:{issue}/59[#59]
 | link:{issue}/131[#131]
 | ✓

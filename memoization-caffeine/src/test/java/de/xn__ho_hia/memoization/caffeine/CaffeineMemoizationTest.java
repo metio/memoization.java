@@ -9,6 +9,7 @@ import java.lang.reflect.Modifier;
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
@@ -583,6 +584,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized IntPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoublePredicate() {
+        // given
+        final DoublePredicate function = a -> true;
+
+        // when
+        final DoublePredicate memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized DoublePredicate is NULL", memoize);
     }
 
     /**

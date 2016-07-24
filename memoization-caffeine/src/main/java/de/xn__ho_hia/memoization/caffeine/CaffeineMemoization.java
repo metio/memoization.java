@@ -6,6 +6,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFu
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
@@ -42,6 +43,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  *
  * @see BooleanSupplier
  * @see DoubleBinaryOperator
+ * @see DoublePredicate
  * @see DoubleSupplier
  * @see DoubleToIntFunction
  * @see DoubleToLongFunction
@@ -728,6 +730,32 @@ public final class CaffeineMemoization {
     public static IntPredicate memoize(
             final IntPredicate predicate,
             final Cache<Integer, Boolean> cache) {
+        return MapMemoization.memoize(predicate, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static DoublePredicate memoize(final DoublePredicate predicate) {
+        return memoize(predicate, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link DoublePredicate} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static DoublePredicate memoize(
+            final DoublePredicate predicate,
+            final Cache<Double, Boolean> cache) {
         return MapMemoization.memoize(predicate, cache.asMap());
     }
 
