@@ -9,7 +9,7 @@ import java.util.function.Function;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
-import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
+import de.xn__ho_hia.memoization.map.MapMemoization;
 
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
@@ -18,6 +18,10 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class CaffeineMemoization {
+
+    private CaffeineMemoization() {
+        // factory class
+    }
 
     /**
      * Memoizes a {@link Function} in a Caffeine {@link Cache}.
@@ -42,7 +46,7 @@ public final class CaffeineMemoization {
     public static <KEY, VALUE> Function<KEY, VALUE> memoize(
             final Function<KEY, VALUE> function,
             final Cache<KEY, VALUE> cache) {
-        return new CaffeineBasedFunctionMemoizer<>(cache, function);
+        return MapMemoization.memoize(function, cache.asMap());
     }
 
     /**
@@ -68,7 +72,7 @@ public final class CaffeineMemoization {
     public static DoubleToIntFunction memoize(
             final DoubleToIntFunction function,
             final Cache<Double, Integer> cache) {
-        return new CaffeineBasedDoubleToIntFunctionMemoizer(cache, function);
+        return MapMemoization.memoize(function, cache.asMap());
     }
 
     /**
@@ -94,7 +98,7 @@ public final class CaffeineMemoization {
     public static DoubleToLongFunction memoize(
             final DoubleToLongFunction function,
             final Cache<Double, Long> cache) {
-        return new CaffeineBasedDoubleToLongFunctionMemoizer(cache, function);
+        return MapMemoization.memoize(function, cache.asMap());
     }
 
     /**
@@ -120,7 +124,7 @@ public final class CaffeineMemoization {
     public static DoubleUnaryOperator memoize(
             final DoubleUnaryOperator operator,
             final Cache<Double, Double> cache) {
-        return new CaffeineBasedDoubleUnaryOperatorMemoizer(cache, operator);
+        return MapMemoization.memoize(operator, cache.asMap());
     }
 
     /**
@@ -146,12 +150,7 @@ public final class CaffeineMemoization {
     public static DoubleBinaryOperator memoize(
             final DoubleBinaryOperator operator,
             final Cache<String, Double> cache) {
-        return new CaffeineBasedDoubleBinaryOperatorMemoizer<>(cache,
-                MemoizationDefaults.doubleBinaryOperatorHashCodeKeyFunction(), operator);
-    }
-
-    private CaffeineMemoization() {
-        // factory class
+        return MapMemoization.memoize(operator, cache.asMap());
     }
 
 }

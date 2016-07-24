@@ -26,13 +26,13 @@
   <!--                               COORDINATES                               -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
-  <artifactId>memoization-guava</artifactId>
+  <artifactId>memoization-core</artifactId>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                               INFORMATIONS                              -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#More_Project_Information -->
-  <name>memoization.java :: Guava</name>
+  <name>memoization.java :: Core</name>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                                DEPENDENCIES                             -->
@@ -40,16 +40,8 @@
   <!-- https://maven.apache.org/pom.html#Dependencies -->
   <dependencies>
     <dependency>
-      <groupId>de.xn--ho-hia.memoization</groupId>
-      <artifactId>memoization-core</artifactId>
-    </dependency>
-    <dependency>
       <groupId>de.xn--ho-hia.quality</groupId>
       <artifactId>suppress-warnings</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

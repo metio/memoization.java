@@ -12,7 +12,6 @@ Sebastian Hoß <http://seb.xn--ho-hia.de/[@sebhoss]>
 
 image:https://img.shields.io/badge/license-cc%20zero-000000.svg?style=flat-square["CC Zero", link="http://creativecommons.org/publicdomain/zero/1.0/"]
 pass:[<span class="image"><a class="image" href="https://maven-badges.herokuapp.com/maven-central/de.xn--ho-hia.memoization/memoization.java"><img src="https://img.shields.io/maven-central/v/de.xn--ho-hia.memoization/memoization.java.svg?style=flat-square" alt="Maven Central"></a></span>]
-pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization.java"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization.java.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
 image:https://reposs.herokuapp.com/?path={github-org}/{project-name}&style=flat-square["Repository size"]
 image:https://www.openhub.net/p/memoization-java/widgets/project_thin_badge?format=gif["Open Hub statistics", link="https://www.openhub.net/p/memoization-java"]
 
@@ -29,14 +28,14 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 == Features
 
 * Memoize calls to `Supplier`, `Function`, `BiFunction`, `Consumer` and all other functional interfaces in `java.util.function`
-* link:{jdk-api}/java/util/concurrent/ConcurrentHashMap.html[`ConcurrentHashMap`] based implementation
-* link:https://github.com/ben-manes/caffeine[Caffeine] based implementation
-* link:https://github.com/google/guava/wiki/CachesExplained[Guava] based implementation
-* link:https://jcp.org/en/jsr/detail?id=107[JCache] based implementation
+* link:{jdk-api}/java/util/concurrent/ConcurrentMap.html[`ConcurrentMap`] based implementation either using `ConcurrentHashMap` or your own `ConcurrentMap` implementation. pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-core"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-core.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
+* link:https://github.com/ben-manes/caffeine[Caffeine] based implementation pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-caffeine"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-caffeine.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
+* link:https://github.com/google/guava/wiki/CachesExplained[Guava] based implementation pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-guava"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-guava.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
+* link:https://jcp.org/en/jsr/detail?id=107[JCache] based implementation pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-jcache"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-jcache.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
 
 .Coverage of `java.util.function`
 |===
-| | Caffeine | Guava | JCache | Map
+| | Caffeine | Guava | JCache | ConcurrentMap
 
 | link:{jdk-api}/java/util/function/BiConsumer.html[BiConsumer]
 | link:{issue}/88[#88]
@@ -274,7 +273,7 @@ The map based implementation covers all functional interfaces from `java.util.fu
 
 == Usage
 
-Memoize any of the supported types by using the static factory methods supplied by e.g. `MapMemoization` (the `ConcurrentHashMap` based implementation) like this:
+Memoize any of the supported types by using the static factory methods supplied by e.g. `MapMemoization` (the `ConcurrentMap` based implementation) like this:
 
 [source, java]
 ----
@@ -293,76 +292,53 @@ Consumer<T> memoizedConsumer = MapMemoization.memoize(consumer);
 
 === Integration
 
-This project is split into multiple modules in order to offer the least amount of dependencies to import for any given consumer project. In order to use this project, declare any of the following inside your POM. The `memoization-shared` module is not strictly necessary as it gets pulled in transitively by any of `memoization-${kind}`, however in general it is good practice to include all of your direct dependencies. Replace `${version.memoization}` with the pass:[<a href="https://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
-
-==== Caffeine
+This project is split into multiple modules in order to offer the least amount of dependencies to import for any given consumer project. In order to use this project, declare the following inside your POM:
 
 [source, xml, subs="attributes,verbatim"]
 ----
 <dependencies>
   <dependency>
     <groupId>{project-group}</groupId>
-    <artifactId>memoization-shared</artifactId>
+    <artifactId>memoization-core</artifactId>
     <version>${version.memoization}</version>
   </dependency>
+
+  <!-- CAFFEINE ONLY -->
   <dependency>
     <groupId>{project-group}</groupId>
     <artifactId>memoization-caffeine</artifactId>
     <version>${version.memoization}</version>
   </dependency>
-
   <dependency>
     <groupId>com.github.ben-manes.caffeine</groupId>
     <artifactId>caffeine</artifactId>
     <version>${version.caffeine}</version>
   </dependency>
-</dependencies>
-----
+  <!-- CAFFEINE ONLY -->
 
-==== Guava
-
-[source, xml, subs="attributes,verbatim"]
-----
-<dependencies>
-  <dependency>
-    <groupId>{project-group}</groupId>
-    <artifactId>memoization-shared</artifactId>
-    <version>${version.memoization}</version>
-  </dependency>
+  <!-- GUAVA ONLY -->
   <dependency>
     <groupId>{project-group}</groupId>
     <artifactId>memoization-guava</artifactId>
     <version>${version.memoization}</version>
   </dependency>
-
   <dependency>
     <groupId>com.google.guava</groupId>
     <artifactId>guava</artifactId>
     <version>${version.guava}</version>
   </dependency>
-</dependencies>
-----
+  <!-- GUAVA ONLY -->
 
-==== JCache
-
-[source, xml, subs="attributes,verbatim"]
-----
-<dependencies>
-  <dependency>
-    <groupId>{project-group}</groupId>
-    <artifactId>memoization-shared</artifactId>
-    <version>${version.memoization}</version>
-  </dependency>
+  <!-- JCACHE ONLY -->
   <dependency>
     <groupId>{project-group}</groupId>
     <artifactId>memoization-jcache</artifactId>
     <version>${version.memoization}</version>
   </dependency>
-
   <dependency>
     <groupId>javax.cache</groupId>
     <artifactId>cache-api</artifactId>
-    <version>1.0.0</version>
+    <version>${version.jcache}</version>
   </dependency>
   <!-- Add your JCache implementation here -->
   <dependency>
@@ -370,26 +346,12 @@ This project is split into multiple modules in order to offer the least amount o
     <artifactId>...</artifactId>
     <version>...</version>
   </dependency>
+  <!-- JCACHE ONLY -->
+
 </dependencies>
 ----
 
-==== Map
-
-[source, xml, subs="attributes,verbatim"]
-----
-<dependencies>
-  <dependency>
-    <groupId>{project-group}</groupId>
-    <artifactId>memoization-shared</artifactId>
-    <version>${version.memoization}</version>
-  </dependency>
-  <dependency>
-    <groupId>{project-group}</groupId>
-    <artifactId>memoization-map</artifactId>
-    <version>${version.memoization}</version>
-  </dependency>
-</dependencies>
-----
+Replace `${version.memoization}` with the pass:[<a href="https://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
 
 === Compatibility
 

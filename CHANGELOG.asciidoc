@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file.
 * Guava module
 * JCache module
 
+=== Changed
+
+* merged 'shared' & 'map' module into new 'core'
+
 == link:++https://github.com/sebhoss/memoization.java/compare/ad369f6c589569f2d153c14c21f1872df0687111...memoization.java-1.0.0-20160715205956++[1.0.0] - 2016-07-15
 
 === Added

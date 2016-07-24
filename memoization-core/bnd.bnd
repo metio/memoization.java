@@ -3,8 +3,6 @@ Bundle-Name: ${project.artifactId}
 Bundle-Description: ${project.description}
 Bundle-DocURL: ${project.url}
 Bundle-Version: ${project.version}
-Export-Package: de.xn__ho_hia.memoization.caffeine
-Import-Package: \
+Export-Package: \
 	de.xn__ho_hia.memoization.shared,\
-	de.xn__ho_hia.memoization.map,\
-	*
+	de.xn__ho_hia.memoization.map

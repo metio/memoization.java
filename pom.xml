@@ -28,7 +28,7 @@
   <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
   <groupId>de.xn--ho-hia.memoization</groupId>
   <artifactId>memoization.java</artifactId>
-  <version>1.1.0-${revision}</version>
+  <version>2.0.0-${revision}</version>
   <packaging>pom</packaging>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -45,11 +45,10 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#Aggregation -->
   <modules>
-    <module>memoization-shared</module>
+    <module>memoization-core</module>
     <module>memoization-caffeine</module>
     <module>memoization-guava</module>
     <module>memoization-jcache</module>
-    <module>memoization-map</module>
   </modules>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -109,7 +108,7 @@
     <dependencies>
       <dependency>
         <groupId>de.xn--ho-hia.memoization</groupId>
-        <artifactId>memoization-shared</artifactId>
+        <artifactId>memoization-core</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
