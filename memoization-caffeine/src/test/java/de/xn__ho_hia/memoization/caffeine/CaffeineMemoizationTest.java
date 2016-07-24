@@ -16,6 +16,7 @@ import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
+import java.util.function.LongToDoubleFunction;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
@@ -182,6 +183,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized LongBinaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongToDoubleFunction() {
+        // given
+        final LongToDoubleFunction function = a -> 123.456D;
+
+        // when
+        final LongToDoubleFunction memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized LongToDoubleFunction is NULL", memoize);
     }
 
     /**
