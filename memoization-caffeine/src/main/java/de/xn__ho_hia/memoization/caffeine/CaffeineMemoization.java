@@ -14,6 +14,10 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
  *
+ * @see DoubleToIntFunction
+ * @see DoubleToLongFunction
+ * @see DoubleUnaryOperator
+ * @see DoubleBinaryOperator
  * @see Function
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
