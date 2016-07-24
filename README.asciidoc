@@ -56,7 +56,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/BooleanSupplier.html[BooleanSupplier]
-| link:{issue}/91[#91]
+| ✓
 | link:{issue}/56[#56]
 | link:{issue}/128[#128]
 | ✓

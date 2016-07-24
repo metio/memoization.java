@@ -7,6 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.function.BiFunction;
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
@@ -263,6 +264,37 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBooleanSupplier() {
+        // given
+        final BooleanSupplier supplier = () -> true;
+
+        // when
+        final BooleanSupplier memoize = CaffeineMemoization.memoize(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBooleanSupplierWithKeyFunction() {
+        // given
+        final BooleanSupplier supplier = () -> false;
+        final Supplier<String> keySupplier = defaultKeySupplier();
+
+        // when
+        final BooleanSupplier memoize = CaffeineMemoization.memoize(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
     }
 
     /**

@@ -4,6 +4,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySup
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
 import java.util.function.BiFunction;
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
@@ -33,6 +34,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
  *
+ * @see BooleanSupplier
  * @see DoubleBinaryOperator
  * @see DoubleToIntFunction
  * @see DoubleToLongFunction
@@ -59,6 +61,66 @@ public final class CaffeineMemoization {
 
     private CaffeineMemoization() {
         // factory class
+    }
+
+    /**
+     * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static BooleanSupplier memoize(
+            final BooleanSupplier supplier) {
+        return memoize(supplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link BooleanSupplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static BooleanSupplier memoize(
+            final BooleanSupplier supplier,
+            final Cache<String, Boolean> cache) {
+        return memoize(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <KEY> BooleanSupplier memoize(
+            final BooleanSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return memoize(supplier, keySupplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <KEY> BooleanSupplier memoize(
+            final BooleanSupplier supplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, Boolean> cache) {
+        return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
     }
 
     /**
