@@ -33,6 +33,9 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see DoubleUnaryOperator
  * @see Function
  * @see IntBinaryOperator
+ * @see IntToDoubleFunction
+ * @see IntToLongFunction
+ * @see IntUnaryOperator
  * @see ToDoubleBiFunction
  * @see ToDoubleFunction
  * @see ToIntBiFunction
