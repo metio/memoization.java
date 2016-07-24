@@ -254,7 +254,7 @@ Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
 | ✓
 
 | link:{jdk-api}/java/util/function/ToIntFunction.html[ToIntFunction]
-| link:{issue}/124[#124]
+| ✓
 | link:{issue}/86[#86]
 | link:{issue}/158[#158]
 | ✓
