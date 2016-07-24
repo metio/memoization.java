@@ -1,5 +1,6 @@
 package de.xn__ho_hia.memoization.caffeine;
 
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
 import java.util.function.BiFunction;
@@ -16,6 +17,7 @@ import java.util.function.LongBinaryOperator;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
+import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
@@ -44,6 +46,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see LongToDoubleFunction
  * @see LongToIntFunction
  * @see LongUnaryOperator
+ * @see Supplier
  * @see ToDoubleBiFunction
  * @see ToDoubleFunction
  * @see ToIntBiFunction
@@ -394,6 +397,66 @@ public final class CaffeineMemoization {
             final LongUnaryOperator operator,
             final Cache<Long, Long> cache) {
         return MapMemoization.memoize(operator, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <VALUE> Supplier<VALUE> memoize(
+            final Supplier<VALUE> supplier) {
+        return memoize(supplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <VALUE> Supplier<VALUE> memoize(
+            final Supplier<VALUE> supplier,
+            final Cache<String, VALUE> cache) {
+        return memoize(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <KEY, VALUE> Supplier<VALUE> memoize(
+            final Supplier<VALUE> supplier,
+            final Supplier<KEY> keySupplier) {
+        return memoize(supplier, keySupplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link Supplier} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <KEY, VALUE> Supplier<VALUE> memoize(
+            final Supplier<VALUE> supplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, VALUE> cache) {
+        return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
     }
 
     /**

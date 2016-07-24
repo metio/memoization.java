@@ -112,7 +112,23 @@ public final class MapMemoization {
      * @return The wrapped {@link Supplier}.
      */
     public static <VALUE> Supplier<VALUE> memoize(final Supplier<VALUE> supplier) {
-        return memoize(supplier, defaultKeySupplier());
+        return memoize(supplier, emptyMap());
+    }
+
+    /**
+     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentHashMap ConcurrentHashMap}. Skips
+     * previously computed values.
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param preComputedValues
+     *            {@link Map} of already computed values.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <VALUE> Supplier<VALUE> memoize(
+            final Supplier<VALUE> supplier,
+            final Map<String, VALUE> preComputedValues) {
+        return memoize(supplier, defaultKeySupplier(), asConcurrentMap(preComputedValues));
     }
 
     /**

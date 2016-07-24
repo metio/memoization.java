@@ -79,6 +79,22 @@ public class MapMemoizationTest {
     *
     */
     @Test
+    public void shouldMemoizeSupplierWithKeySupplier() {
+        // given
+        final Supplier<String> supplier = () -> "test";
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final Supplier<String> memoize = MapMemoization.memoize(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeBooleanSupplier() {
         // given
         final BooleanSupplier supplier = () -> true;

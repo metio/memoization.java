@@ -1,5 +1,6 @@
 package de.xn__ho_hia.memoization.caffeine;
 
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
 import java.lang.reflect.Constructor;
@@ -19,6 +20,7 @@ import java.util.function.LongBinaryOperator;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
+import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
@@ -230,6 +232,37 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized LongUnaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeSupplier() {
+        // given
+        final Supplier<String> supplier = () -> "test";
+
+        // when
+        final Supplier<String> memoize = CaffeineMemoization.memoize(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeSupplierWithKeyFunction() {
+        // given
+        final Supplier<String> supplier = () -> "test";
+        final Supplier<String> keySupplier = defaultKeySupplier();
+
+        // when
+        final Supplier<String> memoize = CaffeineMemoization.memoize(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
     }
 
     /**
