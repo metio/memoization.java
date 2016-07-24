@@ -1,10 +1,14 @@
 package de.xn__ho_hia.memoization.caffeine;
 
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
+
+import java.util.function.BiFunction;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
+import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
@@ -161,6 +165,66 @@ public final class CaffeineMemoization {
             final DoubleBinaryOperator operator,
             final Cache<String, Double> cache) {
         return MapMemoization.memoize(operator, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
+     *
+     * @param function
+     *            The {@link ToDoubleBiFunction} to memoize.
+     * @return The wrapped {@link ToDoubleBiFunction}.
+     */
+    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> memoize(
+            final ToDoubleBiFunction<FIRST, SECOND> function) {
+        return memoize(function, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link ToDoubleBiFunction} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param function
+     *            The {@link ToDoubleBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link ToDoubleBiFunction}.
+     */
+    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> memoize(
+            final ToDoubleBiFunction<FIRST, SECOND> function,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return memoize(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link ToDoubleBiFunction} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     *
+     * @param function
+     *            The {@link ToDoubleBiFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToDoubleBiFunction}.
+     */
+    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> memoize(
+            final ToDoubleBiFunction<FIRST, SECOND> function,
+            final Cache<String, Double> cache) {
+        return memoize(function, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * Memoizes a {@link ToDoubleBiFunction} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param function
+     *            The {@link ToDoubleBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToDoubleBiFunction}.
+     */
+    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> memoize(
+            final ToDoubleBiFunction<FIRST, SECOND> function,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return MapMemoization.memoize(function, keyFunction, cache.asMap());
     }
 
     /**

@@ -1,13 +1,17 @@
 package de.xn__ho_hia.memoization.caffeine;
 
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.function.BiFunction;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
+import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
@@ -96,6 +100,39 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToDoubleBiFunction() {
+        // given
+        final ToDoubleBiFunction<Double, Double> function = (first, second) -> first.doubleValue()
+                + second.doubleValue();
+
+        // when
+        final ToDoubleBiFunction<Double, Double> memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToDoubleBiFunctionWithKeyFunction() {
+        // given
+        final ToDoubleBiFunction<Double, Double> function = (first, second) -> first.doubleValue()
+                + second.doubleValue();
+        final BiFunction<Double, Double, String> keyFunction = hashCodeKeyFunction();
+
+        // when
+        final ToDoubleBiFunction<Double, Double> memoize = CaffeineMemoization.memoize(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
     }
 
     /**
