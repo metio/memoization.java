@@ -4,6 +4,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySup
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
@@ -45,6 +46,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
  *
+ * @see BiPredicate
  * @see BooleanSupplier
  * @see Consumer
  * @see DoubleBinaryOperator
@@ -82,6 +84,66 @@ public final class CaffeineMemoization {
 
     private CaffeineMemoization() {
         // factory class
+    }
+
+    /**
+     * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> memoize(
+            final BiPredicate<FIRST, SECOND> predicate) {
+        return memoize(predicate, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link BiPredicate} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> memoize(
+            final BiPredicate<FIRST, SECOND> predicate,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return memoize(predicate, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link BiPredicate} in a pre-configured Caffeine {@link Cache}. Uses the default key function.
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> memoize(
+            final BiPredicate<FIRST, SECOND> predicate,
+            final Cache<String, Boolean> cache) {
+        return memoize(predicate, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * Memoizes a {@link BiPredicate} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> memoize(
+            final BiPredicate<FIRST, SECOND> predicate,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return MapMemoization.memoize(predicate, keyFunction, cache.asMap());
     }
 
     /**

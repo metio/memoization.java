@@ -7,6 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
@@ -663,6 +664,37 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiPredicate() {
+        // given
+        final BiPredicate<Long, Long> function = (first, second) -> true;
+
+        // when
+        final BiPredicate<Long, Long> memoize = CaffeineMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized BiPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiPredicateWithKeyFunction() {
+        // given
+        final BiPredicate<Long, Long> function = (first, second) -> false;
+        final BiFunction<Long, Long, String> keyFunction = hashCodeKeyFunction();
+
+        // when
+        final BiPredicate<Long, Long> memoize = CaffeineMemoization.memoize(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized BiPredicate is NULL", memoize);
     }
 
     /**
