@@ -7,6 +7,7 @@ import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
@@ -45,6 +46,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * @see BooleanSupplier
  * @see Consumer
  * @see DoubleBinaryOperator
+ * @see DoubleConsumer
  * @see DoublePredicate
  * @see DoubleSupplier
  * @see DoubleToIntFunction
@@ -142,27 +144,53 @@ public final class CaffeineMemoization {
     /**
      * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
      *
-     * @param predicate
+     * @param consumer
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
      */
-    public static <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+    public static <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> consumer) {
+        return memoize(consumer, Caffeine.newBuilder().build());
     }
 
     /**
      * Memoizes a {@link Consumer} in a pre-configured Caffeine {@link Cache}.
      *
-     * @param predicate
+     * @param consumer
      *            The {@link Consumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link Consumer}.
      */
     public static <VALUE> Consumer<VALUE> memoize(
-            final Consumer<VALUE> predicate,
+            final Consumer<VALUE> consumer,
             final Cache<VALUE, VALUE> cache) {
-        return MapMemoization.memoize(predicate, cache.asMap());
+        return MapMemoization.memoize(consumer, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static DoubleConsumer memoize(final DoubleConsumer consumer) {
+        return memoize(consumer, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link DoubleConsumer} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static DoubleConsumer memoize(
+            final DoubleConsumer consumer,
+            final Cache<Double, Double> cache) {
+        return MapMemoization.memoize(consumer, cache.asMap());
     }
 
     /**

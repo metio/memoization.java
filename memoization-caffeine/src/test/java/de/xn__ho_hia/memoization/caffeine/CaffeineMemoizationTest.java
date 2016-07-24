@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleConsumer;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
@@ -615,6 +616,21 @@ public class CaffeineMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleConsumer() {
+        // given
+        final DoubleConsumer consumer = System.out::println;
+
+        // when
+        final DoubleConsumer memoize = CaffeineMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleConsumer is NULL", memoize);
     }
 
     /**
