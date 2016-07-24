@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
@@ -547,10 +548,10 @@ public class CaffeineMemoizationTest {
     @Test
     public void shouldMemoizePredicate() {
         // given
-        final Predicate<String> function = a -> true;
+        final Predicate<String> predicate = a -> true;
 
         // when
-        final Predicate<String> memoize = CaffeineMemoization.memoize(function);
+        final Predicate<String> memoize = CaffeineMemoization.memoize(predicate);
 
         // then
         Assert.assertNotNull("Memoized Predicate is NULL", memoize);
@@ -562,10 +563,10 @@ public class CaffeineMemoizationTest {
     @Test
     public void shouldMemoizeLongPredicate() {
         // given
-        final LongPredicate function = a -> true;
+        final LongPredicate predicate = a -> true;
 
         // when
-        final LongPredicate memoize = CaffeineMemoization.memoize(function);
+        final LongPredicate memoize = CaffeineMemoization.memoize(predicate);
 
         // then
         Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
@@ -577,10 +578,10 @@ public class CaffeineMemoizationTest {
     @Test
     public void shouldMemoizeIntPredicate() {
         // given
-        final IntPredicate function = a -> true;
+        final IntPredicate predicate = a -> true;
 
         // when
-        final IntPredicate memoize = CaffeineMemoization.memoize(function);
+        final IntPredicate memoize = CaffeineMemoization.memoize(predicate);
 
         // then
         Assert.assertNotNull("Memoized IntPredicate is NULL", memoize);
@@ -592,13 +593,28 @@ public class CaffeineMemoizationTest {
     @Test
     public void shouldMemoizeDoublePredicate() {
         // given
-        final DoublePredicate function = a -> true;
+        final DoublePredicate predicate = a -> true;
 
         // when
-        final DoublePredicate memoize = CaffeineMemoization.memoize(function);
+        final DoublePredicate memoize = CaffeineMemoization.memoize(predicate);
 
         // then
         Assert.assertNotNull("Memoized DoublePredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeConsumer() {
+        // given
+        final Consumer<String> consumer = System.out::println;
+
+        // when
+        final Consumer<String> memoize = CaffeineMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized Consumer is NULL", memoize);
     }
 
     /**

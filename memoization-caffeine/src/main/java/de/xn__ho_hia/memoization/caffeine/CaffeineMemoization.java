@@ -5,6 +5,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFu
 
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
@@ -42,6 +43,7 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
  *
  * @see BooleanSupplier
+ * @see Consumer
  * @see DoubleBinaryOperator
  * @see DoublePredicate
  * @see DoubleSupplier
@@ -135,6 +137,32 @@ public final class CaffeineMemoization {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Boolean> cache) {
         return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link Consumer} to memoize.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> predicate) {
+        return memoize(predicate, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link Consumer} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param predicate
+     *            The {@link Consumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static <VALUE> Consumer<VALUE> memoize(
+            final Consumer<VALUE> predicate,
+            final Cache<VALUE, VALUE> cache) {
+        return MapMemoization.memoize(predicate, cache.asMap());
     }
 
     /**
