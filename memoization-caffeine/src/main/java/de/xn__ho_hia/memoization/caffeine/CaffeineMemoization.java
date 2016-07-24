@@ -8,6 +8,7 @@ import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
@@ -23,15 +24,17 @@ import de.xn__ho_hia.memoization.map.MapMemoization;
 /**
  * Factory for lightweight wrappers that store the result of a potentially expensive function call.
  *
+ * @see DoubleBinaryOperator
  * @see DoubleToIntFunction
  * @see DoubleToLongFunction
  * @see DoubleUnaryOperator
- * @see DoubleBinaryOperator
  * @see Function
+ * @see IntBinaryOperator
  * @see ToDoubleBiFunction
- * @see ToIntBiFunction
  * @see ToDoubleFunction
+ * @see ToIntBiFunction
  * @see ToIntFunction
+ * @see ToLongBiFunction
  * @see ToLongFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
@@ -168,6 +171,32 @@ public final class CaffeineMemoization {
     public static DoubleBinaryOperator memoize(
             final DoubleBinaryOperator operator,
             final Cache<String, Double> cache) {
+        return MapMemoization.memoize(operator, cache.asMap());
+    }
+
+    /**
+     * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     *
+     * @param operator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @return The wrapped {@link Function}.
+     */
+    public static IntBinaryOperator memoize(final IntBinaryOperator operator) {
+        return memoize(operator, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * Memoizes a {@link IntBinaryOperator} in a pre-configured Caffeine {@link Cache}.
+     *
+     * @param operator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static IntBinaryOperator memoize(
+            final IntBinaryOperator operator,
+            final Cache<String, Integer> cache) {
         return MapMemoization.memoize(operator, cache.asMap());
     }
 
