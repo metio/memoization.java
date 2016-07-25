@@ -4,4 +4,9 @@
  * including this file, may be copied, modified, propagated, or distributed except according to the terms contained
  * in the LICENSE file.
  */
+/**
+ * Shared interfaces & utilities.
+ *
+ * @see de.xn__ho_hia.memoization.shared.MemoizationDefaults
+ */
 package de.xn__ho_hia.memoization.shared;
