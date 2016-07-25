@@ -19,7 +19,6 @@ import java.util.function.Supplier;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
@@ -100,9 +99,7 @@ public final class GuavaMemoization {
     public static final <KEY, VALUE> Supplier<VALUE> memoize(
             final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(keySupplier, CacheBuilder.newBuilder()
-                .maximumSize(1)
-                .build(new SupplierBasedCacheLoader<>(supplier)));
+        return memoize(supplier, keySupplier, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -115,16 +112,19 @@ public final class GuavaMemoization {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
      * @param keySupplier
      *            The {@link Supplier} for the cache key.
      * @param cache
-     *            The {@link LoadingCache} to use.
+     *            The {@link Cache} to use.
      * @return The wrapped {@link Supplier}.
      */
     public static final <KEY, VALUE> Supplier<VALUE> memoize(
+            final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier,
-            final LoadingCache<KEY, VALUE> cache) {
-        return new GuavaCacheBasedSupplierMemoizer<>(cache, keySupplier);
+            final Cache<KEY, VALUE> cache) {
+        return new GuavaCacheBasedSupplierMemoizer<>(cache, keySupplier, supplier);
     }
 
     /**
@@ -143,26 +143,7 @@ public final class GuavaMemoization {
      */
     public static final <KEY, VALUE> Function<KEY, VALUE> memoize(
             final Function<KEY, VALUE> function) {
-        return memoize(new FunctionBasedCacheLoader<>(function));
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Function} in a previously constructed Guava {@link CacheLoader}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param loader
-     *            The {@link CacheLoader} to use.
-     * @return The wrapped {@link Function}.
-     */
-    public static final <KEY, VALUE> Function<KEY, VALUE> memoize(
-            final CacheLoader<KEY, VALUE> loader) {
-        return memoize(CacheBuilder.newBuilder().build(loader));
+        return memoize(function, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -172,16 +153,19 @@ public final class GuavaMemoization {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
-     * <li>Custom cache key</li>
+     * <li>Default cache key</li>
      * </ul>
      *
+     * @param function
+     *            The {@link Function} to memoize.
      * @param cache
-     *            The {@link LoadingCache} to use.
+     *            The {@link Cache} to use.
      * @return The wrapped {@link Function}.
      */
     public static final <KEY, VALUE> Function<KEY, VALUE> memoize(
-            final LoadingCache<KEY, VALUE> cache) {
-        return new GuavaCacheBasedFunctionMemoizer<>(cache);
+            final Function<KEY, VALUE> function,
+            final Cache<KEY, VALUE> cache) {
+        return new GuavaCacheBasedFunctionMemoizer<>(cache, function);
     }
 
     /**

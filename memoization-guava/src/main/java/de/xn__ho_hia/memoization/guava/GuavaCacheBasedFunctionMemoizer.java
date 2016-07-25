@@ -8,19 +8,24 @@ package de.xn__ho_hia.memoization.guava;
 
 import java.util.function.Function;
 
-import com.google.common.cache.LoadingCache;
+import com.google.common.cache.Cache;
 
 final class GuavaCacheBasedFunctionMemoizer<KEY, VALUE>
-        extends AbstractGuavaLoadingCacheBasedMemoizer<KEY, VALUE>
+        extends AbstractGuavaCacheBasedMemoizer<KEY, VALUE>
         implements Function<KEY, VALUE> {
 
-    GuavaCacheBasedFunctionMemoizer(final LoadingCache<KEY, VALUE> cache) {
+    private final Function<KEY, VALUE> function;
+
+    GuavaCacheBasedFunctionMemoizer(
+            final Cache<KEY, VALUE> cache,
+            final Function<KEY, VALUE> function) {
         super(cache);
+        this.function = function;
     }
 
     @Override
     public VALUE apply(final KEY key) {
-        return get(key);
+        return get(key, function);
     }
 
 }

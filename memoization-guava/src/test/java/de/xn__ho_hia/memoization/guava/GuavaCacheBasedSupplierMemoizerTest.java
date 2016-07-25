@@ -8,18 +8,21 @@ package de.xn__ho_hia.memoization.guava;
 
 import java.util.function.Supplier;
 
+import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.LoadingCache;
 
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
 /**
  *
  *
  */
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class GuavaCacheBasedSupplierMemoizerTest {
 
     /** Captures expected exceptions. */
@@ -30,17 +33,15 @@ public class GuavaCacheBasedSupplierMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings("static-method")
     public void shouldAcceptLoadingCacheAndKeySupplier() {
         // given
-        final Supplier<String> keySupplier = () -> "key"; //$NON-NLS-1$
-        final Supplier<String> supplier = () -> "value"; //$NON-NLS-1$
-        final LoadingCache<String, String> cache = CacheBuilder.newBuilder()
-                .build(new SupplierBasedCacheLoader<>(supplier));
+        final Supplier<String> supplier = () -> "value";
+        final Supplier<String> keySupplier = () -> "key";
+        final Cache<String, String> cache = CacheBuilder.newBuilder().build();
 
         // when
         final GuavaCacheBasedSupplierMemoizer<String, String> memoizer = new GuavaCacheBasedSupplierMemoizer<>(cache,
-                keySupplier);
+                keySupplier, supplier);
 
         // then
         Assert.assertNotNull(memoizer);
@@ -50,17 +51,15 @@ public class GuavaCacheBasedSupplierMemoizerTest {
     *
     */
     @Test
-    @SuppressWarnings({ "static-method", "nls" })
     public void shouldReturnSuppliedValue() {
         // given
-        final Supplier<String> keySupplier = () -> "key"; //$NON-NLS-1$
-        final Supplier<String> supplier = () -> "value"; //$NON-NLS-1$
-        final LoadingCache<String, String> cache = CacheBuilder.newBuilder()
-                .build(new SupplierBasedCacheLoader<>(supplier));
+        final Supplier<String> supplier = () -> "value";
+        final Supplier<String> keySupplier = () -> "key";
+        final Cache<String, String> cache = CacheBuilder.newBuilder().build();
 
         // when
         final GuavaCacheBasedSupplierMemoizer<String, String> memoizer = new GuavaCacheBasedSupplierMemoizer<>(cache,
-                keySupplier);
+                keySupplier, supplier);
 
         // then
         Assert.assertEquals("value", memoizer.get());

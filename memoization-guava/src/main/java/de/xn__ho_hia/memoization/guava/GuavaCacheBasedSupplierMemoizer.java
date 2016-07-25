@@ -8,24 +8,27 @@ package de.xn__ho_hia.memoization.guava;
 
 import java.util.function.Supplier;
 
-import com.google.common.cache.LoadingCache;
+import com.google.common.cache.Cache;
 
 final class GuavaCacheBasedSupplierMemoizer<KEY, VALUE>
-        extends AbstractGuavaLoadingCacheBasedMemoizer<KEY, VALUE>
+        extends AbstractGuavaCacheBasedMemoizer<KEY, VALUE>
         implements Supplier<VALUE> {
 
-    private final Supplier<KEY> keySupplier;
+    private final Supplier<KEY>   keySupplier;
+    private final Supplier<VALUE> supplier;
 
     GuavaCacheBasedSupplierMemoizer(
-            final LoadingCache<KEY, VALUE> cache,
-            final Supplier<KEY> keySupplier) {
+            final Cache<KEY, VALUE> cache,
+            final Supplier<KEY> keySupplier,
+            final Supplier<VALUE> supplier) {
         super(cache);
         this.keySupplier = keySupplier;
+        this.supplier = supplier;
     }
 
     @Override
     public VALUE get() {
-        return get(keySupplier.get());
+        return get(keySupplier.get(), givenKey -> supplier.get());
     }
 
 }

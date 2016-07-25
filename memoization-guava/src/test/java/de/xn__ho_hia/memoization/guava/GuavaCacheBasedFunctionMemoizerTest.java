@@ -12,8 +12,8 @@ import static org.mockito.Matchers.any;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 
+import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.LoadingCache;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -42,11 +42,11 @@ public class GuavaCacheBasedFunctionMemoizerTest {
     public void shouldAcceptLoadingCache() {
         // given
         final Function<String, String> function = Function.identity();
-        final LoadingCache<String, String> cache = CacheBuilder.newBuilder()
-                .build(new FunctionBasedCacheLoader<>(function));
+        final Cache<String, String> cache = CacheBuilder.newBuilder().build();
 
         // when
-        final GuavaCacheBasedFunctionMemoizer<String, String> memoizer = new GuavaCacheBasedFunctionMemoizer<>(cache);
+        final GuavaCacheBasedFunctionMemoizer<String, String> memoizer = new GuavaCacheBasedFunctionMemoizer<>(cache,
+                function);
 
         // then
         Assert.assertNotNull(memoizer);
@@ -59,11 +59,11 @@ public class GuavaCacheBasedFunctionMemoizerTest {
     public void shouldTransformInput() {
         // given
         final Function<String, String> function = Function.identity();
-        final LoadingCache<String, String> cache = CacheBuilder.newBuilder()
-                .build(new FunctionBasedCacheLoader<>(function));
+        final Cache<String, String> cache = CacheBuilder.newBuilder().build();
 
         // when
-        final GuavaCacheBasedFunctionMemoizer<String, String> memoizer = new GuavaCacheBasedFunctionMemoizer<>(cache);
+        final GuavaCacheBasedFunctionMemoizer<String, String> memoizer = new GuavaCacheBasedFunctionMemoizer<>(cache,
+                function);
 
         // then
         Assert.assertEquals("value", memoizer.apply("value"));
@@ -77,9 +77,10 @@ public class GuavaCacheBasedFunctionMemoizerTest {
     @SuppressWarnings(CompilerWarnings.UNCHECKED)
     public void shouldWrapExecutionExceptionInMemoizationException() throws ExecutionException {
         // given
-        final LoadingCache<String, String> cache = Mockito.mock(LoadingCache.class);
-        given(cache.get(any())).willThrow(ExecutionException.class);
-        final GuavaCacheBasedFunctionMemoizer<String, String> memoizer = new GuavaCacheBasedFunctionMemoizer<>(cache);
+        final Cache<String, String> cache = Mockito.mock(Cache.class);
+        given(cache.get(any(), any())).willThrow(ExecutionException.class);
+        final GuavaCacheBasedFunctionMemoizer<String, String> memoizer = new GuavaCacheBasedFunctionMemoizer<>(cache,
+                null);
 
         // when
         thrown.expect(MemoizationException.class);
