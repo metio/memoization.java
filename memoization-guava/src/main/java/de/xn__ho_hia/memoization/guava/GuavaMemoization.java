@@ -25,7 +25,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 /**
  * <p>
  * Factory for lightweight wrappers that store the result of a potentially expensive function call. Each method of this
- * class exposes zero or more of the following features:
+ * class exposes two of the following features:
  * </p>
  * <strong>Default cache</strong>
  * <p>
