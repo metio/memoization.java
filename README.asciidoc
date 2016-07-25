@@ -277,6 +277,7 @@ Memoize any of the supported types by using the static factory methods supplied 
 
 [source, java]
 ----
+// using default caches
 Consumer<T> consumer = ...;
 Consumer<T> memoizedConsumer = CaffeineMemoization.memoize(consumer);
 
@@ -288,6 +289,23 @@ Predicate<T> memoizedPredicate = JCacheMemoization.memoize(predicate);
 
 Supplier<T> supplier = ...;
 Supplier<T> memoizedSupplier = MapMemoization.memoize(supplier);
+
+// using custom caches
+Consumer<T> consumer = ...;
+Cache<T, T> cache = ...;
+Consumer<T> memoizedConsumer = CaffeineMemoization.memoize(consumer, cache);
+
+Function<T, U> function = ...;
+Cache<T, U> cache = ...;
+Function<T, U> memoizedFunction = GuavaMemoization.memoize(function, cache);
+
+Predicate<T> predicate = ...;
+Cache<T, Boolean> cache = ...;
+Predicate<T> memoizedPredicate = JCacheMemoization.memoize(predicate, cache);
+
+Supplier<T> supplier = ...;
+Map<String, T> cache = ...;
+Supplier<T> memoizedSupplier = MapMemoization.memoize(supplier, cache);
 ----
 
 === Integration
