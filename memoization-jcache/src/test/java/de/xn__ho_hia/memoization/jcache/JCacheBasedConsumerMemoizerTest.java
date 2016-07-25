@@ -54,6 +54,25 @@ public class JCacheBasedConsumerMemoizerTest {
     *
     */
     @Test
+    public void shouldMemoizeConsumerOnce() {
+        // given
+        final Consumer<String> consumer = Mockito.mock(Consumer.class);
+        try (final Cache<String, String> cache = JCacheMemoization.createCache(Predicate.class.getSimpleName())) {
+            // when
+            final JCacheBasedConsumerMemoizer<String> loader = new JCacheBasedConsumerMemoizer<>(cache,
+                    consumer);
+
+            // then
+            loader.accept("test");
+            loader.accept("test");
+            Mockito.verify(consumer).accept("test");
+        }
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldWrapRuntimeExceptionInMemoizationException() {
         // given
         try (final Cache<String, String> cache = Mockito.mock(Cache.class)) {
