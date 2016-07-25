@@ -64,7 +64,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 | link:{jdk-api}/java/util/function/Consumer.html[Consumer]
 | ✓
 | ✓
-| link:{issue}/161[#161]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleBinaryOperator.html[DoubleBinaryOperator]

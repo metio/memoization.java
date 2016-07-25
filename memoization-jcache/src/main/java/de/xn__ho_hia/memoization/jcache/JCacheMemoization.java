@@ -210,6 +210,46 @@ public final class JCacheMemoization {
         return new JCacheBasedPredicateMemoizer<>(cache, predicate);
     }
 
+    /**
+     * <p>
+     * Memoizes a {@link Consumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static final <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> consumer) {
+        return memoize(consumer, createCache(Consumer.class.getSimpleName()));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Consumer} in a previously constructed JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static final <VALUE> Consumer<VALUE> memoize(
+            final Consumer<VALUE> consumer,
+            final Cache<VALUE, VALUE> cache) {
+        return new JCacheBasedConsumerMemoizer<>(cache, consumer);
+    }
+
     static <KEY, VALUE> Cache<KEY, VALUE> createCache(final String typeName) {
         final MutableConfiguration<KEY, VALUE> configuration = new MutableConfiguration<>();
         return CACHE_MANAGER.createCache(generateCacheName(typeName), configuration);

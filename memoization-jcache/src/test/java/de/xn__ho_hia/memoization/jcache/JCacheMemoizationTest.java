@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.jcache;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -67,6 +68,21 @@ public class JCacheMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeConsumer() {
+        // given
+        final Consumer<String> function = System.out::println;
+
+        // when
+        final Consumer<String> memoize = JCacheMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized Consumer is NULL", memoize);
     }
 
     /**
