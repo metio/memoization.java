@@ -284,10 +284,10 @@ Function<I, O> function = ...;
 Function<I, O> memoizedFunction = GuavaMemoization.memoize(function);
 
 Predicate<T> predicate = ...;
-Predicate<T> memoizedPredicate = MapMemoization.memoize(biFunction);
+Predicate<T> memoizedPredicate = JCacheMemoization.memoize(biFunction);
 
 Supplier<T> supplier = ...;
-Supplier<T> memoizedSupplier = JCacheMemoization.memoize(supplier);
+Supplier<T> memoizedSupplier = MapMemoization.memoize(supplier);
 ----
 
 === Integration
