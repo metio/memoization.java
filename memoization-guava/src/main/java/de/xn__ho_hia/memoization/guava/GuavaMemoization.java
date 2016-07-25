@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import com.google.common.cache.Cache;
@@ -58,11 +59,10 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see Consumer
  * @see Function
  * @see Supplier
+ * @see Predicate
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class GuavaMemoization {
-
-    private static final long DEFAULT_MAXIMUM_CACHE_SIZE = 1000L;
 
     private GuavaMemoization() {
         // factory class
@@ -146,31 +146,9 @@ public final class GuavaMemoization {
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static final <KEY, VALUE> Function<KEY, VALUE> memoize(final Function<KEY, VALUE> function) {
-        return memoize(function, DEFAULT_MAXIMUM_CACHE_SIZE);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Function} in a Guava {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * <li>Limits entries</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link Function} to memoize.
-     * @param maximumCacheSize
-     *            The maximum number of computed values to cache.
-     * @return The wrapped {@link Function}.
-     */
     public static final <KEY, VALUE> Function<KEY, VALUE> memoize(
-            final Function<KEY, VALUE> function,
-            final long maximumCacheSize) {
-        return memoize(new FunctionBasedCacheLoader<>(function), maximumCacheSize);
+            final Function<KEY, VALUE> function) {
+        return memoize(new FunctionBasedCacheLoader<>(function));
     }
 
     /**
@@ -181,21 +159,15 @@ public final class GuavaMemoization {
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
-     * <li>Limits entries</li>
      * </ul>
      *
      * @param loader
      *            The {@link CacheLoader} to use.
-     * @param maximumCacheSize
-     *            The maximum number of computed values to cache.
      * @return The wrapped {@link Function}.
      */
     public static final <KEY, VALUE> Function<KEY, VALUE> memoize(
-            final CacheLoader<KEY, VALUE> loader,
-            final long maximumCacheSize) {
-        return memoize(CacheBuilder.newBuilder()
-                .maximumSize(maximumCacheSize)
-                .build(loader));
+            final CacheLoader<KEY, VALUE> loader) {
+        return memoize(CacheBuilder.newBuilder().build(loader));
     }
 
     /**
@@ -233,32 +205,7 @@ public final class GuavaMemoization {
      */
     public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
             final BiFunction<FIRST, SECOND, VALUE> biFunction) {
-        return memoize(biFunction, DEFAULT_MAXIMUM_CACHE_SIZE);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * <li>Limits entries</li>
-     * </ul>
-     *
-     * @param biFunction
-     *            The {@link BiFunction} to memoize.
-     * @param maximumCacheSize
-     *            The maximum number of computed values to cache.
-     * @return The wrapped {@link BiFunction}.
-     */
-    public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
-            final long maximumCacheSize) {
-        return memoize(biFunction, CacheBuilder.newBuilder()
-                .maximumSize(maximumCacheSize)
-                .build());
+        return memoize(biFunction, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -322,33 +269,9 @@ public final class GuavaMemoization {
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
      */
-    public static final <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> consumer) {
-        return memoize(consumer, DEFAULT_MAXIMUM_CACHE_SIZE);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Consumer} in a Guava {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * <li>Limits entries</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link Consumer} to memoize.
-     * @param maximumCacheSize
-     *            The maximum number of computed values to cache.
-     * @return The wrapped {@link Consumer}.
-     */
     public static final <VALUE> Consumer<VALUE> memoize(
-            final Consumer<VALUE> consumer,
-            final long maximumCacheSize) {
-        return memoize(consumer, CacheBuilder.newBuilder()
-                .maximumSize(maximumCacheSize)
-                .build());
+            final Consumer<VALUE> consumer) {
+        return memoize(consumer, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -371,6 +294,47 @@ public final class GuavaMemoization {
             final Consumer<VALUE> consumer,
             final Cache<VALUE, VALUE> cache) {
         return new GuavaCacheBasedConsumerMemoizer<>(cache, identity(), consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static final <VALUE> Predicate<VALUE> memoize(
+            final Predicate<VALUE> predicate) {
+        return memoize(predicate, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a previously constructed {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static final <VALUE> Predicate<VALUE> memoize(
+            final Predicate<VALUE> predicate,
+            final Cache<VALUE, Boolean> cache) {
+        return new GuavaCacheBasedPredicateMemoizer<>(cache, predicate);
     }
 
 }

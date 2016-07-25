@@ -12,6 +12,7 @@ import java.lang.reflect.Modifier;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import org.junit.Assert;
@@ -144,6 +145,21 @@ public class GuavaMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizePredicate() {
+        // given
+        final Predicate<String> consumer = a -> true;
+
+        // when
+        final Predicate<String> memoize = GuavaMemoization.memoize(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
     }
 
     // /**

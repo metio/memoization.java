@@ -17,7 +17,7 @@ abstract class AbstractGuavaCacheBasedMemoizer<KEY, VALUE> {
 
     private final Cache<KEY, VALUE> cache;
 
-    AbstractGuavaCacheBasedMemoizer(final Cache<KEY, VALUE> cache) {
+    protected AbstractGuavaCacheBasedMemoizer(final Cache<KEY, VALUE> cache) {
         this.cache = cache;
     }
 

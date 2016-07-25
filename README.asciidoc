@@ -219,7 +219,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 
 | link:{jdk-api}/java/util/function/Predicate.html[Predicate]
 | ✓
-| link:{issue}/81[#81]
+| ✓
 | link:{issue}/153[#153]
 | ✓
 
