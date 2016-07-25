@@ -284,7 +284,7 @@ Function<I, O> function = ...;
 Function<I, O> memoizedFunction = GuavaMemoization.memoize(function);
 
 Predicate<T> predicate = ...;
-Predicate<T> memoizedPredicate = JCacheMemoization.memoize(biFunction);
+Predicate<T> memoizedPredicate = JCacheMemoization.memoize(predicate);
 
 Supplier<T> supplier = ...;
 Supplier<T> memoizedSupplier = MapMemoization.memoize(supplier);
