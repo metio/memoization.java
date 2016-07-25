@@ -9,7 +9,6 @@ package de.xn__ho_hia.memoization.jcache;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -31,8 +30,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * </p>
  * <strong>Default cache</strong>
  * <p>
- * The memoizer uses the default cache of this factory. Current implementation creates a new {@link ConcurrentMap} per
- * memoizer.
+ * The memoizer uses the default cache of this factory. Current implementation creates a new {@link Cache} per memoizer.
  * </p>
  * <strong>Default cache key</strong>
  * <p>
@@ -41,8 +39,8 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * </p>
  * <strong>Custom cache</strong>
  * <p>
- * The memoizer uses a user-provided {@link ConcurrentMap} as its cache. It is possible to add values to the cache both
- * before and after the memoizer was created.
+ * The memoizer uses a user-provided {@link Cache} as its cache. It is possible to add values to the cache both before
+ * and after the memoizer was created.
  * </p>
  * <strong>Custom cache key</strong>
  * <p>
@@ -53,8 +51,8 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see BiFunction
  * @see Consumer
  * @see Function
- * @see Supplier
  * @see Predicate
+ * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class JCacheMemoization {
