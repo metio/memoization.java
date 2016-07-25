@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.jcache;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -83,6 +84,21 @@ public class JCacheMemoizationTest {
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiFunction() {
+        // given
+        final BiFunction<String, String, String> function = (first, second) -> "test";
+
+        // when
+        final BiFunction<String, String, String> memoize = JCacheMemoization.memoize(function);
+
+        // then
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
     }
 
     /**

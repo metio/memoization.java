@@ -7,6 +7,7 @@
 package de.xn__ho_hia.memoization.jcache;
 
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -248,6 +249,72 @@ public final class JCacheMemoization {
             final Consumer<VALUE> consumer,
             final Cache<VALUE, VALUE> cache) {
         return new JCacheBasedConsumerMemoizer<>(cache, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
+     * @return The wrapped {@link BiFunction}.
+     */
+    public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+            final BiFunction<FIRST, SECOND, VALUE> biFunction) {
+        return memoize(biFunction, hashCodeKeyFunction());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link BiFunction}.
+     */
+    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return memoize(biFunction, keyFunction, createCache(BiFunction.class.getSimpleName()));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiFunction} in a previously constructed JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BiFunction}.
+     */
+    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Cache<KEY, VALUE> cache) {
+        return new JCacheBasedBiFunctionMemoizer<>(cache, keyFunction, biFunction);
     }
 
     static <KEY, VALUE> Cache<KEY, VALUE> createCache(final String typeName) {
