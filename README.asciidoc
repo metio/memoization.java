@@ -290,19 +290,19 @@ Supplier<INPUT> memoizedSupplier = MapMemoization.memoize(supplier);
 
 // using custom caches
 Consumer<INPUT> consumer = ...;
-Cache<INPUT, INPUT> cache = ...;
+Cache<INPUT, INPUT> cache = ...; // com.github.benmanes.caffeine.cache.Cache
 Consumer<INPUT> memoizedConsumer = CaffeineMemoization.memoize(consumer, cache);
 
 Function<INPUT, OUTPUT> function = ...;
-Cache<INPUT, OUTPUT> cache = ...;
+Cache<INPUT, OUTPUT> cache = ...; // com.google.common.cache.Cache
 Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoization.memoize(function, cache);
 
 Predicate<INPUT> predicate = ...;
-Cache<INPUT, Boolean> cache = ...;
+Cache<INPUT, Boolean> cache = ...; // javax.cache.Cache
 Predicate<INPUT> memoizedPredicate = JCacheMemoization.memoize(predicate, cache);
 
 Supplier<INPUT> supplier = ...;
-Map<String, INPUT> cache = ...;
+Map<String, INPUT> cache = ...; // e.g. java.util.concurrent.ConcurrentHashMap
 Supplier<INPUT> memoizedSupplier = MapMemoization.memoize(supplier, cache);
 ----
 
