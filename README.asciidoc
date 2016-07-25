@@ -23,7 +23,7 @@ image:https://img.shields.io/badge/forkable-yes-brightgreen.svg?style=flat-squar
 image:https://img.shields.io/maintenance/yes/2016.svg?style=flat-square["Is this thing still maintained?"]
 image:https://img.shields.io/bountysource/team/metio/activity.svg?style=flat-square["Bounties on open tickets", link="https://www.bountysource.com/teams/metio"]
 
-Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library.
+_Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 
 == Features
 
