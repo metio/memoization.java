@@ -19,7 +19,7 @@ The *Bug* category is used for anything that breaks something for a user.
 The *Cache* category is used to classify which cache implementation is used.
 
 * Cache: Caffeine - used for tickets that are related to the Caffeine implementation
-* Cache: ConcurrentHashMap - used for tickets that are related to the ConcurrentHashMap implementation
+* Cache: ConcurrentMap - used for tickets that are related to the ConcurrentMap implementation
 * Cache: Guava - used for tickets that are related to the Guava implementation
 * Cache: JCache - used for tickets that are related to the JCache implementation
 
