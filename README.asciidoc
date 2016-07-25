@@ -278,34 +278,34 @@ Memoize any of the supported types by using the static factory methods supplied 
 [source, java]
 ----
 // using default caches
-Consumer<T> consumer = ...;
-Consumer<T> memoizedConsumer = CaffeineMemoization.memoize(consumer);
+Consumer<INPUT> consumer = ...;
+Consumer<INPUT> memoizedConsumer = CaffeineMemoization.memoize(consumer);
 
-Function<I, O> function = ...;
-Function<I, O> memoizedFunction = GuavaMemoization.memoize(function);
+Function<INPUT, OUTPUT> function = ...;
+Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoization.memoize(function);
 
-Predicate<T> predicate = ...;
-Predicate<T> memoizedPredicate = JCacheMemoization.memoize(predicate);
+Predicate<INPUT> predicate = ...;
+Predicate<INPUT> memoizedPredicate = JCacheMemoization.memoize(predicate);
 
-Supplier<T> supplier = ...;
-Supplier<T> memoizedSupplier = MapMemoization.memoize(supplier);
+Supplier<INPUT> supplier = ...;
+Supplier<INPUT> memoizedSupplier = MapMemoization.memoize(supplier);
 
 // using custom caches
-Consumer<T> consumer = ...;
-Cache<T, T> cache = ...;
-Consumer<T> memoizedConsumer = CaffeineMemoization.memoize(consumer, cache);
+Consumer<INPUT> consumer = ...;
+Cache<INPUT, INPUT> cache = ...;
+Consumer<INPUT> memoizedConsumer = CaffeineMemoization.memoize(consumer, cache);
 
-Function<T, U> function = ...;
-Cache<T, U> cache = ...;
-Function<T, U> memoizedFunction = GuavaMemoization.memoize(function, cache);
+Function<INPUT, OUTPUT> function = ...;
+Cache<INPUT, OUTPUT> cache = ...;
+Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoization.memoize(function, cache);
 
-Predicate<T> predicate = ...;
-Cache<T, Boolean> cache = ...;
-Predicate<T> memoizedPredicate = JCacheMemoization.memoize(predicate, cache);
+Predicate<INPUT> predicate = ...;
+Cache<INPUT, Boolean> cache = ...;
+Predicate<INPUT> memoizedPredicate = JCacheMemoization.memoize(predicate, cache);
 
-Supplier<T> supplier = ...;
-Map<String, T> cache = ...;
-Supplier<T> memoizedSupplier = MapMemoization.memoize(supplier, cache);
+Supplier<INPUT> supplier = ...;
+Map<String, INPUT> cache = ...;
+Supplier<INPUT> memoizedSupplier = MapMemoization.memoize(supplier, cache);
 ----
 
 === Integration
