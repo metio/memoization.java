@@ -27,11 +27,9 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 
 == Features
 
-* Memoize calls to `Supplier`, `Function`, `BiFunction`, `Consumer` and all other functional interfaces in `java.util.function`
-* link:{jdk-api}/java/util/concurrent/ConcurrentMap.html[`ConcurrentMap`] based implementation either using `ConcurrentHashMap` or your own `ConcurrentMap` implementation. pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-core"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-core.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
-* link:https://github.com/ben-manes/caffeine[Caffeine] based implementation pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-caffeine"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-caffeine.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
-* link:https://github.com/google/guava/wiki/CachesExplained[Guava] based implementation pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-guava"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-guava.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
-* link:https://jcp.org/en/jsr/detail?id=107[JCache] based implementation pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-jcache"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-jcache.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>]
+* Memoize calls to `Consumer`, `Function`, `Predicate`, `Supplier` and other functional interfaces in `java.util.function`
+* Cache values using link:https://github.com/ben-manes/caffeine[Caffeine], link:https://github.com/google/guava/wiki/CachesExplained[Guava], link:https://jcp.org/en/jsr/detail?id=107[JCache] or link:{jdk-api}/java/util/concurrent/ConcurrentMap.html[`ConcurrentMap`]
+* Customize cache key calculation
 
 .Coverage of `java.util.function`
 |===
@@ -273,7 +271,7 @@ The `ConcurrentMap` and Caffeine based implementations cover all functional inte
 
 == Usage
 
-Memoize any of the supported types by using the static factory methods supplied by either using `CaffeineMemoization`, `GuavaMemoization`, `JCacheMemoization` or `MapMemoization` like this:
+Memoize any of the supported types by using the static factory methods supplied by either using `CaffeineMemoization` pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-caffeine"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-caffeine.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>], `GuavaMemoization` pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-guava"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-guava.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>], `JCacheMemoization` pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-jcache"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-jcache.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>] or `MapMemoization` pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-core"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-core.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>] like this:
 
 [source, java]
 ----
