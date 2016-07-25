@@ -308,7 +308,7 @@ Supplier<INPUT> memoizedSupplier = MapMemoization.memoize(supplier, cache);
 
 === Integration
 
-This project is split into multiple modules in order to offer the least amount of dependencies to import for any given consumer project. In order to use this project, declare the following inside your POM:
+In order to use this project, declare the following inside your POM:
 
 [source, xml, subs="attributes,verbatim"]
 ----
