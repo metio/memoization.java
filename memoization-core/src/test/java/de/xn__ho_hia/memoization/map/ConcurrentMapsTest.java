@@ -9,15 +9,54 @@ package de.xn__ho_hia.memoization.map;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**
  *
  *
  */
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
 public class ConcurrentMapsTest {
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMakeDefensiveCopyOfMap() {
+        // given
+        final Map<Object, Object> map = new HashMap<>();
+
+        // when
+        final ConcurrentMap<Object, Object> concurrentMap = ConcurrentMaps.asConcurrentMap(map);
+
+        // then
+        Assert.assertNotNull("Returned map is NULL", concurrentMap);
+        Assert.assertNotSame("Instsances are the same", map, concurrentMap);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldReturnConcurrentMap() {
+        // given
+        final Map<Object, Object> map = new ConcurrentHashMap<>();
+
+        // when
+        final ConcurrentMap<Object, Object> concurrentMap = ConcurrentMaps.asConcurrentMap(map);
+
+        // then
+        Assert.assertNotNull("Returned map is NULL", concurrentMap);
+        Assert.assertSame("Instances are not the same", map, concurrentMap);
+    }
 
     /**
      * @throws NoSuchMethodException
@@ -30,7 +69,6 @@ public class ConcurrentMapsTest {
      *             Reflection problemt
      */
     @Test
-    @SuppressWarnings({ "static-method", "nls" })
     public void shouldDeclarePrivateConstructor()
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         // given

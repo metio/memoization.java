@@ -21,6 +21,9 @@ final class ConcurrentMaps {
     }
 
     static final <KEY, VALUE> ConcurrentMap<KEY, VALUE> asConcurrentMap(final Map<KEY, VALUE> map) {
+        if (ConcurrentMap.class.isAssignableFrom(map.getClass())) {
+            return (ConcurrentMap<KEY, VALUE>) nullsafe(map);
+        }
         return new ConcurrentHashMap<>(nullsafe(map));
     }
 
