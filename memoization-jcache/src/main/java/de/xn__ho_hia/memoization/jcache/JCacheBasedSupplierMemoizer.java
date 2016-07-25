@@ -14,18 +14,21 @@ final class JCacheBasedSupplierMemoizer<KEY, VALUE>
         extends AbstractJCacheBasedMemoizer<KEY, VALUE>
         implements Supplier<VALUE> {
 
-    private final Supplier<KEY> keySupplier;
+    private final Supplier<KEY>   keySupplier;
+    private final Supplier<VALUE> supplier;
 
     JCacheBasedSupplierMemoizer(
             final Cache<KEY, VALUE> cache,
-            final Supplier<KEY> keySupplier) {
+            final Supplier<KEY> keySupplier,
+            final Supplier<VALUE> supplier) {
         super(cache);
         this.keySupplier = keySupplier;
+        this.supplier = supplier;
     }
 
     @Override
     public VALUE get() {
-        return get(keySupplier.get());
+        return invoke(keySupplier.get(), key -> supplier.get());
     }
 
 }

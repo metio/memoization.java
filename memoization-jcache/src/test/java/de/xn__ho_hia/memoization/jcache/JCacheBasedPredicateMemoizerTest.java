@@ -9,7 +9,7 @@ package de.xn__ho_hia.memoization.jcache;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 import javax.cache.Cache;
 
@@ -26,7 +26,7 @@ import de.xn__ho_hia.quality.suppression.CompilerWarnings;
  *
  */
 @SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
-public class JCacheBasedFunctionMemoizerTest {
+public class JCacheBasedPredicateMemoizerTest {
 
     /** Captures expected exceptions. */
     @Rule
@@ -38,14 +38,14 @@ public class JCacheBasedFunctionMemoizerTest {
     @Test
     public void shouldMemoizeFunction() {
         // given
-        final Function<String, String> function = Function.identity();
-        try (final Cache<String, String> cache = JCacheMemoization.createCache(Function.class.getSimpleName())) {
+        final Predicate<String> predicate = a -> true;
+        try (final Cache<String, Boolean> cache = JCacheMemoization.createCache(Predicate.class.getSimpleName())) {
             // when
-            final JCacheBasedFunctionMemoizer<String, String> loader = new JCacheBasedFunctionMemoizer<>(cache,
-                    function);
+            final JCacheBasedPredicateMemoizer<String> loader = new JCacheBasedPredicateMemoizer<>(cache,
+                    predicate);
 
             // then
-            Assert.assertEquals("Memoized value does not match expectation", "test", loader.apply("test"));
+            Assert.assertTrue("Memoized value does not match expectation", loader.test("test"));
         }
     }
 
@@ -56,15 +56,15 @@ public class JCacheBasedFunctionMemoizerTest {
     @SuppressWarnings(CompilerWarnings.UNCHECKED)
     public void shouldWrapRuntimeExceptionInMemoizationException() {
         // given
-        try (final Cache<String, String> cache = Mockito.mock(Cache.class)) {
-            final JCacheBasedFunctionMemoizer<String, String> loader = new JCacheBasedFunctionMemoizer<>(cache, null);
+        try (final Cache<String, Boolean> cache = Mockito.mock(Cache.class)) {
+            final JCacheBasedPredicateMemoizer<String> loader = new JCacheBasedPredicateMemoizer<>(cache, null);
             given(cache.invoke(any(), any())).willThrow(RuntimeException.class);
 
             // when
             thrown.expect(MemoizationException.class);
 
             // then
-            loader.apply("test");
+            loader.test("test");
         }
     }
 

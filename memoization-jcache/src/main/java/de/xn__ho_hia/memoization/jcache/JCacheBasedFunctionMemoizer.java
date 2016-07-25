@@ -14,13 +14,18 @@ final class JCacheBasedFunctionMemoizer<KEY, VALUE>
         extends AbstractJCacheBasedMemoizer<KEY, VALUE>
         implements Function<KEY, VALUE> {
 
-    JCacheBasedFunctionMemoizer(final Cache<KEY, VALUE> cache) {
+    private final Function<KEY, VALUE> function;
+
+    JCacheBasedFunctionMemoizer(
+            final Cache<KEY, VALUE> cache,
+            final Function<KEY, VALUE> function) {
         super(cache);
+        this.function = function;
     }
 
     @Override
     public VALUE apply(final KEY input) {
-        return get(input);
+        return invoke(input, function);
     }
 
 }

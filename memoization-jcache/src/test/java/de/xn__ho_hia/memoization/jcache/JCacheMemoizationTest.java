@@ -10,10 +10,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import javax.cache.configuration.Factory;
-import javax.cache.integration.CacheLoader;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -60,30 +58,15 @@ public class JCacheMemoizationTest {
     *
     */
     @Test
-    public void shouldReturnNonNullSupplierFactory() {
+    public void shouldMemoizePredicate() {
         // given
-        final Supplier<String> supplier = () -> "test";
+        final Predicate<String> function = a -> true;
 
         // when
-        final Factory<CacheLoader<Object, String>> factory = JCacheMemoization.supplierFactory(supplier);
+        final Predicate<String> memoize = JCacheMemoization.memoize(function);
 
         // then
-        Assert.assertNotNull("Cache loader factory for Supplier is NULL", factory);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldReturnNonNullFunctionFactory() {
-        // given
-        final Function<String, String> function = a -> "test";
-
-        // when
-        final Factory<CacheLoader<String, String>> factory = JCacheMemoization.functionFactory(function);
-
-        // then
-        Assert.assertNotNull("Cache loader factory for Function is NULL", factory);
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
     }
 
     /**

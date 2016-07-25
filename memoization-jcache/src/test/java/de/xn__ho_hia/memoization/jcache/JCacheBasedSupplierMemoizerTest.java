@@ -31,11 +31,10 @@ public class JCacheBasedSupplierMemoizerTest {
         // given
         final Supplier<String> supplier = () -> "test";
         final Supplier<String> keySupplier = () -> "key";
-        try (final Cache<String, String> cache = JCacheMemoization.createCache(Function.class.getSimpleName(),
-                JCacheMemoization.supplierFactory(supplier))) {
+        try (final Cache<String, String> cache = JCacheMemoization.createCache(Function.class.getSimpleName())) {
             // when
             final JCacheBasedSupplierMemoizer<String, String> loader = new JCacheBasedSupplierMemoizer<>(cache,
-                    keySupplier);
+                    keySupplier, supplier);
 
             // then
             Assert.assertEquals("Memoized value does not match expectation", "test", loader.get());
