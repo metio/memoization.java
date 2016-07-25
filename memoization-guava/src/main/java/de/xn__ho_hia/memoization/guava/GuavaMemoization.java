@@ -49,11 +49,6 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * The memoizer uses a user-defined {@link BiFunction} or {@link Supplier} to calculate the cache key for each call.
  * Take a look at {@link MemoizationDefaults} for a possible key functions and suppliers.
  * </p>
- * <strong>Limits entries</strong>
- * <p>
- * The memoizer limits the number of entries it will memoize. Adding more values, will lead to cache eviction of
- * previously calculated values.
- * </p>
  *
  * @see BiFunction
  * @see Consumer
