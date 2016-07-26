@@ -122,9 +122,9 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see ToLongFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
-public final class MapMemoization {
+public final class MapMemoize {
 
-    private MapMemoization() {
+    private MapMemoize() {
         // factory class
     }
 
@@ -142,8 +142,8 @@ public final class MapMemoization {
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
      */
-    public static <VALUE> Supplier<VALUE> memoize(final Supplier<VALUE> supplier) {
-        return memoize(supplier, emptyMap());
+    public static <VALUE> Supplier<VALUE> supplier(final Supplier<VALUE> supplier) {
+        return supplier(supplier, emptyMap());
     }
 
     /**
@@ -162,10 +162,10 @@ public final class MapMemoization {
      *            {@link Map} of already computed values.
      * @return The wrapped {@link Supplier}.
      */
-    public static <VALUE> Supplier<VALUE> memoize(
+    public static <VALUE> Supplier<VALUE> supplier(
             final Supplier<VALUE> supplier,
             final Map<String, VALUE> cache) {
-        return memoize(supplier, defaultKeySupplier(), asConcurrentMap(cache));
+        return supplier(supplier, defaultKeySupplier(), asConcurrentMap(cache));
     }
 
     /**
@@ -184,10 +184,10 @@ public final class MapMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link Supplier}.
      */
-    public static <KEY, VALUE> Supplier<VALUE> memoize(
+    public static <KEY, VALUE> Supplier<VALUE> supplier(
             final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, emptyMap());
+        return supplier(supplier, keySupplier, emptyMap());
     }
 
     /**
@@ -208,7 +208,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link Supplier}.
      */
-    public static <KEY, VALUE> Supplier<VALUE> memoize(
+    public static <KEY, VALUE> Supplier<VALUE> supplier(
             final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier,
             final Map<KEY, VALUE> cache) {
@@ -229,8 +229,8 @@ public final class MapMemoization {
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link BooleanSupplier}.
      */
-    public static BooleanSupplier memoize(final BooleanSupplier supplier) {
-        return memoize(supplier, defaultKeySupplier());
+    public static BooleanSupplier booleanSupplier(final BooleanSupplier supplier) {
+        return booleanSupplier(supplier, defaultKeySupplier());
     }
 
     /**
@@ -249,10 +249,10 @@ public final class MapMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link BooleanSupplier}.
      */
-    public static <KEY> BooleanSupplier memoize(
+    public static <KEY> BooleanSupplier booleanSupplier(
             final BooleanSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, emptyMap());
+        return booleanSupplier(supplier, keySupplier, emptyMap());
     }
 
     /**
@@ -273,7 +273,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link BooleanSupplier}.
      */
-    public static <KEY> BooleanSupplier memoize(
+    public static <KEY> BooleanSupplier booleanSupplier(
             final BooleanSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Map<KEY, Boolean> cache) {
@@ -294,8 +294,8 @@ public final class MapMemoization {
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static DoubleSupplier memoize(final DoubleSupplier supplier) {
-        return memoize(supplier, defaultKeySupplier());
+    public static DoubleSupplier doubleSupplier(final DoubleSupplier supplier) {
+        return doubleSupplier(supplier, defaultKeySupplier());
     }
 
     /**
@@ -314,10 +314,10 @@ public final class MapMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static <KEY> DoubleSupplier memoize(
+    public static <KEY> DoubleSupplier doubleSupplier(
             final DoubleSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, emptyMap());
+        return doubleSupplier(supplier, keySupplier, emptyMap());
     }
 
     /**
@@ -338,7 +338,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static <KEY> DoubleSupplier memoize(
+    public static <KEY> DoubleSupplier doubleSupplier(
             final DoubleSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Map<KEY, Double> cache) {
@@ -359,8 +359,8 @@ public final class MapMemoization {
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link IntSupplier}.
      */
-    public static IntSupplier memoize(final IntSupplier supplier) {
-        return memoize(supplier, defaultKeySupplier());
+    public static IntSupplier intSupplier(final IntSupplier supplier) {
+        return intSupplier(supplier, defaultKeySupplier());
     }
 
     /**
@@ -379,10 +379,10 @@ public final class MapMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link IntSupplier}.
      */
-    public static <KEY> IntSupplier memoize(
+    public static <KEY> IntSupplier intSupplier(
             final IntSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, emptyMap());
+        return intSupplier(supplier, keySupplier, emptyMap());
     }
 
     /**
@@ -403,7 +403,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link IntSupplier}.
      */
-    public static <KEY> IntSupplier memoize(
+    public static <KEY> IntSupplier intSupplier(
             final IntSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Map<KEY, Integer> cache) {
@@ -424,8 +424,8 @@ public final class MapMemoization {
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link LongSupplier}.
      */
-    public static LongSupplier memoize(final LongSupplier supplier) {
-        return memoize(supplier, defaultKeySupplier());
+    public static LongSupplier longSupplier(final LongSupplier supplier) {
+        return longSupplier(supplier, defaultKeySupplier());
     }
 
     /**
@@ -444,10 +444,10 @@ public final class MapMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link LongSupplier}.
      */
-    public static <KEY> LongSupplier memoize(
+    public static <KEY> LongSupplier longSupplier(
             final LongSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, emptyMap());
+        return longSupplier(supplier, keySupplier, emptyMap());
     }
 
     /**
@@ -468,7 +468,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link LongSupplier}.
      */
-    public static <KEY> LongSupplier memoize(
+    public static <KEY> LongSupplier longSupplier(
             final LongSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Map<KEY, Long> cache) {
@@ -489,8 +489,8 @@ public final class MapMemoization {
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static <KEY, VALUE> Function<KEY, VALUE> memoize(final Function<KEY, VALUE> function) {
-        return memoize(function, emptyMap());
+    public static <KEY, VALUE> Function<KEY, VALUE> function(final Function<KEY, VALUE> function) {
+        return function(function, emptyMap());
     }
 
     /**
@@ -509,7 +509,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link Function}.
      */
-    public static <KEY, VALUE> Function<KEY, VALUE> memoize(
+    public static <KEY, VALUE> Function<KEY, VALUE> function(
             final Function<KEY, VALUE> function,
             final Map<KEY, VALUE> cache) {
         return new ConcurrentMapBasedFunctionMemoizer<>(asConcurrentMap(cache), function);
@@ -529,9 +529,9 @@ public final class MapMemoization {
      *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
             final BiFunction<FIRST, SECOND, VALUE> biFunction) {
-        return memoize(biFunction, hashCodeKeyFunction());
+        return biFunction(biFunction, hashCodeKeyFunction());
     }
 
     /**
@@ -550,10 +550,10 @@ public final class MapMemoization {
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
             final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(biFunction, keyFunction, emptyMap());
+        return biFunction(biFunction, keyFunction, emptyMap());
     }
 
     /**
@@ -574,7 +574,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
             final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, VALUE> cache) {
@@ -595,8 +595,8 @@ public final class MapMemoization {
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
      */
-    public static <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> consumer) {
-        return memoize(consumer, emptyMap());
+    public static <VALUE> Consumer<VALUE> consumer(final Consumer<VALUE> consumer) {
+        return consumer(consumer, emptyMap());
     }
 
     /**
@@ -615,7 +615,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link Consumer}.
      */
-    public static <VALUE> Consumer<VALUE> memoize(
+    public static <VALUE> Consumer<VALUE> consumer(
             final Consumer<VALUE> consumer,
             final Map<VALUE, VALUE> cache) {
         return new ConcurrentMapBasedConsumerMemoizer<>(asConcurrentMap(cache), identity(), consumer);
@@ -635,8 +635,8 @@ public final class MapMemoization {
      *            The {@link DoubleConsumer} to memoize.
      * @return The wrapped {@link DoubleConsumer}.
      */
-    public static DoubleConsumer memoize(final DoubleConsumer consumer) {
-        return memoize(consumer, emptyMap());
+    public static DoubleConsumer doubleConsumer(final DoubleConsumer consumer) {
+        return doubleConsumer(consumer, emptyMap());
     }
 
     /**
@@ -655,7 +655,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link DoubleConsumer}.
      */
-    public static DoubleConsumer memoize(
+    public static DoubleConsumer doubleConsumer(
             final DoubleConsumer consumer,
             final Map<Double, Double> cache) {
         return new ConcurrentMapBasedDoubleConsumerMemoizer(asConcurrentMap(cache), consumer);
@@ -675,8 +675,8 @@ public final class MapMemoization {
      *            The {@link IntConsumer} to memoize.
      * @return The wrapped {@link IntConsumer}.
      */
-    public static IntConsumer memoize(final IntConsumer consumer) {
-        return memoize(consumer, emptyMap());
+    public static IntConsumer intConsumer(final IntConsumer consumer) {
+        return intConsumer(consumer, emptyMap());
     }
 
     /**
@@ -695,7 +695,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link IntConsumer}.
      */
-    public static IntConsumer memoize(
+    public static IntConsumer intConsumer(
             final IntConsumer consumer,
             final Map<Integer, Integer> cache) {
         return new ConcurrentMapBasedIntConsumerMemoizer(asConcurrentMap(cache), consumer);
@@ -715,8 +715,8 @@ public final class MapMemoization {
      *            The {@link LongConsumer} to memoize.
      * @return The wrapped {@link LongConsumer}.
      */
-    public static LongConsumer memoize(final LongConsumer consumer) {
-        return memoize(consumer, emptyMap());
+    public static LongConsumer longConsumer(final LongConsumer consumer) {
+        return longConsumer(consumer, emptyMap());
     }
 
     /**
@@ -735,7 +735,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link LongConsumer}.
      */
-    public static LongConsumer memoize(
+    public static LongConsumer longConsumer(
             final LongConsumer consumer,
             final Map<Long, Long> cache) {
         return new ConcurrentMapBasedLongConsumerMemoizer(asConcurrentMap(cache), consumer);
@@ -755,8 +755,8 @@ public final class MapMemoization {
      *            The {@link ObjDoubleConsumer} to memoize.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static <VALUE> ObjDoubleConsumer<VALUE> memoize(final ObjDoubleConsumer<VALUE> consumer) {
-        return memoize(consumer, emptyMap());
+    public static <VALUE> ObjDoubleConsumer<VALUE> objDoubleConsumer(final ObjDoubleConsumer<VALUE> consumer) {
+        return objDoubleConsumer(consumer, emptyMap());
     }
 
     /**
@@ -775,7 +775,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
+    public static <VALUE> ObjDoubleConsumer<VALUE> objDoubleConsumer(
             final ObjDoubleConsumer<VALUE> consumer,
             final Map<String, String> cache) {
         return new ConcurrentMapBasedObjDoubleConsumerMemoizer<>(asConcurrentMap(cache),
@@ -796,8 +796,8 @@ public final class MapMemoization {
      *            The {@link ObjIntConsumer} to memoize.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static <VALUE> ObjIntConsumer<VALUE> memoize(final ObjIntConsumer<VALUE> consumer) {
-        return memoize(consumer, emptyMap());
+    public static <VALUE> ObjIntConsumer<VALUE> objIntConsumer(final ObjIntConsumer<VALUE> consumer) {
+        return objIntConsumer(consumer, emptyMap());
     }
 
     /**
@@ -816,7 +816,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static <VALUE> ObjIntConsumer<VALUE> memoize(
+    public static <VALUE> ObjIntConsumer<VALUE> objIntConsumer(
             final ObjIntConsumer<VALUE> consumer,
             final Map<String, String> cache) {
         return new ConcurrentMapBasedObjIntConsumerMemoizer<>(asConcurrentMap(cache),
@@ -837,8 +837,8 @@ public final class MapMemoization {
      *            The {@link ObjLongConsumer} to memoize.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static <VALUE> ObjLongConsumer<VALUE> memoize(final ObjLongConsumer<VALUE> consumer) {
-        return memoize(consumer, emptyMap());
+    public static <VALUE> ObjLongConsumer<VALUE> objLongConsumer(final ObjLongConsumer<VALUE> consumer) {
+        return objLongConsumer(consumer, emptyMap());
     }
 
     /**
@@ -857,7 +857,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static <VALUE> ObjLongConsumer<VALUE> memoize(
+    public static <VALUE> ObjLongConsumer<VALUE> objLongConsumer(
             final ObjLongConsumer<VALUE> consumer,
             final Map<String, String> cache) {
         return new ConcurrentMapBasedObjLongConsumerMemoizer<>(asConcurrentMap(cache),
@@ -878,8 +878,8 @@ public final class MapMemoization {
      *            The {@link BiConsumer} to memoize.
      * @return The wrapped {@link BiConsumer}.
      */
-    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> memoize(final BiConsumer<FIRST, SECOND> biConsumer) {
-        return memoize(biConsumer, hashCodeKeyFunction(), emptyMap());
+    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(final BiConsumer<FIRST, SECOND> biConsumer) {
+        return biConsumer(biConsumer, hashCodeKeyFunction(), emptyMap());
     }
 
     /**
@@ -900,7 +900,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link BiConsumer}.
      */
-    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, KEY> cache) {
@@ -921,8 +921,8 @@ public final class MapMemoization {
      *            The {@link Predicate} to memoize.
      * @return The wrapped {@link Predicate}.
      */
-    public static <VALUE> Predicate<VALUE> memoize(final Predicate<VALUE> predicate) {
-        return memoize(predicate, emptyMap());
+    public static <VALUE> Predicate<VALUE> predicate(final Predicate<VALUE> predicate) {
+        return predicate(predicate, emptyMap());
     }
 
     /**
@@ -941,7 +941,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link Predicate}.
      */
-    public static <VALUE> Predicate<VALUE> memoize(
+    public static <VALUE> Predicate<VALUE> predicate(
             final Predicate<VALUE> predicate,
             final Map<VALUE, Boolean> cache) {
         return new ConcurrentMapBasedPredicateMemoizer<>(asConcurrentMap(cache), predicate);
@@ -961,8 +961,8 @@ public final class MapMemoization {
      *            The {@link BiPredicate} to memoize.
      * @return The wrapped {@link BiPredicate}.
      */
-    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> memoize(final BiPredicate<FIRST, SECOND> predicate) {
-        return memoize(predicate, hashCodeKeyFunction(), emptyMap());
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(final BiPredicate<FIRST, SECOND> predicate) {
+        return biPredicate(predicate, hashCodeKeyFunction(), emptyMap());
     }
 
     /**
@@ -983,7 +983,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link BiPredicate}.
      */
-    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, Boolean> cache) {
@@ -1004,8 +1004,8 @@ public final class MapMemoization {
      *            The {@link IntPredicate} to memoize.
      * @return The wrapped {@link IntPredicate}.
      */
-    public static IntPredicate memoize(final IntPredicate predicate) {
-        return memoize(predicate, emptyMap());
+    public static IntPredicate intPredicate(final IntPredicate predicate) {
+        return intPredicate(predicate, emptyMap());
     }
 
     /**
@@ -1024,7 +1024,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link IntPredicate}.
      */
-    public static IntPredicate memoize(
+    public static IntPredicate intPredicate(
             final IntPredicate predicate,
             final Map<Integer, Boolean> cache) {
         return new ConcurrentMapBasedIntPredicateMemoizer(asConcurrentMap(cache), predicate);
@@ -1044,8 +1044,8 @@ public final class MapMemoization {
      *            The {@link LongPredicate} to memoize.
      * @return The wrapped {@link DoublePredicate}.
      */
-    public static LongPredicate memoize(final LongPredicate predicate) {
-        return memoize(predicate, emptyMap());
+    public static LongPredicate longPredicate(final LongPredicate predicate) {
+        return longPredicate(predicate, emptyMap());
     }
 
     /**
@@ -1064,7 +1064,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link LongPredicate}.
      */
-    public static LongPredicate memoize(
+    public static LongPredicate longPredicate(
             final LongPredicate predicate,
             final Map<Long, Boolean> cache) {
         return new ConcurrentMapBasedLongPredicateMemoizer(asConcurrentMap(cache), predicate);
@@ -1084,8 +1084,8 @@ public final class MapMemoization {
      *            The {@link DoublePredicate} to memoize.
      * @return The wrapped {@link DoublePredicate}.
      */
-    public static DoublePredicate memoize(final DoublePredicate predicate) {
-        return memoize(predicate, emptyMap());
+    public static DoublePredicate doublePredicate(final DoublePredicate predicate) {
+        return doublePredicate(predicate, emptyMap());
     }
 
     /**
@@ -1104,7 +1104,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link DoublePredicate}.
      */
-    public static DoublePredicate memoize(
+    public static DoublePredicate doublePredicate(
             final DoublePredicate predicate,
             final Map<Double, Boolean> cache) {
         return new ConcurrentMapBasedDoublePredicateMemoizer(asConcurrentMap(cache), predicate);
@@ -1124,8 +1124,8 @@ public final class MapMemoization {
      *            The {@link DoubleBinaryOperator} to memoize.
      * @return The wrapped {@link DoubleBinaryOperator}.
      */
-    public static DoubleBinaryOperator memoize(final DoubleBinaryOperator operator) {
-        return memoize(operator, emptyMap());
+    public static DoubleBinaryOperator doubleBinaryOperator(final DoubleBinaryOperator operator) {
+        return doubleBinaryOperator(operator, emptyMap());
     }
 
     /**
@@ -1144,7 +1144,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link DoubleBinaryOperator}.
      */
-    public static DoubleBinaryOperator memoize(
+    public static DoubleBinaryOperator doubleBinaryOperator(
             final DoubleBinaryOperator operator,
             final Map<String, Double> cache) {
         return new ConcurrentMapBasedDoubleBinaryOperatorMemoizer<>(asConcurrentMap(cache),
@@ -1165,8 +1165,8 @@ public final class MapMemoization {
      *            The {@link IntBinaryOperator} to memoize.
      * @return The wrapped {@link IntBinaryOperator}.
      */
-    public static IntBinaryOperator memoize(final IntBinaryOperator operator) {
-        return memoize(operator, emptyMap());
+    public static IntBinaryOperator intBinaryOperator(final IntBinaryOperator operator) {
+        return intBinaryOperator(operator, emptyMap());
     }
 
     /**
@@ -1185,7 +1185,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link IntBinaryOperator}.
      */
-    public static IntBinaryOperator memoize(
+    public static IntBinaryOperator intBinaryOperator(
             final IntBinaryOperator operator,
             final Map<String, Integer> cache) {
         return new ConcurrentMapBasedIntBinaryOperatorMemoizer<>(asConcurrentMap(cache),
@@ -1206,8 +1206,8 @@ public final class MapMemoization {
      *            The {@link LongBinaryOperator} to memoize.
      * @return The wrapped {@link LongBinaryOperator}.
      */
-    public static LongBinaryOperator memoize(final LongBinaryOperator operator) {
-        return memoize(operator, emptyMap());
+    public static LongBinaryOperator longBinaryOperator(final LongBinaryOperator operator) {
+        return longBinaryOperator(operator, emptyMap());
     }
 
     /**
@@ -1226,7 +1226,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link LongBinaryOperator}.
      */
-    public static LongBinaryOperator memoize(
+    public static LongBinaryOperator longBinaryOperator(
             final LongBinaryOperator operator,
             final Map<String, Long> cache) {
         return new ConcurrentMapBasedLongBinaryOperatorMemoizer<>(asConcurrentMap(cache),
@@ -1247,8 +1247,8 @@ public final class MapMemoization {
      *            The {@link DoubleUnaryOperator} to memoize.
      * @return The wrapped {@link DoubleUnaryOperator}.
      */
-    public static DoubleUnaryOperator memoize(final DoubleUnaryOperator operator) {
-        return memoize(operator, emptyMap());
+    public static DoubleUnaryOperator doubleUnaryOperator(final DoubleUnaryOperator operator) {
+        return doubleUnaryOperator(operator, emptyMap());
     }
 
     /**
@@ -1267,7 +1267,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link DoubleUnaryOperator}.
      */
-    public static DoubleUnaryOperator memoize(
+    public static DoubleUnaryOperator doubleUnaryOperator(
             final DoubleUnaryOperator operator,
             final Map<Double, Double> cache) {
         return new ConcurrentMapBasedDoubleUnaryOperatorMemoizer(asConcurrentMap(cache), operator);
@@ -1287,8 +1287,8 @@ public final class MapMemoization {
      *            The {@link IntUnaryOperator} to memoize.
      * @return The wrapped {@link IntUnaryOperator}.
      */
-    public static IntUnaryOperator memoize(final IntUnaryOperator operator) {
-        return memoize(operator, emptyMap());
+    public static IntUnaryOperator intUnaryOperator(final IntUnaryOperator operator) {
+        return intUnaryOperator(operator, emptyMap());
     }
 
     /**
@@ -1307,7 +1307,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link IntUnaryOperator}.
      */
-    public static IntUnaryOperator memoize(
+    public static IntUnaryOperator intUnaryOperator(
             final IntUnaryOperator operator,
             final Map<Integer, Integer> cache) {
         return new ConcurrentMapBasedIntUnaryOperatorMemoizer(asConcurrentMap(cache), operator);
@@ -1327,8 +1327,8 @@ public final class MapMemoization {
      *            The {@link LongUnaryOperator} to memoize.
      * @return The wrapped {@link LongUnaryOperator}.
      */
-    public static LongUnaryOperator memoize(final LongUnaryOperator operator) {
-        return memoize(operator, emptyMap());
+    public static LongUnaryOperator longUnaryOperator(final LongUnaryOperator operator) {
+        return longUnaryOperator(operator, emptyMap());
     }
 
     /**
@@ -1347,7 +1347,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link LongUnaryOperator}.
      */
-    public static LongUnaryOperator memoize(
+    public static LongUnaryOperator longUnaryOperator(
             final LongUnaryOperator operator,
             final Map<Long, Long> cache) {
         return new ConcurrentMapBasedLongUnaryOperatorMemoizer(asConcurrentMap(cache), operator);
@@ -1367,8 +1367,8 @@ public final class MapMemoization {
      *            The {@link DoubleToIntFunction} to memoize.
      * @return The wrapped {@link DoubleToIntFunction}.
      */
-    public static DoubleToIntFunction memoize(final DoubleToIntFunction function) {
-        return memoize(function, emptyMap());
+    public static DoubleToIntFunction doubleToIntFunction(final DoubleToIntFunction function) {
+        return doubleToIntFunction(function, emptyMap());
     }
 
     /**
@@ -1387,7 +1387,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link DoubleToIntFunction}.
      */
-    public static DoubleToIntFunction memoize(
+    public static DoubleToIntFunction doubleToIntFunction(
             final DoubleToIntFunction function,
             final Map<Double, Integer> cache) {
         return new ConcurrentMapBasedDoubleToIntFunctionMemoizer(asConcurrentMap(cache), function);
@@ -1407,8 +1407,8 @@ public final class MapMemoization {
      *            The {@link DoubleToLongFunction} to memoize.
      * @return The wrapped {@link DoubleToLongFunction}.
      */
-    public static DoubleToLongFunction memoize(final DoubleToLongFunction function) {
-        return memoize(function, emptyMap());
+    public static DoubleToLongFunction doubleToLongFunction(final DoubleToLongFunction function) {
+        return doubleToLongFunction(function, emptyMap());
     }
 
     /**
@@ -1427,7 +1427,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link DoubleToLongFunction}.
      */
-    public static DoubleToLongFunction memoize(
+    public static DoubleToLongFunction doubleToLongFunction(
             final DoubleToLongFunction function,
             final Map<Double, Long> cache) {
         return new ConcurrentMapBasedDoubleToLongFunctionMemoizer(asConcurrentMap(cache), function);
@@ -1447,8 +1447,8 @@ public final class MapMemoization {
      *            The {@link IntToDoubleFunction} to memoize.
      * @return The wrapped {@link IntToDoubleFunction}.
      */
-    public static IntToDoubleFunction memoize(final IntToDoubleFunction function) {
-        return memoize(function, emptyMap());
+    public static IntToDoubleFunction intToDoubleFunction(final IntToDoubleFunction function) {
+        return intToDoubleFunction(function, emptyMap());
     }
 
     /**
@@ -1467,7 +1467,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link IntToDoubleFunction}.
      */
-    public static IntToDoubleFunction memoize(
+    public static IntToDoubleFunction intToDoubleFunction(
             final IntToDoubleFunction function,
             final Map<Integer, Double> cache) {
         return new ConcurrentMapBasedIntToDoubleFunctionMemoizer(asConcurrentMap(cache), function);
@@ -1487,8 +1487,8 @@ public final class MapMemoization {
      *            The {@link IntToLongFunction} to memoize.
      * @return The wrapped {@link IntToLongFunction}.
      */
-    public static IntToLongFunction memoize(final IntToLongFunction function) {
-        return memoize(function, emptyMap());
+    public static IntToLongFunction intToLongFunction(final IntToLongFunction function) {
+        return intToLongFunction(function, emptyMap());
     }
 
     /**
@@ -1507,7 +1507,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link IntToLongFunction}.
      */
-    public static IntToLongFunction memoize(
+    public static IntToLongFunction intToLongFunction(
             final IntToLongFunction function,
             final Map<Integer, Long> cache) {
         return new ConcurrentMapBasedIntToLongFunctionMemoizer(asConcurrentMap(cache), function);
@@ -1527,8 +1527,8 @@ public final class MapMemoization {
      *            The {@link LongToDoubleFunction} to memoize.
      * @return The wrapped {@link LongToDoubleFunction}.
      */
-    public static LongToDoubleFunction memoize(final LongToDoubleFunction function) {
-        return memoize(function, emptyMap());
+    public static LongToDoubleFunction longToDoubleFunction(final LongToDoubleFunction function) {
+        return longToDoubleFunction(function, emptyMap());
     }
 
     /**
@@ -1547,7 +1547,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link LongToDoubleFunction}.
      */
-    public static LongToDoubleFunction memoize(
+    public static LongToDoubleFunction longToDoubleFunction(
             final LongToDoubleFunction function,
             final Map<Long, Double> cache) {
         return new ConcurrentMapBasedLongToDoubleFunctionMemoizer(asConcurrentMap(cache), function);
@@ -1567,8 +1567,8 @@ public final class MapMemoization {
      *            The {@link LongToIntFunction} to memoize.
      * @return The wrapped {@link LongToIntFunction}.
      */
-    public static LongToIntFunction memoize(final LongToIntFunction function) {
-        return memoize(function, emptyMap());
+    public static LongToIntFunction longToIntFunction(final LongToIntFunction function) {
+        return longToIntFunction(function, emptyMap());
     }
 
     /**
@@ -1587,7 +1587,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link LongToIntFunction}.
      */
-    public static LongToIntFunction memoize(
+    public static LongToIntFunction longToIntFunction(
             final LongToIntFunction function,
             final Map<Long, Integer> cache) {
         return new ConcurrentMapBasedLongToIntFunctionMemoizer(asConcurrentMap(cache), function);
@@ -1607,8 +1607,8 @@ public final class MapMemoization {
      *            The {@link ToDoubleFunction} to memoize.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static <VALUE> ToDoubleFunction<VALUE> memoize(final ToDoubleFunction<VALUE> function) {
-        return memoize(function, emptyMap());
+    public static <VALUE> ToDoubleFunction<VALUE> toDoubleFunction(final ToDoubleFunction<VALUE> function) {
+        return toDoubleFunction(function, emptyMap());
     }
 
     /**
@@ -1627,7 +1627,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static <VALUE> ToDoubleFunction<VALUE> memoize(
+    public static <VALUE> ToDoubleFunction<VALUE> toDoubleFunction(
             final ToDoubleFunction<VALUE> function,
             final Map<VALUE, Double> cache) {
         return new ConcurrentMapBasedToDoubleFunctionMemoizer<>(asConcurrentMap(cache), function);
@@ -1647,8 +1647,8 @@ public final class MapMemoization {
      *            The {@link ToIntFunction} to memoize.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static <VALUE> ToIntFunction<VALUE> memoize(final ToIntFunction<VALUE> function) {
-        return memoize(function, emptyMap());
+    public static <VALUE> ToIntFunction<VALUE> toIntFunction(final ToIntFunction<VALUE> function) {
+        return toIntFunction(function, emptyMap());
     }
 
     /**
@@ -1667,7 +1667,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static <VALUE> ToIntFunction<VALUE> memoize(
+    public static <VALUE> ToIntFunction<VALUE> toIntFunction(
             final ToIntFunction<VALUE> function,
             final Map<VALUE, Integer> cache) {
         return new ConcurrentMapBasedToIntFunctionMemoizer<>(asConcurrentMap(cache), function);
@@ -1687,8 +1687,8 @@ public final class MapMemoization {
      *            The {@link ToLongFunction} to memoize.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static <VALUE> ToLongFunction<VALUE> memoize(final ToLongFunction<VALUE> function) {
-        return memoize(function, emptyMap());
+    public static <VALUE> ToLongFunction<VALUE> toLongFunction(final ToLongFunction<VALUE> function) {
+        return toLongFunction(function, emptyMap());
     }
 
     /**
@@ -1707,7 +1707,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static <VALUE> ToLongFunction<VALUE> memoize(
+    public static <VALUE> ToLongFunction<VALUE> toLongFunction(
             final ToLongFunction<VALUE> function,
             final Map<VALUE, Long> cache) {
         return new ConcurrentMapBasedToLongFunctionMemoizer<>(asConcurrentMap(cache), function);
@@ -1727,9 +1727,9 @@ public final class MapMemoization {
      *            The {@link ToDoubleBiFunction} to memoize.
      * @return The wrapped {@link ToDoubleBiFunction}.
      */
-    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function) {
-        return memoize(function, hashCodeKeyFunction(), emptyMap());
+        return toDoubleBiFunction(function, hashCodeKeyFunction(), emptyMap());
     }
 
     /**
@@ -1750,7 +1750,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link ToDoubleBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, Double> cache) {
@@ -1771,9 +1771,9 @@ public final class MapMemoization {
      *            The {@link ToIntBiFunction} to memoize.
      * @return The wrapped {@link ToIntBiFunction}.
      */
-    public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function) {
-        return memoize(function, hashCodeKeyFunction(), emptyMap());
+        return toIntBiFunction(function, hashCodeKeyFunction(), emptyMap());
     }
 
     /**
@@ -1794,7 +1794,7 @@ public final class MapMemoization {
      *            {@link Map} of already computed values.
      * @return The wrapped {@link ToIntBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, Integer> cache) {
@@ -1815,9 +1815,9 @@ public final class MapMemoization {
      *            The {@link ToLongBiFunction} to memoize.
      * @return The wrapped {@link ToLongBiFunction}.
      */
-    public static <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function) {
-        return memoize(function, hashCodeKeyFunction(), emptyMap());
+        return toLongBiFunction(function, hashCodeKeyFunction(), emptyMap());
     }
 
     /**
@@ -1838,7 +1838,7 @@ public final class MapMemoization {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link ToLongBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, Long> cache) {

@@ -111,6 +111,21 @@
         <artifactId>memoization-core</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>de.xn--ho-hia.memoization</groupId>
+        <artifactId>memoization-caffeine</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>de.xn--ho-hia.memoization</groupId>
+        <artifactId>memoization-guava</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>de.xn--ho-hia.memoization</groupId>
+        <artifactId>memoization-jcache</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

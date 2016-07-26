@@ -39,7 +39,7 @@ public class JCacheBasedFunctionMemoizerTest {
     public void shouldMemoizeFunction() {
         // given
         final Function<String, String> function = Function.identity();
-        try (final Cache<String, String> cache = JCacheMemoization.createCache(Function.class.getSimpleName())) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class.getSimpleName())) {
             // when
             final JCacheBasedFunctionMemoizer<String, String> loader = new JCacheBasedFunctionMemoizer<>(cache,
                     function);

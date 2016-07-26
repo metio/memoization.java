@@ -24,7 +24,7 @@ import de.xn__ho_hia.quality.suppression.CompilerWarnings;
  *
  */
 @SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
-public class JCacheMemoizationTest {
+public class JCacheMemoizeTest {
 
     /**
     *
@@ -35,7 +35,21 @@ public class JCacheMemoizationTest {
         final Supplier<String> supplier = () -> "test";
 
         // when
-        final Supplier<String> memoize = JCacheMemoization.memoize(supplier);
+        final Supplier<String> memoize = JCacheMemoize.supplier(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeSupplierWithLambda() {
+        // given
+
+        // when
+        final Supplier<String> memoize = JCacheMemoize.supplier(() -> "test");
 
         // then
         Assert.assertNotNull("Memoized Supplier is NULL", memoize);
@@ -50,7 +64,21 @@ public class JCacheMemoizationTest {
         final Function<String, String> function = a -> "test";
 
         // when
-        final Function<String, String> memoize = JCacheMemoization.memoize(function);
+        final Function<String, String> memoize = JCacheMemoize.function(function);
+
+        // then
+        Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeFunctionWithLambda() {
+        // given
+
+        // when
+        final Function<String, String> memoize = JCacheMemoize.function(a -> "test");
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
@@ -62,10 +90,24 @@ public class JCacheMemoizationTest {
     @Test
     public void shouldMemoizePredicate() {
         // given
-        final Predicate<String> function = a -> true;
+        final Predicate<String> predicate = a -> true;
 
         // when
-        final Predicate<String> memoize = JCacheMemoization.memoize(function);
+        final Predicate<String> memoize = JCacheMemoize.predicate(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizePredicateWithLambda() {
+        // given
+
+        // when
+        final Predicate<String> memoize = JCacheMemoize.predicate(a -> true);
 
         // then
         Assert.assertNotNull("Memoized Predicate is NULL", memoize);
@@ -77,10 +119,24 @@ public class JCacheMemoizationTest {
     @Test
     public void shouldMemoizeConsumer() {
         // given
-        final Consumer<String> function = System.out::println;
+        final Consumer<String> consumer = System.out::println;
 
         // when
-        final Consumer<String> memoize = JCacheMemoization.memoize(function);
+        final Consumer<String> memoize = JCacheMemoize.consumer(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeConsumerWithLambda() {
+        // given
+
+        // when
+        final Consumer<String> memoize = JCacheMemoize.consumer(System.out::println);
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
@@ -95,7 +151,21 @@ public class JCacheMemoizationTest {
         final BiFunction<String, String, String> function = (first, second) -> "test";
 
         // when
-        final BiFunction<String, String, String> memoize = JCacheMemoization.memoize(function);
+        final BiFunction<String, String, String> memoize = JCacheMemoize.biFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiFunctionWithLambda() {
+        // given
+
+        // when
+        final BiFunction<String, String, String> memoize = JCacheMemoize.biFunction((first, second) -> "test");
 
         // then
         Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
@@ -115,7 +185,7 @@ public class JCacheMemoizationTest {
     public void shouldDeclarePrivateConstructor()
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         // given
-        final Constructor<JCacheMemoization> constructor = JCacheMemoization.class.getDeclaredConstructor();
+        final Constructor<JCacheMemoize> constructor = JCacheMemoize.class.getDeclaredConstructor();
 
         // when
         final boolean isPrivate = Modifier.isPrivate(constructor.getModifiers());

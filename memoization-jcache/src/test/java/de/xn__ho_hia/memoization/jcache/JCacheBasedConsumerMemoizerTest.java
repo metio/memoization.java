@@ -39,7 +39,7 @@ public class JCacheBasedConsumerMemoizerTest {
     public void shouldMemoizeConsumer() {
         // given
         final Consumer<String> consumer = Mockito.mock(Consumer.class);
-        try (final Cache<String, String> cache = JCacheMemoization.createCache(Predicate.class.getSimpleName())) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(Predicate.class.getSimpleName())) {
             // when
             final JCacheBasedConsumerMemoizer<String> loader = new JCacheBasedConsumerMemoizer<>(cache,
                     consumer);
@@ -57,7 +57,7 @@ public class JCacheBasedConsumerMemoizerTest {
     public void shouldMemoizeConsumerOnce() {
         // given
         final Consumer<String> consumer = Mockito.mock(Consumer.class);
-        try (final Cache<String, String> cache = JCacheMemoization.createCache(Predicate.class.getSimpleName())) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(Predicate.class.getSimpleName())) {
             // when
             final JCacheBasedConsumerMemoizer<String> loader = new JCacheBasedConsumerMemoizer<>(cache,
                     consumer);

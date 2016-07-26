@@ -25,7 +25,7 @@ import de.xn__ho_hia.quality.suppression.CompilerWarnings;
  *
  */
 @SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
-public class GuavaMemoizationTest {
+public class GuavaMemoizeTest {
 
     /**
     *
@@ -36,7 +36,7 @@ public class GuavaMemoizationTest {
         final Supplier<String> supplier = () -> "test";
 
         // when
-        final Supplier<String> memoize = GuavaMemoization.memoize(supplier);
+        final Supplier<String> memoize = GuavaMemoize.supplier(supplier);
 
         // then
         Assert.assertNotNull("Memoized Supplier is NULL", memoize);
@@ -51,7 +51,7 @@ public class GuavaMemoizationTest {
     // final BooleanSupplier supplier = () -> true;
     //
     // // when
-    // final BooleanSupplier memoize = GuavaMemoization.memoize(supplier);
+    // final BooleanSupplier memoize = GuavaMemoize.memoize(supplier);
     //
     // // then
     // Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
@@ -66,7 +66,7 @@ public class GuavaMemoizationTest {
     // final DoubleSupplier supplier = () -> 123.456D;
     //
     // // when
-    // final DoubleSupplier memoize = GuavaMemoization.memoize(supplier);
+    // final DoubleSupplier memoize = GuavaMemoize.memoize(supplier);
     //
     // // then
     // Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
@@ -81,7 +81,7 @@ public class GuavaMemoizationTest {
     // final IntSupplier supplier = () -> 123;
     //
     // // when
-    // final IntSupplier memoize = GuavaMemoization.memoize(supplier);
+    // final IntSupplier memoize = GuavaMemoize.memoize(supplier);
     //
     // // then
     // Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
@@ -96,7 +96,7 @@ public class GuavaMemoizationTest {
     // final LongSupplier supplier = () -> 123L;
     //
     // // when
-    // final LongSupplier memoize = GuavaMemoization.memoize(supplier);
+    // final LongSupplier memoize = GuavaMemoize.memoize(supplier);
     //
     // // then
     // Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
@@ -111,7 +111,21 @@ public class GuavaMemoizationTest {
         final Function<String, String> function = a -> "test";
 
         // when
-        final Function<String, String> memoize = GuavaMemoization.memoize(function);
+        final Function<String, String> memoize = GuavaMemoize.function(function);
+
+        // then
+        Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeFunctionWithLambda() {
+        // given
+
+        // when
+        final Function<String, String> memoize = GuavaMemoize.function(a -> "test");
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
@@ -126,7 +140,21 @@ public class GuavaMemoizationTest {
         final BiFunction<String, String, String> bifunction = (a, b) -> "test";
 
         // when
-        final BiFunction<String, String, String> memoize = GuavaMemoization.memoize(bifunction);
+        final BiFunction<String, String, String> memoize = GuavaMemoize.biFunction(bifunction);
+
+        // then
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiFunctionWithLambda() {
+        // given
+
+        // when
+        final BiFunction<String, String, String> memoize = GuavaMemoize.biFunction((a, b) -> "test");
 
         // then
         Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
@@ -141,7 +169,21 @@ public class GuavaMemoizationTest {
         final Consumer<String> consumer = System.out::println;
 
         // when
-        final Consumer<String> memoize = GuavaMemoization.memoize(consumer);
+        final Consumer<String> memoize = GuavaMemoize.consumer(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeConsumerWithLambda() {
+        // given
+
+        // when
+        final Consumer<String> memoize = GuavaMemoize.consumer(System.out::println);
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
@@ -153,10 +195,24 @@ public class GuavaMemoizationTest {
     @Test
     public void shouldMemoizePredicate() {
         // given
-        final Predicate<String> consumer = a -> true;
+        final Predicate<String> predicate = a -> true;
 
         // when
-        final Predicate<String> memoize = GuavaMemoization.memoize(consumer);
+        final Predicate<String> memoize = GuavaMemoize.predicate(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizePredicateWithLambda() {
+        // given
+
+        // when
+        final Predicate<String> memoize = GuavaMemoize.predicate(a -> true);
 
         // then
         Assert.assertNotNull("Memoized Predicate is NULL", memoize);
@@ -171,7 +227,7 @@ public class GuavaMemoizationTest {
     // final BiConsumer<String, String> biConsumer = (first, second) -> System.out.println(first + second);
     //
     // // when
-    // final BiConsumer<String, String> memoize = GuavaMemoization.memoize(biConsumer);
+    // final BiConsumer<String, String> memoize = GuavaMemoize.memoize(biConsumer);
     //
     // // then
     // Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
@@ -186,7 +242,7 @@ public class GuavaMemoizationTest {
     // final ObjDoubleConsumer<String> consumer = (first, second) -> System.out.println(first + second);
     //
     // // when
-    // final ObjDoubleConsumer<String> memoize = GuavaMemoization.memoize(consumer);
+    // final ObjDoubleConsumer<String> memoize = GuavaMemoize.memoize(consumer);
     //
     // // then
     // Assert.assertNotNull("Memoized ObjDoubleConsumer is NULL", memoize);
@@ -201,7 +257,7 @@ public class GuavaMemoizationTest {
     // final DoubleConsumer consumer = System.out::println;
     //
     // // when
-    // final DoubleConsumer memoize = GuavaMemoization.memoize(consumer);
+    // final DoubleConsumer memoize = GuavaMemoize.memoize(consumer);
     //
     // // then
     // Assert.assertNotNull("Memoized DoubleConsumer is NULL", memoize);
@@ -216,7 +272,7 @@ public class GuavaMemoizationTest {
     // final IntConsumer consumer = System.out::println;
     //
     // // when
-    // final IntConsumer memoize = GuavaMemoization.memoize(consumer);
+    // final IntConsumer memoize = GuavaMemoize.memoize(consumer);
     //
     // // then
     // Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
@@ -231,7 +287,7 @@ public class GuavaMemoizationTest {
     // final LongConsumer consumer = System.out::println;
     //
     // // when
-    // final LongConsumer memoize = GuavaMemoization.memoize(consumer);
+    // final LongConsumer memoize = GuavaMemoize.memoize(consumer);
     //
     // // then
     // Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
@@ -246,7 +302,7 @@ public class GuavaMemoizationTest {
     // final ObjIntConsumer<String> consumer = (first, second) -> System.out.println(first + second);
     //
     // // when
-    // final ObjIntConsumer<String> memoize = GuavaMemoization.memoize(consumer);
+    // final ObjIntConsumer<String> memoize = GuavaMemoize.memoize(consumer);
     //
     // // then
     // Assert.assertNotNull("Memoized ObjIntConsumer is NULL", memoize);
@@ -261,7 +317,7 @@ public class GuavaMemoizationTest {
     // final ObjLongConsumer<String> consumer = (first, second) -> System.out.println(first + second);
     //
     // // when
-    // final ObjLongConsumer<String> memoize = GuavaMemoization.memoize(consumer);
+    // final ObjLongConsumer<String> memoize = GuavaMemoize.memoize(consumer);
     //
     // // then
     // Assert.assertNotNull("Memoized ObjLongConsumer is NULL", memoize);
@@ -276,7 +332,7 @@ public class GuavaMemoizationTest {
     // final Predicate<String> predicate = input -> true;
     //
     // // when
-    // final Predicate<String> memoize = GuavaMemoization.memoize(predicate);
+    // final Predicate<String> memoize = GuavaMemoize.memoize(predicate);
     //
     // // then
     // Assert.assertNotNull("Memoized Predicate is NULL", memoize);
@@ -291,7 +347,7 @@ public class GuavaMemoizationTest {
     // final BiPredicate<String, String> predicate = (first, second) -> true;
     //
     // // when
-    // final BiPredicate<String, String> memoize = GuavaMemoization.memoize(predicate);
+    // final BiPredicate<String, String> memoize = GuavaMemoize.memoize(predicate);
     //
     // // then
     // Assert.assertNotNull("Memoized BiPredicate is NULL", memoize);
@@ -306,7 +362,7 @@ public class GuavaMemoizationTest {
     // final DoublePredicate predicate = input -> true;
     //
     // // when
-    // final DoublePredicate memoize = GuavaMemoization.memoize(predicate);
+    // final DoublePredicate memoize = GuavaMemoize.memoize(predicate);
     //
     // // then
     // Assert.assertNotNull("Memoized DoublePredicate is NULL", memoize);
@@ -321,7 +377,7 @@ public class GuavaMemoizationTest {
     // final IntPredicate predicate = input -> true;
     //
     // // when
-    // final IntPredicate memoize = GuavaMemoization.memoize(predicate);
+    // final IntPredicate memoize = GuavaMemoize.memoize(predicate);
     //
     // // then
     // Assert.assertNotNull("Memoized IntPredicate is NULL", memoize);
@@ -336,7 +392,7 @@ public class GuavaMemoizationTest {
     // final LongPredicate predicate = input -> true;
     //
     // // when
-    // final LongPredicate memoize = GuavaMemoization.memoize(predicate);
+    // final LongPredicate memoize = GuavaMemoize.memoize(predicate);
     //
     // // then
     // Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
@@ -351,7 +407,7 @@ public class GuavaMemoizationTest {
     // final DoubleBinaryOperator operator = (first, second) -> first + second;
     //
     // // when
-    // final DoubleBinaryOperator memoize = GuavaMemoization.memoize(operator);
+    // final DoubleBinaryOperator memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
@@ -366,7 +422,7 @@ public class GuavaMemoizationTest {
     // final IntBinaryOperator operator = (first, second) -> first + second;
     //
     // // when
-    // final IntBinaryOperator memoize = GuavaMemoization.memoize(operator);
+    // final IntBinaryOperator memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized IntBinaryOperator is NULL", memoize);
@@ -381,7 +437,7 @@ public class GuavaMemoizationTest {
     // final LongBinaryOperator operator = (first, second) -> first + second;
     //
     // // when
-    // final LongBinaryOperator memoize = GuavaMemoization.memoize(operator);
+    // final LongBinaryOperator memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized LongBinaryOperator is NULL", memoize);
@@ -396,7 +452,7 @@ public class GuavaMemoizationTest {
     // final DoubleUnaryOperator operator = input -> 123.456D;
     //
     // // when
-    // final DoubleUnaryOperator memoize = GuavaMemoization.memoize(operator);
+    // final DoubleUnaryOperator memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized DoubleUnaryOperator is NULL", memoize);
@@ -411,7 +467,7 @@ public class GuavaMemoizationTest {
     // final IntUnaryOperator operator = input -> 123;
     //
     // // when
-    // final IntUnaryOperator memoize = GuavaMemoization.memoize(operator);
+    // final IntUnaryOperator memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized IntUnaryOperator is NULL", memoize);
@@ -426,7 +482,7 @@ public class GuavaMemoizationTest {
     // final LongUnaryOperator operator = input -> 123L;
     //
     // // when
-    // final LongUnaryOperator memoize = GuavaMemoization.memoize(operator);
+    // final LongUnaryOperator memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized LongUnaryOperator is NULL", memoize);
@@ -441,7 +497,7 @@ public class GuavaMemoizationTest {
     // final DoubleToIntFunction operator = input -> 123;
     //
     // // when
-    // final DoubleToIntFunction memoize = GuavaMemoization.memoize(operator);
+    // final DoubleToIntFunction memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized DoubleToIntFunction is NULL", memoize);
@@ -456,7 +512,7 @@ public class GuavaMemoizationTest {
     // final DoubleToLongFunction operator = input -> 123L;
     //
     // // when
-    // final DoubleToLongFunction memoize = GuavaMemoization.memoize(operator);
+    // final DoubleToLongFunction memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized DoubleToLongFunction is NULL", memoize);
@@ -471,7 +527,7 @@ public class GuavaMemoizationTest {
     // final IntToDoubleFunction operator = input -> 123.456D;
     //
     // // when
-    // final IntToDoubleFunction memoize = GuavaMemoization.memoize(operator);
+    // final IntToDoubleFunction memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized IntToDoubleFunction is NULL", memoize);
@@ -486,7 +542,7 @@ public class GuavaMemoizationTest {
     // final IntToLongFunction operator = input -> 123L;
     //
     // // when
-    // final IntToLongFunction memoize = GuavaMemoization.memoize(operator);
+    // final IntToLongFunction memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized IntToLongFunction is NULL", memoize);
@@ -501,7 +557,7 @@ public class GuavaMemoizationTest {
     // final LongToDoubleFunction operator = input -> 123D;
     //
     // // when
-    // final LongToDoubleFunction memoize = GuavaMemoization.memoize(operator);
+    // final LongToDoubleFunction memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized LongToDoubleFunction is NULL", memoize);
@@ -516,7 +572,7 @@ public class GuavaMemoizationTest {
     // final LongToIntFunction operator = input -> 123;
     //
     // // when
-    // final LongToIntFunction memoize = GuavaMemoization.memoize(operator);
+    // final LongToIntFunction memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized LongToIntFunction is NULL", memoize);
@@ -531,7 +587,7 @@ public class GuavaMemoizationTest {
     // final ToDoubleFunction<String> operator = Double::parseDouble;
     //
     // // when
-    // final ToDoubleFunction<String> memoize = GuavaMemoization.memoize(operator);
+    // final ToDoubleFunction<String> memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized ToDoubleFunction is NULL", memoize);
@@ -546,7 +602,7 @@ public class GuavaMemoizationTest {
     // final ToIntFunction<String> operator = Integer::parseInt;
     //
     // // when
-    // final ToIntFunction<String> memoize = GuavaMemoization.memoize(operator);
+    // final ToIntFunction<String> memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized ToIntFunction is NULL", memoize);
@@ -561,7 +617,7 @@ public class GuavaMemoizationTest {
     // final ToLongFunction<String> operator = Long::parseLong;
     //
     // // when
-    // final ToLongFunction<String> memoize = GuavaMemoization.memoize(operator);
+    // final ToLongFunction<String> memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized ToLongFunction is NULL", memoize);
@@ -576,7 +632,7 @@ public class GuavaMemoizationTest {
     // final ToDoubleBiFunction<String, String> operator = (first, second) -> 123.456D;
     //
     // // when
-    // final ToDoubleBiFunction<String, String> memoize = GuavaMemoization.memoize(operator);
+    // final ToDoubleBiFunction<String, String> memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
@@ -591,7 +647,7 @@ public class GuavaMemoizationTest {
     // final ToIntBiFunction<String, String> operator = (first, second) -> 123;
     //
     // // when
-    // final ToIntBiFunction<String, String> memoize = GuavaMemoization.memoize(operator);
+    // final ToIntBiFunction<String, String> memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized ToIntBiFunction is NULL", memoize);
@@ -606,7 +662,7 @@ public class GuavaMemoizationTest {
     // final ToLongBiFunction<String, String> operator = (first, second) -> 123;
     //
     // // when
-    // final ToLongBiFunction<String, String> memoize = GuavaMemoization.memoize(operator);
+    // final ToLongBiFunction<String, String> memoize = GuavaMemoize.memoize(operator);
     //
     // // then
     // Assert.assertNotNull("Memoized ToLongBiFunction is NULL", memoize);
@@ -626,7 +682,7 @@ public class GuavaMemoizationTest {
     public void shouldDeclarePrivateConstructor()
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         // given
-        final Constructor<GuavaMemoization> constructor = GuavaMemoization.class.getDeclaredConstructor();
+        final Constructor<GuavaMemoize> constructor = GuavaMemoize.class.getDeclaredConstructor();
 
         // when
         final boolean isPrivate = Modifier.isPrivate(constructor.getModifiers());

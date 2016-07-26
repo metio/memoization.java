@@ -273,37 +273,42 @@ The `ConcurrentMap` and Caffeine based implementations cover all functional inte
 
 Memoize any of the supported types by using the static factory methods supplied by either using `CaffeineMemoization` pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-caffeine"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-caffeine.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>], `GuavaMemoization` pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-guava"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-guava.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>], `JCacheMemoization` pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-jcache"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-jcache.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>] or `MapMemoization` pass:[<span class="image"><a class="image" href="https://www.javadoc.io/doc/de.xn--ho-hia.memoization/memoization-core"><img src="https://www.javadoc.io/badge/de.xn--ho-hia.memoization/memoization-core.svg?style=flat-square&color=blue" alt="Read JavaDocs"></a></span>] like this:
 
+=== Default cache w/ default cache keys
+
 [source, java]
 ----
-// using default caches
 Consumer<INPUT> consumer = ...;
-Consumer<INPUT> memoizedConsumer = CaffeineMemoization.memoize(consumer);
+Consumer<INPUT> memoizedConsumer = CaffeineMemoize.consumer(consumer);
 
 Function<INPUT, OUTPUT> function = ...;
-Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoization.memoize(function);
+Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function);
 
 Predicate<INPUT> predicate = ...;
-Predicate<INPUT> memoizedPredicate = JCacheMemoization.memoize(predicate);
+Predicate<INPUT> memoizedPredicate = JCacheMemoize.predicate(predicate);
 
 Supplier<INPUT> supplier = ...;
-Supplier<INPUT> memoizedSupplier = MapMemoization.memoize(supplier);
+Supplier<INPUT> memoizedSupplier = MapMemoize.supplier(supplier);
+----
 
-// using custom caches
+=== Custom cache w/ default cache keys
+
+[source, java]
+----
 Consumer<INPUT> consumer = ...;
 Cache<INPUT, INPUT> cache = ...; // com.github.benmanes.caffeine.cache.Cache
-Consumer<INPUT> memoizedConsumer = CaffeineMemoization.memoize(consumer, cache);
+Consumer<INPUT> memoizedConsumer = CaffeineMemoize.consumer(consumer, cache);
 
 Function<INPUT, OUTPUT> function = ...;
 Cache<INPUT, OUTPUT> cache = ...; // com.google.common.cache.Cache
-Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoization.memoize(function, cache);
+Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function, cache);
 
 Predicate<INPUT> predicate = ...;
 Cache<INPUT, Boolean> cache = ...; // javax.cache.Cache
-Predicate<INPUT> memoizedPredicate = JCacheMemoization.memoize(predicate, cache);
+Predicate<INPUT> memoizedPredicate = JCacheMemoize.predicate(predicate, cache);
 
 Supplier<INPUT> supplier = ...;
 Map<String, INPUT> cache = ...; // e.g. java.util.concurrent.ConcurrentHashMap
-Supplier<INPUT> memoizedSupplier = MapMemoization.memoize(supplier, cache);
+Supplier<INPUT> memoizedSupplier = MapMemoize.supplier(supplier, cache);
 ----
 
 === Integration

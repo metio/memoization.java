@@ -39,7 +39,7 @@ public class JCacheBasedPredicateMemoizerTest {
     public void shouldMemoizeFunction() {
         // given
         final Predicate<String> predicate = a -> true;
-        try (final Cache<String, Boolean> cache = JCacheMemoization.createCache(Predicate.class.getSimpleName())) {
+        try (final Cache<String, Boolean> cache = JCacheMemoize.createCache(Predicate.class.getSimpleName())) {
             // when
             final JCacheBasedPredicateMemoizer<String> loader = new JCacheBasedPredicateMemoizer<>(cache,
                     predicate);

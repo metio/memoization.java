@@ -1,3 +1,9 @@
+/*
+ * This file is part of memoization.java. It is subject to the license terms in the LICENSE file found in the top-level
+ * directory of this distribution and at http://creativecommons.org/publicdomain/zero/1.0/. No part of memoization.java,
+ * including this file, may be copied, modified, propagated, or distributed except according to the terms contained
+ * in the LICENSE file.
+ */
 package de.xn__ho_hia.memoization.caffeine;
 
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
@@ -45,7 +51,7 @@ import java.util.function.ToLongFunction;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
-import de.xn__ho_hia.memoization.map.MapMemoization;
+import de.xn__ho_hia.memoization.map.MapMemoize;
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
 /**
@@ -112,9 +118,9 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see ToLongFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
-public final class CaffeineMemoization {
+public final class CaffeineMemoize {
 
-    private CaffeineMemoization() {
+    private CaffeineMemoize() {
         // factory class
     }
 
@@ -132,9 +138,9 @@ public final class CaffeineMemoization {
      *            The {@link BiConsumer} to memoize.
      * @return The wrapped {@link BiConsumer}.
      */
-    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer) {
-        return memoize(biConsumer, Caffeine.newBuilder().build());
+        return biConsumer(biConsumer, Caffeine.newBuilder().build());
     }
 
     /**
@@ -153,10 +159,10 @@ public final class CaffeineMemoization {
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiConsumer}.
      */
-    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(biConsumer, keyFunction, Caffeine.newBuilder().build());
+        return biConsumer(biConsumer, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -175,10 +181,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiConsumer}.
      */
-    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer,
             final Cache<String, String> cache) {
-        return memoize(biConsumer, hashCodeKeyFunction(), cache);
+        return biConsumer(biConsumer, hashCodeKeyFunction(), cache);
     }
 
     /**
@@ -199,11 +205,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiConsumer}.
      */
-    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
-        return MapMemoization.memoize(biConsumer, keyFunction, cache.asMap());
+        return MapMemoize.biConsumer(biConsumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -220,9 +226,9 @@ public final class CaffeineMemoization {
      *            The {@link ObjDoubleConsumer} to memoize.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
+    public static <VALUE> ObjDoubleConsumer<VALUE> objDoubleConsumer(
             final ObjDoubleConsumer<VALUE> consumer) {
-        return memoize(consumer, Caffeine.newBuilder().build());
+        return objDoubleConsumer(consumer, Caffeine.newBuilder().build());
     }
 
     /**
@@ -241,10 +247,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static <VALUE> ObjDoubleConsumer<VALUE> memoize(
+    public static <VALUE> ObjDoubleConsumer<VALUE> objDoubleConsumer(
             final ObjDoubleConsumer<VALUE> consumer,
             final Cache<String, String> cache) {
-        return MapMemoization.memoize(consumer, cache.asMap());
+        return MapMemoize.objDoubleConsumer(consumer, cache.asMap());
     }
 
     /**
@@ -261,9 +267,9 @@ public final class CaffeineMemoization {
      *            The {@link ObjIntConsumer} to memoize.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static <VALUE> ObjIntConsumer<VALUE> memoize(
+    public static <VALUE> ObjIntConsumer<VALUE> objIntConsumer(
             final ObjIntConsumer<VALUE> consumer) {
-        return memoize(consumer, Caffeine.newBuilder().build());
+        return objIntConsumer(consumer, Caffeine.newBuilder().build());
     }
 
     /**
@@ -282,10 +288,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static <VALUE> ObjIntConsumer<VALUE> memoize(
+    public static <VALUE> ObjIntConsumer<VALUE> objIntConsumer(
             final ObjIntConsumer<VALUE> consumer,
             final Cache<String, String> cache) {
-        return MapMemoization.memoize(consumer, cache.asMap());
+        return MapMemoize.objIntConsumer(consumer, cache.asMap());
     }
 
     /**
@@ -302,9 +308,9 @@ public final class CaffeineMemoization {
      *            The {@link ObjLongConsumer} to memoize.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static <VALUE> ObjLongConsumer<VALUE> memoize(
+    public static <VALUE> ObjLongConsumer<VALUE> objLongConsumer(
             final ObjLongConsumer<VALUE> consumer) {
-        return memoize(consumer, Caffeine.newBuilder().build());
+        return objLongConsumer(consumer, Caffeine.newBuilder().build());
     }
 
     /**
@@ -323,10 +329,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static <VALUE> ObjLongConsumer<VALUE> memoize(
+    public static <VALUE> ObjLongConsumer<VALUE> objLongConsumer(
             final ObjLongConsumer<VALUE> consumer,
             final Cache<String, String> cache) {
-        return MapMemoization.memoize(consumer, cache.asMap());
+        return MapMemoize.objLongConsumer(consumer, cache.asMap());
     }
 
     /**
@@ -343,9 +349,9 @@ public final class CaffeineMemoization {
      *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
             final BiFunction<FIRST, SECOND, VALUE> biFunction) {
-        return memoize(biFunction, Caffeine.newBuilder().build());
+        return biFunction(biFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -364,10 +370,10 @@ public final class CaffeineMemoization {
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
             final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(biFunction, keyFunction, Caffeine.newBuilder().build());
+        return biFunction(biFunction, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -386,10 +392,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
             final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final Cache<String, VALUE> cache) {
-        return memoize(biFunction, hashCodeKeyFunction(), cache);
+        return biFunction(biFunction, hashCodeKeyFunction(), cache);
     }
 
     /**
@@ -410,11 +416,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> memoize(
+    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
             final BiFunction<FIRST, SECOND, VALUE> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, VALUE> cache) {
-        return MapMemoization.memoize(biFunction, keyFunction, cache.asMap());
+        return MapMemoize.biFunction(biFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -431,9 +437,9 @@ public final class CaffeineMemoization {
      *            The {@link BiPredicate} to memoize.
      * @return The wrapped {@link BiPredicate}.
      */
-    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+        return biPredicate(predicate, Caffeine.newBuilder().build());
     }
 
     /**
@@ -452,10 +458,10 @@ public final class CaffeineMemoization {
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiPredicate}.
      */
-    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(predicate, keyFunction, Caffeine.newBuilder().build());
+        return biPredicate(predicate, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -474,10 +480,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiPredicate}.
      */
-    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
             final Cache<String, Boolean> cache) {
-        return memoize(predicate, hashCodeKeyFunction(), cache);
+        return biPredicate(predicate, hashCodeKeyFunction(), cache);
     }
 
     /**
@@ -498,11 +504,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiPredicate}.
      */
-    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
-        return MapMemoization.memoize(predicate, keyFunction, cache.asMap());
+        return MapMemoize.biPredicate(predicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -519,9 +525,8 @@ public final class CaffeineMemoization {
      *            The {@link BooleanSupplier} to memoize.
      * @return The wrapped {@link BooleanSupplier}.
      */
-    public static BooleanSupplier memoize(
-            final BooleanSupplier supplier) {
-        return memoize(supplier, Caffeine.newBuilder().build());
+    public static BooleanSupplier booleanSupplier(final BooleanSupplier supplier) {
+        return booleanSupplier(supplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -540,10 +545,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BooleanSupplier}.
      */
-    public static BooleanSupplier memoize(
+    public static BooleanSupplier booleanSupplier(
             final BooleanSupplier supplier,
             final Cache<String, Boolean> cache) {
-        return memoize(supplier, defaultKeySupplier(), cache);
+        return booleanSupplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -562,10 +567,10 @@ public final class CaffeineMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link BooleanSupplier}.
      */
-    public static <KEY> BooleanSupplier memoize(
+    public static <KEY> BooleanSupplier booleanSupplier(
             final BooleanSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, Caffeine.newBuilder().build());
+        return booleanSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -586,11 +591,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BooleanSupplier}.
      */
-    public static <KEY> BooleanSupplier memoize(
+    public static <KEY> BooleanSupplier booleanSupplier(
             final BooleanSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Boolean> cache) {
-        return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
+        return MapMemoize.booleanSupplier(supplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -607,8 +612,8 @@ public final class CaffeineMemoization {
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
      */
-    public static <VALUE> Consumer<VALUE> memoize(final Consumer<VALUE> consumer) {
-        return memoize(consumer, Caffeine.newBuilder().build());
+    public static <VALUE> Consumer<VALUE> consumer(final Consumer<VALUE> consumer) {
+        return consumer(consumer, Caffeine.newBuilder().build());
     }
 
     /**
@@ -627,10 +632,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Consumer}.
      */
-    public static <VALUE> Consumer<VALUE> memoize(
+    public static <VALUE> Consumer<VALUE> consumer(
             final Consumer<VALUE> consumer,
             final Cache<VALUE, VALUE> cache) {
-        return MapMemoization.memoize(consumer, cache.asMap());
+        return MapMemoize.consumer(consumer, cache.asMap());
     }
 
     /**
@@ -647,8 +652,8 @@ public final class CaffeineMemoization {
      *            The {@link DoubleConsumer} to memoize.
      * @return The wrapped {@link DoubleConsumer}.
      */
-    public static DoubleConsumer memoize(final DoubleConsumer consumer) {
-        return memoize(consumer, Caffeine.newBuilder().build());
+    public static DoubleConsumer doubleConsumer(final DoubleConsumer consumer) {
+        return doubleConsumer(consumer, Caffeine.newBuilder().build());
     }
 
     /**
@@ -667,10 +672,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleConsumer}.
      */
-    public static DoubleConsumer memoize(
+    public static DoubleConsumer doubleConsumer(
             final DoubleConsumer consumer,
             final Cache<Double, Double> cache) {
-        return MapMemoization.memoize(consumer, cache.asMap());
+        return MapMemoize.doubleConsumer(consumer, cache.asMap());
     }
 
     /**
@@ -687,8 +692,8 @@ public final class CaffeineMemoization {
      *            The {@link IntConsumer} to memoize.
      * @return The wrapped {@link IntConsumer}.
      */
-    public static IntConsumer memoize(final IntConsumer consumer) {
-        return memoize(consumer, Caffeine.newBuilder().build());
+    public static IntConsumer intConsumer(final IntConsumer consumer) {
+        return intConsumer(consumer, Caffeine.newBuilder().build());
     }
 
     /**
@@ -707,10 +712,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntConsumer}.
      */
-    public static IntConsumer memoize(
+    public static IntConsumer intConsumer(
             final IntConsumer consumer,
             final Cache<Integer, Integer> cache) {
-        return MapMemoization.memoize(consumer, cache.asMap());
+        return MapMemoize.intConsumer(consumer, cache.asMap());
     }
 
     /**
@@ -727,8 +732,8 @@ public final class CaffeineMemoization {
      *            The {@link LongConsumer} to memoize.
      * @return The wrapped {@link LongConsumer}.
      */
-    public static LongConsumer memoize(final LongConsumer consumer) {
-        return memoize(consumer, Caffeine.newBuilder().build());
+    public static LongConsumer longConsumer(final LongConsumer consumer) {
+        return longConsumer(consumer, Caffeine.newBuilder().build());
     }
 
     /**
@@ -747,10 +752,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongConsumer}.
      */
-    public static LongConsumer memoize(
+    public static LongConsumer longConsumer(
             final LongConsumer consumer,
             final Cache<Long, Long> cache) {
-        return MapMemoization.memoize(consumer, cache.asMap());
+        return MapMemoize.longConsumer(consumer, cache.asMap());
     }
 
     /**
@@ -767,9 +772,8 @@ public final class CaffeineMemoization {
      *            The {@link DoubleSupplier} to memoize.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static DoubleSupplier memoize(
-            final DoubleSupplier supplier) {
-        return memoize(supplier, Caffeine.newBuilder().build());
+    public static DoubleSupplier doubleSupplier(final DoubleSupplier supplier) {
+        return doubleSupplier(supplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -788,10 +792,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static DoubleSupplier memoize(
+    public static DoubleSupplier doubleSupplier(
             final DoubleSupplier supplier,
             final Cache<String, Double> cache) {
-        return memoize(supplier, defaultKeySupplier(), cache);
+        return doubleSupplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -810,10 +814,10 @@ public final class CaffeineMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static <KEY> DoubleSupplier memoize(
+    public static <KEY> DoubleSupplier doubleSupplier(
             final DoubleSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, Caffeine.newBuilder().build());
+        return doubleSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -834,11 +838,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static <KEY> DoubleSupplier memoize(
+    public static <KEY> DoubleSupplier doubleSupplier(
             final DoubleSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Double> cache) {
-        return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
+        return MapMemoize.doubleSupplier(supplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -855,9 +859,9 @@ public final class CaffeineMemoization {
      *            The {@link IntSupplier} to memoize.
      * @return The wrapped {@link IntSupplier}.
      */
-    public static IntSupplier memoize(
+    public static IntSupplier intSupplier(
             final IntSupplier supplier) {
-        return memoize(supplier, Caffeine.newBuilder().build());
+        return intSupplier(supplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -876,10 +880,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntSupplier}.
      */
-    public static IntSupplier memoize(
+    public static IntSupplier intSupplier(
             final IntSupplier supplier,
             final Cache<String, Integer> cache) {
-        return memoize(supplier, defaultKeySupplier(), cache);
+        return intSupplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -898,10 +902,10 @@ public final class CaffeineMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link IntSupplier}.
      */
-    public static <KEY> IntSupplier memoize(
+    public static <KEY> IntSupplier intSupplier(
             final IntSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, Caffeine.newBuilder().build());
+        return intSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -922,11 +926,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntSupplier}.
      */
-    public static <KEY> IntSupplier memoize(
+    public static <KEY> IntSupplier intSupplier(
             final IntSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Integer> cache) {
-        return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
+        return MapMemoize.intSupplier(supplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -943,9 +947,9 @@ public final class CaffeineMemoization {
      *            The {@link LongSupplier} to memoize.
      * @return The wrapped {@link LongSupplier}.
      */
-    public static LongSupplier memoize(
+    public static LongSupplier longSupplier(
             final LongSupplier supplier) {
-        return memoize(supplier, Caffeine.newBuilder().build());
+        return longSupplier(supplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -964,10 +968,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongSupplier}.
      */
-    public static LongSupplier memoize(
+    public static LongSupplier longSupplier(
             final LongSupplier supplier,
             final Cache<String, Long> cache) {
-        return memoize(supplier, defaultKeySupplier(), cache);
+        return longSupplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -986,10 +990,10 @@ public final class CaffeineMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link LongSupplier}.
      */
-    public static <KEY> LongSupplier memoize(
+    public static <KEY> LongSupplier longSupplier(
             final LongSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, Caffeine.newBuilder().build());
+        return longSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1010,11 +1014,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongSupplier}.
      */
-    public static <KEY> LongSupplier memoize(
+    public static <KEY> LongSupplier longSupplier(
             final LongSupplier supplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Long> cache) {
-        return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
+        return MapMemoize.longSupplier(supplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -1031,8 +1035,8 @@ public final class CaffeineMemoization {
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static <KEY, VALUE> Function<KEY, VALUE> memoize(final Function<KEY, VALUE> function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static <KEY, VALUE> Function<KEY, VALUE> function(final Function<KEY, VALUE> function) {
+        return function(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1051,10 +1055,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Function}.
      */
-    public static <KEY, VALUE> Function<KEY, VALUE> memoize(
+    public static <KEY, VALUE> Function<KEY, VALUE> function(
             final Function<KEY, VALUE> function,
             final Cache<KEY, VALUE> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.function(function, cache.asMap());
     }
 
     /**
@@ -1071,8 +1075,8 @@ public final class CaffeineMemoization {
      *            The {@link DoubleToIntFunction} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static DoubleToIntFunction memoize(final DoubleToIntFunction function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static DoubleToIntFunction doubleToIntFunction(final DoubleToIntFunction function) {
+        return doubleToIntFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1091,10 +1095,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleToIntFunction}.
      */
-    public static DoubleToIntFunction memoize(
+    public static DoubleToIntFunction doubleToIntFunction(
             final DoubleToIntFunction function,
             final Cache<Double, Integer> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.doubleToIntFunction(function, cache.asMap());
     }
 
     /**
@@ -1111,8 +1115,8 @@ public final class CaffeineMemoization {
      *            The {@link DoubleToLongFunction} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static DoubleToLongFunction memoize(final DoubleToLongFunction function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static DoubleToLongFunction doubleToLongFunction(final DoubleToLongFunction function) {
+        return doubleToLongFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1131,10 +1135,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleToLongFunction}.
      */
-    public static DoubleToLongFunction memoize(
+    public static DoubleToLongFunction doubleToLongFunction(
             final DoubleToLongFunction function,
             final Cache<Double, Long> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.doubleToLongFunction(function, cache.asMap());
     }
 
     /**
@@ -1151,8 +1155,8 @@ public final class CaffeineMemoization {
      *            The {@link DoubleUnaryOperator} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static DoubleUnaryOperator memoize(final DoubleUnaryOperator operator) {
-        return memoize(operator, Caffeine.newBuilder().build());
+    public static DoubleUnaryOperator doubleUnaryOperator(final DoubleUnaryOperator operator) {
+        return doubleUnaryOperator(operator, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1171,10 +1175,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleUnaryOperator}.
      */
-    public static DoubleUnaryOperator memoize(
+    public static DoubleUnaryOperator doubleUnaryOperator(
             final DoubleUnaryOperator operator,
             final Cache<Double, Double> cache) {
-        return MapMemoization.memoize(operator, cache.asMap());
+        return MapMemoize.doubleUnaryOperator(operator, cache.asMap());
     }
 
     /**
@@ -1191,8 +1195,8 @@ public final class CaffeineMemoization {
      *            The {@link DoubleBinaryOperator} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static DoubleBinaryOperator memoize(final DoubleBinaryOperator operator) {
-        return memoize(operator, Caffeine.newBuilder().build());
+    public static DoubleBinaryOperator doubleBinaryOperator(final DoubleBinaryOperator operator) {
+        return doubleBinaryOperator(operator, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1211,10 +1215,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleBinaryOperator}.
      */
-    public static DoubleBinaryOperator memoize(
+    public static DoubleBinaryOperator doubleBinaryOperator(
             final DoubleBinaryOperator operator,
             final Cache<String, Double> cache) {
-        return MapMemoization.memoize(operator, cache.asMap());
+        return MapMemoize.doubleBinaryOperator(operator, cache.asMap());
     }
 
     /**
@@ -1231,8 +1235,8 @@ public final class CaffeineMemoization {
      *            The {@link IntBinaryOperator} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static IntBinaryOperator memoize(final IntBinaryOperator operator) {
-        return memoize(operator, Caffeine.newBuilder().build());
+    public static IntBinaryOperator intBinaryOperator(final IntBinaryOperator operator) {
+        return intBinaryOperator(operator, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1251,10 +1255,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntBinaryOperator}.
      */
-    public static IntBinaryOperator memoize(
+    public static IntBinaryOperator intBinaryOperator(
             final IntBinaryOperator operator,
             final Cache<String, Integer> cache) {
-        return MapMemoization.memoize(operator, cache.asMap());
+        return MapMemoize.intBinaryOperator(operator, cache.asMap());
     }
 
     /**
@@ -1271,8 +1275,8 @@ public final class CaffeineMemoization {
      *            The {@link IntToDoubleFunction} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static IntToDoubleFunction memoize(final IntToDoubleFunction function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static IntToDoubleFunction intToDoubleFunction(final IntToDoubleFunction function) {
+        return intToDoubleFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1291,10 +1295,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntToDoubleFunction}.
      */
-    public static IntToDoubleFunction memoize(
+    public static IntToDoubleFunction intToDoubleFunction(
             final IntToDoubleFunction function,
             final Cache<Integer, Double> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.intToDoubleFunction(function, cache.asMap());
     }
 
     /**
@@ -1311,8 +1315,8 @@ public final class CaffeineMemoization {
      *            The {@link IntToLongFunction} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static IntToLongFunction memoize(final IntToLongFunction function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static IntToLongFunction intToLongFunction(final IntToLongFunction function) {
+        return intToLongFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1331,10 +1335,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntToLongFunction}.
      */
-    public static IntToLongFunction memoize(
+    public static IntToLongFunction intToLongFunction(
             final IntToLongFunction function,
             final Cache<Integer, Long> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.intToLongFunction(function, cache.asMap());
     }
 
     /**
@@ -1351,8 +1355,8 @@ public final class CaffeineMemoization {
      *            The {@link IntUnaryOperator} to memoize.
      * @return The wrapped {@link IntUnaryOperator}.
      */
-    public static IntUnaryOperator memoize(final IntUnaryOperator operator) {
-        return memoize(operator, Caffeine.newBuilder().build());
+    public static IntUnaryOperator intUnaryOperator(final IntUnaryOperator operator) {
+        return intUnaryOperator(operator, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1371,10 +1375,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntUnaryOperator}.
      */
-    public static IntUnaryOperator memoize(
+    public static IntUnaryOperator intUnaryOperator(
             final IntUnaryOperator operator,
             final Cache<Integer, Integer> cache) {
-        return MapMemoization.memoize(operator, cache.asMap());
+        return MapMemoize.intUnaryOperator(operator, cache.asMap());
     }
 
     /**
@@ -1391,8 +1395,8 @@ public final class CaffeineMemoization {
      *            The {@link LongBinaryOperator} to memoize.
      * @return The wrapped {@link LongBinaryOperator}.
      */
-    public static LongBinaryOperator memoize(final LongBinaryOperator operator) {
-        return memoize(operator, Caffeine.newBuilder().build());
+    public static LongBinaryOperator longBinaryOperator(final LongBinaryOperator operator) {
+        return longBinaryOperator(operator, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1411,10 +1415,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongBinaryOperator}.
      */
-    public static LongBinaryOperator memoize(
+    public static LongBinaryOperator longBinaryOperator(
             final LongBinaryOperator operator,
             final Cache<String, Long> cache) {
-        return MapMemoization.memoize(operator, cache.asMap());
+        return MapMemoize.longBinaryOperator(operator, cache.asMap());
     }
 
     /**
@@ -1431,8 +1435,8 @@ public final class CaffeineMemoization {
      *            The {@link LongToDoubleFunction} to memoize.
      * @return The wrapped {@link LongToDoubleFunction}.
      */
-    public static LongToDoubleFunction memoize(final LongToDoubleFunction function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static LongToDoubleFunction longToDoubleFunction(final LongToDoubleFunction function) {
+        return longToDoubleFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1451,10 +1455,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongToDoubleFunction}.
      */
-    public static LongToDoubleFunction memoize(
+    public static LongToDoubleFunction longToDoubleFunction(
             final LongToDoubleFunction function,
             final Cache<Long, Double> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.longToDoubleFunction(function, cache.asMap());
     }
 
     /**
@@ -1471,8 +1475,8 @@ public final class CaffeineMemoization {
      *            The {@link LongToIntFunction} to memoize.
      * @return The wrapped {@link LongToIntFunction}.
      */
-    public static LongToIntFunction memoize(final LongToIntFunction function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static LongToIntFunction longToIntFunction(final LongToIntFunction function) {
+        return longToIntFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1491,10 +1495,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongToIntFunction}.
      */
-    public static LongToIntFunction memoize(
+    public static LongToIntFunction longToIntFunction(
             final LongToIntFunction function,
             final Cache<Long, Integer> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.longToIntFunction(function, cache.asMap());
     }
 
     /**
@@ -1511,8 +1515,8 @@ public final class CaffeineMemoization {
      *            The {@link LongUnaryOperator} to memoize.
      * @return The wrapped {@link LongUnaryOperator}.
      */
-    public static LongUnaryOperator memoize(final LongUnaryOperator operator) {
-        return memoize(operator, Caffeine.newBuilder().build());
+    public static LongUnaryOperator longUnaryOperator(final LongUnaryOperator operator) {
+        return longUnaryOperator(operator, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1531,10 +1535,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongUnaryOperator}.
      */
-    public static LongUnaryOperator memoize(
+    public static LongUnaryOperator longUnaryOperator(
             final LongUnaryOperator operator,
             final Cache<Long, Long> cache) {
-        return MapMemoization.memoize(operator, cache.asMap());
+        return MapMemoize.longUnaryOperator(operator, cache.asMap());
     }
 
     /**
@@ -1551,8 +1555,8 @@ public final class CaffeineMemoization {
      *            The {@link Predicate} to memoize.
      * @return The wrapped {@link Predicate}.
      */
-    public static <VALUE> Predicate<VALUE> memoize(final Predicate<VALUE> predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+    public static <VALUE> Predicate<VALUE> predicate(final Predicate<VALUE> predicate) {
+        return predicate(predicate, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1571,10 +1575,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Predicate}.
      */
-    public static <VALUE> Predicate<VALUE> memoize(
+    public static <VALUE> Predicate<VALUE> predicate(
             final Predicate<VALUE> predicate,
             final Cache<VALUE, Boolean> cache) {
-        return MapMemoization.memoize(predicate, cache.asMap());
+        return MapMemoize.predicate(predicate, cache.asMap());
     }
 
     /**
@@ -1591,8 +1595,8 @@ public final class CaffeineMemoization {
      *            The {@link LongPredicate} to memoize.
      * @return The wrapped {@link LongPredicate}.
      */
-    public static LongPredicate memoize(final LongPredicate predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+    public static LongPredicate longPredicate(final LongPredicate predicate) {
+        return longPredicate(predicate, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1611,10 +1615,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongPredicate}.
      */
-    public static LongPredicate memoize(
+    public static LongPredicate longPredicate(
             final LongPredicate predicate,
             final Cache<Long, Boolean> cache) {
-        return MapMemoization.memoize(predicate, cache.asMap());
+        return MapMemoize.longPredicate(predicate, cache.asMap());
     }
 
     /**
@@ -1631,8 +1635,8 @@ public final class CaffeineMemoization {
      *            The {@link IntPredicate} to memoize.
      * @return The wrapped {@link IntPredicate}.
      */
-    public static IntPredicate memoize(final IntPredicate predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+    public static IntPredicate intPredicate(final IntPredicate predicate) {
+        return intPredicate(predicate, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1651,10 +1655,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntPredicate}.
      */
-    public static IntPredicate memoize(
+    public static IntPredicate intPredicate(
             final IntPredicate predicate,
             final Cache<Integer, Boolean> cache) {
-        return MapMemoization.memoize(predicate, cache.asMap());
+        return MapMemoize.intPredicate(predicate, cache.asMap());
     }
 
     /**
@@ -1671,8 +1675,8 @@ public final class CaffeineMemoization {
      *            The {@link DoublePredicate} to memoize.
      * @return The wrapped {@link DoublePredicate}.
      */
-    public static DoublePredicate memoize(final DoublePredicate predicate) {
-        return memoize(predicate, Caffeine.newBuilder().build());
+    public static DoublePredicate doublePredicate(final DoublePredicate predicate) {
+        return doublePredicate(predicate, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1691,10 +1695,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoublePredicate}.
      */
-    public static DoublePredicate memoize(
+    public static DoublePredicate doublePredicate(
             final DoublePredicate predicate,
             final Cache<Double, Boolean> cache) {
-        return MapMemoization.memoize(predicate, cache.asMap());
+        return MapMemoize.doublePredicate(predicate, cache.asMap());
     }
 
     /**
@@ -1711,9 +1715,9 @@ public final class CaffeineMemoization {
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
      */
-    public static <VALUE> Supplier<VALUE> memoize(
+    public static <VALUE> Supplier<VALUE> supplier(
             final Supplier<VALUE> supplier) {
-        return memoize(supplier, Caffeine.newBuilder().build());
+        return supplier(supplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1732,10 +1736,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Supplier}.
      */
-    public static <VALUE> Supplier<VALUE> memoize(
+    public static <VALUE> Supplier<VALUE> supplier(
             final Supplier<VALUE> supplier,
             final Cache<String, VALUE> cache) {
-        return memoize(supplier, defaultKeySupplier(), cache);
+        return supplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -1754,10 +1758,10 @@ public final class CaffeineMemoization {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link Supplier}.
      */
-    public static <KEY, VALUE> Supplier<VALUE> memoize(
+    public static <KEY, VALUE> Supplier<VALUE> supplier(
             final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier) {
-        return memoize(supplier, keySupplier, Caffeine.newBuilder().build());
+        return supplier(supplier, keySupplier, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1772,11 +1776,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Supplier}.
      */
-    public static <KEY, VALUE> Supplier<VALUE> memoize(
+    public static <KEY, VALUE> Supplier<VALUE> supplier(
             final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, VALUE> cache) {
-        return MapMemoization.memoize(supplier, keySupplier, cache.asMap());
+        return MapMemoize.supplier(supplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -1793,9 +1797,9 @@ public final class CaffeineMemoization {
      *            The {@link ToDoubleBiFunction} to memoize.
      * @return The wrapped {@link ToDoubleBiFunction}.
      */
-    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function) {
-        return memoize(function, Caffeine.newBuilder().build());
+        return toDoubleBiFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1814,10 +1818,10 @@ public final class CaffeineMemoization {
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link ToDoubleBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(function, keyFunction, Caffeine.newBuilder().build());
+        return toDoubleBiFunction(function, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1836,10 +1840,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToDoubleBiFunction}.
      */
-    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function,
             final Cache<String, Double> cache) {
-        return memoize(function, hashCodeKeyFunction(), cache);
+        return toDoubleBiFunction(function, hashCodeKeyFunction(), cache);
     }
 
     /**
@@ -1854,11 +1858,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToDoubleBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Double> cache) {
-        return MapMemoization.memoize(function, keyFunction, cache.asMap());
+        return MapMemoize.toDoubleBiFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1875,9 +1879,9 @@ public final class CaffeineMemoization {
      *            The {@link ToIntBiFunction} to memoize.
      * @return The wrapped {@link ToIntBiFunction}.
      */
-    public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function) {
-        return memoize(function, Caffeine.newBuilder().build());
+        return toIntBiFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1896,10 +1900,10 @@ public final class CaffeineMemoization {
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link ToIntBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(function, keyFunction, Caffeine.newBuilder().build());
+        return toIntBiFunction(function, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1918,10 +1922,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToIntBiFunction}.
      */
-    public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function,
             final Cache<String, Integer> cache) {
-        return memoize(function, hashCodeKeyFunction(), cache);
+        return toIntBiFunction(function, hashCodeKeyFunction(), cache);
     }
 
     /**
@@ -1942,11 +1946,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToIntBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
-        return MapMemoization.memoize(function, keyFunction, cache.asMap());
+        return MapMemoize.toIntBiFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1963,9 +1967,9 @@ public final class CaffeineMemoization {
      *            The {@link ToLongBiFunction} to memoize.
      * @return The wrapped {@link ToLongBiFunction}.
      */
-    public static <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function) {
-        return memoize(function, Caffeine.newBuilder().build());
+        return toLongBiFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1984,10 +1988,10 @@ public final class CaffeineMemoization {
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link ToLongBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return memoize(function, keyFunction, Caffeine.newBuilder().build());
+        return toLongBiFunction(function, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -2006,10 +2010,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToLongBiFunction}.
      */
-    public static <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function,
             final Cache<String, Long> cache) {
-        return memoize(function, hashCodeKeyFunction(), cache);
+        return toLongBiFunction(function, hashCodeKeyFunction(), cache);
     }
 
     /**
@@ -2030,11 +2034,11 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToLongBiFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> memoize(
+    public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Long> cache) {
-        return MapMemoization.memoize(function, keyFunction, cache.asMap());
+        return MapMemoize.toLongBiFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -2051,8 +2055,8 @@ public final class CaffeineMemoization {
      *            The {@link ToDoubleFunction} to memoize.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static <VALUE> ToDoubleFunction<VALUE> memoize(final ToDoubleFunction<VALUE> function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static <VALUE> ToDoubleFunction<VALUE> toDoubleFunction(final ToDoubleFunction<VALUE> function) {
+        return toDoubleFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -2071,10 +2075,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static <VALUE> ToDoubleFunction<VALUE> memoize(
+    public static <VALUE> ToDoubleFunction<VALUE> toDoubleFunction(
             final ToDoubleFunction<VALUE> function,
             final Cache<VALUE, Double> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.toDoubleFunction(function, cache.asMap());
     }
 
     /**
@@ -2091,8 +2095,8 @@ public final class CaffeineMemoization {
      *            The {@link ToIntFunction} to memoize.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static <VALUE> ToIntFunction<VALUE> memoize(final ToIntFunction<VALUE> function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static <VALUE> ToIntFunction<VALUE> toIntFunction(final ToIntFunction<VALUE> function) {
+        return toIntFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -2111,10 +2115,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static <VALUE> ToIntFunction<VALUE> memoize(
+    public static <VALUE> ToIntFunction<VALUE> toIntFunction(
             final ToIntFunction<VALUE> function,
             final Cache<VALUE, Integer> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.toIntFunction(function, cache.asMap());
     }
 
     /**
@@ -2131,8 +2135,8 @@ public final class CaffeineMemoization {
      *            The {@link ToLongFunction} to memoize.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static <VALUE> ToLongFunction<VALUE> memoize(final ToLongFunction<VALUE> function) {
-        return memoize(function, Caffeine.newBuilder().build());
+    public static <VALUE> ToLongFunction<VALUE> toLongFunction(final ToLongFunction<VALUE> function) {
+        return toLongFunction(function, Caffeine.newBuilder().build());
     }
 
     /**
@@ -2151,10 +2155,10 @@ public final class CaffeineMemoization {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static <VALUE> ToLongFunction<VALUE> memoize(
+    public static <VALUE> ToLongFunction<VALUE> toLongFunction(
             final ToLongFunction<VALUE> function,
             final Cache<VALUE, Long> cache) {
-        return MapMemoization.memoize(function, cache.asMap());
+        return MapMemoize.toLongFunction(function, cache.asMap());
     }
 
 }
