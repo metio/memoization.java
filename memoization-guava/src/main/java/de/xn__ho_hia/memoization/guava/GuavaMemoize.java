@@ -12,6 +12,7 @@ import static java.util.function.Function.identity;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.DoubleFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
@@ -50,6 +51,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  *
  * @see BiFunction
  * @see Consumer
+ * @see DoubleFunction
  * @see Function
  * @see IntFunction
  * @see LongFunction
@@ -412,6 +414,94 @@ public final class GuavaMemoize {
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
         return new GuavaCacheBasedLongFunctionMemoizer<>(cache, keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static final <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function) {
+        return doubleFunction(function, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static final <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleFunction(function, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static final <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final Cache<Double, OUTPUT> cache) {
+        return doubleFunction(function, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static final <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return new GuavaCacheBasedDoubleFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**

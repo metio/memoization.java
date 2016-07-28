@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.guava;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.DoubleFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
@@ -78,7 +79,7 @@ public class GuavaMemoizeCustomKeyTest {
     *
     */
     @Test
-    public void shouldMemoizeLongFunction() {
+    public void shouldMemoizeLongFunctionWithKeyFunction() {
         // given
         final LongFunction<String> function = a -> "test";
         final LongFunction<String> keyFunction = a -> "key";
@@ -88,6 +89,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleFunctionWithKeyFunction() {
+        // given
+        final DoubleFunction<String> function = a -> "test";
+        final DoubleFunction<String> keyFunction = a -> "key";
+
+        // when
+        final DoubleFunction<String> memoize = GuavaMemoize.doubleFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
     }
 
     /**

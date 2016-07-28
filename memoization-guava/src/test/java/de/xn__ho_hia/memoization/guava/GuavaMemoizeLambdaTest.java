@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.guava;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.DoubleFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
@@ -80,6 +81,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleFunctionWithLambda() {
+        // given
+
+        // when
+        final DoubleFunction<String> memoize = GuavaMemoize.doubleFunction(a -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
     }
 
     /**
