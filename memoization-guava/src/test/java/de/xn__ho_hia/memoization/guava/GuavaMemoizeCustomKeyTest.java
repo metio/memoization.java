@@ -1,0 +1,124 @@
+/*
+ * This file is part of memoization.java. It is subject to the license terms in the LICENSE file found in the top-level
+ * directory of this distribution and at http://creativecommons.org/publicdomain/zero/1.0/. No part of memoization.java,
+ * including this file, may be copied, modified, propagated, or distributed except according to the terms contained
+ * in the LICENSE file.
+ */
+package de.xn__ho_hia.memoization.guava;
+
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+
+/**
+ *
+ *
+ */
+@SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
+public class GuavaMemoizeCustomKeyTest {
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeSupplierWithKeySupplier() {
+        // given
+        final Supplier<String> supplier = () -> "test";
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final Supplier<String> memoize = GuavaMemoize.supplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeFunctionWithKeyFunction() {
+        // given
+        final Function<String, String> function = a -> "test";
+        final Function<String, String> keyFunction = Function.identity();
+
+        // when
+        final Function<String, String> memoize = GuavaMemoize.function(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntFunctionWithKeyFunction() {
+        // given
+        final IntFunction<String> function = a -> "test";
+        final IntFunction<String> keyFunction = a -> "test";
+
+        // when
+        final IntFunction<String> memoize = GuavaMemoize.intFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiFunctionWithKeyBiFunction() {
+        // given
+        final BiFunction<String, String, String> biFunction = (a, b) -> "test";
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
+
+        // when
+        final BiFunction<String, String, String> memoize = GuavaMemoize.biFunction(biFunction, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeConsumerWithKeyFunction() {
+        // given
+        final Consumer<String> consumer = System.out::println;
+        final Function<String, String> keyFunction = Function.identity();
+
+        // when
+        final Consumer<String> memoize = GuavaMemoize.consumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizePredicateWithKeyFunction() {
+        // given
+        final Predicate<String> predicate = a -> true;
+        final Function<String, String> keyFunction = Function.identity();
+
+        // when
+        final Predicate<String> memoize = GuavaMemoize.predicate(predicate, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+}
