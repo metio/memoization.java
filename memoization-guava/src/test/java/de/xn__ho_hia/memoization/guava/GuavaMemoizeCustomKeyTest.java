@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.LongFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -48,7 +49,7 @@ public class GuavaMemoizeCustomKeyTest {
     public void shouldMemoizeFunctionWithKeyFunction() {
         // given
         final Function<String, String> function = a -> "test";
-        final Function<String, String> keyFunction = Function.identity();
+        final Function<String, String> keyFunction = a -> "key";
 
         // when
         final Function<String, String> memoize = GuavaMemoize.function(function, keyFunction);
@@ -64,13 +65,29 @@ public class GuavaMemoizeCustomKeyTest {
     public void shouldMemoizeIntFunctionWithKeyFunction() {
         // given
         final IntFunction<String> function = a -> "test";
-        final IntFunction<String> keyFunction = a -> "test";
+        final IntFunction<String> keyFunction = a -> "key";
 
         // when
         final IntFunction<String> memoize = GuavaMemoize.intFunction(function, keyFunction);
 
         // then
         Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongFunction() {
+        // given
+        final LongFunction<String> function = a -> "test";
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongFunction<String> memoize = GuavaMemoize.longFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
     }
 
     /**
@@ -96,7 +113,7 @@ public class GuavaMemoizeCustomKeyTest {
     public void shouldMemoizeConsumerWithKeyFunction() {
         // given
         final Consumer<String> consumer = System.out::println;
-        final Function<String, String> keyFunction = Function.identity();
+        final Function<String, String> keyFunction = a -> "key";
 
         // when
         final Consumer<String> memoize = GuavaMemoize.consumer(consumer, keyFunction);
@@ -112,7 +129,7 @@ public class GuavaMemoizeCustomKeyTest {
     public void shouldMemoizePredicateWithKeyFunction() {
         // given
         final Predicate<String> predicate = a -> true;
-        final Function<String, String> keyFunction = Function.identity();
+        final Function<String, String> keyFunction = a -> "key";
 
         // when
         final Predicate<String> memoize = GuavaMemoize.predicate(predicate, keyFunction);

@@ -14,6 +14,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.LongFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -51,6 +52,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see Consumer
  * @see Function
  * @see IntFunction
+ * @see LongFunction
  * @see Predicate
  * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
@@ -257,7 +259,7 @@ public final class GuavaMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Function} in a Guava {@link Cache}.
+     * Memoizes a {@link IntFunction} in a Guava {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -266,10 +268,10 @@ public final class GuavaMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link Function} to memoize.
+     *            The {@link IntFunction} to memoize.
      * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @return The wrapped {@link Function}.
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntFunction}.
      */
     public static final <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
             final IntFunction<OUTPUT> function,
@@ -322,6 +324,94 @@ public final class GuavaMemoize {
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
         return new GuavaCacheBasedIntFunctionMemoizer<>(cache, keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static final <OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function) {
+        return longFunction(function, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static final <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final LongFunction<KEY> keyFunction) {
+        return longFunction(function, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static final <OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final Cache<Long, OUTPUT> cache) {
+        return longFunction(function, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static final <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return new GuavaCacheBasedLongFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
