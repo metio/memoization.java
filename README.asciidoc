@@ -350,7 +350,7 @@ Map<String, OUTPUT> cache                = ...;
 Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, cache);
 ----
 
-=== Custom cache w/ Custom cache keys
+=== Custom cache w/ custom cache keys
 
 [source, java]
 ----
