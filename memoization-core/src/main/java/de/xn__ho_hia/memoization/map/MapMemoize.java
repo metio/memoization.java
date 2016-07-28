@@ -120,6 +120,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see IntUnaryOperator
  * @see LongBinaryOperator
  * @see LongConsumer
+ * @see LongFunction
  * @see LongPredicate
  * @see LongSupplier
  * @see LongToDoubleFunction
@@ -1100,6 +1101,93 @@ public final class MapMemoize {
             final IntFunction<KEY> keyFunction,
             final Map<KEY, OUTPUT> cache) {
         return new ConcurrentMapBasedIntFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static <OUTPUT> LongFunction<OUTPUT> longFunction(final LongFunction<OUTPUT> function) {
+        return longFunction(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final LongFunction<KEY> keyFunction) {
+        return longFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static <OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final Map<Long, OUTPUT> cache) {
+        return longFunction(function, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final LongFunction<KEY> keyFunction,
+            final Map<KEY, OUTPUT> cache) {
+        return new ConcurrentMapBasedLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
     }
 
     /**

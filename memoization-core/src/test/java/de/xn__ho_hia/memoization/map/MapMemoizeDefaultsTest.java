@@ -29,6 +29,7 @@ import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
+import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
@@ -251,6 +252,21 @@ public class MapMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongFunction() {
+        // given
+        final LongFunction<String> function = a -> "test";
+
+        // when
+        final LongFunction<String> memoize = MapMemoize.longFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
     }
 
     /**

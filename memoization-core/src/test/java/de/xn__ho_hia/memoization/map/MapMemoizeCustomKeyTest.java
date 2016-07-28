@@ -182,6 +182,22 @@ public class MapMemoizeCustomKeyTest {
     *
     */
     @Test
+    public void shouldMemoizeLongFunctionWithKeyFunction() {
+        // given
+        final LongFunction<String> function = a -> "test";
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongFunction<String> memoize = MapMemoize.longFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeBiFunctionWithKeyBiFunction() {
         // given
         final BiFunction<String, String, String> bifunction = (a, b) -> "test";
