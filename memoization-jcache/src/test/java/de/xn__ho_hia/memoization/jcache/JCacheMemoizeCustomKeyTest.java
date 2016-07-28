@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.LongFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -70,6 +71,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongFunctionWithKeyFunction() {
+        // given
+        final LongFunction<String> function = a -> "test";
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongFunction<String> memoize = JCacheMemoize.longFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
     }
 
     /**

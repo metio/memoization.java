@@ -15,6 +15,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.LongFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -54,6 +55,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see Consumer
  * @see Function
  * @see IntFunction
+ * @see LongFunction
  * @see Predicate
  * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
@@ -256,7 +258,7 @@ public final class JCacheMemoize {
      * @return The wrapped {@link IntFunction}.
      */
     public static final <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
-        return intFunction(function, createCache(Function.class));
+        return intFunction(function, createCache(IntFunction.class));
     }
 
     /**
@@ -278,7 +280,7 @@ public final class JCacheMemoize {
     public static final <OUTPUT, KEY> IntFunction<OUTPUT> intFunction(
             final IntFunction<OUTPUT> function,
             final IntFunction<KEY> keyFunction) {
-        return intFunction(function, keyFunction, createCache(Function.class));
+        return intFunction(function, keyFunction, createCache(IntFunction.class));
     }
 
     /**
@@ -326,6 +328,93 @@ public final class JCacheMemoize {
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
         return new JCacheBasedIntFunctionMemoizer<>(cache, keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static final <OUTPUT> LongFunction<OUTPUT> longFunction(final LongFunction<OUTPUT> function) {
+        return longFunction(function, createCache(LongFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static final <OUTPUT, KEY> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final LongFunction<KEY> keyFunction) {
+        return longFunction(function, keyFunction, createCache(LongFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static final <OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final Cache<Long, OUTPUT> cache) {
+        return longFunction(function, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static final <OUTPUT, KEY> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return new JCacheBasedLongFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**

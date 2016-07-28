@@ -176,7 +176,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 | link:{jdk-api}/java/util/function/LongFunction.html[LongFunction]
 | ✓
 | ✓
-| link:{issue}/144[#184]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/LongPredicate.html[LongPredicate]

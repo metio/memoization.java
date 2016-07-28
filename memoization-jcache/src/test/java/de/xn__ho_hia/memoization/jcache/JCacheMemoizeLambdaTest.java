@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.LongFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -64,6 +65,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongFunctionWithLambda() {
+        // given
+
+        // when
+        final LongFunction<String> memoize = JCacheMemoize.longFunction(a -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
     }
 
     /**
