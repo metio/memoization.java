@@ -106,6 +106,22 @@ public class CaffeineMemoizeCustomKeyTest {
     *
     */
     @Test
+    public void shouldMemoizeLongFunctionWithKeyFunction() {
+        // given
+        final LongFunction<String> function = a -> "test";
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongFunction<String> memoize = CaffeineMemoize.longFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeDoubleToIntFunctionWithKeyFunction() {
         // given
         final DoubleToIntFunction function = a -> 123;
