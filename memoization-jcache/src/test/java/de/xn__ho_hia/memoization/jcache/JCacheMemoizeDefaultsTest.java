@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.jcache;
 
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.DoubleFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
@@ -83,6 +84,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleFunction() {
+        // given
+        final DoubleFunction<String> function = a -> "test";
+
+        // when
+        final DoubleFunction<String> memoize = JCacheMemoize.doubleFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
     }
 
     /**
