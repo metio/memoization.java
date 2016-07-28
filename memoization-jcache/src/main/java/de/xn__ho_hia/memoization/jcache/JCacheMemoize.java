@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -52,6 +53,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see BiFunction
  * @see Consumer
  * @see Function
+ * @see IntFunction
  * @see Predicate
  * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
@@ -237,6 +239,93 @@ public final class JCacheMemoize {
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
         return new JCacheBasedFunctionMemoizer<>(cache, keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static final <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
+        return intFunction(function, createCache(Function.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static final <OUTPUT, KEY> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final IntFunction<KEY> keyFunction) {
+        return intFunction(function, keyFunction, createCache(Function.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static final <OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final Cache<Integer, OUTPUT> cache) {
+        return intFunction(function, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static final <OUTPUT, KEY> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return new JCacheBasedIntFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
