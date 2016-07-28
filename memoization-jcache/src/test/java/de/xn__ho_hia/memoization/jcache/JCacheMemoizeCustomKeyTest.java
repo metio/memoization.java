@@ -60,7 +60,7 @@ public class JCacheMemoizeCustomKeyTest {
     *
     */
     @Test
-    public void shouldMemoizeIntFunction() {
+    public void shouldMemoizeIntFunctionWithKeyFunction() {
         // given
         final IntFunction<String> function = a -> "test";
         final IntFunction<String> keyFunction = a -> "key";
