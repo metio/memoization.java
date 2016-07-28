@@ -166,6 +166,22 @@ public class MapMemoizeCustomKeyTest {
     *
     */
     @Test
+    public void shouldMemoizeIntFunctionWithKeyFunction() {
+        // given
+        final IntFunction<String> function = a -> "test";
+        final IntFunction<String> keyFunction = a -> "key";
+
+        // when
+        final IntFunction<String> memoize = MapMemoize.intFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeBiFunctionWithKeyBiFunction() {
         // given
         final BiFunction<String, String, String> bifunction = (a, b) -> "test";

@@ -125,6 +125,12 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 | link:{issue}/137[#137]
 | ✓
 
+| link:{jdk-api}/java/util/function/IntFunction.html[IntFunction]
+| link:{issue}/137[#174]
+| link:{issue}/137[#175]
+| link:{issue}/137[#176]
+| ✓
+
 | link:{jdk-api}/java/util/function/IntPredicate.html[IntPredicate]
 | ✓
 | link:{issue}/66[#66]

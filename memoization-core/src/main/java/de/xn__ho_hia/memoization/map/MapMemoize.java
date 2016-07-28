@@ -112,6 +112,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see Function
  * @see IntBinaryOperator
  * @see IntConsumer
+ * @see IntFunction
  * @see IntPredicate
  * @see IntSupplier
  * @see IntToDoubleFunction
@@ -1012,6 +1013,93 @@ public final class MapMemoize {
             final IntFunction<KEY> keyFunction,
             final Map<KEY, Integer> cache) {
         return new ConcurrentMapBasedIntConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
+        return intFunction(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final IntFunction<KEY> keyFunction) {
+        return intFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final Map<Integer, OUTPUT> cache) {
+        return intFunction(function, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final IntFunction<KEY> keyFunction,
+            final Map<KEY, OUTPUT> cache) {
+        return new ConcurrentMapBasedIntFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
     }
 
     /**
