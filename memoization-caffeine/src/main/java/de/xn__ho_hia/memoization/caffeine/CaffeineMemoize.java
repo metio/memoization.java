@@ -110,6 +110,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see Function
  * @see IntBinaryOperator
  * @see IntConsumer
+ * @see IntFunction
  * @see IntPredicate
  * @see IntSupplier
  * @see IntToDoubleFunction
@@ -1451,6 +1452,93 @@ public final class CaffeineMemoize {
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
         return MapMemoize.function(function, keyFunction, cache.asMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
+        return intFunction(function, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final IntFunction<KEY> keyFunction) {
+        return intFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final Cache<Integer, OUTPUT> cache) {
+        return intFunction(function, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return MapMemoize.intFunction(function, keyFunction, cache.asMap());
     }
 
     /**

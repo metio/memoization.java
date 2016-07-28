@@ -21,6 +21,7 @@ import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
+import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
@@ -69,6 +70,21 @@ public class CaffeineMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntFunction() {
+        // given
+        final IntFunction<String> function = a -> "test";
+
+        // when
+        final IntFunction<String> memoize = CaffeineMemoize.intFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
     }
 
     /**
