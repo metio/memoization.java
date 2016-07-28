@@ -104,6 +104,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see Consumer
  * @see DoubleBinaryOperator
  * @see DoubleConsumer
+ * @see DoubleFunction
  * @see DoublePredicate
  * @see DoubleSupplier
  * @see DoubleToIntFunction
@@ -1123,7 +1124,7 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -1145,7 +1146,7 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -1188,6 +1189,93 @@ public final class MapMemoize {
             final LongFunction<KEY> keyFunction,
             final Map<KEY, OUTPUT> cache) {
         return new ConcurrentMapBasedLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(final DoubleFunction<OUTPUT> function) {
+        return doubleFunction(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final Map<Double, OUTPUT> cache) {
+        return doubleFunction(function, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final DoubleFunction<KEY> keyFunction,
+            final Map<KEY, OUTPUT> cache) {
+        return new ConcurrentMapBasedDoubleFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
     }
 
     /**

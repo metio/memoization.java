@@ -198,6 +198,22 @@ public class MapMemoizeCustomKeyTest {
     *
     */
     @Test
+    public void shouldMemoizeDoubleFunction() {
+        // given
+        final DoubleFunction<String> function = a -> "test";
+        final DoubleFunction<String> keyFunction = a -> "key";
+
+        // when
+        final DoubleFunction<String> memoize = MapMemoize.doubleFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeBiFunctionWithKeyBiFunction() {
         // given
         final BiFunction<String, String, String> bifunction = (a, b) -> "test";

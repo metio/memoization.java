@@ -77,6 +77,12 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 | link:{issue}/130[#130]
 | ✓
 
+| link:{jdk-api}/java/util/function/DoubleFunction.html[DoubleFunction]
+| link:{issue}/177[#177]
+| link:{issue}/179[#179]
+| link:{issue}/180[#180]
+| ✓
+
 | link:{jdk-api}/java/util/function/DoublePredicate.html[DoublePredicate]
 | ✓
 | link:{issue}/59[#59]
