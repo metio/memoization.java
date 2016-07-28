@@ -9,28 +9,33 @@ package de.xn__ho_hia.memoization.map;
 import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedLongPredicateMemoizer
-        extends ConcurrentMapBasedMemoizer<Long, Boolean>
+final class ConcurrentMapBasedLongPredicateMemoizer<KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Boolean>
         implements LongPredicate {
 
-    private final LongPredicate predicate;
+    private final LongFunction<KEY> keyFunction;
+    private final LongPredicate     predicate;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedLongPredicateMemoizer(
-            final ConcurrentMap<Long, Boolean> cache,
+            final ConcurrentMap<KEY, Boolean> cache,
+            final LongFunction<KEY> keyFunction,
             final LongPredicate predicate) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.predicate = requireNonNull(predicate,
                 "Cannot memoize a NULL Predicate - provide an actual Predicate to fix this.");
     }
 
     @Override
     public boolean test(final long value) {
-        return computeIfAbsent(Long.valueOf(value), key -> Boolean.valueOf(predicate.test(value))).booleanValue();
+        final KEY key = keyFunction.apply(value);
+        return computeIfAbsent(key, givenKey -> Boolean.valueOf(predicate.test(value))).booleanValue();
     }
 
 }

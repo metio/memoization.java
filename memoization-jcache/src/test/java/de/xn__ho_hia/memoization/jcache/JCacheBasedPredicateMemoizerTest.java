@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.jcache;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import javax.cache.Cache;
@@ -39,10 +40,11 @@ public class JCacheBasedPredicateMemoizerTest {
     public void shouldMemoizeFunction() {
         // given
         final Predicate<String> predicate = a -> true;
-        try (final Cache<String, Boolean> cache = JCacheMemoize.createCache(Predicate.class.getSimpleName())) {
+        final Function<String, String> keyFunction = Function.identity();
+        try (final Cache<String, Boolean> cache = JCacheMemoize.createCache(Predicate.class)) {
             // when
-            final JCacheBasedPredicateMemoizer<String> loader = new JCacheBasedPredicateMemoizer<>(cache,
-                    predicate);
+            final JCacheBasedPredicateMemoizer<String, String> loader = new JCacheBasedPredicateMemoizer<>(cache,
+                    keyFunction, predicate);
 
             // then
             Assert.assertTrue("Memoized value does not match expectation", loader.test("test"));
@@ -56,8 +58,10 @@ public class JCacheBasedPredicateMemoizerTest {
     @SuppressWarnings(CompilerWarnings.UNCHECKED)
     public void shouldWrapRuntimeExceptionInMemoizationException() {
         // given
+        final Function<String, String> keyFunction = Function.identity();
         try (final Cache<String, Boolean> cache = Mockito.mock(Cache.class)) {
-            final JCacheBasedPredicateMemoizer<String> loader = new JCacheBasedPredicateMemoizer<>(cache, null);
+            final JCacheBasedPredicateMemoizer<String, String> loader = new JCacheBasedPredicateMemoizer<>(cache,
+                    keyFunction, null);
             given(cache.invoke(any(), any())).willThrow(RuntimeException.class);
 
             // when

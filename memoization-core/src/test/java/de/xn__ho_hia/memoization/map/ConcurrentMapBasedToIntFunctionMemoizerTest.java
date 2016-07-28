@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.function.ToIntFunction;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Integer> cache = new ConcurrentHashMap<>();
         final ToIntFunction<String> function = input -> 123;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToIntFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToIntFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Integer> cache = null;
         final ToIntFunction<String> function = input -> 123;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedToIntFunctionMemoizer<>(cache, function);
+        new ConcurrentMapBasedToIntFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Integer> cache = new ConcurrentHashMap<>();
         final ToIntFunction<String> function = null;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedToIntFunctionMemoizerTest {
                 "Cannot memoize a NULL ToIntFunction - provide an actual ToIntFunction to fix this.");
 
         // then
-        new ConcurrentMapBasedToIntFunctionMemoizer<>(cache, function);
+        new ConcurrentMapBasedToIntFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Integer> cache = new ConcurrentHashMap<>();
         final ToIntFunction<String> function = input -> 123;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToIntFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToIntFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt("123");
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Integer> cache = new ConcurrentHashMap<>();
         final ToIntFunction<String> function = input -> 123;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToIntFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToIntFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt("123");
@@ -132,10 +138,11 @@ public class ConcurrentMapBasedToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Integer> cache = new ConcurrentHashMap<>();
         final ToIntFunction<String> function = Mockito.mock(ToIntFunction.class);
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToIntFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToIntFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt("123");
@@ -150,10 +157,11 @@ public class ConcurrentMapBasedToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Integer> cache = new ConcurrentHashMap<>();
         final ToIntFunction<String> function = input -> 123;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToIntFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToIntFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertEquals(123, memoizer.applyAsInt("123"));

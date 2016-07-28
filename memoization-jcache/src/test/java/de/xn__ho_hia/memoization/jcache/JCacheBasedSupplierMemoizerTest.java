@@ -31,7 +31,7 @@ public class JCacheBasedSupplierMemoizerTest {
         // given
         final Supplier<String> supplier = () -> "test";
         final Supplier<String> keySupplier = () -> "key";
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class.getSimpleName())) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
             // when
             final JCacheBasedSupplierMemoizer<String, String> loader = new JCacheBasedSupplierMemoizer<>(cache,
                     keySupplier, supplier);

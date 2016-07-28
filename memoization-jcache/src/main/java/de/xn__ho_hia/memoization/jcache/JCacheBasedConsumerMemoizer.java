@@ -7,27 +7,32 @@
 package de.xn__ho_hia.memoization.jcache;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import javax.cache.Cache;
 
-final class JCacheBasedConsumerMemoizer<VALUE>
-        extends AbstractJCacheBasedMemoizer<VALUE, VALUE>
-        implements Consumer<VALUE> {
+final class JCacheBasedConsumerMemoizer<INPUT, KEY>
+        extends AbstractJCacheBasedMemoizer<KEY, INPUT>
+        implements Consumer<INPUT> {
 
-    private final Consumer<VALUE> consumer;
+    private final Consumer<INPUT>      consumer;
+    private final Function<INPUT, KEY> keyFunction;
 
     JCacheBasedConsumerMemoizer(
-            final Cache<VALUE, VALUE> cache,
-            final Consumer<VALUE> consumer) {
+            final Cache<KEY, INPUT> cache,
+            final Function<INPUT, KEY> keyFunction,
+            final Consumer<INPUT> consumer) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.consumer = consumer;
     }
 
     @Override
-    public void accept(final VALUE input) {
-        invoke(input, key -> {
-            consumer.accept(key);
-            return key;
+    public void accept(final INPUT input) {
+        final KEY key = keyFunction.apply(input);
+        invoke(key, givenKey -> {
+            consumer.accept(input);
+            return input;
         });
     }
 

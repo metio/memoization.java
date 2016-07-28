@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.function.ToLongFunction;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Long> cache = new ConcurrentHashMap<>();
         final ToLongFunction<String> function = input -> 123L;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToLongFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToLongFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Long> cache = null;
         final ToLongFunction<String> function = input -> 123L;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedToLongFunctionMemoizer<>(cache, function);
+        new ConcurrentMapBasedToLongFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Long> cache = new ConcurrentHashMap<>();
         final ToLongFunction<String> function = null;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedToLongFunctionMemoizerTest {
                 "Cannot memoize a NULL ToLongFunction - provide an actual ToLongFunction to fix this.");
 
         // then
-        new ConcurrentMapBasedToLongFunctionMemoizer<>(cache, function);
+        new ConcurrentMapBasedToLongFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Long> cache = new ConcurrentHashMap<>();
         final ToLongFunction<String> function = input -> 123L;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToLongFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToLongFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsLong("123");
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Long> cache = new ConcurrentHashMap<>();
         final ToLongFunction<String> function = input -> 123L;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToLongFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToLongFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsLong("123");
@@ -132,10 +138,11 @@ public class ConcurrentMapBasedToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Long> cache = new ConcurrentHashMap<>();
         final ToLongFunction<String> function = Mockito.mock(ToLongFunction.class);
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToLongFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToLongFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsLong("123");
@@ -150,10 +157,11 @@ public class ConcurrentMapBasedToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Long> cache = new ConcurrentHashMap<>();
         final ToLongFunction<String> function = input -> 123L;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToLongFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToLongFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertEquals(123L, memoizer.applyAsLong("123"));

@@ -39,10 +39,11 @@ public class JCacheBasedFunctionMemoizerTest {
     public void shouldMemoizeFunction() {
         // given
         final Function<String, String> function = Function.identity();
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class.getSimpleName())) {
+        final Function<String, String> keyFunction = Function.identity();
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
             // when
-            final JCacheBasedFunctionMemoizer<String, String> loader = new JCacheBasedFunctionMemoizer<>(cache,
-                    function);
+            final JCacheBasedFunctionMemoizer<String, String, String> loader = new JCacheBasedFunctionMemoizer<>(cache,
+                    keyFunction, function);
 
             // then
             Assert.assertEquals("Memoized value does not match expectation", "test", loader.apply("test"));
@@ -56,8 +57,10 @@ public class JCacheBasedFunctionMemoizerTest {
     @SuppressWarnings(CompilerWarnings.UNCHECKED)
     public void shouldWrapRuntimeExceptionInMemoizationException() {
         // given
+        final Function<String, String> keyFunction = Function.identity();
         try (final Cache<String, String> cache = Mockito.mock(Cache.class)) {
-            final JCacheBasedFunctionMemoizer<String, String> loader = new JCacheBasedFunctionMemoizer<>(cache, null);
+            final JCacheBasedFunctionMemoizer<String, String, String> loader = new JCacheBasedFunctionMemoizer<>(cache,
+                    keyFunction, null);
             given(cache.invoke(any(), any())).willThrow(RuntimeException.class);
 
             // when

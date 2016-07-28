@@ -9,28 +9,32 @@ package de.xn__ho_hia.memoization.map;
 import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.DoubleFunction;
 import java.util.function.DoubleUnaryOperator;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedDoubleUnaryOperatorMemoizer
-        extends ConcurrentMapBasedMemoizer<Double, Double>
+final class ConcurrentMapBasedDoubleUnaryOperatorMemoizer<KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Double>
         implements DoubleUnaryOperator {
 
+    private final DoubleFunction<KEY> keyFunction;
     private final DoubleUnaryOperator operator;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedDoubleUnaryOperatorMemoizer(
-            final ConcurrentMap<Double, Double> cache,
+            final ConcurrentMap<KEY, Double> cache,
+            final DoubleFunction<KEY> keyFunction,
             final DoubleUnaryOperator operator) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.operator = requireNonNull(operator,
                 "Cannot memoize a NULL DoubleUnaryOperator - provide an actual DoubleUnaryOperator to fix this.");
     }
 
     @Override
     public double applyAsDouble(final double operand) {
-        final Double key = Double.valueOf(operand);
+        final KEY key = keyFunction.apply(operand);
         return computeIfAbsent(key, givenKey -> Double.valueOf(operator.applyAsDouble(operand)))
                 .doubleValue();
     }

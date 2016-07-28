@@ -42,11 +42,11 @@ public final class MemoizationDefaults {
     }
 
     /**
-     * @param <VALUE>
+     * @param <INPUT>
      *            the type of the first argument to the function
      * @return The default key function for {@link java.util.function.ObjDoubleConsumer}.
      */
-    public static <VALUE> ObjDoubleFunction<VALUE, String> objDoubleConsumerHashCodeKeyFunction() {
+    public static <INPUT> ObjDoubleFunction<INPUT, String> objDoubleConsumerHashCodeKeyFunction() {
         return (first, second) -> {
             final int firstHashCode = Objects.hashCode(first);
             final int secondHashCode = Double.valueOf(second).hashCode();
@@ -55,11 +55,11 @@ public final class MemoizationDefaults {
     }
 
     /**
-     * @param <VALUE>
+     * @param <INPUT>
      *            the type of the first argument to the function
      * @return The default key function for {@link java.util.function.ObjIntConsumer}.
      */
-    public static <VALUE> ObjIntFunction<VALUE, String> objIntConsumerHashCodeKeyFunction() {
+    public static <INPUT> ObjIntFunction<INPUT, String> objIntConsumerHashCodeKeyFunction() {
         return (first, second) -> {
             final int firstHashCode = Objects.hashCode(first);
             final int secondHashCode = Integer.valueOf(second).hashCode();
@@ -68,11 +68,11 @@ public final class MemoizationDefaults {
     }
 
     /**
-     * @param <VALUE>
+     * @param <INPUT>
      *            the type of the first argument to the function
      * @return The default key function for {@link java.util.function.ObjLongConsumer}.
      */
-    public static <VALUE> ObjLongFunction<VALUE, String> objLongConsumerHashCodeKeyFunction() {
+    public static <INPUT> ObjLongFunction<INPUT, String> objLongConsumerHashCodeKeyFunction() {
         return (first, second) -> {
             final int firstHashCode = Objects.hashCode(first);
             final int secondHashCode = Long.valueOf(second).hashCode();

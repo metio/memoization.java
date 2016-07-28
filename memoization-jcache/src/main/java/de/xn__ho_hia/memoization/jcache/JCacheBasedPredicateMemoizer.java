@@ -6,26 +6,31 @@
  */
 package de.xn__ho_hia.memoization.jcache;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import javax.cache.Cache;
 
-final class JCacheBasedPredicateMemoizer<VALUE>
-        extends AbstractJCacheBasedMemoizer<VALUE, Boolean>
-        implements Predicate<VALUE> {
+final class JCacheBasedPredicateMemoizer<INPUT, KEY>
+        extends AbstractJCacheBasedMemoizer<KEY, Boolean>
+        implements Predicate<INPUT> {
 
-    private final Predicate<VALUE> predicate;
+    private final Function<INPUT, KEY> keyFunction;
+    private final Predicate<INPUT>     predicate;
 
     JCacheBasedPredicateMemoizer(
-            final Cache<VALUE, Boolean> cache,
-            final Predicate<VALUE> predicate) {
+            final Cache<KEY, Boolean> cache,
+            final Function<INPUT, KEY> keyFunction,
+            final Predicate<INPUT> predicate) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.predicate = predicate;
     }
 
     @Override
-    public boolean test(final VALUE input) {
-        return invoke(input, key -> Boolean.valueOf(predicate.test(key))).booleanValue();
+    public boolean test(final INPUT input) {
+        final KEY key = keyFunction.apply(input);
+        return invoke(key, givenKey -> Boolean.valueOf(predicate.test(input))).booleanValue();
     }
 
 }

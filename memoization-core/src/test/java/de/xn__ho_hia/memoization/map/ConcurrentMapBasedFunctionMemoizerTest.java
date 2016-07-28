@@ -37,10 +37,11 @@ public class ConcurrentMapBasedFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, String> cache = new ConcurrentHashMap<>();
         final Function<String, String> function = input -> "output";
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedFunctionMemoizer<String, String, String> memoizer = new ConcurrentMapBasedFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -55,13 +56,14 @@ public class ConcurrentMapBasedFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, String> cache = null;
         final Function<String, String> function = input -> "output";
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedFunctionMemoizer<>(cache, function);
+        new ConcurrentMapBasedFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -73,13 +75,14 @@ public class ConcurrentMapBasedFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, String> cache = new ConcurrentHashMap<>();
         final Function<String, String> function = null;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Cannot memoize a NULL Function - provide an actual Function to fix this.");
 
         // then
-        new ConcurrentMapBasedFunctionMemoizer<>(cache, function);
+        new ConcurrentMapBasedFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -90,10 +93,11 @@ public class ConcurrentMapBasedFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, String> cache = new ConcurrentHashMap<>();
         final Function<String, String> function = input -> "output";
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedFunctionMemoizer<String, String, String> memoizer = new ConcurrentMapBasedFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertEquals("Memoized value does not match expectations", "output", memoizer.apply("test"));

@@ -144,7 +144,7 @@ public class ConcurrentMapBasedObjLongConsumerMemoizerTest {
         Assert.assertFalse("Cache is still empty after memoization", memoizer.viewCacheForTest().isEmpty());
         Assert.assertEquals("Memoization key does not match expectations", "test123",
                 memoizer.viewCacheForTest().keySet().iterator().next());
-        Assert.assertEquals("Memoization value does not match expectations", "test123",
+        Assert.assertEquals("Memoization value does not match expectations", "test",
                 memoizer.viewCacheForTest().values().iterator().next());
     }
 

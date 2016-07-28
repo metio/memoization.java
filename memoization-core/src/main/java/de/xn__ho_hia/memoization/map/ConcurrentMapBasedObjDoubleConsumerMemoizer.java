@@ -14,18 +14,18 @@ import java.util.function.ObjDoubleConsumer;
 import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedObjDoubleConsumerMemoizer<VALUE, KEY>
-        extends ConcurrentMapBasedMemoizer<KEY, KEY>
-        implements ObjDoubleConsumer<VALUE> {
+final class ConcurrentMapBasedObjDoubleConsumerMemoizer<INPUT, KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, INPUT>
+        implements ObjDoubleConsumer<INPUT> {
 
-    private final ObjDoubleFunction<VALUE, KEY> keyFunction;
-    private final ObjDoubleConsumer<VALUE>      consumer;
+    private final ObjDoubleFunction<INPUT, KEY> keyFunction;
+    private final ObjDoubleConsumer<INPUT>      consumer;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedObjDoubleConsumerMemoizer(
-            final ConcurrentMap<KEY, KEY> cache,
-            final ObjDoubleFunction<VALUE, KEY> keyFunction,
-            final ObjDoubleConsumer<VALUE> consumer) {
+            final ConcurrentMap<KEY, INPUT> cache,
+            final ObjDoubleFunction<INPUT, KEY> keyFunction,
+            final ObjDoubleConsumer<INPUT> consumer) {
         super(cache);
         this.keyFunction = requireNonNull(keyFunction,
                 "Provide a key function, might just be 'MemoizationDefaults.objDoubleConsumerHashCodeKeyFunction()'.");
@@ -34,11 +34,11 @@ final class ConcurrentMapBasedObjDoubleConsumerMemoizer<VALUE, KEY>
     }
 
     @Override
-    public void accept(final VALUE t, final double value) {
-        final KEY key = keyFunction.apply(t, value);
+    public void accept(final INPUT input, final double value) {
+        final KEY key = keyFunction.apply(input, value);
         computeIfAbsent(key, givenKey -> {
-            consumer.accept(t, value);
-            return givenKey;
+            consumer.accept(input, value);
+            return input;
         });
     }
 

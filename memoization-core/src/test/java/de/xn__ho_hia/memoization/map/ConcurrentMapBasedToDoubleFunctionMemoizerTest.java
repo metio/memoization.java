@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedToDoubleFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Double> cache = new ConcurrentHashMap<>();
         final ToDoubleFunction<String> function = input -> 123.456D;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToDoubleFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToDoubleFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedToDoubleFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Double> cache = null;
         final ToDoubleFunction<String> function = input -> 123.456D;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedToDoubleFunctionMemoizer<>(cache, function);
+        new ConcurrentMapBasedToDoubleFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedToDoubleFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Double> cache = new ConcurrentHashMap<>();
         final ToDoubleFunction<String> function = null;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedToDoubleFunctionMemoizerTest {
                 "Cannot memoize a NULL ToDoubleFunction - provide an actual ToDoubleFunction to fix this.");
 
         // then
-        new ConcurrentMapBasedToDoubleFunctionMemoizer<>(cache, function);
+        new ConcurrentMapBasedToDoubleFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedToDoubleFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Double> cache = new ConcurrentHashMap<>();
         final ToDoubleFunction<String> function = input -> 123.456D;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToDoubleFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToDoubleFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsDouble("123");
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedToDoubleFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Double> cache = new ConcurrentHashMap<>();
         final ToDoubleFunction<String> function = input -> 123.456D;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToDoubleFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToDoubleFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsDouble("123");
@@ -132,10 +138,11 @@ public class ConcurrentMapBasedToDoubleFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Double> cache = new ConcurrentHashMap<>();
         final ToDoubleFunction<String> function = Mockito.mock(ToDoubleFunction.class);
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToDoubleFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToDoubleFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsDouble("123");
@@ -150,10 +157,11 @@ public class ConcurrentMapBasedToDoubleFunctionMemoizerTest {
         // given
         final ConcurrentMap<String, Double> cache = new ConcurrentHashMap<>();
         final ToDoubleFunction<String> function = input -> 123.456D;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedToDoubleFunctionMemoizer<String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
-                cache, function);
+        final ConcurrentMapBasedToDoubleFunctionMemoizer<String, String> memoizer = new ConcurrentMapBasedToDoubleFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertEquals(123.456D, memoizer.applyAsDouble("123"), 0.0D);

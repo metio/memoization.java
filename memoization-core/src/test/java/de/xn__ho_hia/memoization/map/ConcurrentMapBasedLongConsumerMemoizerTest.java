@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.LongConsumer;
+import java.util.function.LongFunction;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedLongConsumerMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongConsumer consumer = System.out::println;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongConsumerMemoizer memoizer = new ConcurrentMapBasedLongConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedLongConsumerMemoizer<Long> memoizer = new ConcurrentMapBasedLongConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedLongConsumerMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = null;
         final LongConsumer consumer = System.out::println;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedLongConsumerMemoizer(cache, consumer);
+        new ConcurrentMapBasedLongConsumerMemoizer<>(cache, keyFunction, consumer);
     }
 
     /**
@@ -74,13 +77,14 @@ public class ConcurrentMapBasedLongConsumerMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongConsumer consumer = null;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Cannot memoize a NULL Consumer - provide an actual Consumer to fix this.");
 
         // then
-        new ConcurrentMapBasedLongConsumerMemoizer(cache, consumer);
+        new ConcurrentMapBasedLongConsumerMemoizer<>(cache, keyFunction, consumer);
     }
 
     /**
@@ -91,10 +95,11 @@ public class ConcurrentMapBasedLongConsumerMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongConsumer consumer = System.out::println;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongConsumerMemoizer memoizer = new ConcurrentMapBasedLongConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedLongConsumerMemoizer<Long> memoizer = new ConcurrentMapBasedLongConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123L);
@@ -108,10 +113,11 @@ public class ConcurrentMapBasedLongConsumerMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongConsumer consumer = System.out::println;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongConsumerMemoizer memoizer = new ConcurrentMapBasedLongConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedLongConsumerMemoizer<Long> memoizer = new ConcurrentMapBasedLongConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123L);
@@ -130,10 +136,11 @@ public class ConcurrentMapBasedLongConsumerMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongConsumer consumer = Mockito.mock(LongConsumer.class);
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongConsumerMemoizer memoizer = new ConcurrentMapBasedLongConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedLongConsumerMemoizer<Long> memoizer = new ConcurrentMapBasedLongConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123L);

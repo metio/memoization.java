@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.junit.Assert;
@@ -37,10 +38,11 @@ public class ConcurrentMapBasedPredicateMemoizerTest {
         // given
         final ConcurrentMap<String, Boolean> cache = new ConcurrentHashMap<>();
         final Predicate<String> predicate = input -> true;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedPredicateMemoizer<String> memoizer = new ConcurrentMapBasedPredicateMemoizer<>(
-                cache, predicate);
+        final ConcurrentMapBasedPredicateMemoizer<String, String> memoizer = new ConcurrentMapBasedPredicateMemoizer<>(
+                cache, keyFunction, predicate);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -55,13 +57,14 @@ public class ConcurrentMapBasedPredicateMemoizerTest {
         // given
         final ConcurrentMap<String, Boolean> cache = null;
         final Predicate<String> predicate = input -> true;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedPredicateMemoizer<>(cache, predicate);
+        new ConcurrentMapBasedPredicateMemoizer<>(cache, keyFunction, predicate);
     }
 
     /**
@@ -73,13 +76,14 @@ public class ConcurrentMapBasedPredicateMemoizerTest {
         // given
         final ConcurrentMap<String, Boolean> cache = new ConcurrentHashMap<>();
         final Predicate<String> predicate = null;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Cannot memoize a NULL Predicate - provide an actual Predicate to fix this.");
 
         // then
-        new ConcurrentMapBasedPredicateMemoizer<>(cache, predicate);
+        new ConcurrentMapBasedPredicateMemoizer<>(cache, keyFunction, predicate);
     }
 
     /**
@@ -90,10 +94,11 @@ public class ConcurrentMapBasedPredicateMemoizerTest {
         // given
         final ConcurrentMap<String, Boolean> cache = new ConcurrentHashMap<>();
         final Predicate<String> predicate = input -> true;
+        final Function<String, String> keyFunction = Function.identity();
 
         // when
-        final ConcurrentMapBasedPredicateMemoizer<String> memoizer = new ConcurrentMapBasedPredicateMemoizer<>(
-                cache, predicate);
+        final ConcurrentMapBasedPredicateMemoizer<String, String> memoizer = new ConcurrentMapBasedPredicateMemoizer<>(
+                cache, keyFunction, predicate);
 
         // then
         Assert.assertTrue("Memoized value does not match expectations", memoizer.test("test"));

@@ -14,30 +14,31 @@ import java.util.function.Function;
 /**
  * @param <KEY>
  *            The type of the key to use for memoization.
- * @param <VALUE>
+ * @param <INPUT>
  *            The type of the values to memoize.
  */
-public interface MemoizingConsumer<KEY, VALUE> extends Consumer<VALUE> {
+public interface MemoizingConsumer<KEY, INPUT> extends Consumer<INPUT> {
 
     /**
      * @return The Function used to calculate the memoization key.
      */
-    Function<VALUE, KEY> getKeyFunction();
+    Function<INPUT, KEY> getKeyFunction();
 
     /**
      * @return The consumer to memoize/wrap.
      */
-    Consumer<VALUE> getConsumer();
+    Consumer<INPUT> getConsumer();
 
     /**
      * @return The {@link BiFunction} that controls how to memoize the actual {@link Consumer}.
      */
-    BiFunction<KEY, Function<KEY, VALUE>, VALUE> getMemoizingFunction();
+    BiFunction<KEY, Function<KEY, INPUT>, INPUT> getMemoizingFunction();
 
     @Override
-    default void accept(final VALUE input) {
+    default void accept(final INPUT input) {
         final KEY key = getKeyFunction().apply(input);
-        final BiFunction<KEY, Function<KEY, VALUE>, VALUE> memoizer = Objects.requireNonNull(getMemoizingFunction());
+        final BiFunction<KEY, Function<KEY, INPUT>, INPUT> memoizer = Objects.requireNonNull(getMemoizingFunction());
+
         memoizer.apply(key, givenKey -> {
             getConsumer().accept(input);
             return input;

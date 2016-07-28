@@ -14,18 +14,18 @@ import java.util.function.ObjIntConsumer;
 import de.xn__ho_hia.memoization.shared.ObjIntFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedObjIntConsumerMemoizer<VALUE, KEY>
-        extends ConcurrentMapBasedMemoizer<KEY, KEY>
-        implements ObjIntConsumer<VALUE> {
+final class ConcurrentMapBasedObjIntConsumerMemoizer<INPUT, KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, INPUT>
+        implements ObjIntConsumer<INPUT> {
 
-    private final ObjIntFunction<VALUE, KEY> keyFunction;
-    private final ObjIntConsumer<VALUE>      consumer;
+    private final ObjIntFunction<INPUT, KEY> keyFunction;
+    private final ObjIntConsumer<INPUT>      consumer;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedObjIntConsumerMemoizer(
-            final ConcurrentMap<KEY, KEY> cache,
-            final ObjIntFunction<VALUE, KEY> keyFunction,
-            final ObjIntConsumer<VALUE> consumer) {
+            final ConcurrentMap<KEY, INPUT> cache,
+            final ObjIntFunction<INPUT, KEY> keyFunction,
+            final ObjIntConsumer<INPUT> consumer) {
         super(cache);
         this.keyFunction = requireNonNull(keyFunction,
                 "Provide a key function, might just be 'MemoizationDefaults.objIntConsumerHashCodeKeyFunction()'.");
@@ -34,11 +34,11 @@ final class ConcurrentMapBasedObjIntConsumerMemoizer<VALUE, KEY>
     }
 
     @Override
-    public void accept(final VALUE t, final int value) {
-        final KEY key = keyFunction.apply(t, value);
+    public void accept(final INPUT input, final int value) {
+        final KEY key = keyFunction.apply(input, value);
         computeIfAbsent(key, givenKey -> {
-            consumer.accept(t, value);
-            return givenKey;
+            consumer.accept(input, value);
+            return input;
         });
     }
 

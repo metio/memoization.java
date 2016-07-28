@@ -9,28 +9,33 @@ package de.xn__ho_hia.memoization.map;
 import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.function.ToIntFunction;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedToIntFunctionMemoizer<VALUE>
-        extends ConcurrentMapBasedMemoizer<VALUE, Integer>
-        implements ToIntFunction<VALUE> {
+final class ConcurrentMapBasedToIntFunctionMemoizer<INPUT, KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Integer>
+        implements ToIntFunction<INPUT> {
 
-    private final ToIntFunction<VALUE> function;
+    private final Function<INPUT, KEY> keyFunction;
+    private final ToIntFunction<INPUT> function;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedToIntFunctionMemoizer(
-            final ConcurrentMap<VALUE, Integer> cache,
-            final ToIntFunction<VALUE> function) {
+            final ConcurrentMap<KEY, Integer> cache,
+            final Function<INPUT, KEY> keyFunction,
+            final ToIntFunction<INPUT> function) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.function = requireNonNull(function,
                 "Cannot memoize a NULL ToIntFunction - provide an actual ToIntFunction to fix this.");
     }
 
     @Override
-    public int applyAsInt(final VALUE value) {
-        return computeIfAbsent(value, givenKey -> Integer.valueOf(function.applyAsInt(value)))
+    public int applyAsInt(final INPUT input) {
+        final KEY key = keyFunction.apply(input);
+        return computeIfAbsent(key, givenKey -> Integer.valueOf(function.applyAsInt(input)))
                 .intValue();
     }
 

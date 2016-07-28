@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.IntConsumer;
+import java.util.function.IntFunction;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedIntConsumerMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntConsumer consumer = System.out::println;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntConsumerMemoizer memoizer = new ConcurrentMapBasedIntConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedIntConsumerMemoizer<Integer> memoizer = new ConcurrentMapBasedIntConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedIntConsumerMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = null;
         final IntConsumer consumer = System.out::println;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedIntConsumerMemoizer(cache, consumer);
+        new ConcurrentMapBasedIntConsumerMemoizer<>(cache, keyFunction, consumer);
     }
 
     /**
@@ -74,13 +77,14 @@ public class ConcurrentMapBasedIntConsumerMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntConsumer consumer = null;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Cannot memoize a NULL Consumer - provide an actual Consumer to fix this.");
 
         // then
-        new ConcurrentMapBasedIntConsumerMemoizer(cache, consumer);
+        new ConcurrentMapBasedIntConsumerMemoizer<>(cache, keyFunction, consumer);
     }
 
     /**
@@ -91,10 +95,11 @@ public class ConcurrentMapBasedIntConsumerMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntConsumer consumer = System.out::println;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntConsumerMemoizer memoizer = new ConcurrentMapBasedIntConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedIntConsumerMemoizer<Integer> memoizer = new ConcurrentMapBasedIntConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123);
@@ -108,10 +113,11 @@ public class ConcurrentMapBasedIntConsumerMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntConsumer consumer = System.out::println;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntConsumerMemoizer memoizer = new ConcurrentMapBasedIntConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedIntConsumerMemoizer<Integer> memoizer = new ConcurrentMapBasedIntConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123);
@@ -130,10 +136,11 @@ public class ConcurrentMapBasedIntConsumerMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntConsumer consumer = Mockito.mock(IntConsumer.class);
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntConsumerMemoizer memoizer = new ConcurrentMapBasedIntConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedIntConsumerMemoizer<Integer> memoizer = new ConcurrentMapBasedIntConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123);

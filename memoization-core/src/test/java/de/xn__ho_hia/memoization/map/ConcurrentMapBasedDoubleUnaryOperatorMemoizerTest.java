@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.DoubleFunction;
 import java.util.function.DoubleUnaryOperator;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleUnaryOperator operator = input -> input;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = null;
         final DoubleUnaryOperator operator = input -> input;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedDoubleUnaryOperatorMemoizer(cache, operator);
+        new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(cache, keyFunction, operator);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleUnaryOperator operator = null;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
                 "Cannot memoize a NULL DoubleUnaryOperator - provide an actual DoubleUnaryOperator to fix this.");
 
         // then
-        new ConcurrentMapBasedDoubleUnaryOperatorMemoizer(cache, operator);
+        new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(cache, keyFunction, operator);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleUnaryOperator operator = input -> input;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsDouble(123.456D);
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleUnaryOperator operator = input -> input;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsDouble(123D);
@@ -131,10 +137,11 @@ public class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleUnaryOperator operator = Mockito.mock(DoubleUnaryOperator.class);
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsDouble(123D);
@@ -149,10 +156,11 @@ public class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleUnaryOperator operator = input -> input;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedDoubleUnaryOperatorMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         Assert.assertEquals(123D, memoizer.applyAsDouble(123D), 0.0D);

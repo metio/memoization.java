@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 * Caffeine module
 * Guava module (incomplete)
 * JCache module (incomplete)
+* Cache key customization
 
 === Changed
 

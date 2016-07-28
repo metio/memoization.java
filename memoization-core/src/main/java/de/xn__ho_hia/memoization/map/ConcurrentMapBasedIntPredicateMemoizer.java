@@ -9,28 +9,33 @@ package de.xn__ho_hia.memoization.map;
 import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedIntPredicateMemoizer
-        extends ConcurrentMapBasedMemoizer<Integer, Boolean>
+final class ConcurrentMapBasedIntPredicateMemoizer<KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Boolean>
         implements IntPredicate {
 
-    private final IntPredicate predicate;
+    private final IntFunction<KEY> keyFunction;
+    private final IntPredicate     predicate;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedIntPredicateMemoizer(
-            final ConcurrentMap<Integer, Boolean> cache,
+            final ConcurrentMap<KEY, Boolean> cache,
+            final IntFunction<KEY> keyFunction,
             final IntPredicate predicate) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.predicate = requireNonNull(predicate,
                 "Cannot memoize a NULL Predicate - provide an actual Predicate to fix this.");
     }
 
     @Override
     public boolean test(final int value) {
-        return computeIfAbsent(Integer.valueOf(value), key -> Boolean.valueOf(predicate.test(value))).booleanValue();
+        final KEY key = keyFunction.apply(value);
+        return computeIfAbsent(key, givenKey -> Boolean.valueOf(predicate.test(value))).booleanValue();
     }
 
 }

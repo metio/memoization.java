@@ -7,7 +7,14 @@
 package de.xn__ho_hia.memoization.caffeine;
 
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.doubleBinaryOperatorHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.intBinaryOperatorHashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.longBinaryOperatorHashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objDoubleConsumerHashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objIntConsumerHashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objLongConsumerHashCodeKeyFunction;
+import static java.util.function.Function.identity;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
@@ -16,6 +23,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
@@ -24,6 +32,7 @@ import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
+import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
@@ -31,6 +40,7 @@ import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
+import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
@@ -52,7 +62,13 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
 import de.xn__ho_hia.memoization.map.MapMemoize;
+import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
+import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
+import de.xn__ho_hia.memoization.shared.LongBinaryFunction;
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
+import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
+import de.xn__ho_hia.memoization.shared.ObjIntFunction;
+import de.xn__ho_hia.memoization.shared.ObjLongFunction;
 
 /**
  * <p>
@@ -226,9 +242,31 @@ public final class CaffeineMemoize {
      *            The {@link ObjDoubleConsumer} to memoize.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static <VALUE> ObjDoubleConsumer<VALUE> objDoubleConsumer(
-            final ObjDoubleConsumer<VALUE> consumer) {
+    public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> consumer) {
         return objDoubleConsumer(consumer, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjDoubleFunction} to compute the cache key.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> consumer,
+            final ObjDoubleFunction<INPUT, KEY> keyFunction) {
+        return objDoubleConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -247,10 +285,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static <VALUE> ObjDoubleConsumer<VALUE> objDoubleConsumer(
-            final ObjDoubleConsumer<VALUE> consumer,
-            final Cache<String, String> cache) {
-        return MapMemoize.objDoubleConsumer(consumer, cache.asMap());
+    public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> consumer,
+            final Cache<String, INPUT> cache) {
+        return objDoubleConsumer(consumer, objDoubleConsumerHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjDoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> consumer,
+            final ObjDoubleFunction<INPUT, KEY> keyFunction,
+            final Cache<KEY, INPUT> cache) {
+        return MapMemoize.objDoubleConsumer(consumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -278,6 +341,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjIntFunction} to compute the cache key.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> consumer,
+            final ObjIntFunction<INPUT, KEY> keyFunction) {
+        return objIntConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -288,10 +373,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static <VALUE> ObjIntConsumer<VALUE> objIntConsumer(
-            final ObjIntConsumer<VALUE> consumer,
-            final Cache<String, String> cache) {
-        return MapMemoize.objIntConsumer(consumer, cache.asMap());
+    public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> consumer,
+            final Cache<String, INPUT> cache) {
+        return objIntConsumer(consumer, objIntConsumerHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjIntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> consumer,
+            final ObjIntFunction<INPUT, KEY> keyFunction,
+            final Cache<KEY, INPUT> cache) {
+        return MapMemoize.objIntConsumer(consumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -308,9 +418,31 @@ public final class CaffeineMemoize {
      *            The {@link ObjLongConsumer} to memoize.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static <VALUE> ObjLongConsumer<VALUE> objLongConsumer(
-            final ObjLongConsumer<VALUE> consumer) {
+    public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> consumer) {
         return objLongConsumer(consumer, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjLongFunction} to compute the cache key.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> consumer,
+            final ObjLongFunction<INPUT, KEY> keyFunction) {
+        return objLongConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -329,10 +461,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static <VALUE> ObjLongConsumer<VALUE> objLongConsumer(
-            final ObjLongConsumer<VALUE> consumer,
-            final Cache<String, String> cache) {
-        return MapMemoize.objLongConsumer(consumer, cache.asMap());
+    public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> consumer,
+            final Cache<String, INPUT> cache) {
+        return objLongConsumer(consumer, objLongConsumerHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjLongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> consumer,
+            final ObjLongFunction<INPUT, KEY> keyFunction,
+            final Cache<KEY, INPUT> cache) {
+        return MapMemoize.objLongConsumer(consumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -612,8 +769,30 @@ public final class CaffeineMemoize {
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
      */
-    public static <VALUE> Consumer<VALUE> consumer(final Consumer<VALUE> consumer) {
+    public static <INPUT> Consumer<INPUT> consumer(final Consumer<INPUT> consumer) {
         return consumer(consumer, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static <INPUT, KEY> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Function<INPUT, KEY> keyFunction) {
+        return consumer(consumer, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -632,10 +811,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Consumer}.
      */
-    public static <VALUE> Consumer<VALUE> consumer(
-            final Consumer<VALUE> consumer,
-            final Cache<VALUE, VALUE> cache) {
-        return MapMemoize.consumer(consumer, cache.asMap());
+    public static <INPUT> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Cache<INPUT, INPUT> cache) {
+        return consumer(consumer, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static <INPUT, KEY> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, INPUT> cache) {
+        return MapMemoize.consumer(consumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -662,6 +866,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static <KEY> DoubleConsumer doubleConsumer(
+            final DoubleConsumer consumer,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -675,7 +901,32 @@ public final class CaffeineMemoize {
     public static DoubleConsumer doubleConsumer(
             final DoubleConsumer consumer,
             final Cache<Double, Double> cache) {
-        return MapMemoize.doubleConsumer(consumer, cache.asMap());
+        return doubleConsumer(consumer, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static <KEY> DoubleConsumer doubleConsumer(
+            final DoubleConsumer consumer,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return MapMemoize.doubleConsumer(consumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -702,6 +953,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static <KEY> IntConsumer intConsumer(
+            final IntConsumer consumer,
+            final IntFunction<KEY> keyFunction) {
+        return intConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -715,7 +988,32 @@ public final class CaffeineMemoize {
     public static IntConsumer intConsumer(
             final IntConsumer consumer,
             final Cache<Integer, Integer> cache) {
-        return MapMemoize.intConsumer(consumer, cache.asMap());
+        return intConsumer(consumer, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static <KEY> IntConsumer intConsumer(
+            final IntConsumer consumer,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return MapMemoize.intConsumer(consumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -742,6 +1040,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link LongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static <KEY> LongConsumer longConsumer(
+            final LongConsumer consumer,
+            final LongFunction<KEY> keyFunction) {
+        return longConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -755,7 +1075,32 @@ public final class CaffeineMemoize {
     public static LongConsumer longConsumer(
             final LongConsumer consumer,
             final Cache<Long, Long> cache) {
-        return MapMemoize.longConsumer(consumer, cache.asMap());
+        return longConsumer(consumer, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link LongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static <KEY> LongConsumer longConsumer(
+            final LongConsumer consumer,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return MapMemoize.longConsumer(consumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -782,28 +1127,6 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link DoubleSupplier} to memoize.
-     * @param cache
-     *            The {@link Cache} to use.
-     * @return The wrapped {@link DoubleSupplier}.
-     */
-    public static DoubleSupplier doubleSupplier(
-            final DoubleSupplier supplier,
-            final Cache<String, Double> cache) {
-        return doubleSupplier(supplier, defaultKeySupplier(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
      * </ul>
@@ -818,6 +1141,28 @@ public final class CaffeineMemoize {
             final DoubleSupplier supplier,
             final Supplier<KEY> keySupplier) {
         return doubleSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static DoubleSupplier doubleSupplier(
+            final DoubleSupplier supplier,
+            final Cache<String, Double> cache) {
+        return doubleSupplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -870,28 +1215,6 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link IntSupplier} to memoize.
-     * @param cache
-     *            The {@link Cache} to use.
-     * @return The wrapped {@link IntSupplier}.
-     */
-    public static IntSupplier intSupplier(
-            final IntSupplier supplier,
-            final Cache<String, Integer> cache) {
-        return intSupplier(supplier, defaultKeySupplier(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
      * </ul>
@@ -906,6 +1229,28 @@ public final class CaffeineMemoize {
             final IntSupplier supplier,
             final Supplier<KEY> keySupplier) {
         return intSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link IntSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static IntSupplier intSupplier(
+            final IntSupplier supplier,
+            final Cache<String, Integer> cache) {
+        return intSupplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -958,28 +1303,6 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link LongSupplier} to memoize.
-     * @param cache
-     *            The {@link Cache} to use.
-     * @return The wrapped {@link LongSupplier}.
-     */
-    public static LongSupplier longSupplier(
-            final LongSupplier supplier,
-            final Cache<String, Long> cache) {
-        return longSupplier(supplier, defaultKeySupplier(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
      * </ul>
@@ -994,6 +1317,28 @@ public final class CaffeineMemoize {
             final LongSupplier supplier,
             final Supplier<KEY> keySupplier) {
         return longSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link LongSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static LongSupplier longSupplier(
+            final LongSupplier supplier,
+            final Cache<String, Long> cache) {
+        return longSupplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -1035,8 +1380,30 @@ public final class CaffeineMemoize {
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static <KEY, VALUE> Function<KEY, VALUE> function(final Function<KEY, VALUE> function) {
+    public static <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(final Function<INPUT, OUTPUT> function) {
         return function(function, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Function}.
+     */
+    public static <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return function(function, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1055,10 +1422,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Function}.
      */
-    public static <KEY, VALUE> Function<KEY, VALUE> function(
-            final Function<KEY, VALUE> function,
-            final Cache<KEY, VALUE> cache) {
-        return MapMemoize.function(function, cache.asMap());
+    public static <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Cache<INPUT, OUTPUT> cache) {
+        return function(function, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Function}.
+     */
+    public static <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return MapMemoize.function(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1085,6 +1477,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static <KEY> DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction function,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleToIntFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1098,7 +1512,32 @@ public final class CaffeineMemoize {
     public static DoubleToIntFunction doubleToIntFunction(
             final DoubleToIntFunction function,
             final Cache<Double, Integer> cache) {
-        return MapMemoize.doubleToIntFunction(function, cache.asMap());
+        return doubleToIntFunction(function, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static <KEY> DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction function,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return MapMemoize.doubleToIntFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1125,6 +1564,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static <KEY> DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction function,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleToLongFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1138,7 +1599,32 @@ public final class CaffeineMemoize {
     public static DoubleToLongFunction doubleToLongFunction(
             final DoubleToLongFunction function,
             final Cache<Double, Long> cache) {
-        return MapMemoize.doubleToLongFunction(function, cache.asMap());
+        return doubleToLongFunction(function, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static <KEY> DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction function,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return MapMemoize.doubleToLongFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1165,6 +1651,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static <KEY> DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator operator,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleUnaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1178,7 +1686,32 @@ public final class CaffeineMemoize {
     public static DoubleUnaryOperator doubleUnaryOperator(
             final DoubleUnaryOperator operator,
             final Cache<Double, Double> cache) {
-        return MapMemoize.doubleUnaryOperator(operator, cache.asMap());
+        return doubleUnaryOperator(operator, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static <KEY> DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator operator,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return MapMemoize.doubleUnaryOperator(operator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1205,6 +1738,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static <KEY> DoubleBinaryOperator doubleBinaryOperator(
+            final DoubleBinaryOperator operator,
+            final DoubleBinaryFunction<KEY> keyFunction) {
+        return doubleBinaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1218,7 +1773,32 @@ public final class CaffeineMemoize {
     public static DoubleBinaryOperator doubleBinaryOperator(
             final DoubleBinaryOperator operator,
             final Cache<String, Double> cache) {
-        return MapMemoize.doubleBinaryOperator(operator, cache.asMap());
+        return doubleBinaryOperator(operator, doubleBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleBinaryFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static <KEY> DoubleBinaryOperator doubleBinaryOperator(
+            final DoubleBinaryOperator operator,
+            final DoubleBinaryFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return MapMemoize.doubleBinaryOperator(operator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1245,6 +1825,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static <KEY> IntBinaryOperator intBinaryOperator(
+            final IntBinaryOperator operator,
+            final IntBinaryFunction<KEY> keyFunction) {
+        return intBinaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1258,7 +1860,32 @@ public final class CaffeineMemoize {
     public static IntBinaryOperator intBinaryOperator(
             final IntBinaryOperator operator,
             final Cache<String, Integer> cache) {
-        return MapMemoize.intBinaryOperator(operator, cache.asMap());
+        return intBinaryOperator(operator, intBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntBinaryFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static <KEY> IntBinaryOperator intBinaryOperator(
+            final IntBinaryOperator operator,
+            final IntBinaryFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return MapMemoize.intBinaryOperator(operator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1285,6 +1912,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntToDoubleFunction}.
+     */
+    public static <KEY> IntToDoubleFunction intToDoubleFunction(
+            final IntToDoubleFunction function,
+            final IntFunction<KEY> keyFunction) {
+        return intToDoubleFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1298,7 +1947,32 @@ public final class CaffeineMemoize {
     public static IntToDoubleFunction intToDoubleFunction(
             final IntToDoubleFunction function,
             final Cache<Integer, Double> cache) {
-        return MapMemoize.intToDoubleFunction(function, cache.asMap());
+        return intToDoubleFunction(function, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntToDoubleFunction}.
+     */
+    public static <KEY> IntToDoubleFunction intToDoubleFunction(
+            final IntToDoubleFunction function,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return MapMemoize.intToDoubleFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1325,6 +1999,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static <KEY> IntToLongFunction intToLongFunction(
+            final IntToLongFunction function,
+            final IntFunction<KEY> keyFunction) {
+        return intToLongFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1338,7 +2034,32 @@ public final class CaffeineMemoize {
     public static IntToLongFunction intToLongFunction(
             final IntToLongFunction function,
             final Cache<Integer, Long> cache) {
-        return MapMemoize.intToLongFunction(function, cache.asMap());
+        return intToLongFunction(function, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static <KEY> IntToLongFunction intToLongFunction(
+            final IntToLongFunction function,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return MapMemoize.intToLongFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1365,6 +2086,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static <KEY> IntUnaryOperator intUnaryOperator(
+            final IntUnaryOperator operator,
+            final IntFunction<KEY> keyFunction) {
+        return intUnaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1378,7 +2121,32 @@ public final class CaffeineMemoize {
     public static IntUnaryOperator intUnaryOperator(
             final IntUnaryOperator operator,
             final Cache<Integer, Integer> cache) {
-        return MapMemoize.intUnaryOperator(operator, cache.asMap());
+        return intUnaryOperator(operator, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static <KEY> IntUnaryOperator intUnaryOperator(
+            final IntUnaryOperator operator,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return MapMemoize.intUnaryOperator(operator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1405,6 +2173,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static <KEY> LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator operator,
+            final LongBinaryFunction<KEY> keyFunction) {
+        return longBinaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1418,7 +2208,32 @@ public final class CaffeineMemoize {
     public static LongBinaryOperator longBinaryOperator(
             final LongBinaryOperator operator,
             final Cache<String, Long> cache) {
-        return MapMemoize.longBinaryOperator(operator, cache.asMap());
+        return longBinaryOperator(operator, longBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongBinaryFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static <KEY> LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator operator,
+            final LongBinaryFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return MapMemoize.longBinaryOperator(operator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1445,6 +2260,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongToDoubleFunction}.
+     */
+    public static <KEY> LongToDoubleFunction longToDoubleFunction(
+            final LongToDoubleFunction function,
+            final LongFunction<KEY> keyFunction) {
+        return longToDoubleFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1458,7 +2295,32 @@ public final class CaffeineMemoize {
     public static LongToDoubleFunction longToDoubleFunction(
             final LongToDoubleFunction function,
             final Cache<Long, Double> cache) {
-        return MapMemoize.longToDoubleFunction(function, cache.asMap());
+        return longToDoubleFunction(function, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongToDoubleFunction}.
+     */
+    public static <KEY> LongToDoubleFunction longToDoubleFunction(
+            final LongToDoubleFunction function,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return MapMemoize.longToDoubleFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1485,6 +2347,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongToIntFunction}.
+     */
+    public static <KEY> LongToIntFunction longToIntFunction(
+            final LongToIntFunction function,
+            final LongFunction<KEY> keyFunction) {
+        return longToIntFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1498,7 +2382,32 @@ public final class CaffeineMemoize {
     public static LongToIntFunction longToIntFunction(
             final LongToIntFunction function,
             final Cache<Long, Integer> cache) {
-        return MapMemoize.longToIntFunction(function, cache.asMap());
+        return longToIntFunction(function, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongToIntFunction}.
+     */
+    public static <KEY> LongToIntFunction longToIntFunction(
+            final LongToIntFunction function,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return MapMemoize.longToIntFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1525,6 +2434,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static <KEY> LongUnaryOperator longUnaryOperator(
+            final LongUnaryOperator operator,
+            final LongFunction<KEY> keyFunction) {
+        return longUnaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1538,7 +2469,32 @@ public final class CaffeineMemoize {
     public static LongUnaryOperator longUnaryOperator(
             final LongUnaryOperator operator,
             final Cache<Long, Long> cache) {
-        return MapMemoize.longUnaryOperator(operator, cache.asMap());
+        return longUnaryOperator(operator, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static <KEY> LongUnaryOperator longUnaryOperator(
+            final LongUnaryOperator operator,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return MapMemoize.longUnaryOperator(operator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1555,8 +2511,30 @@ public final class CaffeineMemoize {
      *            The {@link Predicate} to memoize.
      * @return The wrapped {@link Predicate}.
      */
-    public static <VALUE> Predicate<VALUE> predicate(final Predicate<VALUE> predicate) {
+    public static <INPUT> Predicate<INPUT> predicate(final Predicate<INPUT> predicate) {
         return predicate(predicate, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <INPUT, KEY> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Function<INPUT, KEY> keyFunction) {
+        return predicate(predicate, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -1575,10 +2553,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Predicate}.
      */
-    public static <VALUE> Predicate<VALUE> predicate(
-            final Predicate<VALUE> predicate,
-            final Cache<VALUE, Boolean> cache) {
-        return MapMemoize.predicate(predicate, cache.asMap());
+    public static <INPUT> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Cache<INPUT, Boolean> cache) {
+        return predicate(predicate, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <INPUT, KEY> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return MapMemoize.predicate(predicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -1605,6 +2608,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static <KEY> LongPredicate longPredicate(
+            final LongPredicate predicate,
+            final LongFunction<KEY> keyFunction) {
+        return longPredicate(predicate, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1618,7 +2643,32 @@ public final class CaffeineMemoize {
     public static LongPredicate longPredicate(
             final LongPredicate predicate,
             final Cache<Long, Boolean> cache) {
-        return MapMemoize.longPredicate(predicate, cache.asMap());
+        return longPredicate(predicate, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static <KEY> LongPredicate longPredicate(
+            final LongPredicate predicate,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return MapMemoize.longPredicate(predicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -1645,6 +2695,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static <KEY> IntPredicate intPredicate(
+            final IntPredicate predicate,
+            final IntFunction<KEY> keyFunction) {
+        return intPredicate(predicate, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1658,7 +2730,32 @@ public final class CaffeineMemoize {
     public static IntPredicate intPredicate(
             final IntPredicate predicate,
             final Cache<Integer, Boolean> cache) {
-        return MapMemoize.intPredicate(predicate, cache.asMap());
+        return intPredicate(predicate, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static <KEY> IntPredicate intPredicate(
+            final IntPredicate predicate,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return MapMemoize.intPredicate(predicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -1685,6 +2782,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static <KEY> DoublePredicate doublePredicate(
+            final DoublePredicate predicate,
+            final DoubleFunction<KEY> keyFunction) {
+        return doublePredicate(predicate, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1698,7 +2817,32 @@ public final class CaffeineMemoize {
     public static DoublePredicate doublePredicate(
             final DoublePredicate predicate,
             final Cache<Double, Boolean> cache) {
-        return MapMemoize.doublePredicate(predicate, cache.asMap());
+        return doublePredicate(predicate, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static <KEY> DoublePredicate doublePredicate(
+            final DoublePredicate predicate,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return MapMemoize.doublePredicate(predicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -1726,28 +2870,6 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @param cache
-     *            The {@link Cache} to use.
-     * @return The wrapped {@link Supplier}.
-     */
-    public static <VALUE> Supplier<VALUE> supplier(
-            final Supplier<VALUE> supplier,
-            final Cache<String, VALUE> cache) {
-        return supplier(supplier, defaultKeySupplier(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
      * </ul>
@@ -1762,6 +2884,28 @@ public final class CaffeineMemoize {
             final Supplier<VALUE> supplier,
             final Supplier<KEY> keySupplier) {
         return supplier(supplier, keySupplier, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <VALUE> Supplier<VALUE> supplier(
+            final Supplier<VALUE> supplier,
+            final Cache<String, VALUE> cache) {
+        return supplier(supplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -2055,8 +3199,30 @@ public final class CaffeineMemoize {
      *            The {@link ToDoubleFunction} to memoize.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static <VALUE> ToDoubleFunction<VALUE> toDoubleFunction(final ToDoubleFunction<VALUE> function) {
+    public static <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(final ToDoubleFunction<INPUT> function) {
         return toDoubleFunction(function, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return toDoubleFunction(function, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -2075,10 +3241,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static <VALUE> ToDoubleFunction<VALUE> toDoubleFunction(
-            final ToDoubleFunction<VALUE> function,
-            final Cache<VALUE, Double> cache) {
-        return MapMemoize.toDoubleFunction(function, cache.asMap());
+    public static <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> function,
+            final Cache<INPUT, Double> cache) {
+        return toDoubleFunction(function, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return MapMemoize.toDoubleFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -2095,8 +3286,30 @@ public final class CaffeineMemoize {
      *            The {@link ToIntFunction} to memoize.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static <VALUE> ToIntFunction<VALUE> toIntFunction(final ToIntFunction<VALUE> function) {
+    public static <INPUT> ToIntFunction<INPUT> toIntFunction(final ToIntFunction<INPUT> function) {
         return toIntFunction(function, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return toIntFunction(function, keyFunction, Caffeine.newBuilder().build());
     }
 
     /**
@@ -2115,10 +3328,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static <VALUE> ToIntFunction<VALUE> toIntFunction(
-            final ToIntFunction<VALUE> function,
-            final Cache<VALUE, Integer> cache) {
-        return MapMemoize.toIntFunction(function, cache.asMap());
+    public static <INPUT> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> function,
+            final Cache<INPUT, Integer> cache) {
+        return toIntFunction(function, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return MapMemoize.toIntFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -2145,6 +3383,28 @@ public final class CaffeineMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return toLongFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -2155,10 +3415,35 @@ public final class CaffeineMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static <VALUE> ToLongFunction<VALUE> toLongFunction(
-            final ToLongFunction<VALUE> function,
-            final Cache<VALUE, Long> cache) {
-        return MapMemoize.toLongFunction(function, cache.asMap());
+    public static <INPUT> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> function,
+            final Cache<INPUT, Long> cache) {
+        return toLongFunction(function, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return MapMemoize.toLongFunction(function, keyFunction, cache.asMap());
     }
 
 }

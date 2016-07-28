@@ -13,24 +13,28 @@ import java.util.function.Function;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedFunctionMemoizer<KEY, VALUE>
-        extends ConcurrentMapBasedMemoizer<KEY, VALUE>
-        implements Function<KEY, VALUE> {
+final class ConcurrentMapBasedFunctionMemoizer<INPUT, KEY, OUTPUT>
+        extends ConcurrentMapBasedMemoizer<KEY, OUTPUT>
+        implements Function<INPUT, OUTPUT> {
 
-    private final Function<KEY, VALUE> function;
+    private final Function<INPUT, KEY>    keyFunction;
+    private final Function<INPUT, OUTPUT> function;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedFunctionMemoizer(
-            final ConcurrentMap<KEY, VALUE> cache,
-            final Function<KEY, VALUE> function) {
+            final ConcurrentMap<KEY, OUTPUT> cache,
+            final Function<INPUT, KEY> keyFunction,
+            final Function<INPUT, OUTPUT> function) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.function = requireNonNull(function,
                 "Cannot memoize a NULL Function - provide an actual Function to fix this.");
     }
 
     @Override
-    public VALUE apply(final KEY input) {
-        return computeIfAbsent(input, function);
+    public OUTPUT apply(final INPUT input) {
+        final KEY key = keyFunction.apply(input);
+        return computeIfAbsent(key, givenKey -> function.apply(input));
     }
 
 }

@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.jcache;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
+import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -78,8 +79,8 @@ public final class JCacheMemoize {
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <VALUE> Supplier<VALUE> supplier(final Supplier<VALUE> supplier) {
-        return supplier(supplier, defaultKeySupplier());
+    public static final <OUTPUT> Supplier<OUTPUT> supplier(final Supplier<OUTPUT> supplier) {
+        return supplier(supplier, createCache(Supplier.class));
     }
 
     /**
@@ -98,15 +99,37 @@ public final class JCacheMemoize {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <KEY, VALUE> Supplier<VALUE> supplier(
-            final Supplier<VALUE> supplier,
+    public static final <KEY, OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
             final Supplier<KEY> keySupplier) {
-        return supplier(supplier, keySupplier, createCache(Supplier.class.getSimpleName()));
+        return supplier(supplier, keySupplier, createCache(Supplier.class));
     }
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a previously constructed JCache {@link Cache}.
+     * Memoizes a {@link Supplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static final <OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
+            final Cache<String, OUTPUT> cache) {
+        return supplier(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Supplier} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -122,10 +145,10 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <KEY, VALUE> Supplier<VALUE> supplier(
-            final Supplier<VALUE> supplier,
+    public static final <KEY, OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
             final Supplier<KEY> keySupplier,
-            final Cache<KEY, VALUE> cache) {
+            final Cache<KEY, OUTPUT> cache) {
         return new JCacheBasedSupplierMemoizer<>(cache, keySupplier, supplier);
     }
 
@@ -143,13 +166,35 @@ public final class JCacheMemoize {
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static final <KEY, VALUE> Function<KEY, VALUE> function(final Function<KEY, VALUE> function) {
-        return function(function, createCache(Function.class.getSimpleName()));
+    public static final <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(final Function<INPUT, OUTPUT> function) {
+        return function(function, createCache(Function.class));
     }
 
     /**
      * <p>
-     * Memoizes a {@link Function} in a previously constructed JCache {@link Cache}.
+     * Memoizes a {@link Function} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Function}.
+     */
+    public static final <INPUT, OUTPUT, KEY> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return function(function, keyFunction, createCache(Function.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -163,10 +208,35 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Function}.
      */
-    public static final <KEY, VALUE> Function<KEY, VALUE> function(
-            final Function<KEY, VALUE> function,
-            final Cache<KEY, VALUE> cache) {
-        return new JCacheBasedFunctionMemoizer<>(cache, function);
+    public static final <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Cache<INPUT, OUTPUT> cache) {
+        return function(function, Function.identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Function}.
+     */
+    public static final <INPUT, OUTPUT, KEY> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return new JCacheBasedFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -183,13 +253,35 @@ public final class JCacheMemoize {
      *            The {@link Predicate} to memoize.
      * @return The wrapped {@link Predicate}.
      */
-    public static final <VALUE> Predicate<VALUE> predicate(final Predicate<VALUE> predicate) {
-        return predicate(predicate, createCache(Predicate.class.getSimpleName()));
+    public static final <INPUT> Predicate<INPUT> predicate(final Predicate<INPUT> predicate) {
+        return predicate(predicate, createCache(Predicate.class));
     }
 
     /**
      * <p>
-     * Memoizes a {@link Predicate} in a previously constructed JCache {@link Cache}.
+     * Memoizes a {@link Predicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static final <INPUT, KEY> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Function<INPUT, KEY> keyFunction) {
+        return predicate(predicate, keyFunction, createCache(Predicate.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -203,10 +295,35 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Predicate}.
      */
-    public static final <VALUE> Predicate<VALUE> predicate(
-            final Predicate<VALUE> predicate,
-            final Cache<VALUE, Boolean> cache) {
-        return new JCacheBasedPredicateMemoizer<>(cache, predicate);
+    public static final <INPUT> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Cache<INPUT, Boolean> cache) {
+        return predicate(predicate, Function.identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static final <INPUT, KEY> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return new JCacheBasedPredicateMemoizer<>(cache, keyFunction, predicate);
     }
 
     /**
@@ -223,13 +340,35 @@ public final class JCacheMemoize {
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
      */
-    public static final <VALUE> Consumer<VALUE> consumer(final Consumer<VALUE> consumer) {
-        return consumer(consumer, createCache(Consumer.class.getSimpleName()));
+    public static final <INPUT> Consumer<INPUT> consumer(final Consumer<INPUT> consumer) {
+        return consumer(consumer, createCache(Consumer.class));
     }
 
     /**
      * <p>
-     * Memoizes a {@link Consumer} in a previously constructed JCache {@link Cache}.
+     * Memoizes a {@link Consumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static final <INPUT, KEY> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Function<INPUT, KEY> keyFunction) {
+        return consumer(consumer, keyFunction, createCache(Consumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Consumer} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -243,10 +382,35 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Consumer}.
      */
-    public static final <VALUE> Consumer<VALUE> consumer(
-            final Consumer<VALUE> consumer,
-            final Cache<VALUE, VALUE> cache) {
-        return new JCacheBasedConsumerMemoizer<>(cache, consumer);
+    public static final <INPUT> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Cache<INPUT, INPUT> cache) {
+        return consumer(consumer, Function.identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Consumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static final <INPUT, KEY> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, INPUT> cache) {
+        return new JCacheBasedConsumerMemoizer<>(cache, keyFunction, consumer);
     }
 
     /**
@@ -263,9 +427,9 @@ public final class JCacheMemoize {
      *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction) {
-        return biFunction(biFunction, hashCodeKeyFunction());
+    public static final <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction) {
+        return biFunction(biFunction, createCache(BiFunction.class));
     }
 
     /**
@@ -284,15 +448,37 @@ public final class JCacheMemoize {
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+    public static final <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return biFunction(biFunction, keyFunction, createCache(BiFunction.class.getSimpleName()));
+        return biFunction(biFunction, keyFunction, createCache(BiFunction.class));
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiFunction} in a previously constructed JCache {@link Cache}.
+     * Memoizes a {@link BiFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BiFunction}.
+     */
+    public static final <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
+            final Cache<String, OUTPUT> cache) {
+        return biFunction(biFunction, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiFunction} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -308,20 +494,20 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+    public static final <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
-            final Cache<KEY, VALUE> cache) {
+            final Cache<KEY, OUTPUT> cache) {
         return new JCacheBasedBiFunctionMemoizer<>(cache, keyFunction, biFunction);
     }
 
-    static <KEY, VALUE> Cache<KEY, VALUE> createCache(final String typeName) {
+    static <KEY, VALUE> Cache<KEY, VALUE> createCache(final Type type) {
         final MutableConfiguration<KEY, VALUE> configuration = new MutableConfiguration<>();
-        return CACHE_MANAGER.createCache(generateCacheName(typeName), configuration);
+        return CACHE_MANAGER.createCache(generateCacheName(type), configuration);
     }
 
-    static String generateCacheName(final String type) {
-        return JCacheMemoize.class.getSimpleName() + type + CACHE_COUNTER.getAndIncrement();
+    static String generateCacheName(final Type type) {
+        return JCacheMemoize.class.getSimpleName() + type.getTypeName() + CACHE_COUNTER.getAndIncrement();
     }
 
 }

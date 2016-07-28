@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.DoubleFunction;
 import java.util.function.DoubleToIntFunction;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedDoubleToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Integer> cache = new ConcurrentHashMap<>();
         final DoubleToIntFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToIntFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedDoubleToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Integer> cache = null;
         final DoubleToIntFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedDoubleToIntFunctionMemoizer(cache, function);
+        new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedDoubleToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Integer> cache = new ConcurrentHashMap<>();
         final DoubleToIntFunction function = null;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedDoubleToIntFunctionMemoizerTest {
                 "Cannot memoize a NULL DoubleToIntFunction - provide an actual DoubleToIntFunction to fix this.");
 
         // then
-        new ConcurrentMapBasedDoubleToIntFunctionMemoizer(cache, function);
+        new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedDoubleToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Integer> cache = new ConcurrentHashMap<>();
         final DoubleToIntFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToIntFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt(123.456D);
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedDoubleToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Integer> cache = new ConcurrentHashMap<>();
         final DoubleToIntFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToIntFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt(123D);
@@ -131,10 +137,11 @@ public class ConcurrentMapBasedDoubleToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Integer> cache = new ConcurrentHashMap<>();
         final DoubleToIntFunction function = Mockito.mock(DoubleToIntFunction.class);
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToIntFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt(123D);
@@ -149,10 +156,11 @@ public class ConcurrentMapBasedDoubleToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Integer> cache = new ConcurrentHashMap<>();
         final DoubleToIntFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToIntFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToIntFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertEquals(123, memoizer.applyAsInt(123D));

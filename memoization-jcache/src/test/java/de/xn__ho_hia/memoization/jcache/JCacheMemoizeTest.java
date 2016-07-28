@@ -59,6 +59,22 @@ public class JCacheMemoizeTest {
     *
     */
     @Test
+    public void shouldMemoizeSupplierWithKeySupplier() {
+        // given
+        final Supplier<String> supplier = () -> "test";
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final Supplier<String> memoize = JCacheMemoize.supplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeFunction() {
         // given
         final Function<String, String> function = a -> "test";
@@ -79,6 +95,22 @@ public class JCacheMemoizeTest {
 
         // when
         final Function<String, String> memoize = JCacheMemoize.function(a -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeFunctionWithKeyFunction() {
+        // given
+        final Function<String, String> function = a -> "test";
+        final Function<String, String> keyFunction = Function.identity();
+
+        // when
+        final Function<String, String> memoize = JCacheMemoize.function(function, keyFunction);
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
@@ -117,6 +149,22 @@ public class JCacheMemoizeTest {
     *
     */
     @Test
+    public void shouldMemoizePredicateWithKeyFunction() {
+        // given
+        final Predicate<String> predicate = a -> true;
+        final Function<String, String> keyFunction = Function.identity();
+
+        // when
+        final Predicate<String> memoize = JCacheMemoize.predicate(predicate, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeConsumer() {
         // given
         final Consumer<String> consumer = System.out::println;
@@ -146,6 +194,22 @@ public class JCacheMemoizeTest {
     *
     */
     @Test
+    public void shouldMemoizeConsumerWithKeyFunction() {
+        // given
+        final Consumer<String> consumer = System.out::println;
+        final Function<String, String> keyFunction = Function.identity();
+
+        // when
+        final Consumer<String> memoize = JCacheMemoize.consumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeBiFunction() {
         // given
         final BiFunction<String, String, String> function = (first, second) -> "test";
@@ -166,6 +230,22 @@ public class JCacheMemoizeTest {
 
         // when
         final BiFunction<String, String, String> memoize = JCacheMemoize.biFunction((first, second) -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiFunctionWithKeyBiFunction() {
+        // given
+        final BiFunction<String, String, String> function = (first, second) -> "test";
+        final BiFunction<String, String, String> keyFunction = (first, second) -> "key";
+
+        // when
+        final BiFunction<String, String, String> memoize = JCacheMemoize.biFunction(function, keyFunction);
 
         // then
         Assert.assertNotNull("Memoized BiFunction is NULL", memoize);

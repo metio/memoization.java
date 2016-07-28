@@ -10,6 +10,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
 import java.util.concurrent.ExecutionException;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.google.common.cache.Cache;
@@ -42,11 +43,12 @@ public class GuavaCacheBasedPredicateMemoizerTest {
     public void shouldAcceptCacheAndKeyFunctionAndPredicate() {
         // given
         final Predicate<String> predicate = a -> true;
+        final Function<String, String> keyFunction = Function.identity();
         final Cache<String, Boolean> cache = CacheBuilder.newBuilder().build();
 
         // when
-        final GuavaCacheBasedPredicateMemoizer<String> memoizer = new GuavaCacheBasedPredicateMemoizer<>(cache,
-                predicate);
+        final GuavaCacheBasedPredicateMemoizer<String, String> memoizer = new GuavaCacheBasedPredicateMemoizer<>(cache,
+                keyFunction, predicate);
 
         // then
         Assert.assertNotNull(memoizer);
@@ -60,11 +62,12 @@ public class GuavaCacheBasedPredicateMemoizerTest {
     public void shouldTestGivenValue() {
         // given
         final Predicate<String> predicate = Mockito.mock(Predicate.class);
+        final Function<String, String> keyFunction = Function.identity();
         final Cache<String, Boolean> cache = CacheBuilder.newBuilder().build();
 
         // when
-        final GuavaCacheBasedPredicateMemoizer<String> memoizer = new GuavaCacheBasedPredicateMemoizer<>(cache,
-                predicate);
+        final GuavaCacheBasedPredicateMemoizer<String, String> memoizer = new GuavaCacheBasedPredicateMemoizer<>(cache,
+                keyFunction, predicate);
 
         // then
         memoizer.test("value");
@@ -80,10 +83,11 @@ public class GuavaCacheBasedPredicateMemoizerTest {
     public void shouldWrapExecutionExceptionInMemoizationException() throws ExecutionException {
         // given
         final Predicate<String> predicate = a -> true;
+        final Function<String, String> keyFunction = Function.identity();
         final Cache<String, Boolean> cache = Mockito.mock(Cache.class);
         given(cache.get(any(), any())).willThrow(ExecutionException.class);
-        final GuavaCacheBasedPredicateMemoizer<String> memoizer = new GuavaCacheBasedPredicateMemoizer<>(cache,
-                predicate);
+        final GuavaCacheBasedPredicateMemoizer<String, String> memoizer = new GuavaCacheBasedPredicateMemoizer<>(cache,
+                keyFunction, predicate);
 
         // when
         thrown.expect(MemoizationException.class);
@@ -99,11 +103,12 @@ public class GuavaCacheBasedPredicateMemoizerTest {
     public void shouldMemoizeResult() {
         // given
         final Predicate<String> predicate = a -> true;
+        final Function<String, String> keyFunction = Function.identity();
         final Cache<String, Boolean> cache = CacheBuilder.newBuilder().build();
 
         // when
-        final GuavaCacheBasedPredicateMemoizer<String> memoizer = new GuavaCacheBasedPredicateMemoizer<>(cache,
-                predicate);
+        final GuavaCacheBasedPredicateMemoizer<String, String> memoizer = new GuavaCacheBasedPredicateMemoizer<>(cache,
+                keyFunction, predicate);
 
         // then
         Assert.assertTrue(memoizer.test("value"));

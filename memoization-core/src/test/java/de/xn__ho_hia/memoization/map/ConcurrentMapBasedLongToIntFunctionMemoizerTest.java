@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.LongFunction;
 import java.util.function.LongToIntFunction;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedLongToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Long, Integer> cache = new ConcurrentHashMap<>();
         final LongToIntFunction function = input -> 123;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongToIntFunctionMemoizer memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedLongToIntFunctionMemoizer<Long> memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedLongToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Long, Integer> cache = null;
         final LongToIntFunction function = input -> 123;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedLongToIntFunctionMemoizer(cache, function);
+        new ConcurrentMapBasedLongToIntFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedLongToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Long, Integer> cache = new ConcurrentHashMap<>();
         final LongToIntFunction function = null;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedLongToIntFunctionMemoizerTest {
                 "Cannot memoize a NULL LongToIntFunction - provide an actual LongToIntFunction to fix this.");
 
         // then
-        new ConcurrentMapBasedLongToIntFunctionMemoizer(cache, function);
+        new ConcurrentMapBasedLongToIntFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedLongToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Long, Integer> cache = new ConcurrentHashMap<>();
         final LongToIntFunction function = input -> 123;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongToIntFunctionMemoizer memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedLongToIntFunctionMemoizer<Long> memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt(123L);
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedLongToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Long, Integer> cache = new ConcurrentHashMap<>();
         final LongToIntFunction function = input -> 123;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongToIntFunctionMemoizer memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedLongToIntFunctionMemoizer<Long> memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt(123L);
@@ -131,10 +137,11 @@ public class ConcurrentMapBasedLongToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Long, Integer> cache = new ConcurrentHashMap<>();
         final LongToIntFunction function = Mockito.mock(LongToIntFunction.class);
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongToIntFunctionMemoizer memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedLongToIntFunctionMemoizer<Long> memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsInt(123L);
@@ -149,10 +156,11 @@ public class ConcurrentMapBasedLongToIntFunctionMemoizerTest {
         // given
         final ConcurrentMap<Long, Integer> cache = new ConcurrentHashMap<>();
         final LongToIntFunction function = input -> 123;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongToIntFunctionMemoizer memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedLongToIntFunctionMemoizer<Long> memoizer = new ConcurrentMapBasedLongToIntFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertEquals(123, memoizer.applyAsInt(123L));

@@ -9,28 +9,33 @@ package de.xn__ho_hia.memoization.map;
 import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedDoublePredicateMemoizer
-        extends ConcurrentMapBasedMemoizer<Double, Boolean>
+final class ConcurrentMapBasedDoublePredicateMemoizer<KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Boolean>
         implements DoublePredicate {
 
-    private final DoublePredicate predicate;
+    private final DoubleFunction<KEY> keyFunction;
+    private final DoublePredicate     predicate;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedDoublePredicateMemoizer(
-            final ConcurrentMap<Double, Boolean> cache,
+            final ConcurrentMap<KEY, Boolean> cache,
+            final DoubleFunction<KEY> keyFunction,
             final DoublePredicate predicate) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.predicate = requireNonNull(predicate,
                 "Cannot memoize a NULL Predicate - provide an actual Predicate to fix this.");
     }
 
     @Override
     public boolean test(final double value) {
-        return computeIfAbsent(Double.valueOf(value), key -> Boolean.valueOf(predicate.test(value))).booleanValue();
+        final KEY key = keyFunction.apply(value);
+        return computeIfAbsent(key, givenKey -> Boolean.valueOf(predicate.test(value))).booleanValue();
     }
 
 }

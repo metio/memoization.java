@@ -18,7 +18,6 @@ import java.util.function.Supplier;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.LoadingCache;
 
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
@@ -74,8 +73,8 @@ public final class GuavaMemoize {
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <VALUE> Supplier<VALUE> supplier(final Supplier<VALUE> supplier) {
-        return supplier(supplier, defaultKeySupplier());
+    public static final <OUTPUT> Supplier<OUTPUT> supplier(final Supplier<OUTPUT> supplier) {
+        return supplier(supplier, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -94,15 +93,37 @@ public final class GuavaMemoize {
      *            The {@link Supplier} for the cache key.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <KEY, VALUE> Supplier<VALUE> supplier(
-            final Supplier<VALUE> supplier,
+    public static final <KEY, OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
             final Supplier<KEY> keySupplier) {
         return supplier(supplier, keySupplier, CacheBuilder.newBuilder().build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a previously constructed Guava {@link LoadingCache}.
+     * Memoizes a {@link Supplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static final <OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
+            final Cache<String, OUTPUT> cache) {
+        return supplier(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Supplier} in a Guava {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -118,10 +139,10 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Supplier}.
      */
-    public static final <KEY, VALUE> Supplier<VALUE> supplier(
-            final Supplier<VALUE> supplier,
+    public static final <KEY, OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
             final Supplier<KEY> keySupplier,
-            final Cache<KEY, VALUE> cache) {
+            final Cache<KEY, OUTPUT> cache) {
         return new GuavaCacheBasedSupplierMemoizer<>(cache, keySupplier, supplier);
     }
 
@@ -139,14 +160,36 @@ public final class GuavaMemoize {
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
      */
-    public static final <KEY, VALUE> Function<KEY, VALUE> function(
-            final Function<KEY, VALUE> function) {
+    public static final <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function) {
         return function(function, CacheBuilder.newBuilder().build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link Function} in a previously constructed Guava {@link LoadingCache}.
+     * Memoizes a {@link Function} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Function}.
+     */
+    public static final <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return function(function, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a Guava {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -160,10 +203,35 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Function}.
      */
-    public static final <KEY, VALUE> Function<KEY, VALUE> function(
-            final Function<KEY, VALUE> function,
-            final Cache<KEY, VALUE> cache) {
-        return new GuavaCacheBasedFunctionMemoizer<>(cache, function);
+    public static final <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Cache<INPUT, OUTPUT> cache) {
+        return function(function, Function.identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Function}.
+     */
+    public static final <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return new GuavaCacheBasedFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -180,14 +248,36 @@ public final class GuavaMemoize {
      *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction) {
+    public static final <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction) {
         return biFunction(biFunction, CacheBuilder.newBuilder().build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiFunction} in a previously constructed Guava {@link Cache}.
+     * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link BiFunction}.
+     */
+    public static final <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return biFunction(biFunction, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -201,15 +291,15 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
-            final Cache<String, VALUE> cache) {
+    public static final <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
+            final Cache<String, OUTPUT> cache) {
         return biFunction(biFunction, hashCodeKeyFunction(), cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiFunction} in a previously constructed Guava {@link Cache}.
+     * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -225,10 +315,10 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link BiFunction}.
      */
-    public static final <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+    public static final <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
-            final Cache<KEY, VALUE> cache) {
+            final Cache<KEY, OUTPUT> cache) {
         return new GuavaCacheBasedBiFunctionMemoizer<>(cache, keyFunction, biFunction);
     }
 
@@ -246,14 +336,36 @@ public final class GuavaMemoize {
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
      */
-    public static final <VALUE> Consumer<VALUE> consumer(
-            final Consumer<VALUE> consumer) {
+    public static final <INPUT> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer) {
         return consumer(consumer, CacheBuilder.newBuilder().build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link Consumer} in a previously constructed {@link Cache}.
+     * Memoizes a {@link Consumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static final <INPUT, KEY> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Function<INPUT, KEY> keyFunction) {
+        return consumer(consumer, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Consumer} in a Guava {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -267,10 +379,35 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Consumer}.
      */
-    public static final <VALUE> Consumer<VALUE> consumer(
-            final Consumer<VALUE> consumer,
-            final Cache<VALUE, VALUE> cache) {
-        return new GuavaCacheBasedConsumerMemoizer<>(cache, identity(), consumer);
+    public static final <INPUT> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Cache<INPUT, INPUT> cache) {
+        return consumer(consumer, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Consumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link Consumer} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Consumer}.
+     */
+    public static final <INPUT, KEY> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, INPUT> cache) {
+        return new GuavaCacheBasedConsumerMemoizer<>(cache, keyFunction, consumer);
     }
 
     /**
@@ -287,14 +424,36 @@ public final class GuavaMemoize {
      *            The {@link Predicate} to memoize.
      * @return The wrapped {@link Predicate}.
      */
-    public static final <VALUE> Predicate<VALUE> predicate(
-            final Predicate<VALUE> predicate) {
+    public static final <INPUT> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate) {
         return predicate(predicate, CacheBuilder.newBuilder().build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link Predicate} in a previously constructed {@link Cache}.
+     * Memoizes a {@link Predicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static final <INPUT, KEY> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Function<INPUT, KEY> keyFunction) {
+        return predicate(predicate, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a Guava {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -308,10 +467,35 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Predicate}.
      */
-    public static final <VALUE> Predicate<VALUE> predicate(
-            final Predicate<VALUE> predicate,
-            final Cache<VALUE, Boolean> cache) {
-        return new GuavaCacheBasedPredicateMemoizer<>(cache, predicate);
+    public static final <INPUT> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Cache<INPUT, Boolean> cache) {
+        return predicate(predicate, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static final <INPUT, KEY> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return new GuavaCacheBasedPredicateMemoizer<>(cache, keyFunction, predicate);
     }
 
 }

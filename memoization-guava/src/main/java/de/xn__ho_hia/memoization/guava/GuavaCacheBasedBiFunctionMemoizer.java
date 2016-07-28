@@ -10,24 +10,24 @@ import java.util.function.BiFunction;
 
 import com.google.common.cache.Cache;
 
-final class GuavaCacheBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
-        extends AbstractGuavaCacheBasedMemoizer<KEY, VALUE>
-        implements BiFunction<FIRST, SECOND, VALUE> {
+final class GuavaCacheBasedBiFunctionMemoizer<FIRST, SECOND, KEY, OUTPUT>
+        extends AbstractGuavaCacheBasedMemoizer<KEY, OUTPUT>
+        implements BiFunction<FIRST, SECOND, OUTPUT> {
 
     private final BiFunction<FIRST, SECOND, KEY>   keyFunction;
-    private final BiFunction<FIRST, SECOND, VALUE> biFunction;
+    private final BiFunction<FIRST, SECOND, OUTPUT> biFunction;
 
     GuavaCacheBasedBiFunctionMemoizer(
-            final Cache<KEY, VALUE> cache,
+            final Cache<KEY, OUTPUT> cache,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
-            final BiFunction<FIRST, SECOND, VALUE> biFunction) {
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction) {
         super(cache);
         this.keyFunction = keyFunction;
         this.biFunction = biFunction;
     }
 
     @Override
-    public VALUE apply(final FIRST first, final SECOND second) {
+    public OUTPUT apply(final FIRST first, final SECOND second) {
         final KEY key = keyFunction.apply(first, second);
         return get(key, givenKey -> biFunction.apply(first, second));
     }

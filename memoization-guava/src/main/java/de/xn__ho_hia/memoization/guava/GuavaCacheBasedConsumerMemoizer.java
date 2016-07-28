@@ -14,34 +14,34 @@ import com.google.common.cache.Cache;
 
 import de.xn__ho_hia.memoization.shared.MemoizingConsumer;
 
-final class GuavaCacheBasedConsumerMemoizer<KEY, VALUE>
-        extends AbstractGuavaCacheBasedMemoizer<KEY, VALUE>
-        implements MemoizingConsumer<KEY, VALUE> {
+final class GuavaCacheBasedConsumerMemoizer<KEY, INPUT>
+        extends AbstractGuavaCacheBasedMemoizer<KEY, INPUT>
+        implements MemoizingConsumer<KEY, INPUT> {
 
-    private final Function<VALUE, KEY> keyFunction;
-    private final Consumer<VALUE>      consumer;
+    private final Function<INPUT, KEY> keyFunction;
+    private final Consumer<INPUT>      consumer;
 
     GuavaCacheBasedConsumerMemoizer(
-            final Cache<KEY, VALUE> cache,
-            final Function<VALUE, KEY> keyFunction,
-            final Consumer<VALUE> consumer) {
+            final Cache<KEY, INPUT> cache,
+            final Function<INPUT, KEY> keyFunction,
+            final Consumer<INPUT> consumer) {
         super(cache);
         this.keyFunction = keyFunction;
         this.consumer = consumer;
     }
 
     @Override
-    public BiFunction<KEY, Function<KEY, VALUE>, VALUE> getMemoizingFunction() {
+    public BiFunction<KEY, Function<KEY, INPUT>, INPUT> getMemoizingFunction() {
         return this::get;
     }
 
     @Override
-    public final Function<VALUE, KEY> getKeyFunction() {
+    public final Function<INPUT, KEY> getKeyFunction() {
         return keyFunction;
     }
 
     @Override
-    public final Consumer<VALUE> getConsumer() {
+    public final Consumer<INPUT> getConsumer() {
         return consumer;
     }
 

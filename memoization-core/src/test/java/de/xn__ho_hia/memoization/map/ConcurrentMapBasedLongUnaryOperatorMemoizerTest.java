@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.LongFunction;
 import java.util.function.LongUnaryOperator;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedLongUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongUnaryOperator operator = input -> input;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedLongUnaryOperatorMemoizer<Long> memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedLongUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = null;
         final LongUnaryOperator operator = input -> input;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedLongUnaryOperatorMemoizer(cache, operator);
+        new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(cache, keyFunction, operator);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedLongUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongUnaryOperator operator = null;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedLongUnaryOperatorMemoizerTest {
                 "Cannot memoize a NULL LongUnaryOperator - provide an actual LongUnaryOperator to fix this.");
 
         // then
-        new ConcurrentMapBasedLongUnaryOperatorMemoizer(cache, operator);
+        new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(cache, keyFunction, operator);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedLongUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongUnaryOperator operator = input -> input;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedLongUnaryOperatorMemoizer<Long> memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsLong(123L);
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedLongUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongUnaryOperator operator = input -> input;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedLongUnaryOperatorMemoizer<Long> memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsLong(123L);
@@ -131,10 +137,11 @@ public class ConcurrentMapBasedLongUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongUnaryOperator operator = Mockito.mock(LongUnaryOperator.class);
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedLongUnaryOperatorMemoizer<Long> memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsLong(123L);
@@ -149,10 +156,11 @@ public class ConcurrentMapBasedLongUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
         final LongUnaryOperator operator = input -> input;
+        final LongFunction<Long> keyFunction = Long::valueOf;
 
         // when
-        final ConcurrentMapBasedLongUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedLongUnaryOperatorMemoizer<Long> memoizer = new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         Assert.assertEquals(123L, memoizer.applyAsLong(123L));

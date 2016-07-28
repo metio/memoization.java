@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.DoubleFunction;
 import java.util.function.DoubleToLongFunction;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Long> cache = new ConcurrentHashMap<>();
         final DoubleToLongFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToLongFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToLongFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Long> cache = null;
         final DoubleToLongFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedDoubleToLongFunctionMemoizer(cache, function);
+        new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Long> cache = new ConcurrentHashMap<>();
         final DoubleToLongFunction function = null;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
                 "Cannot memoize a NULL DoubleToLongFunction - provide an actual DoubleToLongFunction to fix this.");
 
         // then
-        new ConcurrentMapBasedDoubleToLongFunctionMemoizer(cache, function);
+        new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(cache, keyFunction, function);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Long> cache = new ConcurrentHashMap<>();
         final DoubleToLongFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToLongFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToLongFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsLong(123.456D);
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Long> cache = new ConcurrentHashMap<>();
         final DoubleToLongFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToLongFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToLongFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsLong(123D);
@@ -131,10 +137,11 @@ public class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Long> cache = new ConcurrentHashMap<>();
         final DoubleToLongFunction function = Mockito.mock(DoubleToLongFunction.class);
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToLongFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToLongFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         memoizer.applyAsLong(123D);
@@ -149,10 +156,11 @@ public class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
         // given
         final ConcurrentMap<Double, Long> cache = new ConcurrentHashMap<>();
         final DoubleToLongFunction function = input -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleToLongFunctionMemoizer memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer(
-                cache, function);
+        final ConcurrentMapBasedDoubleToLongFunctionMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(
+                cache, keyFunction, function);
 
         // then
         Assert.assertEquals(123L, memoizer.applyAsLong(123D));

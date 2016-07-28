@@ -10,30 +10,34 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedDoubleConsumerMemoizer
-        extends ConcurrentMapBasedMemoizer<Double, Double>
+final class ConcurrentMapBasedDoubleConsumerMemoizer<KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Double>
         implements DoubleConsumer {
 
-    private final DoubleConsumer consumer;
+    private final DoubleFunction<KEY> keyFunction;
+    private final DoubleConsumer      consumer;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedDoubleConsumerMemoizer(
-            final ConcurrentMap<Double, Double> cache,
+            final ConcurrentMap<KEY, Double> cache,
+            final DoubleFunction<KEY> keyFunction,
             final DoubleConsumer consumer) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.consumer = requireNonNull(consumer,
                 "Cannot memoize a NULL Consumer - provide an actual Consumer to fix this.");
     }
 
     @Override
     public void accept(final double value) {
-        final Double key = Double.valueOf(value);
+        final KEY key = keyFunction.apply(value);
         computeIfAbsent(key, givenKey -> {
             consumer.accept(value);
-            return givenKey;
+            return Double.valueOf(value);
         });
     }
 

@@ -10,26 +10,26 @@ import java.util.function.BiFunction;
 
 import javax.cache.Cache;
 
-final class JCacheBasedBiFunctionMemoizer<FIRST, SECOND, KEY, VALUE>
-        extends AbstractJCacheBasedMemoizer<KEY, VALUE>
-        implements BiFunction<FIRST, SECOND, VALUE> {
+final class JCacheBasedBiFunctionMemoizer<FIRST, SECOND, KEY, OUTPUT>
+        extends AbstractJCacheBasedMemoizer<KEY, OUTPUT>
+        implements BiFunction<FIRST, SECOND, OUTPUT> {
 
     private final BiFunction<FIRST, SECOND, KEY>   keyFunction;
-    private final BiFunction<FIRST, SECOND, VALUE> biFunction;
+    private final BiFunction<FIRST, SECOND, OUTPUT> biFunction;
 
     JCacheBasedBiFunctionMemoizer(
-            final Cache<KEY, VALUE> cache,
+            final Cache<KEY, OUTPUT> cache,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
-            final BiFunction<FIRST, SECOND, VALUE> biFunction) {
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction) {
         super(cache);
         this.keyFunction = keyFunction;
         this.biFunction = biFunction;
     }
 
     @Override
-    public VALUE apply(final FIRST t, final SECOND u) {
-        final KEY key = keyFunction.apply(t, u);
-        return invoke(key, givenKey -> biFunction.apply(t, u));
+    public OUTPUT apply(final FIRST first, final SECOND second) {
+        final KEY key = keyFunction.apply(first, second);
+        return invoke(key, givenKey -> biFunction.apply(first, second));
     }
 
 }

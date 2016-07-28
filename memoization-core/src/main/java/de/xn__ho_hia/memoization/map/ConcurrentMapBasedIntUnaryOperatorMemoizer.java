@@ -9,28 +9,32 @@ package de.xn__ho_hia.memoization.map;
 import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.IntFunction;
 import java.util.function.IntUnaryOperator;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedIntUnaryOperatorMemoizer
-        extends ConcurrentMapBasedMemoizer<Integer, Integer>
+final class ConcurrentMapBasedIntUnaryOperatorMemoizer<KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Integer>
         implements IntUnaryOperator {
 
+    private final IntFunction<KEY> keyFunction;
     private final IntUnaryOperator operator;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedIntUnaryOperatorMemoizer(
-            final ConcurrentMap<Integer, Integer> cache,
+            final ConcurrentMap<KEY, Integer> cache,
+            final IntFunction<KEY> keyFunction,
             final IntUnaryOperator operator) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.operator = requireNonNull(operator,
                 "Cannot memoize a NULL IntUnaryOperator - provide an actual IntUnaryOperator to fix this.");
     }
 
     @Override
     public int applyAsInt(final int operand) {
-        final Integer key = Integer.valueOf(operand);
+        final KEY key = keyFunction.apply(operand);
         return computeIfAbsent(key, givenKey -> Integer.valueOf(operator.applyAsInt(operand)))
                 .intValue();
     }

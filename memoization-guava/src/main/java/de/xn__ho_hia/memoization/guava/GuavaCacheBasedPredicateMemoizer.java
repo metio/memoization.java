@@ -6,26 +6,31 @@
  */
 package de.xn__ho_hia.memoization.guava;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.google.common.cache.Cache;
 
-final class GuavaCacheBasedPredicateMemoizer<VALUE>
-        extends AbstractGuavaCacheBasedMemoizer<VALUE, Boolean>
-        implements Predicate<VALUE> {
+final class GuavaCacheBasedPredicateMemoizer<INPUT, KEY>
+        extends AbstractGuavaCacheBasedMemoizer<KEY, Boolean>
+        implements Predicate<INPUT> {
 
-    private final Predicate<VALUE> predicate;
+    private final Function<INPUT, KEY> keyFunction;
+    private final Predicate<INPUT>     predicate;
 
     GuavaCacheBasedPredicateMemoizer(
-            final Cache<VALUE, Boolean> cache,
-            final Predicate<VALUE> predicate) {
+            final Cache<KEY, Boolean> cache,
+            final Function<INPUT, KEY> keyFunction,
+            final Predicate<INPUT> predicate) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.predicate = predicate;
     }
 
     @Override
-    public boolean test(final VALUE value) {
-        return get(value, givenValue -> Boolean.valueOf(predicate.test(givenValue))).booleanValue();
+    public boolean test(final INPUT input) {
+        final KEY key = keyFunction.apply(input);
+        return get(key, givenKey -> Boolean.valueOf(predicate.test(input))).booleanValue();
     }
 
 }

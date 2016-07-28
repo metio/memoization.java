@@ -10,6 +10,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import javax.cache.Cache;
@@ -39,10 +40,11 @@ public class JCacheBasedConsumerMemoizerTest {
     public void shouldMemoizeConsumer() {
         // given
         final Consumer<String> consumer = Mockito.mock(Consumer.class);
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Predicate.class.getSimpleName())) {
+        final Function<String, String> keyFunction = Function.identity();
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(Predicate.class)) {
             // when
-            final JCacheBasedConsumerMemoizer<String> loader = new JCacheBasedConsumerMemoizer<>(cache,
-                    consumer);
+            final JCacheBasedConsumerMemoizer<String, String> loader = new JCacheBasedConsumerMemoizer<>(cache,
+                    keyFunction, consumer);
 
             // then
             loader.accept("test");
@@ -57,10 +59,11 @@ public class JCacheBasedConsumerMemoizerTest {
     public void shouldMemoizeConsumerOnce() {
         // given
         final Consumer<String> consumer = Mockito.mock(Consumer.class);
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Predicate.class.getSimpleName())) {
+        final Function<String, String> keyFunction = Function.identity();
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(Predicate.class)) {
             // when
-            final JCacheBasedConsumerMemoizer<String> loader = new JCacheBasedConsumerMemoizer<>(cache,
-                    consumer);
+            final JCacheBasedConsumerMemoizer<String, String> loader = new JCacheBasedConsumerMemoizer<>(cache,
+                    keyFunction, consumer);
 
             // then
             loader.accept("test");
@@ -75,8 +78,10 @@ public class JCacheBasedConsumerMemoizerTest {
     @Test
     public void shouldWrapRuntimeExceptionInMemoizationException() {
         // given
+        final Function<String, String> keyFunction = Function.identity();
         try (final Cache<String, String> cache = Mockito.mock(Cache.class)) {
-            final JCacheBasedConsumerMemoizer<String> loader = new JCacheBasedConsumerMemoizer<>(cache, null);
+            final JCacheBasedConsumerMemoizer<String, String> loader = new JCacheBasedConsumerMemoizer<>(cache,
+                    keyFunction, null);
             given(cache.invoke(any(), any())).willThrow(RuntimeException.class);
 
             // when

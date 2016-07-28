@@ -9,28 +9,33 @@ package de.xn__ho_hia.memoization.map;
 import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedToDoubleFunctionMemoizer<VALUE>
-        extends ConcurrentMapBasedMemoizer<VALUE, Double>
-        implements ToDoubleFunction<VALUE> {
+final class ConcurrentMapBasedToDoubleFunctionMemoizer<INPUT, KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Double>
+        implements ToDoubleFunction<INPUT> {
 
-    private final ToDoubleFunction<VALUE> function;
+    private final Function<INPUT, KEY>    keyFunction;
+    private final ToDoubleFunction<INPUT> function;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedToDoubleFunctionMemoizer(
-            final ConcurrentMap<VALUE, Double> cache,
-            final ToDoubleFunction<VALUE> function) {
+            final ConcurrentMap<KEY, Double> cache,
+            final Function<INPUT, KEY> keyFunction,
+            final ToDoubleFunction<INPUT> function) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.function = requireNonNull(function,
                 "Cannot memoize a NULL ToDoubleFunction - provide an actual ToDoubleFunction to fix this.");
     }
 
     @Override
-    public double applyAsDouble(final VALUE value) {
-        return computeIfAbsent(value, givenKey -> Double.valueOf(function.applyAsDouble(value)))
+    public double applyAsDouble(final INPUT value) {
+        final KEY key = keyFunction.apply(value);
+        return computeIfAbsent(key, givenKey -> Double.valueOf(function.applyAsDouble(value)))
                 .doubleValue();
     }
 

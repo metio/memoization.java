@@ -9,28 +9,32 @@ package de.xn__ho_hia.memoization.map;
 import static java.util.Objects.requireNonNull;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.DoubleFunction;
 import java.util.function.DoubleToIntFunction;
 
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
-final class ConcurrentMapBasedDoubleToIntFunctionMemoizer
-        extends ConcurrentMapBasedMemoizer<Double, Integer>
+final class ConcurrentMapBasedDoubleToIntFunctionMemoizer<KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Integer>
         implements DoubleToIntFunction {
 
+    private final DoubleFunction<KEY> keyFunction;
     private final DoubleToIntFunction function;
 
     @SuppressWarnings(CompilerWarnings.NLS)
     ConcurrentMapBasedDoubleToIntFunctionMemoizer(
-            final ConcurrentMap<Double, Integer> cache,
+            final ConcurrentMap<KEY, Integer> cache,
+            final DoubleFunction<KEY> keyFunction,
             final DoubleToIntFunction function) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.function = requireNonNull(function,
                 "Cannot memoize a NULL DoubleToIntFunction - provide an actual DoubleToIntFunction to fix this.");
     }
 
     @Override
     public int applyAsInt(final double value) {
-        final Double key = Double.valueOf(value);
+        final KEY key = keyFunction.apply(value);
         return computeIfAbsent(key, givenKey -> Integer.valueOf(function.applyAsInt(value)))
                 .intValue();
     }

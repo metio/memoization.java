@@ -10,22 +10,26 @@ import java.util.function.Function;
 
 import javax.cache.Cache;
 
-final class JCacheBasedFunctionMemoizer<KEY, VALUE>
-        extends AbstractJCacheBasedMemoizer<KEY, VALUE>
-        implements Function<KEY, VALUE> {
+final class JCacheBasedFunctionMemoizer<INPUT, OUTPUT, KEY>
+        extends AbstractJCacheBasedMemoizer<KEY, OUTPUT>
+        implements Function<INPUT, OUTPUT> {
 
-    private final Function<KEY, VALUE> function;
+    private final Function<INPUT, KEY>    keyFunction;
+    private final Function<INPUT, OUTPUT> function;
 
     JCacheBasedFunctionMemoizer(
-            final Cache<KEY, VALUE> cache,
-            final Function<KEY, VALUE> function) {
+            final Cache<KEY, OUTPUT> cache,
+            final Function<INPUT, KEY> keyFunction,
+            final Function<INPUT, OUTPUT> function) {
         super(cache);
+        this.keyFunction = keyFunction;
         this.function = function;
     }
 
     @Override
-    public VALUE apply(final KEY input) {
-        return invoke(input, function);
+    public OUTPUT apply(final INPUT input) {
+        final KEY key = keyFunction.apply(input);
+        return invoke(key, givenKey -> function.apply(input));
     }
 
 }

@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 
 import org.junit.Assert;
@@ -37,10 +38,11 @@ public class ConcurrentMapBasedIntPredicateMemoizerTest {
         // given
         final ConcurrentMap<Integer, Boolean> cache = new ConcurrentHashMap<>();
         final IntPredicate predicate = input -> true;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntPredicateMemoizer memoizer = new ConcurrentMapBasedIntPredicateMemoizer(
-                cache, predicate);
+        final ConcurrentMapBasedIntPredicateMemoizer<Integer> memoizer = new ConcurrentMapBasedIntPredicateMemoizer<>(
+                cache, keyFunction, predicate);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -55,13 +57,14 @@ public class ConcurrentMapBasedIntPredicateMemoizerTest {
         // given
         final ConcurrentMap<Integer, Boolean> cache = null;
         final IntPredicate predicate = input -> true;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedIntPredicateMemoizer(cache, predicate);
+        new ConcurrentMapBasedIntPredicateMemoizer<>(cache, keyFunction, predicate);
     }
 
     /**
@@ -73,13 +76,14 @@ public class ConcurrentMapBasedIntPredicateMemoizerTest {
         // given
         final ConcurrentMap<Integer, Boolean> cache = new ConcurrentHashMap<>();
         final IntPredicate predicate = null;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Cannot memoize a NULL Predicate - provide an actual Predicate to fix this.");
 
         // then
-        new ConcurrentMapBasedIntPredicateMemoizer(cache, predicate);
+        new ConcurrentMapBasedIntPredicateMemoizer<>(cache, keyFunction, predicate);
     }
 
     /**
@@ -90,10 +94,11 @@ public class ConcurrentMapBasedIntPredicateMemoizerTest {
         // given
         final ConcurrentMap<Integer, Boolean> cache = new ConcurrentHashMap<>();
         final IntPredicate predicate = input -> true;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntPredicateMemoizer memoizer = new ConcurrentMapBasedIntPredicateMemoizer(
-                cache, predicate);
+        final ConcurrentMapBasedIntPredicateMemoizer<Integer> memoizer = new ConcurrentMapBasedIntPredicateMemoizer<>(
+                cache, keyFunction, predicate);
 
         // then
         Assert.assertTrue("Memoized value does not match expectations", memoizer.test(123));

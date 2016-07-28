@@ -8,6 +8,7 @@ package de.xn__ho_hia.memoization.map;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.IntFunction;
 import java.util.function.IntUnaryOperator;
 
 import org.junit.Assert;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedIntUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntUnaryOperator operator = input -> input;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedIntUnaryOperatorMemoizer<Integer> memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedIntUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = null;
         final IntUnaryOperator operator = input -> input;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedIntUnaryOperatorMemoizer(cache, operator);
+        new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(cache, keyFunction, operator);
     }
 
     /**
@@ -74,6 +77,7 @@ public class ConcurrentMapBasedIntUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntUnaryOperator operator = null;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
@@ -81,7 +85,7 @@ public class ConcurrentMapBasedIntUnaryOperatorMemoizerTest {
                 "Cannot memoize a NULL IntUnaryOperator - provide an actual IntUnaryOperator to fix this.");
 
         // then
-        new ConcurrentMapBasedIntUnaryOperatorMemoizer(cache, operator);
+        new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(cache, keyFunction, operator);
     }
 
     /**
@@ -92,10 +96,11 @@ public class ConcurrentMapBasedIntUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntUnaryOperator operator = input -> input;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedIntUnaryOperatorMemoizer<Integer> memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsInt(123);
@@ -109,10 +114,11 @@ public class ConcurrentMapBasedIntUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntUnaryOperator operator = input -> input;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedIntUnaryOperatorMemoizer<Integer> memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsInt(123);
@@ -131,10 +137,11 @@ public class ConcurrentMapBasedIntUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntUnaryOperator operator = Mockito.mock(IntUnaryOperator.class);
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedIntUnaryOperatorMemoizer<Integer> memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         memoizer.applyAsInt(123);
@@ -149,10 +156,11 @@ public class ConcurrentMapBasedIntUnaryOperatorMemoizerTest {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();
         final IntUnaryOperator operator = input -> input;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
 
         // when
-        final ConcurrentMapBasedIntUnaryOperatorMemoizer memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer(
-                cache, operator);
+        final ConcurrentMapBasedIntUnaryOperatorMemoizer<Integer> memoizer = new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(
+                cache, keyFunction, operator);
 
         // then
         Assert.assertEquals(123, memoizer.applyAsInt(123));

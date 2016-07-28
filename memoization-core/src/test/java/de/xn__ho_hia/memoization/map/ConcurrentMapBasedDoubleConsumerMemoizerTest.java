@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -38,10 +39,11 @@ public class ConcurrentMapBasedDoubleConsumerMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleConsumer consumer = System.out::println;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleConsumerMemoizer memoizer = new ConcurrentMapBasedDoubleConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedDoubleConsumerMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         Assert.assertNotNull("Memoizer is NULL", memoizer);
@@ -56,13 +58,14 @@ public class ConcurrentMapBasedDoubleConsumerMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = null;
         final DoubleConsumer consumer = System.out::println;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Provide an empty map instead of NULL.");
 
         // then
-        new ConcurrentMapBasedDoubleConsumerMemoizer(cache, consumer);
+        new ConcurrentMapBasedDoubleConsumerMemoizer<>(cache, keyFunction, consumer);
     }
 
     /**
@@ -74,13 +77,14 @@ public class ConcurrentMapBasedDoubleConsumerMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleConsumer consumer = null;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Cannot memoize a NULL Consumer - provide an actual Consumer to fix this.");
 
         // then
-        new ConcurrentMapBasedDoubleConsumerMemoizer(cache, consumer);
+        new ConcurrentMapBasedDoubleConsumerMemoizer<>(cache, keyFunction, consumer);
     }
 
     /**
@@ -91,10 +95,11 @@ public class ConcurrentMapBasedDoubleConsumerMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleConsumer consumer = System.out::println;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleConsumerMemoizer memoizer = new ConcurrentMapBasedDoubleConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedDoubleConsumerMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123.456D);
@@ -108,10 +113,11 @@ public class ConcurrentMapBasedDoubleConsumerMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleConsumer consumer = System.out::println;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleConsumerMemoizer memoizer = new ConcurrentMapBasedDoubleConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedDoubleConsumerMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123.456D);
@@ -130,10 +136,11 @@ public class ConcurrentMapBasedDoubleConsumerMemoizerTest {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
         final DoubleConsumer consumer = Mockito.mock(DoubleConsumer.class);
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
 
         // when
-        final ConcurrentMapBasedDoubleConsumerMemoizer memoizer = new ConcurrentMapBasedDoubleConsumerMemoizer(
-                cache, consumer);
+        final ConcurrentMapBasedDoubleConsumerMemoizer<Double> memoizer = new ConcurrentMapBasedDoubleConsumerMemoizer<>(
+                cache, keyFunction, consumer);
 
         // then
         memoizer.accept(123.456D);
