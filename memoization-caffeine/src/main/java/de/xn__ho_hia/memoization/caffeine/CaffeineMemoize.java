@@ -102,6 +102,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see Consumer
  * @see DoubleBinaryOperator
  * @see DoubleConsumer
+ * @see DoubleFunction
  * @see DoublePredicate
  * @see DoubleSupplier
  * @see DoubleToIntFunction
@@ -1628,6 +1629,93 @@ public final class CaffeineMemoize {
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
         return MapMemoize.longFunction(function, keyFunction, cache.asMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(final DoubleFunction<OUTPUT> function) {
+        return doubleFunction(function, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleFunction(function, keyFunction, Caffeine.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final Cache<Double, OUTPUT> cache) {
+        return doubleFunction(function, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a Caffeine {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, OUTPUT> cache) {
+        return MapMemoize.doubleFunction(function, keyFunction, cache.asMap());
     }
 
     /**

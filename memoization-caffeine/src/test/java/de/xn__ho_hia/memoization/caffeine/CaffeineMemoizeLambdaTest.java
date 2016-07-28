@@ -13,6 +13,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
@@ -98,6 +99,20 @@ public class CaffeineMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleFunctionWithLambda() {
+        // given
+
+        // when
+        final DoubleFunction<String> memoize = CaffeineMemoize.doubleFunction(a -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
     }
 
     /**

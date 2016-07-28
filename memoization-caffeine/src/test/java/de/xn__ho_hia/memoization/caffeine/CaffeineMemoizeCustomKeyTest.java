@@ -122,6 +122,22 @@ public class CaffeineMemoizeCustomKeyTest {
     *
     */
     @Test
+    public void shouldMemoizeDoubleFunction() {
+        // given
+        final DoubleFunction<String> function = a -> "test";
+        final DoubleFunction<String> keyFunction = a -> "key";
+
+        // when
+        final DoubleFunction<String> memoize = CaffeineMemoize.doubleFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeDoubleToIntFunctionWithKeyFunction() {
         // given
         final DoubleToIntFunction function = a -> 123;
