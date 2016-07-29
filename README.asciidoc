@@ -73,7 +73,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 
 | link:{jdk-api}/java/util/function/DoubleConsumer.html[DoubleConsumer]
 | ✓
-| link:{issue}/58[#58]
+| ✓
 | link:{issue}/130[#130]
 | ✓
 

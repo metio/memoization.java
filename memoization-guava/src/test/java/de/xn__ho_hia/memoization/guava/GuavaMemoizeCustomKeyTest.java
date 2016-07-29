@@ -10,6 +10,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -155,6 +156,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleConsumer() {
+        // given
+        final DoubleConsumer consumer = System.out::println;
+        final DoubleFunction<String> keyFunction = a -> "key";
+
+        // when
+        final DoubleConsumer memoize = GuavaMemoize.doubleConsumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleConsumer is NULL", memoize);
     }
 
     /**
