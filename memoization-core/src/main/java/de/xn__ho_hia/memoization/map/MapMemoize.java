@@ -148,7 +148,7 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -156,17 +156,17 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @return The wrapped {@link Supplier}.
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
+     * @return The wrapped {@link BiConsumer}.
      */
-    public static <OUTPUT> Supplier<OUTPUT> supplier(final Supplier<OUTPUT> supplier) {
-        return supplier(supplier, emptyMap());
+    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(final BiConsumer<FIRST, SECOND> biConsumer) {
+        return biConsumer(biConsumer, emptyMap());
     }
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -174,478 +174,21 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @return The wrapped {@link Supplier}.
-     */
-    public static <KEY, OUTPUT> Supplier<OUTPUT> supplier(
-            final Supplier<OUTPUT> supplier,
-            final Supplier<KEY> keySupplier) {
-        return supplier(supplier, keySupplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @param cache
-     *            {@link Map} of already computed values.
-     * @return The wrapped {@link Supplier}.
-     */
-    public static <OUTPUT> Supplier<OUTPUT> supplier(
-            final Supplier<OUTPUT> supplier,
-            final Map<String, OUTPUT> cache) {
-        return supplier(supplier, defaultKeySupplier(), asConcurrentMap(cache));
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache key</li>
-     * <li>Custom cache</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link Supplier}.
-     */
-    public static <KEY, OUTPUT> Supplier<OUTPUT> supplier(
-            final Supplier<OUTPUT> supplier,
-            final Supplier<KEY> keySupplier,
-            final Map<KEY, OUTPUT> cache) {
-        return new ConcurrentMapBasedSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @return The wrapped {@link BooleanSupplier}.
-     */
-    public static BooleanSupplier booleanSupplier(final BooleanSupplier supplier) {
-        return booleanSupplier(supplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link BooleanSupplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @return The wrapped {@link BooleanSupplier}.
-     */
-    public static <KEY> BooleanSupplier booleanSupplier(
-            final BooleanSupplier supplier,
-            final Supplier<KEY> keySupplier) {
-        return booleanSupplier(supplier, keySupplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link BooleanSupplier} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link BooleanSupplier}.
-     */
-    public static BooleanSupplier booleanSupplier(
-            final BooleanSupplier supplier,
-            final Map<String, Boolean> cache) {
-        return booleanSupplier(supplier, defaultKeySupplier(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link BooleanSupplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link BooleanSupplier}.
-     */
-    public static <KEY> BooleanSupplier booleanSupplier(
-            final BooleanSupplier supplier,
-            final Supplier<KEY> keySupplier,
-            final Map<KEY, Boolean> cache) {
-        return new ConcurrentMapBasedBooleanSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @return The wrapped {@link DoubleSupplier}.
-     */
-    public static DoubleSupplier doubleSupplier(final DoubleSupplier supplier) {
-        return doubleSupplier(supplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link DoubleSupplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @return The wrapped {@link DoubleSupplier}.
-     */
-    public static <KEY> DoubleSupplier doubleSupplier(
-            final DoubleSupplier supplier,
-            final Supplier<KEY> keySupplier) {
-        return doubleSupplier(supplier, keySupplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link DoubleSupplier} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleSupplier}.
-     */
-    public static DoubleSupplier doubleSupplier(
-            final DoubleSupplier supplier,
-            final Map<String, Double> cache) {
-        return doubleSupplier(supplier, defaultKeySupplier(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link DoubleSupplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleSupplier}.
-     */
-    public static <KEY> DoubleSupplier doubleSupplier(
-            final DoubleSupplier supplier,
-            final Supplier<KEY> keySupplier,
-            final Map<KEY, Double> cache) {
-        return new ConcurrentMapBasedDoubleSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @return The wrapped {@link IntSupplier}.
-     */
-    public static IntSupplier intSupplier(final IntSupplier supplier) {
-        return intSupplier(supplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link IntSupplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @return The wrapped {@link IntSupplier}.
-     */
-    public static <KEY> IntSupplier intSupplier(
-            final IntSupplier supplier,
-            final Supplier<KEY> keySupplier) {
-        return intSupplier(supplier, keySupplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link IntSupplier} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntSupplier}.
-     */
-    public static IntSupplier intSupplier(
-            final IntSupplier supplier,
-            final Map<String, Integer> cache) {
-        return intSupplier(supplier, defaultKeySupplier(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link IntSupplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntSupplier}.
-     */
-    public static <KEY> IntSupplier intSupplier(
-            final IntSupplier supplier,
-            final Supplier<KEY> keySupplier,
-            final Map<KEY, Integer> cache) {
-        return new ConcurrentMapBasedIntSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link Supplier} to memoize.
-     * @return The wrapped {@link LongSupplier}.
-     */
-    public static LongSupplier longSupplier(final LongSupplier supplier) {
-        return longSupplier(supplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link LongSupplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @return The wrapped {@link LongSupplier}.
-     */
-    public static <KEY> LongSupplier longSupplier(
-            final LongSupplier supplier,
-            final Supplier<KEY> keySupplier) {
-        return longSupplier(supplier, keySupplier, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link LongSupplier} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongSupplier}.
-     */
-    public static LongSupplier longSupplier(
-            final LongSupplier supplier,
-            final Map<String, Long> cache) {
-        return longSupplier(supplier, defaultKeySupplier(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param supplier
-     *            The {@link LongSupplier} to memoize.
-     * @param keySupplier
-     *            The {@link Supplier} for the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongSupplier}.
-     */
-    public static <KEY> LongSupplier longSupplier(
-            final LongSupplier supplier,
-            final Supplier<KEY> keySupplier,
-            final Map<KEY, Long> cache) {
-        return new ConcurrentMapBasedLongSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link Function} to memoize.
-     * @return The wrapped {@link Function}.
-     */
-    public static <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(final Function<INPUT, OUTPUT> function) {
-        return function(function, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link Function} to memoize.
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
      * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @return The wrapped {@link Function}.
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link BiConsumer}.
      */
-    public static <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
-            final Function<INPUT, OUTPUT> function,
-            final Function<INPUT, KEY> keyFunction) {
-        return function(function, keyFunction, emptyMap());
+    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
+            final BiConsumer<FIRST, SECOND> biConsumer,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return biConsumer(biConsumer, keyFunction, emptyMap());
     }
 
     /**
      * <p>
-     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link Function} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link Function}.
-     */
-    public static <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(
-            final Function<INPUT, OUTPUT> function,
-            final Map<INPUT, OUTPUT> cache) {
-        return function(function, identity(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -653,19 +196,41 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param function
-     *            The {@link Function} to memoize.
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
      * @param keyFunction
-     *            The {@link Function} to compute the cache key.
+     *            The {@link BiFunction} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link Function}.
+     * @return The wrapped {@link BiConsumer}.
      */
-    public static <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
-            final Function<INPUT, OUTPUT> function,
-            final Function<INPUT, KEY> keyFunction,
-            final Map<KEY, OUTPUT> cache) {
-        return new ConcurrentMapBasedFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
+            final BiConsumer<FIRST, SECOND> biConsumer,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, KEY> cache) {
+        return new ConcurrentMapBasedBiConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, biConsumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link BiConsumer}.
+     */
+    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
+            final BiConsumer<FIRST, SECOND> biConsumer,
+            final Map<String, String> cache) {
+        return biConsumer(biConsumer, hashCodeKeyFunction(), cache);
     }
 
     /**
@@ -716,6 +281,31 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link BiFunction}.
+     */
+    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
+            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, VALUE> cache) {
+        return new ConcurrentMapBasedBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, biFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
      *
@@ -733,7 +323,47 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(final BiPredicate<FIRST, SECOND> predicate) {
+        return biPredicate(predicate, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
+            final BiPredicate<FIRST, SECOND> predicate,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return biPredicate(predicate, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -741,19 +371,128 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param biFunction
-     *            The {@link BiFunction} to memoize.
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link BiFunction}.
+     * @return The wrapped {@link BiPredicate}.
      */
-    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
+            final BiPredicate<FIRST, SECOND> predicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
-            final Map<KEY, VALUE> cache) {
-        return new ConcurrentMapBasedBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, biFunction);
+            final Map<KEY, Boolean> cache) {
+        return new ConcurrentMapBasedBiPredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link BiPredicate} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
+            final BiPredicate<FIRST, SECOND> predicate,
+            final Map<String, Boolean> cache) {
+        return biPredicate(predicate, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static BooleanSupplier booleanSupplier(final BooleanSupplier supplier) {
+        return booleanSupplier(supplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static BooleanSupplier booleanSupplier(
+            final BooleanSupplier supplier,
+            final Map<String, Boolean> cache) {
+        return booleanSupplier(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static <KEY> BooleanSupplier booleanSupplier(
+            final BooleanSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return booleanSupplier(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static <KEY> BooleanSupplier booleanSupplier(
+            final BooleanSupplier supplier,
+            final Supplier<KEY> keySupplier,
+            final Map<KEY, Boolean> cache) {
+        return new ConcurrentMapBasedBooleanSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
     }
 
     /**
@@ -803,28 +542,6 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link Consumer} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link Consumer}.
-     */
-    public static <INPUT> Consumer<INPUT> consumer(
-            final Consumer<INPUT> consumer,
-            final Map<INPUT, INPUT> cache) {
-        return consumer(consumer, identity(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
      * <li>Custom cache key</li>
      * </ul>
      *
@@ -845,47 +562,7 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link DoubleConsumer} to memoize.
-     * @return The wrapped {@link DoubleConsumer}.
-     */
-    public static DoubleConsumer doubleConsumer(final DoubleConsumer consumer) {
-        return doubleConsumer(consumer, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link DoubleConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @return The wrapped {@link DoubleConsumer}.
-     */
-    public static <KEY> DoubleConsumer doubleConsumer(
-            final DoubleConsumer consumer,
-            final DoubleFunction<KEY> keyFunction) {
-        return doubleConsumer(consumer, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -894,1258 +571,15 @@ public final class MapMemoize {
      * </ul>
      *
      * @param consumer
-     *            The {@link DoubleConsumer} to memoize.
+     *            The {@link Consumer} to memoize.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleConsumer}.
+     * @return The wrapped {@link Consumer}.
      */
-    public static DoubleConsumer doubleConsumer(
-            final DoubleConsumer consumer,
-            final Map<Double, Double> cache) {
-        return doubleConsumer(consumer, Double::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link DoubleConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleConsumer}.
-     */
-    public static <KEY> DoubleConsumer doubleConsumer(
-            final DoubleConsumer consumer,
-            final DoubleFunction<KEY> keyFunction,
-            final Map<KEY, Double> cache) {
-        return new ConcurrentMapBasedDoubleConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link IntConsumer} to memoize.
-     * @return The wrapped {@link IntConsumer}.
-     */
-    public static IntConsumer intConsumer(final IntConsumer consumer) {
-        return intConsumer(consumer, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link IntConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link IntFunction} to compute the cache key.
-     * @return The wrapped {@link IntConsumer}.
-     */
-    public static <KEY> IntConsumer intConsumer(
-            final IntConsumer consumer,
-            final IntFunction<KEY> keyFunction) {
-        return intConsumer(consumer, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link IntConsumer} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntConsumer}.
-     */
-    public static IntConsumer intConsumer(
-            final IntConsumer consumer,
-            final Map<Integer, Integer> cache) {
-        return intConsumer(consumer, Integer::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link IntConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link IntFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntConsumer}.
-     */
-    public static <KEY> IntConsumer intConsumer(
-            final IntConsumer consumer,
-            final IntFunction<KEY> keyFunction,
-            final Map<KEY, Integer> cache) {
-        return new ConcurrentMapBasedIntConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link IntFunction} to memoize.
-     * @return The wrapped {@link IntFunction}.
-     */
-    public static <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
-        return intFunction(function, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link IntFunction} to memoize.
-     * @param keyFunction
-     *            The {@link IntFunction} to compute the cache key.
-     * @return The wrapped {@link IntFunction}.
-     */
-    public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
-            final IntFunction<OUTPUT> function,
-            final IntFunction<KEY> keyFunction) {
-        return intFunction(function, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link IntFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntFunction}.
-     */
-    public static <OUTPUT> IntFunction<OUTPUT> intFunction(
-            final IntFunction<OUTPUT> function,
-            final Map<Integer, OUTPUT> cache) {
-        return intFunction(function, Integer::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link IntFunction} to memoize.
-     * @param keyFunction
-     *            The {@link IntFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntFunction}.
-     */
-    public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
-            final IntFunction<OUTPUT> function,
-            final IntFunction<KEY> keyFunction,
-            final Map<KEY, OUTPUT> cache) {
-        return new ConcurrentMapBasedIntFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link LongFunction} to memoize.
-     * @return The wrapped {@link LongFunction}.
-     */
-    public static <OUTPUT> LongFunction<OUTPUT> longFunction(final LongFunction<OUTPUT> function) {
-        return longFunction(function, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link LongFunction} to memoize.
-     * @param keyFunction
-     *            The {@link LongFunction} to compute the cache key.
-     * @return The wrapped {@link LongFunction}.
-     */
-    public static <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
-            final LongFunction<OUTPUT> function,
-            final LongFunction<KEY> keyFunction) {
-        return longFunction(function, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link LongFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongFunction}.
-     */
-    public static <OUTPUT> LongFunction<OUTPUT> longFunction(
-            final LongFunction<OUTPUT> function,
-            final Map<Long, OUTPUT> cache) {
-        return longFunction(function, Long::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link LongFunction} to memoize.
-     * @param keyFunction
-     *            The {@link LongFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongFunction}.
-     */
-    public static <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
-            final LongFunction<OUTPUT> function,
-            final LongFunction<KEY> keyFunction,
-            final Map<KEY, OUTPUT> cache) {
-        return new ConcurrentMapBasedLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleFunction} to memoize.
-     * @return The wrapped {@link DoubleFunction}.
-     */
-    public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(final DoubleFunction<OUTPUT> function) {
-        return doubleFunction(function, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleFunction} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @return The wrapped {@link DoubleFunction}.
-     */
-    public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
-            final DoubleFunction<OUTPUT> function,
-            final DoubleFunction<KEY> keyFunction) {
-        return doubleFunction(function, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleFunction}.
-     */
-    public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
-            final DoubleFunction<OUTPUT> function,
-            final Map<Double, OUTPUT> cache) {
-        return doubleFunction(function, Double::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleFunction} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleFunction}.
-     */
-    public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
-            final DoubleFunction<OUTPUT> function,
-            final DoubleFunction<KEY> keyFunction,
-            final Map<KEY, OUTPUT> cache) {
-        return new ConcurrentMapBasedDoubleFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link LongConsumer} to memoize.
-     * @return The wrapped {@link LongConsumer}.
-     */
-    public static LongConsumer longConsumer(final LongConsumer consumer) {
-        return longConsumer(consumer, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link LongConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link LongFunction} to compute the cache key.
-     * @return The wrapped {@link LongConsumer}.
-     */
-    public static <KEY> LongConsumer longConsumer(
-            final LongConsumer consumer,
-            final LongFunction<KEY> keyFunction) {
-        return longConsumer(consumer, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link LongConsumer} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongConsumer}.
-     */
-    public static LongConsumer longConsumer(
-            final LongConsumer consumer,
-            final Map<Long, Long> cache) {
-        return longConsumer(consumer, Long::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link LongConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link LongFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongConsumer}.
-     */
-    public static <KEY> LongConsumer longConsumer(
-            final LongConsumer consumer,
-            final LongFunction<KEY> keyFunction,
-            final Map<KEY, Long> cache) {
-        return new ConcurrentMapBasedLongConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjDoubleConsumer} to memoize.
-     * @return The wrapped {@link ObjDoubleConsumer}.
-     */
-    public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(final ObjDoubleConsumer<INPUT> consumer) {
-        return objDoubleConsumer(consumer, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjDoubleConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @return The wrapped {@link ObjDoubleConsumer}.
-     */
-    public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
-            final ObjDoubleConsumer<INPUT> consumer,
-            final ObjDoubleFunction<INPUT, KEY> keyFunction) {
-        return objDoubleConsumer(consumer, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjDoubleConsumer} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ObjDoubleConsumer}.
-     */
-    public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
-            final ObjDoubleConsumer<INPUT> consumer,
-            final Map<String, INPUT> cache) {
-        return objDoubleConsumer(consumer, objDoubleConsumerHashCodeKeyFunction(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjDoubleConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ObjDoubleConsumer}.
-     */
-    public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
-            final ObjDoubleConsumer<INPUT> consumer,
-            final ObjDoubleFunction<INPUT, KEY> keyFunction,
-            final Map<KEY, INPUT> cache) {
-        return new ConcurrentMapBasedObjDoubleConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjIntConsumer} to memoize.
-     * @return The wrapped {@link ObjIntConsumer}.
-     */
-    public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(final ObjIntConsumer<INPUT> consumer) {
-        return objIntConsumer(consumer, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjIntConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @return The wrapped {@link ObjIntConsumer}.
-     */
-    public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
-            final ObjIntConsumer<INPUT> consumer,
-            final ObjIntFunction<INPUT, KEY> keyFunction) {
-        return objIntConsumer(consumer, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjIntConsumer} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ObjIntConsumer}.
-     */
-    public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
-            final ObjIntConsumer<INPUT> consumer,
-            final Map<String, INPUT> cache) {
-        return objIntConsumer(consumer, objIntConsumerHashCodeKeyFunction(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjIntConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ObjIntConsumer}.
-     */
-    public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
-            final ObjIntConsumer<INPUT> consumer,
-            final ObjIntFunction<INPUT, KEY> keyFunction,
-            final Map<KEY, INPUT> cache) {
-        return new ConcurrentMapBasedObjIntConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjLongConsumer} to memoize.
-     * @return The wrapped {@link ObjLongConsumer}.
-     */
-    public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(final ObjLongConsumer<INPUT> consumer) {
-        return objLongConsumer(consumer, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjLongConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @return The wrapped {@link ObjLongConsumer}.
-     */
-    public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
-            final ObjLongConsumer<INPUT> consumer,
-            final ObjLongFunction<INPUT, KEY> keyFunction) {
-        return objLongConsumer(consumer, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjLongConsumer} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ObjLongConsumer}.
-     */
-    public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
-            final ObjLongConsumer<INPUT> consumer,
-            final Map<String, INPUT> cache) {
-        return objLongConsumer(consumer, objLongConsumerHashCodeKeyFunction(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param consumer
-     *            The {@link ObjLongConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ObjLongConsumer}.
-     */
-    public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
-            final ObjLongConsumer<INPUT> consumer,
-            final ObjLongFunction<INPUT, KEY> keyFunction,
-            final Map<KEY, INPUT> cache) {
-        return new ConcurrentMapBasedObjLongConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param biConsumer
-     *            The {@link BiConsumer} to memoize.
-     * @return The wrapped {@link BiConsumer}.
-     */
-    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(final BiConsumer<FIRST, SECOND> biConsumer) {
-        return biConsumer(biConsumer, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param biConsumer
-     *            The {@link BiConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @return The wrapped {@link BiConsumer}.
-     */
-    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
-            final BiConsumer<FIRST, SECOND> biConsumer,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return biConsumer(biConsumer, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param biConsumer
-     *            The {@link BiConsumer} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link BiConsumer}.
-     */
-    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
-            final BiConsumer<FIRST, SECOND> biConsumer,
-            final Map<String, String> cache) {
-        return biConsumer(biConsumer, hashCodeKeyFunction(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param biConsumer
-     *            The {@link BiConsumer} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link BiConsumer}.
-     */
-    public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
-            final BiConsumer<FIRST, SECOND> biConsumer,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction,
-            final Map<KEY, KEY> cache) {
-        return new ConcurrentMapBasedBiConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, biConsumer);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link Predicate} to memoize.
-     * @return The wrapped {@link Predicate}.
-     */
-    public static <INPUT> Predicate<INPUT> predicate(final Predicate<INPUT> predicate) {
-        return predicate(predicate, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link Predicate} to memoize.
-     * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @return The wrapped {@link Predicate}.
-     */
-    public static <INPUT, KEY> Predicate<INPUT> predicate(
-            final Predicate<INPUT> predicate,
-            final Function<INPUT, KEY> keyFunction) {
-        return predicate(predicate, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link Predicate} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link Predicate}.
-     */
-    public static <INPUT> Predicate<INPUT> predicate(
-            final Predicate<INPUT> predicate,
-            final Map<INPUT, Boolean> cache) {
-        return predicate(predicate, identity(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link Predicate} to memoize.
-     * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link Predicate}.
-     */
-    public static <INPUT, KEY> Predicate<INPUT> predicate(
-            final Predicate<INPUT> predicate,
-            final Function<INPUT, KEY> keyFunction,
-            final Map<KEY, Boolean> cache) {
-        return new ConcurrentMapBasedPredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link BiPredicate} to memoize.
-     * @return The wrapped {@link BiPredicate}.
-     */
-    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(final BiPredicate<FIRST, SECOND> predicate) {
-        return biPredicate(predicate, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link BiPredicate} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @return The wrapped {@link BiPredicate}.
-     */
-    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
-            final BiPredicate<FIRST, SECOND> predicate,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return biPredicate(predicate, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link BiPredicate} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link BiPredicate}.
-     */
-    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
-            final BiPredicate<FIRST, SECOND> predicate,
-            final Map<String, Boolean> cache) {
-        return biPredicate(predicate, hashCodeKeyFunction(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link BiPredicate} to memoize.
-     * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link BiPredicate}.
-     */
-    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
-            final BiPredicate<FIRST, SECOND> predicate,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction,
-            final Map<KEY, Boolean> cache) {
-        return new ConcurrentMapBasedBiPredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link IntPredicate} to memoize.
-     * @return The wrapped {@link IntPredicate}.
-     */
-    public static IntPredicate intPredicate(final IntPredicate predicate) {
-        return intPredicate(predicate, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link IntPredicate} to memoize.
-     * @param keyFunction
-     *            The {@link IntFunction} to compute the cache key.
-     * @return The wrapped {@link IntPredicate}.
-     */
-    public static <KEY> IntPredicate intPredicate(
-            final IntPredicate predicate,
-            final IntFunction<KEY> keyFunction) {
-        return intPredicate(predicate, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link IntPredicate} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntPredicate}.
-     */
-    public static IntPredicate intPredicate(
-            final IntPredicate predicate,
-            final Map<Integer, Boolean> cache) {
-        return intPredicate(predicate, Integer::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link IntPredicate} to memoize.
-     * @param keyFunction
-     *            The {@link IntFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntPredicate}.
-     */
-    public static <KEY> IntPredicate intPredicate(
-            final IntPredicate predicate,
-            final IntFunction<KEY> keyFunction,
-            final Map<KEY, Boolean> cache) {
-        return new ConcurrentMapBasedIntPredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link LongPredicate} to memoize.
-     * @return The wrapped {@link DoublePredicate}.
-     */
-    public static LongPredicate longPredicate(final LongPredicate predicate) {
-        return longPredicate(predicate, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link LongPredicate} to memoize.
-     * @param keyFunction
-     *            The {@link LongFunction} to compute the cache key.
-     * @return The wrapped {@link LongPredicate}.
-     */
-    public static <KEY> LongPredicate longPredicate(
-            final LongPredicate predicate,
-            final LongFunction<KEY> keyFunction) {
-        return longPredicate(predicate, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link LongPredicate} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongPredicate}.
-     */
-    public static LongPredicate longPredicate(
-            final LongPredicate predicate,
-            final Map<Long, Boolean> cache) {
-        return longPredicate(predicate, Long::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link LongPredicate} to memoize.
-     * @param keyFunction
-     *            The {@link LongFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongPredicate}.
-     */
-    public static <KEY> LongPredicate longPredicate(
-            final LongPredicate predicate,
-            final LongFunction<KEY> keyFunction,
-            final Map<KEY, Boolean> cache) {
-        return new ConcurrentMapBasedLongPredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link DoublePredicate} to memoize.
-     * @return The wrapped {@link DoublePredicate}.
-     */
-    public static DoublePredicate doublePredicate(final DoublePredicate predicate) {
-        return doublePredicate(predicate, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link DoublePredicate} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @return The wrapped {@link DoublePredicate}.
-     */
-    public static <KEY> DoublePredicate doublePredicate(
-            final DoublePredicate predicate,
-            final DoubleFunction<KEY> keyFunction) {
-        return doublePredicate(predicate, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link DoublePredicate} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoublePredicate}.
-     */
-    public static DoublePredicate doublePredicate(
-            final DoublePredicate predicate,
-            final Map<Double, Boolean> cache) {
-        return doublePredicate(predicate, Double::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param predicate
-     *            The {@link DoublePredicate} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoublePredicate}.
-     */
-    public static <KEY> DoublePredicate doublePredicate(
-            final DoublePredicate predicate,
-            final DoubleFunction<KEY> keyFunction,
-            final Map<KEY, Boolean> cache) {
-        return new ConcurrentMapBasedDoublePredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
+    public static <INPUT> Consumer<INPUT> consumer(
+            final Consumer<INPUT> consumer,
+            final Map<INPUT, INPUT> cache) {
+        return consumer(consumer, identity(), cache);
     }
 
     /**
@@ -2195,6 +629,31 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleBinaryFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static <KEY> DoubleBinaryOperator doubleBinaryOperator(
+            final DoubleBinaryOperator operator,
+            final DoubleBinaryFunction<KEY> keyFunction,
+            final Map<KEY, Double> cache) {
+        return new ConcurrentMapBasedDoubleBinaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
      *
@@ -2212,7 +671,569 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static DoubleConsumer doubleConsumer(final DoubleConsumer consumer) {
+        return doubleConsumer(consumer, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static <KEY> DoubleConsumer doubleConsumer(
+            final DoubleConsumer consumer,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleConsumer(consumer, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static <KEY> DoubleConsumer doubleConsumer(
+            final DoubleConsumer consumer,
+            final DoubleFunction<KEY> keyFunction,
+            final Map<KEY, Double> cache) {
+        return new ConcurrentMapBasedDoubleConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static DoubleConsumer doubleConsumer(
+            final DoubleConsumer consumer,
+            final Map<Double, Double> cache) {
+        return doubleConsumer(consumer, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(final DoubleFunction<OUTPUT> function) {
+        return doubleFunction(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final DoubleFunction<KEY> keyFunction,
+            final Map<KEY, OUTPUT> cache) {
+        return new ConcurrentMapBasedDoubleFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleFunction}.
+     */
+    public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
+            final DoubleFunction<OUTPUT> function,
+            final Map<Double, OUTPUT> cache) {
+        return doubleFunction(function, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static DoublePredicate doublePredicate(final DoublePredicate predicate) {
+        return doublePredicate(predicate, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static <KEY> DoublePredicate doublePredicate(
+            final DoublePredicate predicate,
+            final DoubleFunction<KEY> keyFunction) {
+        return doublePredicate(predicate, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static <KEY> DoublePredicate doublePredicate(
+            final DoublePredicate predicate,
+            final DoubleFunction<KEY> keyFunction,
+            final Map<KEY, Boolean> cache) {
+        return new ConcurrentMapBasedDoublePredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static DoublePredicate doublePredicate(
+            final DoublePredicate predicate,
+            final Map<Double, Boolean> cache) {
+        return doublePredicate(predicate, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static DoubleSupplier doubleSupplier(final DoubleSupplier supplier) {
+        return doubleSupplier(supplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static DoubleSupplier doubleSupplier(
+            final DoubleSupplier supplier,
+            final Map<String, Double> cache) {
+        return doubleSupplier(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static <KEY> DoubleSupplier doubleSupplier(
+            final DoubleSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return doubleSupplier(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static <KEY> DoubleSupplier doubleSupplier(
+            final DoubleSupplier supplier,
+            final Supplier<KEY> keySupplier,
+            final Map<KEY, Double> cache) {
+        return new ConcurrentMapBasedDoubleSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static DoubleToIntFunction doubleToIntFunction(final DoubleToIntFunction function) {
+        return doubleToIntFunction(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static <KEY> DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction function,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleToIntFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static <KEY> DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction function,
+            final DoubleFunction<KEY> keyFunction,
+            final Map<KEY, Integer> cache) {
+        return new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction function,
+            final Map<Double, Integer> cache) {
+        return doubleToIntFunction(function, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static DoubleToLongFunction doubleToLongFunction(final DoubleToLongFunction function) {
+        return doubleToLongFunction(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static <KEY> DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction function,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleToLongFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static <KEY> DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction function,
+            final DoubleFunction<KEY> keyFunction,
+            final Map<KEY, Long> cache) {
+        return new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction function,
+            final Map<Double, Long> cache) {
+        return doubleToLongFunction(function, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static DoubleUnaryOperator doubleUnaryOperator(final DoubleUnaryOperator operator) {
+        return doubleUnaryOperator(operator, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static <KEY> DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator operator,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleUnaryOperator(operator, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2221,18 +1242,127 @@ public final class MapMemoize {
      * </ul>
      *
      * @param operator
-     *            The {@link DoubleBinaryOperator} to memoize.
+     *            The {@link DoubleUnaryOperator} to memoize.
      * @param keyFunction
-     *            The {@link DoubleBinaryFunction} to compute the cache key.
+     *            The {@link DoubleFunction} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleBinaryOperator}.
+     * @return The wrapped {@link DoubleUnaryOperator}.
      */
-    public static <KEY> DoubleBinaryOperator doubleBinaryOperator(
-            final DoubleBinaryOperator operator,
-            final DoubleBinaryFunction<KEY> keyFunction,
+    public static <KEY> DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator operator,
+            final DoubleFunction<KEY> keyFunction,
             final Map<KEY, Double> cache) {
-        return new ConcurrentMapBasedDoubleBinaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
+        return new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator operator,
+            final Map<Double, Double> cache) {
+        return doubleUnaryOperator(operator, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @return The wrapped {@link Function}.
+     */
+    public static <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(final Function<INPUT, OUTPUT> function) {
+        return function(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Function}.
+     */
+    public static <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return function(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link Function}.
+     */
+    public static <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Function<INPUT, KEY> keyFunction,
+            final Map<KEY, OUTPUT> cache) {
+        return new ConcurrentMapBasedFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link Function} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link Function}.
+     */
+    public static <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(
+            final Function<INPUT, OUTPUT> function,
+            final Map<INPUT, OUTPUT> cache) {
+        return function(function, identity(), cache);
     }
 
     /**
@@ -2287,28 +1417,6 @@ public final class MapMemoize {
      *
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntBinaryOperator}.
-     */
-    public static IntBinaryOperator intBinaryOperator(
-            final IntBinaryOperator operator,
-            final Map<String, Integer> cache) {
-        return intBinaryOperator(operator, intBinaryOperatorHashCodeKeyFunction(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link IntBinaryOperator} to memoize.
      * @param keyFunction
      *            The {@link IntBinaryFunction} to compute the cache key.
      * @param cache
@@ -2324,69 +1432,7 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link LongBinaryOperator} to memoize.
-     * @return The wrapped {@link LongBinaryOperator}.
-     */
-    public static LongBinaryOperator longBinaryOperator(final LongBinaryOperator operator) {
-        return longBinaryOperator(operator, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link LongBinaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link LongBinaryFunction} to compute the cache key.
-     * @return The wrapped {@link LongBinaryOperator}.
-     */
-    public static <KEY> LongBinaryOperator longBinaryOperator(
-            final LongBinaryOperator operator,
-            final LongBinaryFunction<KEY> keyFunction) {
-        return longBinaryOperator(operator, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link LongBinaryOperator} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongBinaryOperator}.
-     */
-    public static LongBinaryOperator longBinaryOperator(
-            final LongBinaryOperator operator,
-            final Map<String, Long> cache) {
-        return longBinaryOperator(operator, longBinaryOperatorHashCodeKeyFunction(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2395,23 +1441,20 @@ public final class MapMemoize {
      * </ul>
      *
      * @param operator
-     *            The {@link LongBinaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link LongBinaryFunction} to compute the cache key.
+     *            The {@link IntBinaryOperator} to memoize.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongBinaryOperator}.
+     * @return The wrapped {@link IntBinaryOperator}.
      */
-    public static <KEY> LongBinaryOperator longBinaryOperator(
-            final LongBinaryOperator operator,
-            final LongBinaryFunction<KEY> keyFunction,
-            final Map<KEY, Long> cache) {
-        return new ConcurrentMapBasedLongBinaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
+    public static IntBinaryOperator intBinaryOperator(
+            final IntBinaryOperator operator,
+            final Map<String, Integer> cache) {
+        return intBinaryOperator(operator, intBinaryOperatorHashCodeKeyFunction(), cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2419,17 +1462,17 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
-     * @param operator
-     *            The {@link DoubleUnaryOperator} to memoize.
-     * @return The wrapped {@link DoubleUnaryOperator}.
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
+     * @return The wrapped {@link IntConsumer}.
      */
-    public static DoubleUnaryOperator doubleUnaryOperator(final DoubleUnaryOperator operator) {
-        return doubleUnaryOperator(operator, emptyMap());
+    public static IntConsumer intConsumer(final IntConsumer consumer) {
+        return intConsumer(consumer, emptyMap());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2437,130 +1480,21 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param operator
-     *            The {@link DoubleUnaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @return The wrapped {@link DoubleUnaryOperator}.
-     */
-    public static <KEY> DoubleUnaryOperator doubleUnaryOperator(
-            final DoubleUnaryOperator operator,
-            final DoubleFunction<KEY> keyFunction) {
-        return doubleUnaryOperator(operator, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link DoubleUnaryOperator} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleUnaryOperator}.
-     */
-    public static DoubleUnaryOperator doubleUnaryOperator(
-            final DoubleUnaryOperator operator,
-            final Map<Double, Double> cache) {
-        return doubleUnaryOperator(operator, Double::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link DoubleUnaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleUnaryOperator}.
-     */
-    public static <KEY> DoubleUnaryOperator doubleUnaryOperator(
-            final DoubleUnaryOperator operator,
-            final DoubleFunction<KEY> keyFunction,
-            final Map<KEY, Double> cache) {
-        return new ConcurrentMapBasedDoubleUnaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link IntUnaryOperator} to memoize.
-     * @return The wrapped {@link IntUnaryOperator}.
-     */
-    public static IntUnaryOperator intUnaryOperator(final IntUnaryOperator operator) {
-        return intUnaryOperator(operator, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link IntUnaryOperator} to memoize.
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
      * @param keyFunction
      *            The {@link IntFunction} to compute the cache key.
-     * @return The wrapped {@link IntUnaryOperator}.
+     * @return The wrapped {@link IntConsumer}.
      */
-    public static <KEY> IntUnaryOperator intUnaryOperator(
-            final IntUnaryOperator operator,
+    public static <KEY> IntConsumer intConsumer(
+            final IntConsumer consumer,
             final IntFunction<KEY> keyFunction) {
-        return intUnaryOperator(operator, keyFunction, emptyMap());
+        return intConsumer(consumer, keyFunction, emptyMap());
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link IntUnaryOperator} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntUnaryOperator}.
-     */
-    public static IntUnaryOperator intUnaryOperator(
-            final IntUnaryOperator operator,
-            final Map<Integer, Integer> cache) {
-        return intUnaryOperator(operator, Integer::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2568,64 +1502,24 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param operator
-     *            The {@link IntUnaryOperator} to memoize.
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
      * @param keyFunction
      *            The {@link IntFunction} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntUnaryOperator}.
+     * @return The wrapped {@link IntConsumer}.
      */
-    public static <KEY> IntUnaryOperator intUnaryOperator(
-            final IntUnaryOperator operator,
+    public static <KEY> IntConsumer intConsumer(
+            final IntConsumer consumer,
             final IntFunction<KEY> keyFunction,
             final Map<KEY, Integer> cache) {
-        return new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
+        return new ConcurrentMapBasedIntConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link LongUnaryOperator} to memoize.
-     * @return The wrapped {@link LongUnaryOperator}.
-     */
-    public static LongUnaryOperator longUnaryOperator(final LongUnaryOperator operator) {
-        return longUnaryOperator(operator, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link LongUnaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link LongFunction} to compute the cache key.
-     * @return The wrapped {@link LongUnaryOperator}.
-     */
-    public static <KEY> LongUnaryOperator longUnaryOperator(
-            final LongUnaryOperator operator,
-            final LongFunction<KEY> keyFunction) {
-        return longUnaryOperator(operator, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2633,46 +1527,21 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
-     * @param operator
-     *            The {@link LongUnaryOperator} to memoize.
+     * @param consumer
+     *            The {@link IntConsumer} to memoize.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongUnaryOperator}.
+     * @return The wrapped {@link IntConsumer}.
      */
-    public static LongUnaryOperator longUnaryOperator(
-            final LongUnaryOperator operator,
-            final Map<Long, Long> cache) {
-        return longUnaryOperator(operator, Long::valueOf, cache);
+    public static IntConsumer intConsumer(
+            final IntConsumer consumer,
+            final Map<Integer, Integer> cache) {
+        return intConsumer(consumer, Integer::valueOf, cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param operator
-     *            The {@link LongUnaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link LongFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongUnaryOperator}.
-     */
-    public static <KEY> LongUnaryOperator longUnaryOperator(
-            final LongUnaryOperator operator,
-            final LongFunction<KEY> keyFunction,
-            final Map<KEY, Long> cache) {
-        return new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2681,16 +1550,16 @@ public final class MapMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link DoubleToIntFunction} to memoize.
-     * @return The wrapped {@link DoubleToIntFunction}.
+     *            The {@link IntFunction} to memoize.
+     * @return The wrapped {@link IntFunction}.
      */
-    public static DoubleToIntFunction doubleToIntFunction(final DoubleToIntFunction function) {
-        return doubleToIntFunction(function, emptyMap());
+    public static <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
+        return intFunction(function, emptyMap());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2699,42 +1568,20 @@ public final class MapMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link DoubleToIntFunction} to memoize.
+     *            The {@link IntFunction} to memoize.
      * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @return The wrapped {@link DoubleToIntFunction}.
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntFunction}.
      */
-    public static <KEY> DoubleToIntFunction doubleToIntFunction(
-            final DoubleToIntFunction function,
-            final DoubleFunction<KEY> keyFunction) {
-        return doubleToIntFunction(function, keyFunction, emptyMap());
+    public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final IntFunction<KEY> keyFunction) {
+        return intFunction(function, keyFunction, emptyMap());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleToIntFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleToIntFunction}.
-     */
-    public static DoubleToIntFunction doubleToIntFunction(
-            final DoubleToIntFunction function,
-            final Map<Double, Integer> cache) {
-        return doubleToIntFunction(function, Double::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2743,105 +1590,214 @@ public final class MapMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link DoubleToIntFunction} to memoize.
+     *            The {@link IntFunction} to memoize.
      * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
+     *            The {@link IntFunction} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleToIntFunction}.
+     * @return The wrapped {@link IntFunction}.
      */
-    public static <KEY> DoubleToIntFunction doubleToIntFunction(
-            final DoubleToIntFunction function,
-            final DoubleFunction<KEY> keyFunction,
+    public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final IntFunction<KEY> keyFunction,
+            final Map<KEY, OUTPUT> cache) {
+        return new ConcurrentMapBasedIntFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntFunction}.
+     */
+    public static <OUTPUT> IntFunction<OUTPUT> intFunction(
+            final IntFunction<OUTPUT> function,
+            final Map<Integer, OUTPUT> cache) {
+        return intFunction(function, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static IntPredicate intPredicate(final IntPredicate predicate) {
+        return intPredicate(predicate, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static <KEY> IntPredicate intPredicate(
+            final IntPredicate predicate,
+            final IntFunction<KEY> keyFunction) {
+        return intPredicate(predicate, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static <KEY> IntPredicate intPredicate(
+            final IntPredicate predicate,
+            final IntFunction<KEY> keyFunction,
+            final Map<KEY, Boolean> cache) {
+        return new ConcurrentMapBasedIntPredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link IntPredicate} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static IntPredicate intPredicate(
+            final IntPredicate predicate,
+            final Map<Integer, Boolean> cache) {
+        return intPredicate(predicate, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static IntSupplier intSupplier(final IntSupplier supplier) {
+        return intSupplier(supplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link IntSupplier} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static IntSupplier intSupplier(
+            final IntSupplier supplier,
+            final Map<String, Integer> cache) {
+        return intSupplier(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link IntSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static <KEY> IntSupplier intSupplier(
+            final IntSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return intSupplier(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link IntSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static <KEY> IntSupplier intSupplier(
+            final IntSupplier supplier,
+            final Supplier<KEY> keySupplier,
             final Map<KEY, Integer> cache) {
-        return new ConcurrentMapBasedDoubleToIntFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleToLongFunction} to memoize.
-     * @return The wrapped {@link DoubleToLongFunction}.
-     */
-    public static DoubleToLongFunction doubleToLongFunction(final DoubleToLongFunction function) {
-        return doubleToLongFunction(function, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleToLongFunction} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @return The wrapped {@link DoubleToLongFunction}.
-     */
-    public static <KEY> DoubleToLongFunction doubleToLongFunction(
-            final DoubleToLongFunction function,
-            final DoubleFunction<KEY> keyFunction) {
-        return doubleToLongFunction(function, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleToLongFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleToLongFunction}.
-     */
-    public static DoubleToLongFunction doubleToLongFunction(
-            final DoubleToLongFunction function,
-            final Map<Double, Long> cache) {
-        return doubleToLongFunction(function, Double::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link DoubleToLongFunction} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleFunction} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link DoubleToLongFunction}.
-     */
-    public static <KEY> DoubleToLongFunction doubleToLongFunction(
-            final DoubleToLongFunction function,
-            final DoubleFunction<KEY> keyFunction,
-            final Map<KEY, Long> cache) {
-        return new ConcurrentMapBasedDoubleToLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+        return new ConcurrentMapBasedIntSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
     }
 
     /**
@@ -2891,28 +1847,6 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link IntToDoubleFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntToDoubleFunction}.
-     */
-    public static IntToDoubleFunction intToDoubleFunction(
-            final IntToDoubleFunction function,
-            final Map<Integer, Double> cache) {
-        return intToDoubleFunction(function, Integer::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
      * <li>Custom cache key</li>
      * </ul>
      *
@@ -2929,6 +1863,28 @@ public final class MapMemoize {
             final IntFunction<KEY> keyFunction,
             final Map<KEY, Double> cache) {
         return new ConcurrentMapBasedIntToDoubleFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntToDoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntToDoubleFunction}.
+     */
+    public static IntToDoubleFunction intToDoubleFunction(
+            final IntToDoubleFunction function,
+            final Map<Integer, Double> cache) {
+        return intToDoubleFunction(function, Integer::valueOf, cache);
     }
 
     /**
@@ -2978,6 +1934,31 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link IntToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static <KEY> IntToLongFunction intToLongFunction(
+            final IntToLongFunction function,
+            final IntFunction<KEY> keyFunction,
+            final Map<KEY, Long> cache) {
+        return new ConcurrentMapBasedIntToLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
      *
@@ -2995,7 +1976,308 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static IntUnaryOperator intUnaryOperator(final IntUnaryOperator operator) {
+        return intUnaryOperator(operator, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static <KEY> IntUnaryOperator intUnaryOperator(
+            final IntUnaryOperator operator,
+            final IntFunction<KEY> keyFunction) {
+        return intUnaryOperator(operator, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static <KEY> IntUnaryOperator intUnaryOperator(
+            final IntUnaryOperator operator,
+            final IntFunction<KEY> keyFunction,
+            final Map<KEY, Integer> cache) {
+        return new ConcurrentMapBasedIntUnaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static IntUnaryOperator intUnaryOperator(
+            final IntUnaryOperator operator,
+            final Map<Integer, Integer> cache) {
+        return intUnaryOperator(operator, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static LongBinaryOperator longBinaryOperator(final LongBinaryOperator operator) {
+        return longBinaryOperator(operator, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static <KEY> LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator operator,
+            final LongBinaryFunction<KEY> keyFunction) {
+        return longBinaryOperator(operator, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongBinaryFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static <KEY> LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator operator,
+            final LongBinaryFunction<KEY> keyFunction,
+            final Map<KEY, Long> cache) {
+        return new ConcurrentMapBasedLongBinaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator operator,
+            final Map<String, Long> cache) {
+        return longBinaryOperator(operator, longBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link LongConsumer} to memoize.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static LongConsumer longConsumer(final LongConsumer consumer) {
+        return longConsumer(consumer, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link LongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static <KEY> LongConsumer longConsumer(
+            final LongConsumer consumer,
+            final LongFunction<KEY> keyFunction) {
+        return longConsumer(consumer, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link LongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static <KEY> LongConsumer longConsumer(
+            final LongConsumer consumer,
+            final LongFunction<KEY> keyFunction,
+            final Map<KEY, Long> cache) {
+        return new ConcurrentMapBasedLongConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link LongConsumer} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static LongConsumer longConsumer(
+            final LongConsumer consumer,
+            final Map<Long, Long> cache) {
+        return longConsumer(consumer, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static <OUTPUT> LongFunction<OUTPUT> longFunction(final LongFunction<OUTPUT> function) {
+        return longFunction(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final LongFunction<KEY> keyFunction) {
+        return longFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -3004,18 +2286,214 @@ public final class MapMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link IntToLongFunction} to memoize.
+     *            The {@link LongFunction} to memoize.
      * @param keyFunction
-     *            The {@link IntFunction} to compute the cache key.
+     *            The {@link LongFunction} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link IntToLongFunction}.
+     * @return The wrapped {@link LongFunction}.
      */
-    public static <KEY> IntToLongFunction intToLongFunction(
-            final IntToLongFunction function,
-            final IntFunction<KEY> keyFunction,
+    public static <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final LongFunction<KEY> keyFunction,
+            final Map<KEY, OUTPUT> cache) {
+        return new ConcurrentMapBasedLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongFunction}.
+     */
+    public static <OUTPUT> LongFunction<OUTPUT> longFunction(
+            final LongFunction<OUTPUT> function,
+            final Map<Long, OUTPUT> cache) {
+        return longFunction(function, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static LongPredicate longPredicate(final LongPredicate predicate) {
+        return longPredicate(predicate, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static <KEY> LongPredicate longPredicate(
+            final LongPredicate predicate,
+            final LongFunction<KEY> keyFunction) {
+        return longPredicate(predicate, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static <KEY> LongPredicate longPredicate(
+            final LongPredicate predicate,
+            final LongFunction<KEY> keyFunction,
+            final Map<KEY, Boolean> cache) {
+        return new ConcurrentMapBasedLongPredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link LongPredicate} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static LongPredicate longPredicate(
+            final LongPredicate predicate,
+            final Map<Long, Boolean> cache) {
+        return longPredicate(predicate, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static LongSupplier longSupplier(final LongSupplier supplier) {
+        return longSupplier(supplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link LongSupplier} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static LongSupplier longSupplier(
+            final LongSupplier supplier,
+            final Map<String, Long> cache) {
+        return longSupplier(supplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link LongSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static <KEY> LongSupplier longSupplier(
+            final LongSupplier supplier,
+            final Supplier<KEY> keySupplier) {
+        return longSupplier(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link LongSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static <KEY> LongSupplier longSupplier(
+            final LongSupplier supplier,
+            final Supplier<KEY> keySupplier,
             final Map<KEY, Long> cache) {
-        return new ConcurrentMapBasedIntToLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+        return new ConcurrentMapBasedLongSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
     }
 
     /**
@@ -3065,28 +2543,6 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link LongToDoubleFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongToDoubleFunction}.
-     */
-    public static LongToDoubleFunction longToDoubleFunction(
-            final LongToDoubleFunction function,
-            final Map<Long, Double> cache) {
-        return longToDoubleFunction(function, Long::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
      * <li>Custom cache key</li>
      * </ul>
      *
@@ -3103,6 +2559,28 @@ public final class MapMemoize {
             final LongFunction<KEY> keyFunction,
             final Map<KEY, Double> cache) {
         return new ConcurrentMapBasedLongToDoubleFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link LongToDoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongToDoubleFunction}.
+     */
+    public static LongToDoubleFunction longToDoubleFunction(
+            final LongToDoubleFunction function,
+            final Map<Long, Double> cache) {
+        return longToDoubleFunction(function, Long::valueOf, cache);
     }
 
     /**
@@ -3152,28 +2630,6 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link LongToIntFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link LongToIntFunction}.
-     */
-    public static LongToIntFunction longToIntFunction(
-            final LongToIntFunction function,
-            final Map<Long, Integer> cache) {
-        return longToIntFunction(function, Long::valueOf, cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
      * <li>Custom cache key</li>
      * </ul>
      *
@@ -3194,47 +2650,7 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link ToDoubleFunction} to memoize.
-     * @return The wrapped {@link ToDoubleFunction}.
-     */
-    public static <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(final ToDoubleFunction<INPUT> function) {
-        return toDoubleFunction(function, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link ToDoubleFunction} to memoize.
-     * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @return The wrapped {@link ToDoubleFunction}.
-     */
-    public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
-            final ToDoubleFunction<INPUT> function,
-            final Function<INPUT, KEY> keyFunction) {
-        return toDoubleFunction(function, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -3243,45 +2659,20 @@ public final class MapMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link ToDoubleFunction} to memoize.
+     *            The {@link LongToIntFunction} to memoize.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ToDoubleFunction}.
+     * @return The wrapped {@link LongToIntFunction}.
      */
-    public static <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(
-            final ToDoubleFunction<INPUT> function,
-            final Map<INPUT, Double> cache) {
-        return toDoubleFunction(function, identity(), cache);
+    public static LongToIntFunction longToIntFunction(
+            final LongToIntFunction function,
+            final Map<Long, Integer> cache) {
+        return longToIntFunction(function, Long::valueOf, cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link ToDoubleFunction} to memoize.
-     * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ToDoubleFunction}.
-     */
-    public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
-            final ToDoubleFunction<INPUT> function,
-            final Function<INPUT, KEY> keyFunction,
-            final Map<KEY, Double> cache) {
-        return new ConcurrentMapBasedToDoubleFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -3289,17 +2680,17 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
-     * @param function
-     *            The {@link ToIntFunction} to memoize.
-     * @return The wrapped {@link ToIntFunction}.
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @return The wrapped {@link LongUnaryOperator}.
      */
-    public static <VALUE> ToIntFunction<VALUE> toIntFunction(final ToIntFunction<VALUE> function) {
-        return toIntFunction(function, emptyMap());
+    public static LongUnaryOperator longUnaryOperator(final LongUnaryOperator operator) {
+        return longUnaryOperator(operator, emptyMap());
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -3307,43 +2698,21 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param function
-     *            The {@link ToIntFunction} to memoize.
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
      * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @return The wrapped {@link ToIntFunction}.
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongUnaryOperator}.
      */
-    public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
-            final ToIntFunction<INPUT> function,
-            final Function<INPUT, KEY> keyFunction) {
-        return toIntFunction(function, keyFunction, emptyMap());
+    public static <KEY> LongUnaryOperator longUnaryOperator(
+            final LongUnaryOperator operator,
+            final LongFunction<KEY> keyFunction) {
+        return longUnaryOperator(operator, keyFunction, emptyMap());
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link ToIntFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ToIntFunction}.
-     */
-    public static <INPUT> ToIntFunction<INPUT> toIntFunction(
-            final ToIntFunction<INPUT> function,
-            final Map<INPUT, Integer> cache) {
-        return toIntFunction(function, identity(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -3351,106 +2720,476 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param function
-     *            The {@link ToIntFunction} to memoize.
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
      * @param keyFunction
-     *            The {@link Function} to compute the cache key.
+     *            The {@link LongFunction} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ToIntFunction}.
+     * @return The wrapped {@link LongUnaryOperator}.
      */
-    public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
-            final ToIntFunction<INPUT> function,
-            final Function<INPUT, KEY> keyFunction,
-            final Map<KEY, Integer> cache) {
-        return new ConcurrentMapBasedToIntFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link ToLongFunction} to memoize.
-     * @return The wrapped {@link ToLongFunction}.
-     */
-    public static <VALUE> ToLongFunction<VALUE> toLongFunction(final ToLongFunction<VALUE> function) {
-        return toLongFunction(function, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link ToLongFunction} to memoize.
-     * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @return The wrapped {@link ToLongFunction}.
-     */
-    public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
-            final ToLongFunction<INPUT> function,
-            final Function<INPUT, KEY> keyFunction) {
-        return toLongFunction(function, keyFunction, emptyMap());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link ToLongFunction} to memoize.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ToLongFunction}.
-     */
-    public static <INPUT> ToLongFunction<INPUT> toLongFunction(
-            final ToLongFunction<INPUT> function,
-            final Map<INPUT, Long> cache) {
-        return toLongFunction(function, identity(), cache);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param function
-     *            The {@link ToLongFunction} to memoize.
-     * @param keyFunction
-     *            The {@link Function} to compute the cache key.
-     * @param cache
-     *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ToLongFunction}.
-     */
-    public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
-            final ToLongFunction<INPUT> function,
-            final Function<INPUT, KEY> keyFunction,
+    public static <KEY> LongUnaryOperator longUnaryOperator(
+            final LongUnaryOperator operator,
+            final LongFunction<KEY> keyFunction,
             final Map<KEY, Long> cache) {
-        return new ConcurrentMapBasedToLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+        return new ConcurrentMapBasedLongUnaryOperatorMemoizer<>(asConcurrentMap(cache), keyFunction, operator);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param operator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static LongUnaryOperator longUnaryOperator(
+            final LongUnaryOperator operator,
+            final Map<Long, Long> cache) {
+        return longUnaryOperator(operator, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(final ObjDoubleConsumer<INPUT> consumer) {
+        return objDoubleConsumer(consumer, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> consumer,
+            final Map<String, INPUT> cache) {
+        return objDoubleConsumer(consumer, objDoubleConsumerHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> consumer,
+            final ObjDoubleFunction<INPUT, KEY> keyFunction) {
+        return objDoubleConsumer(consumer, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> consumer,
+            final ObjDoubleFunction<INPUT, KEY> keyFunction,
+            final Map<KEY, INPUT> cache) {
+        return new ConcurrentMapBasedObjDoubleConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(final ObjIntConsumer<INPUT> consumer) {
+        return objIntConsumer(consumer, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> consumer,
+            final Map<String, INPUT> cache) {
+        return objIntConsumer(consumer, objIntConsumerHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> consumer,
+            final ObjIntFunction<INPUT, KEY> keyFunction) {
+        return objIntConsumer(consumer, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> consumer,
+            final ObjIntFunction<INPUT, KEY> keyFunction,
+            final Map<KEY, INPUT> cache) {
+        return new ConcurrentMapBasedObjIntConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(final ObjLongConsumer<INPUT> consumer) {
+        return objLongConsumer(consumer, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> consumer,
+            final Map<String, INPUT> cache) {
+        return objLongConsumer(consumer, objLongConsumerHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> consumer,
+            final ObjLongFunction<INPUT, KEY> keyFunction) {
+        return objLongConsumer(consumer, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param consumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> consumer,
+            final ObjLongFunction<INPUT, KEY> keyFunction,
+            final Map<KEY, INPUT> cache) {
+        return new ConcurrentMapBasedObjLongConsumerMemoizer<>(asConcurrentMap(cache), keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <INPUT> Predicate<INPUT> predicate(final Predicate<INPUT> predicate) {
+        return predicate(predicate, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <INPUT, KEY> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Function<INPUT, KEY> keyFunction) {
+        return predicate(predicate, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <INPUT, KEY> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Function<INPUT, KEY> keyFunction,
+            final Map<KEY, Boolean> cache) {
+        return new ConcurrentMapBasedPredicateMemoizer<>(asConcurrentMap(cache), keyFunction, predicate);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param predicate
+     *            The {@link Predicate} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link Predicate}.
+     */
+    public static <INPUT> Predicate<INPUT> predicate(
+            final Predicate<INPUT> predicate,
+            final Map<INPUT, Boolean> cache) {
+        return predicate(predicate, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <OUTPUT> Supplier<OUTPUT> supplier(final Supplier<OUTPUT> supplier) {
+        return supplier(supplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param cache
+     *            {@link Map} of already computed values.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
+            final Map<String, OUTPUT> cache) {
+        return supplier(supplier, defaultKeySupplier(), asConcurrentMap(cache));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <KEY, OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
+            final Supplier<KEY> keySupplier) {
+        return supplier(supplier, keySupplier, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache key</li>
+     * <li>Custom cache</li>
+     * </ul>
+     *
+     * @param supplier
+     *            The {@link Supplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link Supplier}.
+     */
+    public static <KEY, OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier,
+            final Supplier<KEY> keySupplier,
+            final Map<KEY, OUTPUT> cache) {
+        return new ConcurrentMapBasedSupplierMemoizer<>(asConcurrentMap(cache), keySupplier, supplier);
     }
 
     /**
@@ -3501,6 +3240,31 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToDoubleBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ToDoubleBiFunction}.
+     */
+    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
+            final ToDoubleBiFunction<FIRST, SECOND> function,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, Double> cache) {
+        return new ConcurrentMapBasedToDoubleBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
      *
@@ -3518,7 +3282,47 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToDoubleFunction} to memoize.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(final ToDoubleFunction<INPUT> function) {
+        return toDoubleFunction(function, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return toDoubleFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -3527,18 +3331,40 @@ public final class MapMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link ToDoubleBiFunction} to memoize.
+     *            The {@link ToDoubleFunction} to memoize.
      * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
+     *            The {@link Function} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ToDoubleBiFunction}.
+     * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
-            final ToDoubleBiFunction<FIRST, SECOND> function,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+    public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction,
             final Map<KEY, Double> cache) {
-        return new ConcurrentMapBasedToDoubleBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+        return new ConcurrentMapBasedToDoubleFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToDoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> function,
+            final Map<INPUT, Double> cache) {
+        return toDoubleFunction(function, identity(), cache);
     }
 
     /**
@@ -3589,6 +3415,31 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToIntBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            {@link Map} of already computed values.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> function,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, Integer> cache) {
+        return new ConcurrentMapBasedToIntBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
      *
@@ -3606,7 +3457,29 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return toIntFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -3615,18 +3488,58 @@ public final class MapMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link ToIntBiFunction} to memoize.
+     *            The {@link ToIntFunction} to memoize.
      * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
+     *            The {@link Function} to compute the cache key.
      * @param cache
-     *            {@link Map} of already computed values.
-     * @return The wrapped {@link ToIntBiFunction}.
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ToIntFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
-            final ToIntBiFunction<FIRST, SECOND> function,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+    public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction,
             final Map<KEY, Integer> cache) {
-        return new ConcurrentMapBasedToIntBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+        return new ConcurrentMapBasedToIntFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToIntFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static <INPUT> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> function,
+            final Map<INPUT, Integer> cache) {
+        return toIntFunction(function, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToIntFunction} to memoize.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static <VALUE> ToIntFunction<VALUE> toIntFunction(final ToIntFunction<VALUE> function) {
+        return toIntFunction(function, emptyMap());
     }
 
     /**
@@ -3677,6 +3590,31 @@ public final class MapMemoize {
      * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToLongBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ToLongBiFunction}.
+     */
+    public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
+            final ToLongBiFunction<FIRST, SECOND> function,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Map<KEY, Long> cache) {
+        return new ConcurrentMapBasedToLongBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
      *
@@ -3694,7 +3632,29 @@ public final class MapMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction) {
+        return toLongFunction(function, keyFunction, emptyMap());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -3703,18 +3663,58 @@ public final class MapMemoize {
      * </ul>
      *
      * @param function
-     *            The {@link ToLongBiFunction} to memoize.
+     *            The {@link ToLongFunction} to memoize.
      * @param keyFunction
-     *            The {@link BiFunction} to compute the cache key.
+     *            The {@link Function} to compute the cache key.
      * @param cache
      *            The {@link Map} based cache to use.
-     * @return The wrapped {@link ToLongBiFunction}.
+     * @return The wrapped {@link ToLongFunction}.
      */
-    public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
-            final ToLongBiFunction<FIRST, SECOND> function,
-            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+    public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> function,
+            final Function<INPUT, KEY> keyFunction,
             final Map<KEY, Long> cache) {
-        return new ConcurrentMapBasedToLongBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+        return new ConcurrentMapBasedToLongFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToLongFunction} to memoize.
+     * @param cache
+     *            The {@link Map} based cache to use.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static <INPUT> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> function,
+            final Map<INPUT, Long> cache) {
+        return toLongFunction(function, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param function
+     *            The {@link ToLongFunction} to memoize.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static <VALUE> ToLongFunction<VALUE> toLongFunction(final ToLongFunction<VALUE> function) {
+        return toLongFunction(function, emptyMap());
     }
 
 }
