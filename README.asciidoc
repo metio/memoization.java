@@ -121,7 +121,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/IntBinaryOperator.html[IntBinaryOperator]
 | ✓
-| link:{issue}/64[#64]
+| ✓
 | link:{issue}/136[#136]
 | ✓
 

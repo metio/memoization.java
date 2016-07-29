@@ -17,6 +17,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -203,6 +204,21 @@ public class GuavaMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntBinaryOperator() {
+        // given
+        final IntBinaryOperator function = (a, b) -> 123;
+
+        // when
+        final IntBinaryOperator memoize = GuavaMemoize.intBinaryOperator(function);
+
+        // then
+        Assert.assertNotNull("Memoized IntBinaryOperator is NULL", memoize);
     }
 
     /**

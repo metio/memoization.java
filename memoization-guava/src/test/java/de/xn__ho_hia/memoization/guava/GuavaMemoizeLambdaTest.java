@@ -17,6 +17,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -192,6 +193,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntBinaryOperatorWithLambda() {
+        // given
+
+        // when
+        final IntBinaryOperator memoize = GuavaMemoize.intBinaryOperator((a, b) -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized IntBinaryOperator is NULL", memoize);
     }
 
     /**

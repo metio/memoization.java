@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.guava;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.doubleBinaryOperatorHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.intBinaryOperatorHashCodeKeyFunction;
 import static java.util.function.Function.identity;
 
 import java.util.function.BiConsumer;
@@ -22,6 +23,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -37,6 +39,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
+import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
 /**
@@ -75,6 +78,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see DoublePredicate
  * @see DoubleSupplier
  * @see Function
+ * @see IntBinaryOperator
  * @see IntConsumer
  * @see IntFunction
  * @see IntPredicate
@@ -1057,6 +1061,94 @@ public final class GuavaMemoize {
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
         return new GuavaCacheBasedFunctionMemoizer<>(cache, keyFunction, function);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intBinaryOperator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static final IntBinaryOperator intBinaryOperator(
+            final IntBinaryOperator intBinaryOperator) {
+        return intBinaryOperator(intBinaryOperator, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intBinaryOperator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static final <KEY> IntBinaryOperator intBinaryOperator(
+            final IntBinaryOperator intBinaryOperator,
+            final IntBinaryFunction<KEY> keyFunction) {
+        return intBinaryOperator(intBinaryOperator, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intBinaryOperator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static final IntBinaryOperator intBinaryOperator(
+            final IntBinaryOperator intBinaryOperator,
+            final Cache<String, Integer> cache) {
+        return intBinaryOperator(intBinaryOperator, intBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intBinaryOperator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntBinaryFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static final <KEY> IntBinaryOperator intBinaryOperator(
+            final IntBinaryOperator intBinaryOperator,
+            final IntBinaryFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new GuavaCacheBasedIntBinaryOperatorMemoizer<>(cache, keyFunction, intBinaryOperator);
     }
 
     /**
