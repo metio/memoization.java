@@ -7,6 +7,7 @@
 package de.xn__ho_hia.memoization.jcache;
 
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySupplier;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.doubleBinaryOperatorHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 
 import java.lang.reflect.Type;
@@ -16,6 +17,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
@@ -37,6 +39,7 @@ import javax.cache.CacheManager;
 import javax.cache.Caching;
 import javax.cache.configuration.MutableConfiguration;
 
+import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
 /**
@@ -69,6 +72,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see BiPredicate
  * @see BooleanSupplier
  * @see Consumer
+ * @see DoubleBinaryOperator
  * @see DoubleConsumer
  * @see DoubleFunction
  * @see DoublePredicate
@@ -532,6 +536,93 @@ public final class JCacheMemoize {
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, INPUT> cache) {
         return new JCacheBasedConsumerMemoizer<>(cache, keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleBinaryOperator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static final DoubleBinaryOperator doubleBinaryOperator(final DoubleBinaryOperator doubleBinaryOperator) {
+        return doubleBinaryOperator(doubleBinaryOperator, createCache(DoubleBinaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleBinaryOperator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static final DoubleBinaryOperator doubleBinaryOperator(
+            final DoubleBinaryOperator doubleBinaryOperator,
+            final Cache<String, Double> cache) {
+        return doubleBinaryOperator(doubleBinaryOperator, doubleBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleBinaryOperator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static final <KEY> DoubleBinaryOperator doubleBinaryOperator(
+            final DoubleBinaryOperator doubleBinaryOperator,
+            final DoubleBinaryFunction<KEY> keyFunction) {
+        return doubleBinaryOperator(doubleBinaryOperator, keyFunction, createCache(DoubleBinaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleBinaryOperator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleBinaryFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static final <KEY> DoubleBinaryOperator doubleBinaryOperator(
+            final DoubleBinaryOperator doubleBinaryOperator,
+            final DoubleBinaryFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return new JCacheBasedDoubleBinaryOperatorMemoizer<>(cache, keyFunction, doubleBinaryOperator);
     }
 
     /**
