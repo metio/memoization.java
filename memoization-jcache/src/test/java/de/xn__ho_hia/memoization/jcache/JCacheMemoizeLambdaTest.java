@@ -19,6 +19,7 @@ import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
+import java.util.function.LongPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -143,6 +144,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized IntPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongPredicateWithLambda() {
+        // given
+
+        // when
+        final LongPredicate memoize = JCacheMemoize.longPredicate(a -> true);
+
+        // then
+        Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
     }
 
     /**

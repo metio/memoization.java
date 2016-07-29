@@ -24,6 +24,7 @@ import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
+import java.util.function.LongPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -72,6 +73,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see IntPredicate
  * @see LongConsumer
  * @see LongFunction
+ * @see LongPredicate
  * @see Predicate
  * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
@@ -349,7 +351,7 @@ public final class JCacheMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoublePredicate} in a JCache {@link Cache}.
+     * Memoizes a {@link IntPredicate} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -358,8 +360,8 @@ public final class JCacheMemoize {
      * </ul>
      *
      * @param intPredicate
-     *            The {@link DoublePredicate} to memoize.
-     * @return The wrapped {@link DoublePredicate}.
+     *            The {@link IntPredicate} to memoize.
+     * @return The wrapped {@link IntPredicate}.
      */
     public static final IntPredicate intPredicate(final IntPredicate intPredicate) {
         return intPredicate(intPredicate, createCache(IntPredicate.class));
@@ -432,6 +434,93 @@ public final class JCacheMemoize {
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
         return new JCacheBasedIntPredicateMemoizer<>(cache, keyFunction, intPredicate);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longPredicate
+     *            The {@link LongPredicate} to memoize.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static final LongPredicate longPredicate(final LongPredicate longPredicate) {
+        return longPredicate(longPredicate, createCache(LongPredicate.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longPredicate
+     *            The {@link LongPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static final <KEY> LongPredicate longPredicate(
+            final LongPredicate longPredicate,
+            final LongFunction<KEY> keyFunction) {
+        return longPredicate(longPredicate, keyFunction, createCache(LongPredicate.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longPredicate
+     *            The {@link LongPredicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static final LongPredicate longPredicate(
+            final LongPredicate longPredicate,
+            final Cache<Long, Boolean> cache) {
+        return longPredicate(longPredicate, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongPredicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longPredicate
+     *            The {@link LongPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongPredicate}.
+     */
+    public static final <KEY> LongPredicate longPredicate(
+            final LongPredicate longPredicate,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return new JCacheBasedLongPredicateMemoizer<>(cache, keyFunction, longPredicate);
     }
 
     /**
