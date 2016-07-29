@@ -10,6 +10,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.defaultKeySup
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.doubleBinaryOperatorHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.intBinaryOperatorHashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.longBinaryOperatorHashCodeKeyFunction;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicLong;
@@ -29,6 +30,7 @@ import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
@@ -43,6 +45,7 @@ import javax.cache.configuration.MutableConfiguration;
 
 import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
 import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
+import de.xn__ho_hia.memoization.shared.LongBinaryFunction;
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 
 /**
@@ -86,6 +89,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see IntFunction
  * @see IntPredicate
  * @see IntSupplier
+ * @see LongBinaryOperator
  * @see LongConsumer
  * @see LongFunction
  * @see LongPredicate
@@ -1499,6 +1503,93 @@ public final class JCacheMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Integer> cache) {
         return new JCacheBasedIntSupplierMemoizer<>(cache, keySupplier, intSupplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longBinaryOperator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static final LongBinaryOperator longBinaryOperator(final LongBinaryOperator longBinaryOperator) {
+        return longBinaryOperator(longBinaryOperator, createCache(LongBinaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longBinaryOperator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static final LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator longBinaryOperator,
+            final Cache<String, Long> cache) {
+        return longBinaryOperator(longBinaryOperator, longBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longBinaryOperator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static final <KEY> LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator longBinaryOperator,
+            final LongBinaryFunction<KEY> keyFunction) {
+        return longBinaryOperator(longBinaryOperator, keyFunction, createCache(LongBinaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longBinaryOperator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongBinaryFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static final <KEY> LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator longBinaryOperator,
+            final LongBinaryFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return new JCacheBasedLongBinaryOperatorMemoizer<>(cache, keyFunction, longBinaryOperator);
     }
 
     /**

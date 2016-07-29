@@ -170,7 +170,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/LongBinaryOperator.html[LongBinaryOperator]
 | ✓
 | ✓
-| link:{issue}/143[#143]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/LongConsumer.html[LongConsumer]
