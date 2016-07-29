@@ -17,6 +17,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -202,6 +203,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntBinaryOperator() {
+        // given
+        final IntBinaryOperator operator = (a, b) -> 123;
+
+        // when
+        final IntBinaryOperator memoize = JCacheMemoize.intBinaryOperator(operator);
+
+        // then
+        Assert.assertNotNull("Memoized IntBinaryOperator is NULL", memoize);
     }
 
     /**

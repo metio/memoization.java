@@ -122,7 +122,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/IntBinaryOperator.html[IntBinaryOperator]
 | ✓
 | ✓
-| link:{issue}/136[#136]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/IntConsumer.html[IntConsumer]

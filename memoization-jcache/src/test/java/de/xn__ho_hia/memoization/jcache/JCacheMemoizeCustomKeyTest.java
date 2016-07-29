@@ -17,6 +17,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
@@ -32,6 +33,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
+import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**
@@ -214,6 +216,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntBinaryOperatorWithKeyFunction() {
+        // given
+        final IntBinaryOperator operator = (a, b) -> 123;
+        final IntBinaryFunction<String> keyFunction = (a, b) -> "key";
+
+        // when
+        final IntBinaryOperator memoize = JCacheMemoize.intBinaryOperator(operator, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized IntBinaryOperator is NULL", memoize);
     }
 
     /**
