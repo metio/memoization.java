@@ -23,6 +23,7 @@ import java.util.function.IntSupplier;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
+import java.util.function.LongSupplier;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -95,6 +96,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongSupplier() {
+        // given
+        final LongSupplier supplier = () -> 123L;
+
+        // when
+        final LongSupplier memoize = JCacheMemoize.longSupplier(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
     }
 
     /**

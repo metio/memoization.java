@@ -28,6 +28,7 @@ import java.util.function.IntSupplier;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
+import java.util.function.LongSupplier;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -80,6 +81,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see LongConsumer
  * @see LongFunction
  * @see LongPredicate
+ * @see LongSupplier
  * @see Predicate
  * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
@@ -530,6 +532,94 @@ public final class JCacheMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Integer> cache) {
         return new JCacheBasedIntSupplierMemoizer<>(cache, keySupplier, intSupplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longSupplier
+     *            The {@link LongSupplier} to memoize.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static final LongSupplier longSupplier(final LongSupplier longSupplier) {
+        return longSupplier(longSupplier, createCache(LongSupplier.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a JCache {@link Cache}.
+     * </p>
+     * BooleanSupplier
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longSupplier
+     *            The {@link LongSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static final <KEY> LongSupplier longSupplier(
+            final LongSupplier longSupplier,
+            final Supplier<KEY> keySupplier) {
+        return longSupplier(longSupplier, keySupplier, createCache(LongSupplier.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longSupplier
+     *            The {@link LongSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static final LongSupplier longSupplier(
+            final LongSupplier longSupplier,
+            final Cache<String, Long> cache) {
+        return longSupplier(longSupplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longSupplier
+     *            The {@link LongSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongSupplier}.
+     */
+    public static final <KEY> LongSupplier longSupplier(
+            final LongSupplier longSupplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, Long> cache) {
+        return new JCacheBasedLongSupplierMemoizer<>(cache, keySupplier, longSupplier);
     }
 
     /**
