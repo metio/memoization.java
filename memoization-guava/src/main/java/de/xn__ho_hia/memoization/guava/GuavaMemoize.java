@@ -20,6 +20,7 @@ import java.util.function.DoublePredicate;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
+import java.util.function.IntPredicate;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.Predicate;
@@ -65,6 +66,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see Function
  * @see IntConsumer
  * @see IntFunction
+ * @see IntPredicate
  * @see LongConsumer
  * @see LongFunction
  * @see Predicate
@@ -1306,6 +1308,94 @@ public final class GuavaMemoize {
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
         return new GuavaCacheBasedDoublePredicateMemoizer<>(cache, keyFunction, doublePredicate);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intPredicate
+     *            The {@link IntPredicate} to memoize.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static final IntPredicate intPredicate(
+            final IntPredicate intPredicate) {
+        return intPredicate(intPredicate, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intPredicate
+     *            The {@link IntPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static final <KEY> IntPredicate intPredicate(
+            final IntPredicate intPredicate,
+            final IntFunction<KEY> keyFunction) {
+        return intPredicate(intPredicate, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intPredicate
+     *            The {@link IntPredicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static final IntPredicate intPredicate(
+            final IntPredicate intPredicate,
+            final Cache<Integer, Boolean> cache) {
+        return intPredicate(intPredicate, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntPredicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intPredicate
+     *            The {@link IntPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntPredicate}.
+     */
+    public static final <KEY> IntPredicate intPredicate(
+            final IntPredicate intPredicate,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return new GuavaCacheBasedIntPredicateMemoizer<>(cache, keyFunction, intPredicate);
     }
 
 }
