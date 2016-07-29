@@ -9,8 +9,8 @@ package de.xn__ho_hia.memoization.jcache;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.DoubleFunction;
+import java.util.function.DoublePredicate;
 
 import javax.cache.Cache;
 
@@ -27,7 +27,7 @@ import de.xn__ho_hia.quality.suppression.CompilerWarnings;
  *
  */
 @SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
-public class JCacheBasedPredicateMemoizerTest {
+public class JCacheBasedDoublePredicateMemoizerTest {
 
     /** Captures expected exceptions. */
     @Rule
@@ -39,15 +39,15 @@ public class JCacheBasedPredicateMemoizerTest {
     @Test
     public void shouldMemoizePredicate() {
         // given
-        final Predicate<String> predicate = a -> true;
-        final Function<String, String> keyFunction = Function.identity();
-        try (final Cache<String, Boolean> cache = JCacheMemoize.createCache(Predicate.class)) {
+        final DoublePredicate predicate = a -> true;
+        final DoubleFunction<String> keyFunction = a -> "key";
+        try (final Cache<String, Boolean> cache = JCacheMemoize.createCache(DoublePredicate.class)) {
             // when
-            final JCacheBasedPredicateMemoizer<String, String> loader = new JCacheBasedPredicateMemoizer<>(cache,
+            final JCacheBasedDoublePredicateMemoizer<String> loader = new JCacheBasedDoublePredicateMemoizer<>(cache,
                     keyFunction, predicate);
 
             // then
-            Assert.assertTrue("Memoized value does not match expectation", loader.test("test"));
+            Assert.assertTrue("Memoized value does not match expectation", loader.test(123.456D));
         }
     }
 
@@ -58,9 +58,9 @@ public class JCacheBasedPredicateMemoizerTest {
     @SuppressWarnings(CompilerWarnings.UNCHECKED)
     public void shouldWrapRuntimeExceptionInMemoizationException() {
         // given
-        final Function<String, String> keyFunction = Function.identity();
+        final DoubleFunction<String> keyFunction = a -> "key";
         try (final Cache<String, Boolean> cache = Mockito.mock(Cache.class)) {
-            final JCacheBasedPredicateMemoizer<String, String> loader = new JCacheBasedPredicateMemoizer<>(cache,
+            final JCacheBasedDoublePredicateMemoizer<String> loader = new JCacheBasedDoublePredicateMemoizer<>(cache,
                     keyFunction, null);
             given(cache.invoke(any(), any())).willThrow(RuntimeException.class);
 
@@ -68,7 +68,7 @@ public class JCacheBasedPredicateMemoizerTest {
             thrown.expect(MemoizationException.class);
 
             // then
-            loader.test("test");
+            loader.test(123.456D);
         }
     }
 

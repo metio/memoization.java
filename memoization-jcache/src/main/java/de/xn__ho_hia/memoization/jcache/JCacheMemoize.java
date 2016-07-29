@@ -17,6 +17,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
+import java.util.function.DoublePredicate;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
@@ -63,6 +64,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see Consumer
  * @see DoubleConsumer
  * @see DoubleFunction
+ * @see DoublePredicate
  * @see Function
  * @see IntConsumer
  * @see IntFunction
@@ -254,6 +256,93 @@ public final class JCacheMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, OUTPUT> cache) {
         return new JCacheBasedSupplierMemoizer<>(cache, keySupplier, supplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doublePredicate
+     *            The {@link DoublePredicate} to memoize.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static final DoublePredicate doublePredicate(final DoublePredicate doublePredicate) {
+        return doublePredicate(doublePredicate, createCache(DoublePredicate.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doublePredicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static final <KEY> DoublePredicate doublePredicate(
+            final DoublePredicate doublePredicate,
+            final DoubleFunction<KEY> keyFunction) {
+        return doublePredicate(doublePredicate, keyFunction, createCache(DoublePredicate.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doublePredicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static final DoublePredicate doublePredicate(
+            final DoublePredicate doublePredicate,
+            final Cache<Double, Boolean> cache) {
+        return doublePredicate(doublePredicate, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoublePredicate} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doublePredicate
+     *            The {@link DoublePredicate} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoublePredicate}.
+     */
+    public static final <KEY> DoublePredicate doublePredicate(
+            final DoublePredicate doublePredicate,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return new JCacheBasedDoublePredicateMemoizer<>(cache, keyFunction, doublePredicate);
     }
 
     /**

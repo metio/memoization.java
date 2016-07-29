@@ -38,7 +38,7 @@ public class JCacheBasedBiPredicateMemoizerTest {
     *
     */
     @Test
-    public void shouldMemoizeBiFunction() {
+    public void shouldMemoizeBiPredicate() {
         // given
         final BiPredicate<String, String> biPredicate = (first, second) -> true;
         final BiFunction<String, String, String> keyfunction = hashCodeKeyFunction();

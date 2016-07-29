@@ -12,6 +12,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
+import java.util.function.DoublePredicate;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
@@ -119,6 +120,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoublePredicate() {
+        // given
+        final DoublePredicate predicate = a -> true;
+
+        // when
+        final DoublePredicate memoize = JCacheMemoize.doublePredicate(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized DoublePredicate is NULL", memoize);
     }
 
     /**
