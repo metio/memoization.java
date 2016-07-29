@@ -11,6 +11,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFu
 import static java.util.function.Function.identity;
 
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
@@ -50,6 +51,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * </p>
  *
  * @see BiFunction
+ * @see BiPredicate
  * @see Consumer
  * @see DoubleFunction
  * @see Function
@@ -63,6 +65,94 @@ public final class GuavaMemoize {
 
     private GuavaMemoize() {
         // factory class
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiPredicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiPredicate} to memoize.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static final <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
+            final BiPredicate<FIRST, SECOND> biFunction) {
+        return biFunction(biFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiPredicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static final <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
+            final BiPredicate<FIRST, SECOND> biFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return biFunction(biFunction, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiPredicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiPredicate} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static final <FIRST, SECOND> BiPredicate<FIRST, SECOND> biFunction(
+            final BiPredicate<FIRST, SECOND> biFunction,
+            final Cache<String, Boolean> cache) {
+        return biFunction(biFunction, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiPredicate} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param biFunction
+     *            The {@link BiPredicate} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BiPredicate}.
+     */
+    public static final <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biFunction(
+            final BiPredicate<FIRST, SECOND> biFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Cache<KEY, Boolean> cache) {
+        return new GuavaCacheBasedBiPredicateMemoizer<>(cache, keyFunction, biFunction);
     }
 
     /**

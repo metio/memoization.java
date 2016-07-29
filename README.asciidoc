@@ -49,7 +49,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 
 | link:{jdk-api}/java/util/function/BiPredicate.html[BiPredicate]
 | ✓
-| link:{issue}/55[#55]
+| ✓
 | link:{issue}/127[#127]
 | ✓
 
