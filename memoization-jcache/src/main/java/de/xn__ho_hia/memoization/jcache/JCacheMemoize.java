@@ -24,6 +24,7 @@ import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
+import java.util.function.IntSupplier;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
@@ -75,6 +76,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see IntConsumer
  * @see IntFunction
  * @see IntPredicate
+ * @see IntSupplier
  * @see LongConsumer
  * @see LongFunction
  * @see LongPredicate
@@ -199,7 +201,7 @@ public final class JCacheMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a JCache {@link Cache}.
+     * Memoizes a {@link BooleanSupplier} in a JCache {@link Cache}.
      * </p>
      * BooleanSupplier
      * <h3>Features</h3>
@@ -440,6 +442,94 @@ public final class JCacheMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Double> cache) {
         return new JCacheBasedDoubleSupplierMemoizer<>(cache, keySupplier, doubleSupplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intSupplier
+     *            The {@link IntSupplier} to memoize.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static final IntSupplier intSupplier(final IntSupplier intSupplier) {
+        return intSupplier(intSupplier, createCache(IntSupplier.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a JCache {@link Cache}.
+     * </p>
+     * BooleanSupplier
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intSupplier
+     *            The {@link IntSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static final <KEY> IntSupplier intSupplier(
+            final IntSupplier intSupplier,
+            final Supplier<KEY> keySupplier) {
+        return intSupplier(intSupplier, keySupplier, createCache(IntSupplier.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intSupplier
+     *            The {@link IntSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static final IntSupplier intSupplier(
+            final IntSupplier intSupplier,
+            final Cache<String, Integer> cache) {
+        return intSupplier(intSupplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intSupplier
+     *            The {@link IntSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static final <KEY> IntSupplier intSupplier(
+            final IntSupplier intSupplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, Integer> cache) {
+        return new JCacheBasedIntSupplierMemoizer<>(cache, keySupplier, intSupplier);
     }
 
     /**
