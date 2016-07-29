@@ -4,39 +4,33 @@
  * including this file, may be copied, modified, propagated, or distributed except according to the terms contained
  * in the LICENSE file.
  */
-package de.xn__ho_hia.memoization.map;
+package de.xn__ho_hia.memoization.guava;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-import de.xn__ho_hia.quality.suppression.CompilerWarnings;
+import com.google.common.cache.Cache;
 
-final class ConcurrentMapBasedBiConsumerMemoizer<FIRST, SECOND, KEY>
-        extends ConcurrentMapBasedMemoizer<KEY, KEY>
+final class GuavaCacheBasedBiConsumerMemoizer<FIRST, SECOND, KEY>
+        extends AbstractGuavaCacheBasedMemoizer<KEY, KEY>
         implements BiConsumer<FIRST, SECOND> {
 
     private final BiFunction<FIRST, SECOND, KEY> keyFunction;
     private final BiConsumer<FIRST, SECOND>      biConsumer;
 
-    @SuppressWarnings(CompilerWarnings.NLS)
-    public ConcurrentMapBasedBiConsumerMemoizer(
-            final ConcurrentMap<KEY, KEY> cache,
+    GuavaCacheBasedBiConsumerMemoizer(
+            final Cache<KEY, KEY> cache,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final BiConsumer<FIRST, SECOND> biConsumer) {
         super(cache);
-        this.keyFunction = requireNonNull(keyFunction,
-                "Provide a key function, might just be 'MemoizationDefaults.hashCodeKeyFunction()'.");
-        this.biConsumer = requireNonNull(biConsumer,
-                "Cannot memoize a NULL BiConsumer - provide an actual BiConsumer to fix this.");
+        this.keyFunction = keyFunction;
+        this.biConsumer = biConsumer;
     }
 
     @Override
     public void accept(final FIRST first, final SECOND second) {
         final KEY key = keyFunction.apply(first, second);
-        computeIfAbsent(key, givenKey -> {
+        get(key, givenKey -> {
             biConsumer.accept(first, second);
             return givenKey;
         });

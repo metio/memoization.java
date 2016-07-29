@@ -6,6 +6,7 @@
  */
 package de.xn__ho_hia.memoization.guava;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
@@ -154,6 +155,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiConsumerWithKeyBiFunction() {
+        // given
+        final BiConsumer<String, String> biConsumer = (a, b) -> System.out.println(a + b);
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
+
+        // when
+        final BiConsumer<String, String> memoize = GuavaMemoize.biConsumer(biConsumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
     }
 
     /**
