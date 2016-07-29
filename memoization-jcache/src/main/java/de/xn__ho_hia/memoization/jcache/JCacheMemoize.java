@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
@@ -63,6 +64,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see BiConsumer
  * @see BiFunction
  * @see BiPredicate
+ * @see BooleanSupplier
  * @see Consumer
  * @see DoubleConsumer
  * @see DoubleFunction
@@ -173,6 +175,94 @@ public final class JCacheMemoize {
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
         return new JCacheBasedBiPredicateMemoizer<>(cache, keyFunction, biPredicate);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param booleanSupplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static final BooleanSupplier booleanSupplier(final BooleanSupplier booleanSupplier) {
+        return booleanSupplier(booleanSupplier, createCache(BooleanSupplier.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link Supplier} in a JCache {@link Cache}.
+     * </p>
+     * BooleanSupplier
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param booleanSupplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static final <KEY> BooleanSupplier booleanSupplier(
+            final BooleanSupplier booleanSupplier,
+            final Supplier<KEY> keySupplier) {
+        return booleanSupplier(booleanSupplier, keySupplier, createCache(BooleanSupplier.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param booleanSupplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static final BooleanSupplier booleanSupplier(
+            final BooleanSupplier booleanSupplier,
+            final Cache<String, Boolean> cache) {
+        return booleanSupplier(booleanSupplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BooleanSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param booleanSupplier
+     *            The {@link BooleanSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link BooleanSupplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BooleanSupplier}.
+     */
+    public static final <KEY> BooleanSupplier booleanSupplier(
+            final BooleanSupplier booleanSupplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, Boolean> cache) {
+        return new JCacheBasedBooleanSupplierMemoizer<>(cache, keySupplier, booleanSupplier);
     }
 
     /**

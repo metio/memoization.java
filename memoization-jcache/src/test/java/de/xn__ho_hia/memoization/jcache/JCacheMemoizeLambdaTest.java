@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.jcache;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
@@ -46,6 +47,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBooleanSupplierWithLambda() {
+        // given
+
+        // when
+        final BooleanSupplier memoize = JCacheMemoize.booleanSupplier(() -> true);
+
+        // then
+        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
     }
 
     /**
