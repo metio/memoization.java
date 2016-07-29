@@ -12,6 +12,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
+import java.util.function.DoublePredicate;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
@@ -238,6 +239,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoublePredicateWithKeyFunction() {
+        // given
+        final DoublePredicate predicate = a -> true;
+        final DoubleFunction<String> keyFunction = a -> "key";
+
+        // when
+        final DoublePredicate memoize = GuavaMemoize.doublePredicate(predicate, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized DoublePredicate is NULL", memoize);
     }
 
 }
