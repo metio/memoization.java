@@ -7,6 +7,7 @@
 package de.xn__ho_hia.memoization.jcache;
 
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
@@ -136,6 +137,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized BiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiPredicateWithLambda() {
+        // given
+
+        // when
+        final BiPredicate<String, String> memoize = JCacheMemoize.biPredicate((first, second) -> true);
+
+        // then
+        Assert.assertNotNull("Memoized BiPredicate is NULL", memoize);
     }
 
 }
