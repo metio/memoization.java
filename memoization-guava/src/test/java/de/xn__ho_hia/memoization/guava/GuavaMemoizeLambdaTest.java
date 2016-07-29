@@ -22,6 +22,7 @@ import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
@@ -277,6 +278,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongBinaryOperatorWithLambda() {
+        // given
+
+        // when
+        final LongBinaryOperator memoize = GuavaMemoize.longBinaryOperator((a, b) -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized LongBinaryOperator is NULL", memoize);
     }
 
     /**

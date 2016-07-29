@@ -169,7 +169,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/LongBinaryOperator.html[LongBinaryOperator]
 | ✓
-| link:{issue}/71[#71]
+| ✓
 | link:{issue}/143[#143]
 | ✓
 

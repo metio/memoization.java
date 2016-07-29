@@ -22,6 +22,7 @@ import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
@@ -34,6 +35,7 @@ import org.junit.Test;
 
 import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
 import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
+import de.xn__ho_hia.memoization.shared.LongBinaryFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**
@@ -297,6 +299,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongBinaryOperatorWithKeyFunction() {
+        // given
+        final LongBinaryOperator operator = (a, b) -> 123;
+        final LongBinaryFunction<String> keyFunction = (a, b) -> "key";
+
+        // when
+        final LongBinaryOperator memoize = GuavaMemoize.longBinaryOperator(operator, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongBinaryOperator is NULL", memoize);
     }
 
     /**
