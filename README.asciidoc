@@ -369,25 +369,25 @@ Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, cache);
 // memoize in Caffeine cache
 Consumer<INPUT> consumer                 = ...;
 Function<INPUT, KEY> keyFunction         = ...;
-Cache<INPUT, INPUT> cache                = ...; // com.github.benmanes.caffeine.cache.Cache
+Cache<KEY, INPUT> cache                  = ...; // com.github.benmanes.caffeine.cache.Cache
 Consumer<INPUT> memoizedConsumer         = CaffeineMemoize.consumer(consumer, keyFunction, cache);
 
 // memoize in Guava cache
 Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, KEY> keyFunction         = ...;
-Cache<INPUT, OUTPUT> cache               = ...; // com.google.common.cache.Cache
+Cache<KEY, OUTPUT> cache                 = ...; // com.google.common.cache.Cache
 Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function, keyFunction, cache);
 
 // memoize in JCache cache
 Predicate<INPUT> predicate               = ...;
 Function<INPUT, KEY> keyFunction         = ...;
-Cache<INPUT, Boolean> cache              = ...; // javax.cache.Cache
+Cache<KEY, Boolean> cache                = ...; // javax.cache.Cache
 Predicate<INPUT> memoizedPredicate       = JCacheMemoize.predicate(predicate, keyFunction, cache);
 
 // memoize in ConcurrentMap
 Supplier<OUTPUT> supplier                = ...;
 Supplier<KEY> keySupplier                = ...;
-Map<String, OUTPUT> cache                = ...;
+Map<KEY, OUTPUT> cache                   = ...;
 Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, keySupplier, cache);
 ----
 
