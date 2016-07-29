@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
+import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
@@ -64,6 +65,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see DoubleConsumer
  * @see DoubleFunction
  * @see DoublePredicate
+ * @see DoubleSupplier
  * @see Function
  * @see IntConsumer
  * @see IntFunction
@@ -254,6 +256,93 @@ public final class GuavaMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, OUTPUT> cache) {
         return new GuavaCacheBasedSupplierMemoizer<>(cache, keySupplier, supplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleSupplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static final DoubleSupplier doubleSupplier(final DoubleSupplier doubleSupplier) {
+        return supplier(doubleSupplier, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleSupplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static final <KEY> DoubleSupplier doubleSupplier(
+            final DoubleSupplier doubleSupplier,
+            final Supplier<KEY> keySupplier) {
+        return supplier(doubleSupplier, keySupplier, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleSupplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static final DoubleSupplier supplier(
+            final DoubleSupplier doubleSupplier,
+            final Cache<String, Double> cache) {
+        return supplier(doubleSupplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleSupplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static final <KEY> DoubleSupplier supplier(
+            final DoubleSupplier doubleSupplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, Double> cache) {
+        return new GuavaCacheBasedDoubleSupplierMemoizer<>(cache, keySupplier, doubleSupplier);
     }
 
     /**

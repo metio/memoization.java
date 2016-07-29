@@ -13,6 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
+import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
@@ -234,6 +235,21 @@ public class GuavaMemoizeDefaultsTest {
     *
     */
     @Test
+    public void shouldMemoizeDoubleSupplier() {
+        // given
+        final DoubleSupplier supplier = () -> 123.456D;
+
+        // when
+        final DoubleSupplier memoize = GuavaMemoize.doubleSupplier(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeDoublePredicate() {
         // given
         final DoublePredicate predicate = a -> true;
@@ -264,7 +280,7 @@ public class GuavaMemoizeDefaultsTest {
     *
     */
     @Test
-    public void shouldMemoizeLongPredicateWithLambda() {
+    public void shouldMemoizeLongPredicate() {
         // given
         final LongPredicate predicate = a -> true;
 
