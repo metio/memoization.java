@@ -35,7 +35,7 @@ public class GuavaCacheBasedBiConsumerMemoizerTest {
     *
     */
     @Test
-    public void shouldAcceptCacheAndKeyFunctionAndBiPredicate() {
+    public void shouldAcceptCacheAndKeyFunctionAndBiConsumer() {
         // given
         final BiConsumer<String, String> biConsumer = (first, second) -> System.out.println(first + second);
         final BiFunction<String, String, String> keyFunction = (first, second) -> second + first;
@@ -54,7 +54,7 @@ public class GuavaCacheBasedBiConsumerMemoizerTest {
     */
     @Test
     @SuppressWarnings(CompilerWarnings.UNCHECKED)
-    public void shouldTransformInput() {
+    public void shouldAcceptInput() {
         // given
         final BiConsumer<String, String> biConsumer = Mockito.mock(BiConsumer.class);
         final BiFunction<String, String, String> keyFunction = (first, second) -> second + first;

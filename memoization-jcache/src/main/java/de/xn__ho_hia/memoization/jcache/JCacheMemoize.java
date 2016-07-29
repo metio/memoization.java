@@ -11,6 +11,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFu
 
 import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
@@ -53,6 +54,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * Take a look at {@link MemoizationDefaults} for a possible key functions and suppliers.
  * </p>
  *
+ * @see BiConsumer
  * @see BiFunction
  * @see BiPredicate
  * @see Consumer
@@ -89,7 +91,7 @@ public final class JCacheMemoize {
      */
     public static final <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> biPredicate) {
-        return biPredicate(biPredicate, createCache(BiFunction.class));
+        return biPredicate(biPredicate, createCache(BiPredicate.class));
     }
 
     /**
@@ -111,7 +113,7 @@ public final class JCacheMemoize {
     public static final <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> biPredicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return biPredicate(biPredicate, keyFunction, createCache(BiFunction.class));
+        return biPredicate(biPredicate, keyFunction, createCache(BiPredicate.class));
     }
 
     /**
@@ -768,6 +770,94 @@ public final class JCacheMemoize {
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, INPUT> cache) {
         return new JCacheBasedConsumerMemoizer<>(cache, keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
+     * @return The wrapped {@link BiConsumer}.
+     */
+    public static final <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
+            final BiConsumer<FIRST, SECOND> biConsumer) {
+        return biConsumer(biConsumer, createCache(BiConsumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link BiConsumer}.
+     */
+    public static final <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
+            final BiConsumer<FIRST, SECOND> biConsumer,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return biConsumer(biConsumer, keyFunction, createCache(BiConsumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BiConsumer}.
+     */
+    public static final <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
+            final BiConsumer<FIRST, SECOND> biConsumer,
+            final Cache<String, String> cache) {
+        return biConsumer(biConsumer, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param biConsumer
+     *            The {@link BiConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link BiConsumer}.
+     */
+    public static final <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
+            final BiConsumer<FIRST, SECOND> biConsumer,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Cache<KEY, KEY> cache) {
+        return new JCacheBasedBiConsumerMemoizer<>(cache, keyFunction, biConsumer);
     }
 
     /**

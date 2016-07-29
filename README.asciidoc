@@ -38,7 +38,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 | link:{jdk-api}/java/util/function/BiConsumer.html[BiConsumer]
 | ✓
 | ✓
-| link:{issue}/126[#126]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/BiFunction.html[BiFunction]

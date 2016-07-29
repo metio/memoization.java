@@ -6,6 +6,7 @@
  */
 package de.xn__ho_hia.memoization.jcache;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
@@ -130,6 +131,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBiConsumer() {
+        // given
+        final BiConsumer<String, String> consumer = (a, b) -> System.out.println(a + b);
+
+        // when
+        final BiConsumer<String, String> memoize = JCacheMemoize.biConsumer(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
     }
 
     /**
