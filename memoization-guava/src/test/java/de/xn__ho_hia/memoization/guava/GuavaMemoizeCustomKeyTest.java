@@ -11,6 +11,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
@@ -30,6 +31,7 @@ import java.util.function.Supplier;
 import org.junit.Assert;
 import org.junit.Test;
 
+import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**
@@ -43,144 +45,16 @@ public class GuavaMemoizeCustomKeyTest {
     *
     */
     @Test
-    public void shouldMemoizeSupplierWithKeySupplier() {
+    public void shouldMemoizeBiConsumerWithKeyBiFunction() {
         // given
-        final Supplier<String> supplier = () -> "test";
-        final Supplier<String> keySupplier = () -> "key";
+        final BiConsumer<String, String> biConsumer = (a, b) -> System.out.println(a + b);
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
 
         // when
-        final Supplier<String> memoize = GuavaMemoize.supplier(supplier, keySupplier);
+        final BiConsumer<String, String> memoize = GuavaMemoize.biConsumer(biConsumer, keyFunction);
 
         // then
-        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeDoubleSupplierWithKeySupplier() {
-        // given
-        final DoubleSupplier supplier = () -> 123.456D;
-        final Supplier<String> keySupplier = () -> "key";
-
-        // when
-        final DoubleSupplier memoize = GuavaMemoize.doubleSupplier(supplier, keySupplier);
-
-        // then
-        Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeIntSupplierWithKeySupplier() {
-        // given
-        final IntSupplier supplier = () -> 123;
-        final Supplier<String> keySupplier = () -> "key";
-
-        // when
-        final IntSupplier memoize = GuavaMemoize.intSupplier(supplier, keySupplier);
-
-        // then
-        Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeLongSupplierWithKeySupplier() {
-        // given
-        final LongSupplier supplier = () -> 123;
-        final Supplier<String> keySupplier = () -> "key";
-
-        // when
-        final LongSupplier memoize = GuavaMemoize.longSupplier(supplier, keySupplier);
-
-        // then
-        Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeBooleanSupplierWithKeySupplier() {
-        // given
-        final BooleanSupplier supplier = () -> true;
-        final Supplier<String> keySupplier = () -> "key";
-
-        // when
-        final BooleanSupplier memoize = GuavaMemoize.booleanSupplier(supplier, keySupplier);
-
-        // then
-        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeFunctionWithKeyFunction() {
-        // given
-        final Function<String, String> function = a -> "test";
-        final Function<String, String> keyFunction = a -> "key";
-
-        // when
-        final Function<String, String> memoize = GuavaMemoize.function(function, keyFunction);
-
-        // then
-        Assert.assertNotNull("Memoized Function is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeIntFunctionWithKeyFunction() {
-        // given
-        final IntFunction<String> function = a -> "test";
-        final IntFunction<String> keyFunction = a -> "key";
-
-        // when
-        final IntFunction<String> memoize = GuavaMemoize.intFunction(function, keyFunction);
-
-        // then
-        Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeLongFunctionWithKeyFunction() {
-        // given
-        final LongFunction<String> function = a -> "test";
-        final LongFunction<String> keyFunction = a -> "key";
-
-        // when
-        final LongFunction<String> memoize = GuavaMemoize.longFunction(function, keyFunction);
-
-        // then
-        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeDoubleFunctionWithKeyFunction() {
-        // given
-        final DoubleFunction<String> function = a -> "test";
-        final DoubleFunction<String> keyFunction = a -> "key";
-
-        // when
-        final DoubleFunction<String> memoize = GuavaMemoize.doubleFunction(function, keyFunction);
-
-        // then
-        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
+        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
     }
 
     /**
@@ -219,6 +93,22 @@ public class GuavaMemoizeCustomKeyTest {
     *
     */
     @Test
+    public void shouldMemoizeBooleanSupplierWithKeySupplier() {
+        // given
+        final BooleanSupplier supplier = () -> true;
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final BooleanSupplier memoize = GuavaMemoize.booleanSupplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeConsumerWithKeyFunction() {
         // given
         final Consumer<String> consumer = System.out::println;
@@ -229,6 +119,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleBinaryOperatorWithKeyFunction() {
+        // given
+        final DoubleBinaryOperator operator = (a, b) -> 123.456D;
+        final DoubleBinaryFunction<String> keyFunction = (a, b) -> "key";
+
+        // when
+        final DoubleBinaryOperator memoize = GuavaMemoize.doubleBinaryOperator(operator, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
     }
 
     /**
@@ -251,64 +157,16 @@ public class GuavaMemoizeCustomKeyTest {
     *
     */
     @Test
-    public void shouldMemoizeIntConsumerWithKeyFunction() {
+    public void shouldMemoizeDoubleFunctionWithKeyFunction() {
         // given
-        final IntConsumer consumer = System.out::println;
-        final IntFunction<String> keyFunction = a -> "key";
+        final DoubleFunction<String> function = a -> "test";
+        final DoubleFunction<String> keyFunction = a -> "key";
 
         // when
-        final IntConsumer memoize = GuavaMemoize.intConsumer(consumer, keyFunction);
+        final DoubleFunction<String> memoize = GuavaMemoize.doubleFunction(function, keyFunction);
 
         // then
-        Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeLongConsumerWithKeyFunction() {
-        // given
-        final LongConsumer consumer = System.out::println;
-        final LongFunction<String> keyFunction = a -> "key";
-
-        // when
-        final LongConsumer memoize = GuavaMemoize.longConsumer(consumer, keyFunction);
-
-        // then
-        Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeBiConsumerWithKeyBiFunction() {
-        // given
-        final BiConsumer<String, String> biConsumer = (a, b) -> System.out.println(a + b);
-        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
-
-        // when
-        final BiConsumer<String, String> memoize = GuavaMemoize.biConsumer(biConsumer, keyFunction);
-
-        // then
-        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizePredicateWithKeyFunction() {
-        // given
-        final Predicate<String> predicate = a -> true;
-        final Function<String, String> keyFunction = a -> "key";
-
-        // when
-        final Predicate<String> memoize = GuavaMemoize.predicate(predicate, keyFunction);
-
-        // then
-        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
     }
 
     /**
@@ -331,6 +189,70 @@ public class GuavaMemoizeCustomKeyTest {
     *
     */
     @Test
+    public void shouldMemoizeDoubleSupplierWithKeySupplier() {
+        // given
+        final DoubleSupplier supplier = () -> 123.456D;
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final DoubleSupplier memoize = GuavaMemoize.doubleSupplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeFunctionWithKeyFunction() {
+        // given
+        final Function<String, String> function = a -> "test";
+        final Function<String, String> keyFunction = a -> "key";
+
+        // when
+        final Function<String, String> memoize = GuavaMemoize.function(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntConsumerWithKeyFunction() {
+        // given
+        final IntConsumer consumer = System.out::println;
+        final IntFunction<String> keyFunction = a -> "key";
+
+        // when
+        final IntConsumer memoize = GuavaMemoize.intConsumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntFunctionWithKeyFunction() {
+        // given
+        final IntFunction<String> function = a -> "test";
+        final IntFunction<String> keyFunction = a -> "key";
+
+        // when
+        final IntFunction<String> memoize = GuavaMemoize.intFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeIntPredicateWithKeyFunction() {
         // given
         final IntPredicate predicate = a -> true;
@@ -347,6 +269,54 @@ public class GuavaMemoizeCustomKeyTest {
     *
     */
     @Test
+    public void shouldMemoizeIntSupplierWithKeySupplier() {
+        // given
+        final IntSupplier supplier = () -> 123;
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final IntSupplier memoize = GuavaMemoize.intSupplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongConsumerWithKeyFunction() {
+        // given
+        final LongConsumer consumer = System.out::println;
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongConsumer memoize = GuavaMemoize.longConsumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongFunctionWithKeyFunction() {
+        // given
+        final LongFunction<String> function = a -> "test";
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongFunction<String> memoize = GuavaMemoize.longFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeLongPredicateWithLambda() {
         // given
         final LongPredicate predicate = a -> true;
@@ -357,6 +327,54 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongSupplierWithKeySupplier() {
+        // given
+        final LongSupplier supplier = () -> 123;
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final LongSupplier memoize = GuavaMemoize.longSupplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizePredicateWithKeyFunction() {
+        // given
+        final Predicate<String> predicate = a -> true;
+        final Function<String, String> keyFunction = a -> "key";
+
+        // when
+        final Predicate<String> memoize = GuavaMemoize.predicate(predicate, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeSupplierWithKeySupplier() {
+        // given
+        final Supplier<String> supplier = () -> "test";
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final Supplier<String> memoize = GuavaMemoize.supplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
     }
 
 }

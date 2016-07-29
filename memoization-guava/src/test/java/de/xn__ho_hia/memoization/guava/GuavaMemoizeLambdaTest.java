@@ -11,6 +11,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
@@ -43,126 +44,14 @@ public class GuavaMemoizeLambdaTest {
     *
     */
     @Test
-    public void shouldMemoizeSupplierWithLambda() {
+    public void shouldMemoizeBiConsumerWithLambda() {
         // given
 
         // when
-        final Supplier<String> memoize = GuavaMemoize.supplier(() -> "test");
+        final BiConsumer<String, String> memoize = GuavaMemoize.biConsumer((a, b) -> System.out.println(a + b));
 
         // then
-        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeDoubleSupplierWithLambda() {
-        // given
-
-        // when
-        final DoubleSupplier memoize = GuavaMemoize.doubleSupplier(() -> 123.456D);
-
-        // then
-        Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeIntSupplierWithLambda() {
-        // given
-
-        // when
-        final IntSupplier memoize = GuavaMemoize.intSupplier(() -> 123);
-
-        // then
-        Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeLongSupplierWithLambda() {
-        // given
-
-        // when
-        final LongSupplier memoize = GuavaMemoize.longSupplier(() -> 123);
-
-        // then
-        Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeBooleanSupplierWithLambda() {
-        // given
-
-        // when
-        final BooleanSupplier memoize = GuavaMemoize.booleanSupplier(() -> true);
-
-        // then
-        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeFunctionWithLambda() {
-        // given
-
-        // when
-        final Function<String, String> memoize = GuavaMemoize.function(a -> "test");
-
-        // then
-        Assert.assertNotNull("Memoized Function is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeIntFunctionWithLambda() {
-        // given
-
-        // when
-        final IntFunction<String> memoize = GuavaMemoize.intFunction(a -> "test");
-
-        // then
-        Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeLongFunctionWithLambda() {
-        // given
-
-        // when
-        final LongFunction<String> memoize = GuavaMemoize.longFunction(a -> "test");
-
-        // then
-        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeDoubleFunctionWithLambda() {
-        // given
-
-        // when
-        final DoubleFunction<String> memoize = GuavaMemoize.doubleFunction(a -> "test");
-
-        // then
-        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
+        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
     }
 
     /**
@@ -197,6 +86,34 @@ public class GuavaMemoizeLambdaTest {
     *
     */
     @Test
+    public void shouldMemoizeBooleanSupplierWithLambda() {
+        // given
+
+        // when
+        final BooleanSupplier memoize = GuavaMemoize.booleanSupplier(() -> true);
+
+        // then
+        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleBinaryOperatorWithLambda() {
+        // given
+
+        // when
+        final DoubleBinaryOperator memoize = GuavaMemoize.doubleBinaryOperator((a, b) -> 123.456D);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeConsumerWithLambda() {
         // given
 
@@ -225,56 +142,14 @@ public class GuavaMemoizeLambdaTest {
     *
     */
     @Test
-    public void shouldMemoizeIntConsumerWithLambda() {
+    public void shouldMemoizeDoubleFunctionWithLambda() {
         // given
 
         // when
-        final IntConsumer memoize = GuavaMemoize.intConsumer(System.out::println);
+        final DoubleFunction<String> memoize = GuavaMemoize.doubleFunction(a -> "test");
 
         // then
-        Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeLongConsumerWithLambda() {
-        // given
-
-        // when
-        final LongConsumer memoize = GuavaMemoize.longConsumer(System.out::println);
-
-        // then
-        Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizeBiConsumerWithLambda() {
-        // given
-
-        // when
-        final BiConsumer<String, String> memoize = GuavaMemoize.biConsumer((a, b) -> System.out.println(a + b));
-
-        // then
-        Assert.assertNotNull("Memoized BiConsumer is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
-    public void shouldMemoizePredicateWithLambda() {
-        // given
-
-        // when
-        final Predicate<String> memoize = GuavaMemoize.predicate(a -> true);
-
-        // then
-        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+        Assert.assertNotNull("Memoized DoubleFunction is NULL", memoize);
     }
 
     /**
@@ -295,6 +170,62 @@ public class GuavaMemoizeLambdaTest {
     *
     */
     @Test
+    public void shouldMemoizeDoubleSupplierWithLambda() {
+        // given
+
+        // when
+        final DoubleSupplier memoize = GuavaMemoize.doubleSupplier(() -> 123.456D);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeFunctionWithLambda() {
+        // given
+
+        // when
+        final Function<String, String> memoize = GuavaMemoize.function(a -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized Function is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntConsumerWithLambda() {
+        // given
+
+        // when
+        final IntConsumer memoize = GuavaMemoize.intConsumer(System.out::println);
+
+        // then
+        Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntFunctionWithLambda() {
+        // given
+
+        // when
+        final IntFunction<String> memoize = GuavaMemoize.intFunction(a -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized IntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeIntPredicateWithLambda() {
         // given
 
@@ -309,6 +240,48 @@ public class GuavaMemoizeLambdaTest {
     *
     */
     @Test
+    public void shouldMemoizeIntSupplierWithLambda() {
+        // given
+
+        // when
+        final IntSupplier memoize = GuavaMemoize.intSupplier(() -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongConsumerWithLambda() {
+        // given
+
+        // when
+        final LongConsumer memoize = GuavaMemoize.longConsumer(System.out::println);
+
+        // then
+        Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongFunctionWithLambda() {
+        // given
+
+        // when
+        final LongFunction<String> memoize = GuavaMemoize.longFunction(a -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized LongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
     public void shouldMemoizeLongPredicateWithLambda() {
         // given
 
@@ -317,6 +290,48 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongSupplierWithLambda() {
+        // given
+
+        // when
+        final LongSupplier memoize = GuavaMemoize.longSupplier(() -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizePredicateWithLambda() {
+        // given
+
+        // when
+        final Predicate<String> memoize = GuavaMemoize.predicate(a -> true);
+
+        // then
+        Assert.assertNotNull("Memoized Predicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeSupplierWithLambda() {
+        // given
+
+        // when
+        final Supplier<String> memoize = GuavaMemoize.supplier(() -> "test");
+
+        // then
+        Assert.assertNotNull("Memoized Supplier is NULL", memoize);
     }
 
 }

@@ -67,7 +67,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/DoubleBinaryOperator.html[DoubleBinaryOperator]
 | ✓
-| link:{issue}/57[#57]
+| ✓
 | link:{issue}/129[#129]
 | ✓
 
