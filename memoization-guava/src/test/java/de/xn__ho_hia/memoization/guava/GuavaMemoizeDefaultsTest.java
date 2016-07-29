@@ -19,6 +19,7 @@ import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
+import java.util.function.LongPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -257,6 +258,21 @@ public class GuavaMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized IntPredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongPredicateWithLambda() {
+        // given
+        final LongPredicate predicate = a -> true;
+
+        // when
+        final LongPredicate memoize = GuavaMemoize.longPredicate(predicate);
+
+        // then
+        Assert.assertNotNull("Memoized LongPredicate is NULL", memoize);
     }
 
 }
