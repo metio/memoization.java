@@ -18,6 +18,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
+import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
 import java.util.function.Predicate;
@@ -62,6 +63,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see DoubleConsumer
  * @see DoubleFunction
  * @see Function
+ * @see IntConsumer
  * @see IntFunction
  * @see LongFunction
  * @see Predicate
@@ -859,6 +861,93 @@ public final class JCacheMemoize {
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, Double> cache) {
         return new JCacheBasedDoubleConsumerMemoizer<>(cache, keyFunction, doubleConsumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intConsumer
+     *            The {@link IntConsumer} to memoize.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static final IntConsumer intConsumer(final IntConsumer intConsumer) {
+        return intConsumer(intConsumer, createCache(IntConsumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intConsumer
+     *            The {@link IntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static final <KEY> IntConsumer intConsumer(
+            final IntConsumer intConsumer,
+            final IntFunction<KEY> keyFunction) {
+        return intConsumer(intConsumer, keyFunction, createCache(IntConsumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intConsumer
+     *            The {@link IntConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static final IntConsumer intConsumer(
+            final IntConsumer intConsumer,
+            final Cache<Integer, Integer> cache) {
+        return intConsumer(intConsumer, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intConsumer
+     *            The {@link IntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntConsumer}.
+     */
+    public static final <KEY> IntConsumer intConsumer(
+            final IntConsumer intConsumer,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new JCacheBasedIntConsumerMemoizer<>(cache, keyFunction, intConsumer);
     }
 
     /**
