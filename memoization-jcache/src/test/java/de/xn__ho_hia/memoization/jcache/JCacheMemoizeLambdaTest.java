@@ -16,6 +16,7 @@ import java.util.function.DoublePredicate;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
+import java.util.function.IntPredicate;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.Predicate;
@@ -128,6 +129,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized DoublePredicate is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntPredicateWithLambda() {
+        // given
+
+        // when
+        final IntPredicate memoize = JCacheMemoize.intPredicate(a -> true);
+
+        // then
+        Assert.assertNotNull("Memoized IntPredicate is NULL", memoize);
     }
 
     /**
