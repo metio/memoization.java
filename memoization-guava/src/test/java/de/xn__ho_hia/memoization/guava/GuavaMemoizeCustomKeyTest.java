@@ -13,6 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
+import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
 import java.util.function.Predicate;
@@ -162,7 +163,7 @@ public class GuavaMemoizeCustomKeyTest {
     *
     */
     @Test
-    public void shouldMemoizeDoubleConsumer() {
+    public void shouldMemoizeDoubleConsumerWithKeyFunction() {
         // given
         final DoubleConsumer consumer = System.out::println;
         final DoubleFunction<String> keyFunction = a -> "key";
@@ -172,6 +173,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntConsumerWithKeyFunction() {
+        // given
+        final IntConsumer consumer = System.out::println;
+        final IntFunction<String> keyFunction = a -> "key";
+
+        // when
+        final IntConsumer memoize = GuavaMemoize.intConsumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
     }
 
     /**

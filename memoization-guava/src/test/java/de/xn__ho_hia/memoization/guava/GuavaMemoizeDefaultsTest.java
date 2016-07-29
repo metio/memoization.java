@@ -13,6 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
+import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
 import java.util.function.Predicate;
@@ -148,6 +149,21 @@ public class GuavaMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntConsumer() {
+        // given
+        final IntConsumer consumer = System.out::println;
+
+        // when
+        final IntConsumer memoize = GuavaMemoize.intConsumer(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
     }
 
     /**
