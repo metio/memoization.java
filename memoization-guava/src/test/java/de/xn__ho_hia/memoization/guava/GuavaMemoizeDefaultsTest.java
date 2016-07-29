@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.guava;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
@@ -276,6 +277,21 @@ public class GuavaMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBooleanSupplier() {
+        // given
+        final BooleanSupplier supplier = () -> true;
+
+        // when
+        final BooleanSupplier memoize = GuavaMemoize.booleanSupplier(supplier);
+
+        // then
+        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
     }
 
     /**

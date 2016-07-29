@@ -9,6 +9,7 @@ package de.xn__ho_hia.memoization.guava;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
@@ -100,6 +101,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeBooleanSupplierWithKeySupplier() {
+        // given
+        final BooleanSupplier supplier = () -> true;
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final BooleanSupplier memoize = GuavaMemoize.booleanSupplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
     }
 
     /**
