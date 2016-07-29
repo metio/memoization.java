@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
+import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
@@ -65,6 +66,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized BooleanSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleSupplierWithKeyFunction() {
+        // given
+        final DoubleSupplier supplier = () -> 123.456D;
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final DoubleSupplier memoize = JCacheMemoize.doubleSupplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
     }
 
     /**

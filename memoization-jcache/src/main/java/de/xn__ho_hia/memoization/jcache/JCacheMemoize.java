@@ -19,6 +19,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
+import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
@@ -69,6 +70,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see DoubleConsumer
  * @see DoubleFunction
  * @see DoublePredicate
+ * @see DoubleSupplier
  * @see Function
  * @see IntConsumer
  * @see IntFunction
@@ -253,7 +255,7 @@ public final class JCacheMemoize {
      * @param booleanSupplier
      *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
-     *            The {@link BooleanSupplier} for the cache key.
+     *            The {@link Supplier} for the cache key.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link BooleanSupplier}.
@@ -350,6 +352,94 @@ public final class JCacheMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, OUTPUT> cache) {
         return new JCacheBasedSupplierMemoizer<>(cache, keySupplier, supplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleSupplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static final DoubleSupplier doubleSupplier(final DoubleSupplier doubleSupplier) {
+        return doubleSupplier(doubleSupplier, createCache(DoubleSupplier.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a JCache {@link Cache}.
+     * </p>
+     * BooleanSupplier
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleSupplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static final <KEY> DoubleSupplier doubleSupplier(
+            final DoubleSupplier doubleSupplier,
+            final Supplier<KEY> keySupplier) {
+        return doubleSupplier(doubleSupplier, keySupplier, createCache(DoubleSupplier.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleSupplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static final DoubleSupplier doubleSupplier(
+            final DoubleSupplier doubleSupplier,
+            final Cache<String, Double> cache) {
+        return doubleSupplier(doubleSupplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleSupplier} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleSupplier
+     *            The {@link DoubleSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleSupplier}.
+     */
+    public static final <KEY> DoubleSupplier doubleSupplier(
+            final DoubleSupplier doubleSupplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, Double> cache) {
+        return new JCacheBasedDoubleSupplierMemoizer<>(cache, keySupplier, doubleSupplier);
     }
 
     /**
