@@ -18,6 +18,7 @@ import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
+import java.util.function.IntSupplier;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
@@ -66,6 +67,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntSupplierWithKeyFunction() {
+        // given
+        final IntSupplier supplier = () -> 123;
+        final Supplier<String> keySupplier = () -> "key";
+
+        // when
+        final IntSupplier memoize = GuavaMemoize.intSupplier(supplier, keySupplier);
+
+        // then
+        Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
     }
 
     /**

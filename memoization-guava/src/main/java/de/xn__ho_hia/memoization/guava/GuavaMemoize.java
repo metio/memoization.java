@@ -22,6 +22,7 @@ import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
+import java.util.function.IntSupplier;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
@@ -70,6 +71,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see IntConsumer
  * @see IntFunction
  * @see IntPredicate
+ * @see IntSupplier
  * @see LongConsumer
  * @see LongFunction
  * @see LongPredicate
@@ -273,7 +275,7 @@ public final class GuavaMemoize {
      * @return The wrapped {@link DoubleSupplier}.
      */
     public static final DoubleSupplier doubleSupplier(final DoubleSupplier doubleSupplier) {
-        return supplier(doubleSupplier, CacheBuilder.newBuilder().build());
+        return doubleSupplier(doubleSupplier, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -295,7 +297,7 @@ public final class GuavaMemoize {
     public static final <KEY> DoubleSupplier doubleSupplier(
             final DoubleSupplier doubleSupplier,
             final Supplier<KEY> keySupplier) {
-        return supplier(doubleSupplier, keySupplier, CacheBuilder.newBuilder().build());
+        return doubleSupplier(doubleSupplier, keySupplier, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -314,10 +316,10 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static final DoubleSupplier supplier(
+    public static final DoubleSupplier doubleSupplier(
             final DoubleSupplier doubleSupplier,
             final Cache<String, Double> cache) {
-        return supplier(doubleSupplier, defaultKeySupplier(), cache);
+        return doubleSupplier(doubleSupplier, defaultKeySupplier(), cache);
     }
 
     /**
@@ -338,11 +340,98 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleSupplier}.
      */
-    public static final <KEY> DoubleSupplier supplier(
+    public static final <KEY> DoubleSupplier doubleSupplier(
             final DoubleSupplier doubleSupplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Double> cache) {
         return new GuavaCacheBasedDoubleSupplierMemoizer<>(cache, keySupplier, doubleSupplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intSupplier
+     *            The {@link IntSupplier} to memoize.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static final IntSupplier intSupplier(final IntSupplier intSupplier) {
+        return intSupplier(intSupplier, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intSupplier
+     *            The {@link IntSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static final <KEY> IntSupplier intSupplier(
+            final IntSupplier intSupplier,
+            final Supplier<KEY> keySupplier) {
+        return intSupplier(intSupplier, keySupplier, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intSupplier
+     *            The {@link IntSupplier} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static final IntSupplier intSupplier(
+            final IntSupplier intSupplier,
+            final Cache<String, Integer> cache) {
+        return intSupplier(intSupplier, defaultKeySupplier(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntSupplier} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intSupplier
+     *            The {@link IntSupplier} to memoize.
+     * @param keySupplier
+     *            The {@link Supplier} for the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntSupplier}.
+     */
+    public static final <KEY> IntSupplier intSupplier(
+            final IntSupplier intSupplier,
+            final Supplier<KEY> keySupplier,
+            final Cache<KEY, Integer> cache) {
+        return new GuavaCacheBasedIntSupplierMemoizer<>(cache, keySupplier, intSupplier);
     }
 
     /**

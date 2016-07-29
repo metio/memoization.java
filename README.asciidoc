@@ -145,7 +145,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 
 | link:{jdk-api}/java/util/function/IntSupplier.html[IntSupplier]
 | ✓
-| link:{issue}/67[#67]
+| ✓
 | link:{issue}/139[#139]
 | ✓
 
