@@ -9,8 +9,8 @@ package de.xn__ho_hia.memoization.jcache;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
 
 import javax.cache.Cache;
 
@@ -26,7 +26,7 @@ import de.xn__ho_hia.quality.suppression.CompilerWarnings;
  *
  */
 @SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD, CompilerWarnings.UNCHECKED })
-public class JCacheBasedConsumerMemoizerTest {
+public class JCacheBasedDoubleConsumerMemoizerTest {
 
     /** Captures expected exceptions. */
     @Rule
@@ -38,16 +38,16 @@ public class JCacheBasedConsumerMemoizerTest {
     @Test
     public void shouldMemoizeConsumer() {
         // given
-        final Consumer<String> consumer = Mockito.mock(Consumer.class);
-        final Function<String, String> keyFunction = Function.identity();
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Consumer.class)) {
+        final DoubleConsumer consumer = Mockito.mock(DoubleConsumer.class);
+        final DoubleFunction<String> keyFunction = a -> "key";
+        try (final Cache<String, Double> cache = JCacheMemoize.createCache(DoubleConsumer.class)) {
             // when
-            final JCacheBasedConsumerMemoizer<String, String> loader = new JCacheBasedConsumerMemoizer<>(cache,
+            final JCacheBasedDoubleConsumerMemoizer<String> loader = new JCacheBasedDoubleConsumerMemoizer<>(cache,
                     keyFunction, consumer);
 
             // then
-            loader.accept("test");
-            Mockito.verify(consumer).accept("test");
+            loader.accept(123.456D);
+            Mockito.verify(consumer).accept(123.456D);
         }
     }
 
@@ -57,17 +57,17 @@ public class JCacheBasedConsumerMemoizerTest {
     @Test
     public void shouldMemoizeConsumerOnce() {
         // given
-        final Consumer<String> consumer = Mockito.mock(Consumer.class);
-        final Function<String, String> keyFunction = Function.identity();
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Consumer.class)) {
+        final DoubleConsumer consumer = Mockito.mock(DoubleConsumer.class);
+        final DoubleFunction<String> keyFunction = a -> "key";
+        try (final Cache<String, Double> cache = JCacheMemoize.createCache(DoubleConsumer.class)) {
             // when
-            final JCacheBasedConsumerMemoizer<String, String> loader = new JCacheBasedConsumerMemoizer<>(cache,
+            final JCacheBasedDoubleConsumerMemoizer<String> loader = new JCacheBasedDoubleConsumerMemoizer<>(cache,
                     keyFunction, consumer);
 
             // then
-            loader.accept("test");
-            loader.accept("test");
-            Mockito.verify(consumer).accept("test");
+            loader.accept(123.456D);
+            loader.accept(123.456D);
+            Mockito.verify(consumer).accept(123.456D);
         }
     }
 
@@ -77,9 +77,9 @@ public class JCacheBasedConsumerMemoizerTest {
     @Test
     public void shouldWrapRuntimeExceptionInMemoizationException() {
         // given
-        final Function<String, String> keyFunction = Function.identity();
-        try (final Cache<String, String> cache = Mockito.mock(Cache.class)) {
-            final JCacheBasedConsumerMemoizer<String, String> loader = new JCacheBasedConsumerMemoizer<>(cache,
+        final DoubleFunction<String> keyFunction = a -> "key";
+        try (final Cache<String, Double> cache = Mockito.mock(Cache.class)) {
+            final JCacheBasedDoubleConsumerMemoizer<String> loader = new JCacheBasedDoubleConsumerMemoizer<>(cache,
                     keyFunction, null);
             given(cache.invoke(any(), any())).willThrow(RuntimeException.class);
 
@@ -87,7 +87,7 @@ public class JCacheBasedConsumerMemoizerTest {
             thrown.expect(MemoizationException.class);
 
             // then
-            loader.accept("test");
+            loader.accept(123.456D);
         }
     }
 

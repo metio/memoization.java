@@ -12,7 +12,6 @@ import static org.mockito.Matchers.any;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import javax.cache.Cache;
 
@@ -43,7 +42,7 @@ public class JCacheBasedBiConsumerMemoizerTest {
         // given
         final BiConsumer<String, String> biConsumer = (first, second) -> System.out.println(first + second);
         final BiFunction<String, String, String> keyfunction = hashCodeKeyFunction();
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(BiConsumer.class)) {
             // when
             final JCacheBasedBiConsumerMemoizer<String, String, String> memoizer = new JCacheBasedBiConsumerMemoizer<>(
                     cache, keyfunction, biConsumer);
@@ -62,7 +61,7 @@ public class JCacheBasedBiConsumerMemoizerTest {
         // given
         final BiConsumer<String, String> biConsumer = Mockito.mock(BiConsumer.class);
         final BiFunction<String, String, String> keyFunction = (first, second) -> second + first;
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(BiConsumer.class)) {
             // when
             final JCacheBasedBiConsumerMemoizer<String, String, String> memoizer = new JCacheBasedBiConsumerMemoizer<>(
                     cache, keyFunction, biConsumer);

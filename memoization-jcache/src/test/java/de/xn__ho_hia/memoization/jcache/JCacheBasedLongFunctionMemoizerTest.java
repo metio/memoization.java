@@ -9,7 +9,6 @@ package de.xn__ho_hia.memoization.jcache;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
-import java.util.function.Function;
 import java.util.function.LongFunction;
 
 import javax.cache.Cache;
@@ -41,7 +40,7 @@ public class JCacheBasedLongFunctionMemoizerTest {
         // given
         final LongFunction<String> function = a -> "test";
         final LongFunction<String> keyFunction = a -> "key";
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(LongFunction.class)) {
             // when
             final JCacheBasedLongFunctionMemoizer<String, String> loader = new JCacheBasedLongFunctionMemoizer<>(cache,
                     keyFunction, function);

@@ -6,7 +6,6 @@
  */
 package de.xn__ho_hia.memoization.jcache;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javax.cache.Cache;
@@ -31,7 +30,7 @@ public class JCacheBasedSupplierMemoizerTest {
         // given
         final Supplier<String> supplier = () -> "test";
         final Supplier<String> keySupplier = () -> "key";
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(Supplier.class)) {
             // when
             final JCacheBasedSupplierMemoizer<String, String> loader = new JCacheBasedSupplierMemoizer<>(cache,
                     keySupplier, supplier);

@@ -9,7 +9,6 @@ package de.xn__ho_hia.memoization.jcache;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
-import java.util.function.Function;
 import java.util.function.IntFunction;
 
 import javax.cache.Cache;
@@ -41,7 +40,7 @@ public class JCacheBasedIntFunctionMemoizerTest {
         // given
         final IntFunction<String> function = a -> "test";
         final IntFunction<String> keyFunction = a -> "key";
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(IntFunction.class)) {
             // when
             final JCacheBasedIntFunctionMemoizer<String, String> loader = new JCacheBasedIntFunctionMemoizer<>(cache,
                     keyFunction, function);

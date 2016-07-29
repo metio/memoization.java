@@ -15,6 +15,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -58,6 +59,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see BiFunction
  * @see BiPredicate
  * @see Consumer
+ * @see DoubleConsumer
  * @see DoubleFunction
  * @see Function
  * @see IntFunction
@@ -770,6 +772,93 @@ public final class JCacheMemoize {
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, INPUT> cache) {
         return new JCacheBasedConsumerMemoizer<>(cache, keyFunction, consumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleConsumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static final DoubleConsumer doubleConsumer(final DoubleConsumer doubleConsumer) {
+        return doubleConsumer(doubleConsumer, createCache(DoubleConsumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleConsumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static final <KEY> DoubleConsumer doubleConsumer(
+            final DoubleConsumer doubleConsumer,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleConsumer(doubleConsumer, keyFunction, createCache(DoubleConsumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleConsumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static final DoubleConsumer doubleConsumer(
+            final DoubleConsumer doubleConsumer,
+            final Cache<Double, Double> cache) {
+        return doubleConsumer(doubleConsumer, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleConsumer
+     *            The {@link DoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleConsumer}.
+     */
+    public static final <KEY> DoubleConsumer doubleConsumer(
+            final DoubleConsumer doubleConsumer,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return new JCacheBasedDoubleConsumerMemoizer<>(cache, keyFunction, doubleConsumer);
     }
 
     /**

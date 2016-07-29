@@ -11,7 +11,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import javax.cache.Cache;
 
@@ -42,7 +41,7 @@ public class JCacheBasedBiFunctionMemoizerTest {
         // given
         final BiFunction<String, String, String> function = (first, second) -> "test";
         final BiFunction<String, String, String> keyfunction = hashCodeKeyFunction();
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(BiFunction.class)) {
             // when
             final JCacheBasedBiFunctionMemoizer<String, String, String, String> loader = new JCacheBasedBiFunctionMemoizer<>(
                     cache, keyfunction, function);

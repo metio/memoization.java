@@ -10,7 +10,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
 import java.util.function.DoubleFunction;
-import java.util.function.Function;
 
 import javax.cache.Cache;
 
@@ -41,7 +40,7 @@ public class JCacheBasedDoubleFunctionMemoizerTest {
         // given
         final DoubleFunction<String> function = a -> "test";
         final DoubleFunction<String> keyFunction = a -> "key";
-        try (final Cache<String, String> cache = JCacheMemoize.createCache(Function.class)) {
+        try (final Cache<String, String> cache = JCacheMemoize.createCache(DoubleFunction.class)) {
             // when
             final JCacheBasedDoubleFunctionMemoizer<String, String> loader = new JCacheBasedDoubleFunctionMemoizer<>(
                     cache,

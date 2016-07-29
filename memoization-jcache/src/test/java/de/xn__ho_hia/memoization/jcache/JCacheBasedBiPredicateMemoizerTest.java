@@ -12,7 +12,6 @@ import static org.mockito.Matchers.any;
 
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import java.util.function.Function;
 
 import javax.cache.Cache;
 
@@ -43,7 +42,7 @@ public class JCacheBasedBiPredicateMemoizerTest {
         // given
         final BiPredicate<String, String> biPredicate = (first, second) -> true;
         final BiFunction<String, String, String> keyfunction = hashCodeKeyFunction();
-        try (final Cache<String, Boolean> cache = JCacheMemoize.createCache(Function.class)) {
+        try (final Cache<String, Boolean> cache = JCacheMemoize.createCache(BiPredicate.class)) {
             // when
             final JCacheBasedBiPredicateMemoizer<String, String, String> loader = new JCacheBasedBiPredicateMemoizer<>(
                     cache, keyfunction, biPredicate);
