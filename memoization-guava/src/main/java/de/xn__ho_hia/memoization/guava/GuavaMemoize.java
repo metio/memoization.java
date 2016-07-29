@@ -19,6 +19,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
+import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -62,6 +63,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see Function
  * @see IntConsumer
  * @see IntFunction
+ * @see LongConsumer
  * @see LongFunction
  * @see Predicate
  * @see Supplier
@@ -686,6 +688,94 @@ public final class GuavaMemoize {
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
         return new GuavaCacheBasedIntConsumerMemoizer<>(cache, keyFunction, intConsumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longConsumer
+     *            The {@link LongConsumer} to memoize.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static final LongConsumer longConsumer(
+            final LongConsumer longConsumer) {
+        return longConsumer(longConsumer, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longConsumer
+     *            The {@link LongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static final <KEY> LongConsumer longConsumer(
+            final LongConsumer longConsumer,
+            final LongFunction<KEY> keyFunction) {
+        return longConsumer(longConsumer, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longConsumer
+     *            The {@link LongConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static final LongConsumer longConsumer(
+            final LongConsumer longConsumer,
+            final Cache<Long, Long> cache) {
+        return longConsumer(longConsumer, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longConsumer
+     *            The {@link LongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongConsumer}.
+     */
+    public static final <KEY> LongConsumer longConsumer(
+            final LongConsumer longConsumer,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return new GuavaCacheBasedLongConsumerMemoizer<>(cache, keyFunction, longConsumer);
     }
 
     /**

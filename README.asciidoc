@@ -175,7 +175,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library._
 
 | link:{jdk-api}/java/util/function/LongConsumer.html[LongConsumer]
 | ✓
-| link:{issue}/72[#72]
+| ✓
 | link:{issue}/144[#144]
 | ✓
 
