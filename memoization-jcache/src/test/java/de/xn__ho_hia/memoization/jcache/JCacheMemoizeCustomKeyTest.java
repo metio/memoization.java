@@ -15,6 +15,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
+import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -172,6 +173,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized IntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongConsumer() {
+        // given
+        final LongConsumer consumer = System.out::println;
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongConsumer memoize = JCacheMemoize.longConsumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
     }
 
     /**
