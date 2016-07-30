@@ -23,6 +23,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
+import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
@@ -979,6 +980,94 @@ public final class GuavaMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Double> cache) {
         return new GuavaCacheBasedDoubleSupplierMemoizer<>(cache, keySupplier, doubleSupplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleToIntFunction
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static final DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction doubleToIntFunction) {
+        return doubleToIntFunction(doubleToIntFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleToIntFunction
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static final DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction doubleToIntFunction,
+            final Cache<Double, Integer> cache) {
+        return doubleToIntFunction(doubleToIntFunction, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleToIntFunction
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static final <KEY> DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction doubleToIntFunction,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleToIntFunction(doubleToIntFunction, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleToIntFunction
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static final <KEY> DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction doubleToIntFunction,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new GuavaCacheBasedDoubleToIntFunctionMemoizer<>(cache, keyFunction, doubleToIntFunction);
     }
 
     /**

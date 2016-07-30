@@ -11,7 +11,7 @@ import static org.mockito.Matchers.any;
 
 import java.util.concurrent.ExecutionException;
 import java.util.function.DoubleFunction;
-import java.util.function.DoubleUnaryOperator;
+import java.util.function.DoubleToIntFunction;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -30,7 +30,7 @@ import de.xn__ho_hia.quality.suppression.CompilerWarnings;
  *
  */
 @SuppressWarnings({ CompilerWarnings.NLS, CompilerWarnings.STATIC_METHOD })
-public class GuavaCacheBasedDoubleUnaryOperatorMemoizerTest {
+public class GuavaCacheBasedDoubleToIntFunctionMemoizerTest {
 
     /** Captures expected exceptions. */
     @Rule
@@ -42,12 +42,12 @@ public class GuavaCacheBasedDoubleUnaryOperatorMemoizerTest {
     @Test
     public void shouldAcceptLoadingCache() {
         // given
-        final DoubleUnaryOperator function = a -> 123.456D;
+        final DoubleToIntFunction function = a -> 123;
         final DoubleFunction<Double> keyFunction = Double::valueOf;
-        final Cache<Double, Double> cache = CacheBuilder.newBuilder().build();
+        final Cache<Double, Integer> cache = CacheBuilder.newBuilder().build();
 
         // when
-        final GuavaCacheBasedDoubleUnaryOperatorMemoizer<Double> memoizer = new GuavaCacheBasedDoubleUnaryOperatorMemoizer<>(
+        final GuavaCacheBasedDoubleToIntFunctionMemoizer<Double> memoizer = new GuavaCacheBasedDoubleToIntFunctionMemoizer<>(
                 cache, keyFunction, function);
 
         // then
@@ -60,16 +60,16 @@ public class GuavaCacheBasedDoubleUnaryOperatorMemoizerTest {
     @Test
     public void shouldTransformInput() {
         // given
-        final DoubleUnaryOperator function = a -> 123.456D;
+        final DoubleToIntFunction function = a -> 123;
         final DoubleFunction<Double> keyFunction = Double::valueOf;
-        final Cache<Double, Double> cache = CacheBuilder.newBuilder().build();
+        final Cache<Double, Integer> cache = CacheBuilder.newBuilder().build();
 
         // when
-        final GuavaCacheBasedDoubleUnaryOperatorMemoizer<Double> memoizer = new GuavaCacheBasedDoubleUnaryOperatorMemoizer<>(
+        final GuavaCacheBasedDoubleToIntFunctionMemoizer<Double> memoizer = new GuavaCacheBasedDoubleToIntFunctionMemoizer<>(
                 cache, keyFunction, function);
 
         // then
-        Assert.assertEquals("Memoized value does not match expectation", 123.456D, memoizer.applyAsDouble(789D), 0.0D);
+        Assert.assertEquals("Memoized value does not match expectation", 123, memoizer.applyAsInt(789D));
     }
 
     /**
@@ -81,16 +81,16 @@ public class GuavaCacheBasedDoubleUnaryOperatorMemoizerTest {
     public void shouldWrapExecutionExceptionInMemoizationException() throws ExecutionException {
         // given
         final DoubleFunction<Double> keyFunction = Double::valueOf;
-        final Cache<Double, Double> cache = Mockito.mock(Cache.class);
+        final Cache<Double, Integer> cache = Mockito.mock(Cache.class);
         given(cache.get(any(), any())).willThrow(ExecutionException.class);
-        final GuavaCacheBasedDoubleUnaryOperatorMemoizer<Double> memoizer = new GuavaCacheBasedDoubleUnaryOperatorMemoizer<>(
+        final GuavaCacheBasedDoubleToIntFunctionMemoizer<Double> memoizer = new GuavaCacheBasedDoubleToIntFunctionMemoizer<>(
                 cache, keyFunction, null);
 
         // when
         thrown.expect(MemoizationException.class);
 
         // then
-        memoizer.applyAsDouble(789D);
+        memoizer.applyAsInt(789D);
     }
 
 }
