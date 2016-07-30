@@ -27,6 +27,7 @@ import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
+import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
@@ -360,6 +361,21 @@ public class GuavaMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized IntToLongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntUnaryOperator() {
+        // given
+        final IntUnaryOperator function = a -> 123;
+
+        // when
+        final IntUnaryOperator memoize = GuavaMemoize.intUnaryOperator(function);
+
+        // then
+        Assert.assertNotNull("Memoized IntUnaryOperator is NULL", memoize);
     }
 
     /**
