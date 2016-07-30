@@ -35,6 +35,7 @@ import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
+import java.util.function.LongUnaryOperator;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -454,6 +455,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized LongToIntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongUnaryOperatorWithLambda() {
+        // given
+
+        // when
+        final LongUnaryOperator memoize = GuavaMemoize.longUnaryOperator(a -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized LongUnaryOperator is NULL", memoize);
     }
 
     /**

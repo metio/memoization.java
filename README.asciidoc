@@ -211,7 +211,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/LongUnaryOperator.html[LongUnaryOperator]
 | ✓
-| link:{issue}/77[#77]
+| ✓
 | link:{issue}/149[#149]
 | ✓
 
