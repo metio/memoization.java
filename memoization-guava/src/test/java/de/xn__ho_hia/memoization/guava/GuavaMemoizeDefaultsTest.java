@@ -17,6 +17,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
+import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
@@ -207,6 +208,21 @@ public class GuavaMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleToIntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleToLongFunction() {
+        // given
+        final DoubleToLongFunction function = a -> 123;
+
+        // when
+        final DoubleToLongFunction memoize = GuavaMemoize.doubleToLongFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleToLongFunction is NULL", memoize);
     }
 
     /**

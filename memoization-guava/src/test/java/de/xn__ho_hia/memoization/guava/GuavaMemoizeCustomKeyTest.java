@@ -17,6 +17,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
+import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
@@ -221,6 +222,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleToIntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleToLongFunctionWithKeyFunction() {
+        // given
+        final DoubleToLongFunction function = a -> 123;
+        final DoubleFunction<Double> keyFunction = Double::valueOf;
+
+        // when
+        final DoubleToLongFunction memoize = GuavaMemoize.doubleToLongFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleToLongFunction is NULL", memoize);
     }
 
     /**

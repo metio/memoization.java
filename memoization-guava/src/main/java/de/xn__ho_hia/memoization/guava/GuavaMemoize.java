@@ -24,6 +24,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
+import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
@@ -82,6 +83,8 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see DoubleFunction
  * @see DoublePredicate
  * @see DoubleSupplier
+ * @see DoubleToIntFunction
+ * @see DoubleToLongFunction
  * @see DoubleUnaryOperator
  * @see Function
  * @see IntBinaryOperator
@@ -1068,6 +1071,94 @@ public final class GuavaMemoize {
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
         return new GuavaCacheBasedDoubleToIntFunctionMemoizer<>(cache, keyFunction, doubleToIntFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleToLongFunction
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static final DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction doubleToLongFunction) {
+        return doubleToLongFunction(doubleToLongFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleToLongFunction
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static final DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction doubleToLongFunction,
+            final Cache<Double, Long> cache) {
+        return doubleToLongFunction(doubleToLongFunction, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleToLongFunction
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static final <KEY> DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction doubleToLongFunction,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleToLongFunction(doubleToLongFunction, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleToLongFunction
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static final <KEY> DoubleToLongFunction doubleToLongFunction(
+            final DoubleToLongFunction doubleToLongFunction,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return new GuavaCacheBasedDoubleToLongFunctionMemoizer<>(cache, keyFunction, doubleToLongFunction);
     }
 
     /**
