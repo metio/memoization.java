@@ -33,6 +33,7 @@ import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
+import java.util.function.IntToLongFunction;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
@@ -1864,6 +1865,94 @@ public final class GuavaMemoize {
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Double> cache) {
         return new GuavaCacheBasedIntToDoubleFunctionMemoizer<>(cache, keyFunction, intToDoubleFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intToLongFunction
+     *            The {@link IntToLongFunction} to memoize.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static final IntToLongFunction intToLongFunction(
+            final IntToLongFunction intToLongFunction) {
+        return intToLongFunction(intToLongFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intToLongFunction
+     *            The {@link IntToLongFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static final IntToLongFunction intToLongFunction(
+            final IntToLongFunction intToLongFunction,
+            final Cache<Integer, Long> cache) {
+        return intToLongFunction(intToLongFunction, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intToLongFunction
+     *            The {@link IntToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static final <KEY> IntToLongFunction intToLongFunction(
+            final IntToLongFunction intToLongFunction,
+            final IntFunction<KEY> keyFunction) {
+        return intToLongFunction(intToLongFunction, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intToLongFunction
+     *            The {@link IntToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static final <KEY> IntToLongFunction intToLongFunction(
+            final IntToLongFunction intToLongFunction,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return new GuavaCacheBasedIntToLongFunctionMemoizer<>(cache, keyFunction, intToLongFunction);
     }
 
     /**
