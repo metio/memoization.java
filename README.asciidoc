@@ -205,7 +205,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/LongToIntFunction.html[LongToIntFunction]
 | ✓
-| link:{issue}/76[#76]
+| ✓
 | link:{issue}/148[#148]
 | ✓
 
