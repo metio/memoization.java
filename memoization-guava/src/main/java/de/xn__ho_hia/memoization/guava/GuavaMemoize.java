@@ -23,6 +23,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
+import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
@@ -80,6 +81,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see DoubleFunction
  * @see DoublePredicate
  * @see DoubleSupplier
+ * @see DoubleUnaryOperator
  * @see Function
  * @see IntBinaryOperator
  * @see IntConsumer
@@ -565,28 +567,6 @@ public final class GuavaMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param doubleBinaryOperator
-     *            The {@link DoubleBinaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link DoubleBinaryFunction} to compute the cache key.
-     * @return The wrapped {@link DoubleBinaryOperator}.
-     */
-    public static final <KEY> DoubleBinaryOperator doubleBinaryOperator(
-            final DoubleBinaryOperator doubleBinaryOperator,
-            final DoubleBinaryFunction<KEY> keyFunction) {
-        return doubleBinaryOperator(doubleBinaryOperator, keyFunction, CacheBuilder.newBuilder().build());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link DoubleBinaryOperator} in a Guava {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -601,6 +581,28 @@ public final class GuavaMemoize {
             final DoubleBinaryOperator doubleBinaryOperator,
             final Cache<String, Double> cache) {
         return doubleBinaryOperator(doubleBinaryOperator, doubleBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleBinaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleBinaryOperator
+     *            The {@link DoubleBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleBinaryOperator}.
+     */
+    public static final <KEY> DoubleBinaryOperator doubleBinaryOperator(
+            final DoubleBinaryOperator doubleBinaryOperator,
+            final DoubleBinaryFunction<KEY> keyFunction) {
+        return doubleBinaryOperator(doubleBinaryOperator, keyFunction, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -981,6 +983,94 @@ public final class GuavaMemoize {
 
     /**
      * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleUnaryOperator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static final DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator doubleUnaryOperator) {
+        return doubleUnaryOperator(doubleUnaryOperator, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleUnaryOperator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static final DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator doubleUnaryOperator,
+            final Cache<Double, Double> cache) {
+        return doubleUnaryOperator(doubleUnaryOperator, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleUnaryOperator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static final <KEY> DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator doubleUnaryOperator,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleUnaryOperator(doubleUnaryOperator, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleUnaryOperator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static final <KEY> DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator doubleUnaryOperator,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return new GuavaCacheBasedDoubleUnaryOperatorMemoizer<>(cache, keyFunction, doubleUnaryOperator);
+    }
+
+    /**
+     * <p>
      * Memoizes a {@link Function} in a Guava {@link Cache}.
      * </p>
      * <h3>Features</h3>
@@ -1092,28 +1182,6 @@ public final class GuavaMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param intBinaryOperator
-     *            The {@link IntBinaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link IntBinaryFunction} to compute the cache key.
-     * @return The wrapped {@link IntBinaryOperator}.
-     */
-    public static final <KEY> IntBinaryOperator intBinaryOperator(
-            final IntBinaryOperator intBinaryOperator,
-            final IntBinaryFunction<KEY> keyFunction) {
-        return intBinaryOperator(intBinaryOperator, keyFunction, CacheBuilder.newBuilder().build());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1128,6 +1196,28 @@ public final class GuavaMemoize {
             final IntBinaryOperator intBinaryOperator,
             final Cache<String, Integer> cache) {
         return intBinaryOperator(intBinaryOperator, intBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intBinaryOperator
+     *            The {@link IntBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link IntBinaryOperator}.
+     */
+    public static final <KEY> IntBinaryOperator intBinaryOperator(
+            final IntBinaryOperator intBinaryOperator,
+            final IntBinaryFunction<KEY> keyFunction) {
+        return intBinaryOperator(intBinaryOperator, keyFunction, CacheBuilder.newBuilder().build());
     }
 
     /**
@@ -1531,28 +1621,6 @@ public final class GuavaMemoize {
      * </p>
      * <h3>Features</h3>
      * <ul>
-     * <li>Default cache</li>
-     * <li>Custom cache key</li>
-     * </ul>
-     *
-     * @param longBinaryOperator
-     *            The {@link LongBinaryOperator} to memoize.
-     * @param keyFunction
-     *            The {@link LongBinaryFunction} to compute the cache key.
-     * @return The wrapped {@link LongBinaryOperator}.
-     */
-    public static final <KEY> LongBinaryOperator longBinaryOperator(
-            final LongBinaryOperator longBinaryOperator,
-            final LongBinaryFunction<KEY> keyFunction) {
-        return longBinaryOperator(longBinaryOperator, keyFunction, CacheBuilder.newBuilder().build());
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link LongBinaryOperator} in a Guava {@link Cache}.
-     * </p>
-     * <h3>Features</h3>
-     * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
      * </ul>
@@ -1567,6 +1635,28 @@ public final class GuavaMemoize {
             final LongBinaryOperator longBinaryOperator,
             final Cache<String, Long> cache) {
         return longBinaryOperator(longBinaryOperator, longBinaryOperatorHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongBinaryOperator} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longBinaryOperator
+     *            The {@link LongBinaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongBinaryFunction} to compute the cache key.
+     * @return The wrapped {@link LongBinaryOperator}.
+     */
+    public static final <KEY> LongBinaryOperator longBinaryOperator(
+            final LongBinaryOperator longBinaryOperator,
+            final LongBinaryFunction<KEY> keyFunction) {
+        return longBinaryOperator(longBinaryOperator, keyFunction, CacheBuilder.newBuilder().build());
     }
 
     /**

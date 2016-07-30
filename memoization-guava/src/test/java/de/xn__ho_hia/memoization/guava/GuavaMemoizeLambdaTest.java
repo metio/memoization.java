@@ -16,6 +16,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
+import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
@@ -180,6 +181,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleUnaryOperatorWithLambda() {
+        // given
+
+        // when
+        final DoubleUnaryOperator memoize = GuavaMemoize.doubleUnaryOperator(a -> 123.456D);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleUnaryOperator is NULL", memoize);
     }
 
     /**
