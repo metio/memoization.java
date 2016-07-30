@@ -25,6 +25,7 @@ import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.IntToDoubleFunction;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
@@ -350,6 +351,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntToDoubleFunctionWithKeyFunction() {
+        // given
+        final IntToDoubleFunction function = a -> 123D;
+        final IntFunction<Integer> keyFunction = Integer::valueOf;
+
+        // when
+        final IntToDoubleFunction memoize = GuavaMemoize.intToDoubleFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized IntToDoubleFunction is NULL", memoize);
     }
 
     /**
