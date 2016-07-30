@@ -199,7 +199,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/LongToDoubleFunction.html[LongToDoubleFunction]
 | ✓
-| link:{issue}/75[#75]
+| ✓
 | link:{issue}/147[#147]
 | ✓
 

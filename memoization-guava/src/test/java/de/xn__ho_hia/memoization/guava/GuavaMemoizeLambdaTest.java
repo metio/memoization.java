@@ -33,6 +33,7 @@ import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
+import java.util.function.LongToDoubleFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -424,6 +425,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongToDoubleFunctionWithLambda() {
+        // given
+
+        // when
+        final LongToDoubleFunction memoize = GuavaMemoize.longToDoubleFunction(a -> 123D);
+
+        // then
+        Assert.assertNotNull("Memoized LongToDoubleFunction is NULL", memoize);
     }
 
     /**
