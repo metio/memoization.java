@@ -49,6 +49,7 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongBiFunction;
+import java.util.function.ToLongFunction;
 
 import javax.cache.Cache;
 import javax.cache.CacheManager;
@@ -118,6 +119,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see ToDoubleFunction
  * @see ToIntBiFunction
  * @see ToLongBiFunction
+ * @see ToLongFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class JCacheMemoize {
@@ -2839,6 +2841,94 @@ public final class JCacheMemoize {
             final ToLongBiFunction<FIRST, SECOND> toLongBiFunction,
             final Cache<String, Long> cache) {
         return toLongBiFunction(toLongBiFunction, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toLongFunction
+     *            The {@link ToLongFunction} to memoize.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static final <FIRST> ToLongFunction<FIRST> toLongFunction(
+            final ToLongFunction<FIRST> toLongFunction) {
+        return toLongFunction(toLongFunction, createCache(ToLongFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toLongFunction
+     *            The {@link ToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static final <FIRST, KEY> ToLongFunction<FIRST> toLongFunction(
+            final ToLongFunction<FIRST> toLongFunction,
+            final Function<FIRST, KEY> keyFunction) {
+        return toLongFunction(toLongFunction, keyFunction, createCache(ToLongFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toLongFunction
+     *            The {@link ToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static final <FIRST, KEY> ToLongFunction<FIRST> toLongFunction(
+            final ToLongFunction<FIRST> toLongFunction,
+            final Function<FIRST, KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return new JCacheBasedToLongFunctionMemoizer<>(cache, keyFunction, toLongFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToLongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toLongFunction
+     *            The {@link ToLongFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToLongFunction}.
+     */
+    public static final <FIRST> ToLongFunction<FIRST> toLongFunction(
+            final ToLongFunction<FIRST> toLongFunction,
+            final Cache<FIRST, Long> cache) {
+        return toLongFunction(toLongFunction, identity(), cache);
     }
 
     static <KEY, VALUE> Cache<KEY, VALUE> createCache(final Type type) {

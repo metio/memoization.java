@@ -37,6 +37,7 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongBiFunction;
+import java.util.function.ToLongFunction;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -481,6 +482,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized ToLongBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToLongFunctionWithLambda() {
+        // given
+
+        // when
+        final ToLongFunction<String> memoize = JCacheMemoize.toLongFunction(a -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized ToLongFunction is NULL", memoize);
     }
 
 }

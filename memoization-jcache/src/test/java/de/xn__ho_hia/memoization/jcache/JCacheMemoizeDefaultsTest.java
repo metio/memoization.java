@@ -37,6 +37,7 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongBiFunction;
+import java.util.function.ToLongFunction;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -512,6 +513,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized ToLongBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToLongFunction() {
+        // given
+        final ToLongFunction<String> function = a -> 123;
+
+        // when
+        final ToLongFunction<String> memoize = JCacheMemoize.toLongFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized ToLongFunction is NULL", memoize);
     }
 
 }
