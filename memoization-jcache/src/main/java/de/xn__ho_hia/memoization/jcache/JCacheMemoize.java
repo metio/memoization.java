@@ -1188,6 +1188,93 @@ public final class JCacheMemoize {
 
     /**
      * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleUnaryOperator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static final DoubleUnaryOperator doubleUnaryOperator(final DoubleUnaryOperator doubleUnaryOperator) {
+        return doubleUnaryOperator(doubleUnaryOperator, createCache(DoubleUnaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleUnaryOperator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static final DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator doubleUnaryOperator,
+            final Cache<Double, Double> cache) {
+        return doubleUnaryOperator(doubleUnaryOperator, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleUnaryOperator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static final <KEY> DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator doubleUnaryOperator,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleUnaryOperator(doubleUnaryOperator, keyFunction, createCache(DoubleUnaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleUnaryOperator
+     *            The {@link DoubleUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleUnaryOperator}.
+     */
+    public static final <KEY> DoubleUnaryOperator doubleUnaryOperator(
+            final DoubleUnaryOperator doubleUnaryOperator,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return new JCacheBasedDoubleUnaryOperatorMemoizer<>(cache, keyFunction, doubleUnaryOperator);
+    }
+
+    /**
+     * <p>
      * Memoizes a {@link Function} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
