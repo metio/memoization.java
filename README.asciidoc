@@ -277,7 +277,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/ToLongFunction.html[ToLongFunction]
 | ✓
-| link:{issue}/87[#87]
+| ✓
 | link:{issue}/159[#159]
 | ✓
 |===
