@@ -247,7 +247,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/ToDoubleBiFunction.html[ToDoubleBiFunction]
 | ✓
-| link:{issue}/82[#82]
+| ✓
 | link:{issue}/154[#154]
 | ✓
 

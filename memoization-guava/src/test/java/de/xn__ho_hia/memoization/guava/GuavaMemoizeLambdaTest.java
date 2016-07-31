@@ -38,6 +38,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
@@ -500,6 +501,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToDoubleBiFunctionWithLambda() {
+        // given
+
+        // when
+        final ToDoubleBiFunction<String, String> memoize = GuavaMemoize.toDoubleBiFunction((a, b) -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
     }
 
     /**

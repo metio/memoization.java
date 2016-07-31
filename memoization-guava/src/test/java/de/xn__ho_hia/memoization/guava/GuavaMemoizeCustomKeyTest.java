@@ -38,6 +38,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
@@ -567,6 +568,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToDoubleBiFunctionWithKeyFunction() {
+        // given
+        final ToDoubleBiFunction<String, String> function = (a, b) -> 123;
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
+
+        // when
+        final ToDoubleBiFunction<String, String> memoize = GuavaMemoize.toDoubleBiFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
     }
 
     /**
