@@ -47,6 +47,7 @@ import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
+import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
@@ -126,6 +127,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see LongSupplier
  * @see LongToDoubleFunction
  * @see LongToIntFunction
+ * @see LongUnaryOperator
  * @see ObjDoubleConsumer
  * @see ObjIntConsumer
  * @see ObjLongConsumer
@@ -2679,6 +2681,93 @@ public final class JCacheMemoize {
 
     /**
      * <p>
+     * Memoizes a {@link LongUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longUnaryOperator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static final LongUnaryOperator longUnaryOperator(final LongUnaryOperator longUnaryOperator) {
+        return longUnaryOperator(longUnaryOperator, createCache(LongUnaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longUnaryOperator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static final LongUnaryOperator longUnaryOperator(
+            final LongUnaryOperator longUnaryOperator,
+            final Cache<Long, Long> cache) {
+        return longUnaryOperator(longUnaryOperator, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longUnaryOperator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static final <KEY> LongUnaryOperator longUnaryOperator(
+            final LongUnaryOperator longUnaryOperator,
+            final LongFunction<KEY> keyFunction) {
+        return longUnaryOperator(longUnaryOperator, keyFunction, createCache(LongUnaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longUnaryOperator
+     *            The {@link LongUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongUnaryOperator}.
+     */
+    public static final <KEY> LongUnaryOperator longUnaryOperator(
+            final LongUnaryOperator longUnaryOperator,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return new JCacheBasedLongUnaryOperatorMemoizer<>(cache, keyFunction, longUnaryOperator);
+    }
+
+    /**
+     * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
@@ -2874,7 +2963,7 @@ public final class JCacheMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a JCache {@link Cache}.
+     * Memoizes a {@link ObjLongConsumer} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2883,10 +2972,10 @@ public final class JCacheMemoize {
      * </ul>
      *
      * @param objLongConsumer
-     *            The {@link ObjDoubleConsumer} to memoize.
+     *            The {@link ObjLongConsumer} to memoize.
      * @param keyFunction
      *            The {@link ObjDoubleFunction} to compute the cache key.
-     * @return The wrapped {@link ObjDoubleConsumer}.
+     * @return The wrapped {@link ObjLongConsumer}.
      */
     public static final <FIRST, KEY> ObjLongConsumer<FIRST> objLongConsumer(
             final ObjLongConsumer<FIRST> objLongConsumer,

@@ -35,6 +35,7 @@ import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
+import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
@@ -526,6 +527,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized LongToIntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongUnaryOperatorWithKeyFunction() {
+        // given
+        final LongUnaryOperator function = a -> 123;
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongUnaryOperator memoize = JCacheMemoize.longUnaryOperator(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongUnaryOperator is NULL", memoize);
     }
 
     /**
