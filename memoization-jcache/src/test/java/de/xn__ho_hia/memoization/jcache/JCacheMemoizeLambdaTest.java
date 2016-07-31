@@ -33,6 +33,7 @@ import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
+import java.util.function.ToIntBiFunction;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -421,6 +422,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToIntBiFunctionWithLambda() {
+        // given
+
+        // when
+        final ToIntBiFunction<String, String> memoize = JCacheMemoize.toIntBiFunction((a, b) -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized ToIntBiFunction is NULL", memoize);
     }
 
 }

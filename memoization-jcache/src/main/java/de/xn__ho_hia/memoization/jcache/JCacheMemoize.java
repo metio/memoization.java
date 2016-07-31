@@ -44,6 +44,7 @@ import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
+import java.util.function.ToIntBiFunction;
 
 import javax.cache.Cache;
 import javax.cache.CacheManager;
@@ -110,6 +111,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see Predicate
  * @see Supplier
  * @see ToDoubleBiFunction
+ * @see ToIntBiFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class JCacheMemoize {
@@ -2479,6 +2481,94 @@ public final class JCacheMemoize {
             final ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction,
             final Cache<String, Double> cache) {
         return toDoubleBiFunction(toDoubleBiFunction, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toIntBiFunction
+     *            The {@link ToIntBiFunction} to memoize.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static final <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> toIntBiFunction) {
+        return toIntBiFunction(toIntBiFunction, createCache(ToIntBiFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toIntBiFunction
+     *            The {@link ToIntBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static final <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> toIntBiFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return toIntBiFunction(toIntBiFunction, keyFunction, createCache(ToIntBiFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toIntBiFunction
+     *            The {@link ToIntBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static final <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> toIntBiFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new JCacheBasedToIntBiFunctionMemoizer<>(cache, keyFunction, toIntBiFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toIntBiFunction
+     *            The {@link ToIntBiFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static final <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> toIntBiFunction,
+            final Cache<String, Integer> cache) {
+        return toIntBiFunction(toIntBiFunction, hashCodeKeyFunction(), cache);
     }
 
     static <KEY, VALUE> Cache<KEY, VALUE> createCache(final Type type) {
