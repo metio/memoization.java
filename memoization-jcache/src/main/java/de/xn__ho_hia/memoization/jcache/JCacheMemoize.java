@@ -13,6 +13,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.intBinaryOper
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.longBinaryOperatorHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objDoubleConsumerHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objIntConsumerHashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objLongConsumerHashCodeKeyFunction;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicLong;
@@ -39,6 +40,7 @@ import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -53,6 +55,7 @@ import de.xn__ho_hia.memoization.shared.LongBinaryFunction;
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
 import de.xn__ho_hia.memoization.shared.ObjIntFunction;
+import de.xn__ho_hia.memoization.shared.ObjLongFunction;
 
 /**
  * <p>
@@ -102,6 +105,7 @@ import de.xn__ho_hia.memoization.shared.ObjIntFunction;
  * @see LongSupplier
  * @see ObjDoubleConsumer
  * @see ObjIntConsumer
+ * @see ObjLongConsumer
  * @see Predicate
  * @see Supplier
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
@@ -2123,6 +2127,94 @@ public final class JCacheMemoize {
             final ObjIntConsumer<FIRST> objIntConsumer,
             final Cache<String, String> cache) {
         return objIntConsumer(objIntConsumer, objIntConsumerHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param objLongConsumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static final <FIRST> ObjLongConsumer<FIRST> objLongConsumer(
+            final ObjLongConsumer<FIRST> objLongConsumer) {
+        return objLongConsumer(objLongConsumer, createCache(ObjLongConsumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param objLongConsumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjDoubleFunction} to compute the cache key.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static final <FIRST, KEY> ObjLongConsumer<FIRST> objLongConsumer(
+            final ObjLongConsumer<FIRST> objLongConsumer,
+            final ObjLongFunction<FIRST, KEY> keyFunction) {
+        return objLongConsumer(objLongConsumer, keyFunction, createCache(ObjLongConsumer.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param objLongConsumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjDoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static final <FIRST, KEY> ObjLongConsumer<FIRST> objLongConsumer(
+            final ObjLongConsumer<FIRST> objLongConsumer,
+            final ObjLongFunction<FIRST, KEY> keyFunction,
+            final Cache<KEY, KEY> cache) {
+        return new JCacheBasedObjLongConsumerMemoizer<>(cache, keyFunction, objLongConsumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjLongConsumer} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param objLongConsumer
+     *            The {@link ObjLongConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjLongConsumer}.
+     */
+    public static final <FIRST> ObjLongConsumer<FIRST> objLongConsumer(
+            final ObjLongConsumer<FIRST> objLongConsumer,
+            final Cache<String, String> cache) {
+        return objLongConsumer(objLongConsumer, objLongConsumerHashCodeKeyFunction(), cache);
     }
 
     /**

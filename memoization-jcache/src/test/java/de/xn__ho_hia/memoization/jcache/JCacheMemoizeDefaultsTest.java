@@ -29,6 +29,7 @@ import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -386,6 +387,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized ObjIntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjLongConsumer() {
+        // given
+        final ObjLongConsumer<String> consumer = (a, b) -> System.out.println(a + b);
+
+        // when
+        final ObjLongConsumer<String> memoize = JCacheMemoize.objLongConsumer(consumer);
+
+        // then
+        Assert.assertNotNull("Memoized ObjLongConsumer is NULL", memoize);
     }
 
     /**

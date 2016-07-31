@@ -230,7 +230,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/ObjLongConsumer.html[ObjLongConsumer]
 | ✓
 | ✓
-| link:{issue}/152[#152]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/Predicate.html[Predicate]

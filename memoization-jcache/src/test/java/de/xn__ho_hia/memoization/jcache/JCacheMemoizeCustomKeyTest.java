@@ -29,6 +29,7 @@ import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -40,6 +41,7 @@ import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
 import de.xn__ho_hia.memoization.shared.LongBinaryFunction;
 import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
 import de.xn__ho_hia.memoization.shared.ObjIntFunction;
+import de.xn__ho_hia.memoization.shared.ObjLongFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**
@@ -414,6 +416,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized ObjIntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjLongConsumerWithKeyFunction() {
+        // given
+        final ObjLongConsumer<String> consumer = (a, b) -> System.out.println(a + b);
+        final ObjLongFunction<String, String> keyFunction = (a, b) -> "key";
+
+        // when
+        final ObjLongConsumer<String> memoize = JCacheMemoize.objLongConsumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ObjLongConsumer is NULL", memoize);
     }
 
     /**
