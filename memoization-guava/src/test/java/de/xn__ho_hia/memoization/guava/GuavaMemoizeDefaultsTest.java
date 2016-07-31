@@ -39,6 +39,7 @@ import java.util.function.LongUnaryOperator;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -545,6 +546,21 @@ public class GuavaMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized ToDoubleFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToIntFunction() {
+        // given
+        final ToIntFunction<String> function = a -> 123;
+
+        // when
+        final ToIntFunction<String> memoize = GuavaMemoize.toIntFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized ToIntFunction is NULL", memoize);
     }
 
 }

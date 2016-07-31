@@ -46,6 +46,7 @@ import java.util.function.LongUnaryOperator;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -113,6 +114,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see Predicate
  * @see Supplier
  * @see ToDoubleFunction
+ * @see ToIntFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
 public final class GuavaMemoize {
@@ -3018,6 +3020,94 @@ public final class GuavaMemoize {
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Double> cache) {
         return new GuavaCacheBasedToDoubleFunctionMemoizer<>(cache, keyFunction, toDoubleFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toIntFunction
+     *            The {@link ToIntFunction} to memoize.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static final <INPUT> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> toIntFunction) {
+        return toIntFunction(toIntFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toIntFunction
+     *            The {@link ToIntFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static final <INPUT> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> toIntFunction,
+            final Cache<INPUT, Integer> cache) {
+        return toIntFunction(toIntFunction, identity(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toIntFunction
+     *            The {@link ToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static final <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> toIntFunction,
+            final Function<INPUT, KEY> keyFunction) {
+        return toIntFunction(toIntFunction, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toIntFunction
+     *            The {@link ToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static final <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> toIntFunction,
+            final Function<INPUT, KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new GuavaCacheBasedToIntFunctionMemoizer<>(cache, keyFunction, toIntFunction);
     }
 
 }
