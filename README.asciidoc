@@ -272,7 +272,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/ToLongBiFunction.html[ToLongBiFunction]
 | ✓
 | ✓
-| link:{issue}/156[#156]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/ToLongFunction.html[ToLongFunction]

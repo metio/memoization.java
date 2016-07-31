@@ -34,6 +34,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToIntBiFunction;
+import java.util.function.ToLongBiFunction;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -498,6 +499,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized ToIntBiFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToLongBiFunctionWithKeyFunction() {
+        // given
+        final ToLongBiFunction<String, String> function = (a, b) -> 123;
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
+
+        // when
+        final ToLongBiFunction<String, String> memoize = JCacheMemoize.toLongBiFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ToLongBiFunction is NULL", memoize);
     }
 
 }
