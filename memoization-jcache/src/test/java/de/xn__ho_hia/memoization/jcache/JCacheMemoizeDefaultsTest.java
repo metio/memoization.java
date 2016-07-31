@@ -16,6 +16,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
+import java.util.function.DoubleToIntFunction;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
@@ -198,6 +199,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleToIntFunction() {
+        // given
+        final DoubleToIntFunction function = a -> 123;
+
+        // when
+        final DoubleToIntFunction memoize = JCacheMemoize.doubleToIntFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleToIntFunction is NULL", memoize);
     }
 
     /**

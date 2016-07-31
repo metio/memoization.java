@@ -28,6 +28,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
+import java.util.function.DoubleToIntFunction;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
@@ -99,6 +100,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see DoubleFunction
  * @see DoublePredicate
  * @see DoubleSupplier
+ * @see DoubleToIntFunction
  * @see Function
  * @see IntBinaryOperator
  * @see IntConsumer
@@ -1004,6 +1006,93 @@ public final class JCacheMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Double> cache) {
         return new JCacheBasedDoubleSupplierMemoizer<>(cache, keySupplier, doubleSupplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleToIntFunction
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static final DoubleToIntFunction doubleToIntFunction(final DoubleToIntFunction doubleToIntFunction) {
+        return doubleToIntFunction(doubleToIntFunction, createCache(DoubleToIntFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param doubleToIntFunction
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static final DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction doubleToIntFunction,
+            final Cache<Double, Integer> cache) {
+        return doubleToIntFunction(doubleToIntFunction, Double::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleToIntFunction
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static final <KEY> DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction doubleToIntFunction,
+            final DoubleFunction<KEY> keyFunction) {
+        return doubleToIntFunction(doubleToIntFunction, keyFunction, createCache(DoubleToIntFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToIntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param doubleToIntFunction
+     *            The {@link DoubleToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link DoubleFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link DoubleToIntFunction}.
+     */
+    public static final <KEY> DoubleToIntFunction doubleToIntFunction(
+            final DoubleToIntFunction doubleToIntFunction,
+            final DoubleFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new JCacheBasedDoubleToIntFunctionMemoizer<>(cache, keyFunction, doubleToIntFunction);
     }
 
     /**
