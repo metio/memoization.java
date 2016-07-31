@@ -38,6 +38,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
@@ -505,6 +506,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized ObjIntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjLongConsumerWithLambda() {
+        // given
+
+        // when
+        final ObjLongConsumer<String> memoize = GuavaMemoize.objLongConsumer((a, b) -> System.out.println(a + b));
+
+        // then
+        Assert.assertNotNull("Memoized ObjLongConsumer is NULL", memoize);
     }
 
     /**

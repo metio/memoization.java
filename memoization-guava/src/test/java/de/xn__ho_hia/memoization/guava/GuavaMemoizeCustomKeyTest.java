@@ -38,6 +38,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
@@ -55,6 +56,7 @@ import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
 import de.xn__ho_hia.memoization.shared.LongBinaryFunction;
 import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
 import de.xn__ho_hia.memoization.shared.ObjIntFunction;
+import de.xn__ho_hia.memoization.shared.ObjLongFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**
@@ -551,7 +553,7 @@ public class GuavaMemoizeCustomKeyTest {
     public void shouldMemoizeObjDoubleConsumerWithKeyFunction() {
         // given
         final ObjDoubleConsumer<String> consumer = (a, b) -> System.out.println(a + b);
-        final ObjDoubleFunction<String> keyFunction = (a, b) -> "key";
+        final ObjDoubleFunction<String, String> keyFunction = (a, b) -> "key";
 
         // when
         final ObjDoubleConsumer<String> memoize = GuavaMemoize.objDoubleConsumer(consumer, keyFunction);
@@ -567,13 +569,29 @@ public class GuavaMemoizeCustomKeyTest {
     public void shouldMemoizeObjIntConsumerWithKeyFunction() {
         // given
         final ObjIntConsumer<String> consumer = (a, b) -> System.out.println(a + b);
-        final ObjIntFunction<String> keyFunction = (a, b) -> "key";
+        final ObjIntFunction<String, String> keyFunction = (a, b) -> "key";
 
         // when
         final ObjIntConsumer<String> memoize = GuavaMemoize.objIntConsumer(consumer, keyFunction);
 
         // then
         Assert.assertNotNull("Memoized ObjIntConsumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjLongConsumerWithKeyFunction() {
+        // given
+        final ObjLongConsumer<String> consumer = (a, b) -> System.out.println(a + b);
+        final ObjLongFunction<String, String> keyFunction = (a, b) -> "key";
+
+        // when
+        final ObjLongConsumer<String> memoize = GuavaMemoize.objLongConsumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ObjLongConsumer is NULL", memoize);
     }
 
     /**
