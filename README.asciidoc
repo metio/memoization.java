@@ -251,28 +251,28 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{issue}/154[#154]
 | ✓
 
-| link:{jdk-api}/java/util/function/ToIntBiFunction.html[ToIntBiFunction]
-| ✓
-| ✓
-| link:{issue}/155[#155]
-| ✓
-
-| link:{jdk-api}/java/util/function/ToLongBiFunction.html[ToLongBiFunction]
-| ✓
-| link:{issue}/84[#84]
-| link:{issue}/156[#156]
-| ✓
-
 | link:{jdk-api}/java/util/function/ToDoubleFunction.html[ToDoubleFunction]
 | ✓
 | ✓
 | link:{issue}/157[#157]
 | ✓
 
+| link:{jdk-api}/java/util/function/ToIntBiFunction.html[ToIntBiFunction]
+| ✓
+| ✓
+| link:{issue}/155[#155]
+| ✓
+
 | link:{jdk-api}/java/util/function/ToIntFunction.html[ToIntFunction]
 | ✓
 | ✓
 | link:{issue}/158[#158]
+| ✓
+
+| link:{jdk-api}/java/util/function/ToLongBiFunction.html[ToLongBiFunction]
+| ✓
+| ✓
+| link:{issue}/156[#156]
 | ✓
 
 | link:{jdk-api}/java/util/function/ToLongFunction.html[ToLongFunction]
