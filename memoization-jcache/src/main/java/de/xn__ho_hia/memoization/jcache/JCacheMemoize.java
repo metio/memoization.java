@@ -14,6 +14,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.longBinaryOpe
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objDoubleConsumerHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objIntConsumerHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objLongConsumerHashCodeKeyFunction;
+import static java.util.function.Function.identity;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicLong;
@@ -44,6 +45,7 @@ import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
+import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
 import java.util.function.ToLongBiFunction;
 
@@ -112,6 +114,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see Predicate
  * @see Supplier
  * @see ToDoubleBiFunction
+ * @see ToDoubleFunction
  * @see ToIntBiFunction
  * @see ToLongBiFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
@@ -2483,6 +2486,94 @@ public final class JCacheMemoize {
             final ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction,
             final Cache<String, Double> cache) {
         return toDoubleBiFunction(toDoubleBiFunction, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toDoubleFunction
+     *            The {@link ToDoubleFunction} to memoize.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static final <FIRST> ToDoubleFunction<FIRST> toDoubleFunction(
+            final ToDoubleFunction<FIRST> toDoubleFunction) {
+        return toDoubleFunction(toDoubleFunction, createCache(ToDoubleFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toDoubleFunction
+     *            The {@link ToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static final <FIRST, KEY> ToDoubleFunction<FIRST> toDoubleFunction(
+            final ToDoubleFunction<FIRST> toDoubleFunction,
+            final Function<FIRST, KEY> keyFunction) {
+        return toDoubleFunction(toDoubleFunction, keyFunction, createCache(ToDoubleFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleBiFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toDoubleFunction
+     *            The {@link ToDoubleBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToDoubleBiFunction}.
+     */
+    public static final <FIRST, KEY> ToDoubleFunction<FIRST> toDoubleFunction(
+            final ToDoubleFunction<FIRST> toDoubleFunction,
+            final Function<FIRST, KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return new JCacheBasedToDoubleFunctionMemoizer<>(cache, keyFunction, toDoubleFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToDoubleFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toDoubleFunction
+     *            The {@link ToDoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToDoubleFunction}.
+     */
+    public static final <FIRST> ToDoubleFunction<FIRST> toDoubleFunction(
+            final ToDoubleFunction<FIRST> toDoubleFunction,
+            final Cache<FIRST, Double> cache) {
+        return toDoubleFunction(toDoubleFunction, identity(), cache);
     }
 
     /**
