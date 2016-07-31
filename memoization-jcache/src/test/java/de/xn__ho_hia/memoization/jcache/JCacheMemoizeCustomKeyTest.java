@@ -17,6 +17,7 @@ import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
+import java.util.function.DoubleToLongFunction;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
@@ -231,6 +232,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized DoubleToIntFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleToLongFunctionWithKeyFunction() {
+        // given
+        final DoubleToLongFunction function = a -> 123;
+        final DoubleFunction<String> keyFunction = a -> "key";
+
+        // when
+        final DoubleToLongFunction memoize = JCacheMemoize.doubleToLongFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleToLongFunction is NULL", memoize);
     }
 
     /**

@@ -104,7 +104,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/DoubleToLongFunction.html[DoubleToLongFunction]
 | ✓
 | ✓
-| link:{issue}/134[#134]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/DoubleUnaryOperator.html[DoubleUnaryOperator]
