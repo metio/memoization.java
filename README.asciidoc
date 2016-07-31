@@ -224,7 +224,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/ObjIntConsumer.html[ObjIntConsumer]
 | ✓
 | ✓
-| link:{issue}/151[#151]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/ObjLongConsumer.html[ObjLongConsumer]
