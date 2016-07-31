@@ -25,6 +25,7 @@ import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.IntToLongFunction;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
@@ -361,6 +362,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntToLongFunctionWithKeyFunction() {
+        // given
+        final IntToLongFunction function = a -> 123;
+        final IntFunction<String> keyFunction = a -> "key";
+
+        // when
+        final IntToLongFunction memoize = JCacheMemoize.intToLongFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized IntToLongFunction is NULL", memoize);
     }
 
     /**

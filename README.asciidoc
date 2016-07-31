@@ -158,7 +158,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/IntToLongFunction.html[IntToLongFunction]
 | ✓
 | ✓
-| link:{issue}/141[#141]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/IntUnaryOperator.html[IntUnaryOperator]

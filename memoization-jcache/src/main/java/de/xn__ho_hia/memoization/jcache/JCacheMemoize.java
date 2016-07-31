@@ -37,6 +37,7 @@ import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.IntToLongFunction;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
@@ -111,6 +112,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see IntFunction
  * @see IntPredicate
  * @see IntSupplier
+ * @see IntToLongFunction
  * @see LongBinaryOperator
  * @see LongConsumer
  * @see LongFunction
@@ -1794,6 +1796,93 @@ public final class JCacheMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Integer> cache) {
         return new JCacheBasedIntSupplierMemoizer<>(cache, keySupplier, intSupplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intToLongFunction
+     *            The {@link IntToLongFunction} to memoize.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static final IntToLongFunction intToLongFunction(final IntToLongFunction intToLongFunction) {
+        return intToLongFunction(intToLongFunction, createCache(IntToLongFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intToLongFunction
+     *            The {@link IntToLongFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static final IntToLongFunction intToLongFunction(
+            final IntToLongFunction intToLongFunction,
+            final Cache<Integer, Long> cache) {
+        return intToLongFunction(intToLongFunction, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link DoubleToLongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intToLongFunction
+     *            The {@link DoubleToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link DoubleToLongFunction}.
+     */
+    public static final <KEY> IntToLongFunction intToLongFunction(
+            final IntToLongFunction intToLongFunction,
+            final IntFunction<KEY> keyFunction) {
+        return intToLongFunction(intToLongFunction, keyFunction, createCache(IntToLongFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntToLongFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intToLongFunction
+     *            The {@link IntToLongFunction} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntToLongFunction}.
+     */
+    public static final <KEY> IntToLongFunction intToLongFunction(
+            final IntToLongFunction intToLongFunction,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Long> cache) {
+        return new JCacheBasedIntToLongFunctionMemoizer<>(cache, keyFunction, intToLongFunction);
     }
 
     /**
