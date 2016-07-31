@@ -34,6 +34,7 @@ import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
+import java.util.function.LongToIntFunction;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
@@ -509,6 +510,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized LongToDoubleFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongToIntFunctionWithKeyFunction() {
+        // given
+        final LongToIntFunction function = a -> 123;
+        final LongFunction<String> keyFunction = a -> "key";
+
+        // when
+        final LongToIntFunction memoize = JCacheMemoize.longToIntFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized LongToIntFunction is NULL", memoize);
     }
 
     /**

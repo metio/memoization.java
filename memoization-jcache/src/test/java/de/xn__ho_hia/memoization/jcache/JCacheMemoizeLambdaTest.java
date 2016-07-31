@@ -34,6 +34,7 @@ import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
+import java.util.function.LongToIntFunction;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
@@ -447,6 +448,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized LongToDoubleFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongToIntFunctionWithLambda() {
+        // given
+
+        // when
+        final LongToIntFunction memoize = JCacheMemoize.longToIntFunction(a -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized LongToIntFunction is NULL", memoize);
     }
 
     /**
