@@ -25,6 +25,7 @@ import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
+import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
@@ -318,6 +319,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized IntSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntToDoubleFunctionWithLambda() {
+        // given
+
+        // when
+        final IntToDoubleFunction memoize = JCacheMemoize.intToDoubleFunction(a -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized IntToDoubleFunction is NULL", memoize);
     }
 
     /**

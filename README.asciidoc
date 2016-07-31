@@ -152,7 +152,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/IntToDoubleFunction.html[IntToDoubleFunction]
 | ✓
 | ✓
-| link:{issue}/140[#140]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/IntToLongFunction.html[IntToLongFunction]
