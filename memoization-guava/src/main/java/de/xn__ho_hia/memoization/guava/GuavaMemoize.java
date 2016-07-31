@@ -1323,7 +1323,7 @@ public final class GuavaMemoize {
     public static final <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(
             final Function<INPUT, OUTPUT> function,
             final Cache<INPUT, OUTPUT> cache) {
-        return function(function, Function.identity(), cache);
+        return function(function, identity(), cache);
     }
 
     /**
