@@ -32,6 +32,7 @@ import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToDoubleBiFunction;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -464,6 +465,22 @@ public class JCacheMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized Supplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToDoubleBiFunctionWithKeyBiFunction() {
+        // given
+        final ToDoubleBiFunction<String, String> function = (a, b) -> 123;
+        final BiFunction<String, String, String> keyFunction = (a, b) -> "key";
+
+        // when
+        final ToDoubleBiFunction<String, String> memoize = JCacheMemoize.toDoubleBiFunction(function, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ToDoubleBiFunction is NULL", memoize);
     }
 
 }
