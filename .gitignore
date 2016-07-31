@@ -6,3 +6,4 @@ target/
 .pmd
 *.iml
 .ansible-*
+.flattened-pom.xml
