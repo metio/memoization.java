@@ -27,6 +27,7 @@ import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
+import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
@@ -347,6 +348,20 @@ public class JCacheMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized IntToLongFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeIntUnaryOperatorWithLambda() {
+        // given
+
+        // when
+        final IntUnaryOperator memoize = JCacheMemoize.intUnaryOperator(a -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized IntUnaryOperator is NULL", memoize);
     }
 
     /**

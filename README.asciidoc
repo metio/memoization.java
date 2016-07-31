@@ -164,7 +164,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/IntUnaryOperator.html[IntUnaryOperator]
 | ✓
 | ✓
-| link:{issue}/142[#142]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/LongBinaryOperator.html[LongBinaryOperator]

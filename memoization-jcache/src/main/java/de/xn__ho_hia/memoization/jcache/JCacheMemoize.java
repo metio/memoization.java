@@ -39,6 +39,7 @@ import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 import java.util.function.IntToDoubleFunction;
 import java.util.function.IntToLongFunction;
+import java.util.function.IntUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
@@ -115,6 +116,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see IntSupplier
  * @see IntToDoubleFunction
  * @see IntToLongFunction
+ * @see IntUnaryOperator
  * @see LongBinaryOperator
  * @see LongConsumer
  * @see LongFunction
@@ -1972,6 +1974,93 @@ public final class JCacheMemoize {
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Long> cache) {
         return new JCacheBasedIntToLongFunctionMemoizer<>(cache, keyFunction, intToLongFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intUnaryOperator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static final IntUnaryOperator intUnaryOperator(final IntUnaryOperator intUnaryOperator) {
+        return intUnaryOperator(intUnaryOperator, createCache(IntUnaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param intUnaryOperator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static final IntUnaryOperator intUnaryOperator(
+            final IntUnaryOperator intUnaryOperator,
+            final Cache<Integer, Integer> cache) {
+        return intUnaryOperator(intUnaryOperator, Integer::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intUnaryOperator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static final <KEY> IntUnaryOperator intUnaryOperator(
+            final IntUnaryOperator intUnaryOperator,
+            final IntFunction<KEY> keyFunction) {
+        return intUnaryOperator(intUnaryOperator, keyFunction, createCache(IntUnaryOperator.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link IntUnaryOperator} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param intUnaryOperator
+     *            The {@link IntUnaryOperator} to memoize.
+     * @param keyFunction
+     *            The {@link IntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link IntUnaryOperator}.
+     */
+    public static final <KEY> IntUnaryOperator intUnaryOperator(
+            final IntUnaryOperator intUnaryOperator,
+            final IntFunction<KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new JCacheBasedIntUnaryOperatorMemoizer<>(cache, keyFunction, intUnaryOperator);
     }
 
     /**
