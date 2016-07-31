@@ -40,6 +40,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
@@ -563,6 +564,21 @@ public class GuavaMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized ToDoubleFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToIntBiFunction() {
+        // given
+        final ToIntBiFunction<String, String> function = (a, b) -> 123;
+
+        // when
+        final ToIntBiFunction<String, String> memoize = GuavaMemoize.toIntBiFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized ToIntBiFunction is NULL", memoize);
     }
 
     /**

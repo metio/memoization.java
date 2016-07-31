@@ -47,6 +47,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
@@ -117,6 +118,7 @@ import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
  * @see Supplier
  * @see ToDoubleBiFunction
  * @see ToDoubleFunction
+ * @see ToIntBiFunction
  * @see ToIntFunction
  * @see ToLongFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
@@ -3112,6 +3114,94 @@ public final class GuavaMemoize {
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Double> cache) {
         return new GuavaCacheBasedToDoubleFunctionMemoizer<>(cache, keyFunction, toDoubleFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toIntBiFunction
+     *            The {@link ToIntBiFunction} to memoize.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static final <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> toIntBiFunction) {
+        return toIntBiFunction(toIntBiFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toIntBiFunction
+     *            The {@link ToIntBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static final <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> toIntBiFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction) {
+        return toIntBiFunction(toIntBiFunction, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toIntBiFunction
+     *            The {@link ToIntBiFunction} to memoize.
+     * @param keyFunction
+     *            The {@link BiFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static final <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> toIntBiFunction,
+            final BiFunction<FIRST, SECOND, KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new GuavaCacheBasedToIntBiFunctionMemoizer<>(cache, keyFunction, toIntBiFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntBiFunction} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toIntBiFunction
+     *            The {@link ToIntBiFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntBiFunction}.
+     */
+    public static final <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
+            final ToIntBiFunction<FIRST, SECOND> toIntBiFunction,
+            final Cache<String, Integer> cache) {
+        return toIntBiFunction(toIntBiFunction, hashCodeKeyFunction(), cache);
     }
 
     /**

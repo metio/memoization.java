@@ -253,7 +253,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 
 | link:{jdk-api}/java/util/function/ToIntBiFunction.html[ToIntBiFunction]
 | ✓
-| link:{issue}/83[#83]
+| ✓
 | link:{issue}/155[#155]
 | ✓
 

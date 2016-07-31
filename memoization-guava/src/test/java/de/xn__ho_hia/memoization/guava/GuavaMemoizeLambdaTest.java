@@ -40,6 +40,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
@@ -115,20 +116,6 @@ public class GuavaMemoizeLambdaTest {
     *
     */
     @Test
-    public void shouldMemoizeDoubleBinaryOperatorWithLambda() {
-        // given
-
-        // when
-        final DoubleBinaryOperator memoize = GuavaMemoize.doubleBinaryOperator((a, b) -> 123.456D);
-
-        // then
-        Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
     public void shouldMemoizeConsumerWithLambda() {
         // given
 
@@ -137,6 +124,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized Consumer is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeDoubleBinaryOperatorWithLambda() {
+        // given
+
+        // when
+        final DoubleBinaryOperator memoize = GuavaMemoize.doubleBinaryOperator((a, b) -> 123.456D);
+
+        // then
+        Assert.assertNotNull("Memoized DoubleBinaryOperator is NULL", memoize);
     }
 
     /**
@@ -367,20 +368,6 @@ public class GuavaMemoizeLambdaTest {
     *
     */
     @Test
-    public void shouldMemoizeLongConsumerWithLambda() {
-        // given
-
-        // when
-        final LongConsumer memoize = GuavaMemoize.longConsumer(System.out::println);
-
-        // then
-        Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
-    }
-
-    /**
-    *
-    */
-    @Test
     public void shouldMemoizeLongBinaryOperatorWithLambda() {
         // given
 
@@ -389,6 +376,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized LongBinaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongConsumerWithLambda() {
+        // given
+
+        // when
+        final LongConsumer memoize = GuavaMemoize.longConsumer(System.out::println);
+
+        // then
+        Assert.assertNotNull("Memoized LongConsumer is NULL", memoize);
     }
 
     /**
@@ -529,6 +530,20 @@ public class GuavaMemoizeLambdaTest {
 
         // then
         Assert.assertNotNull("Memoized ToDoubleFunction is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeToIntBiFunctionWithLambda() {
+        // given
+
+        // when
+        final ToIntBiFunction<String, String> memoize = GuavaMemoize.toIntBiFunction((a, b) -> 123);
+
+        // then
+        Assert.assertNotNull("Memoized ToIntBiFunction is NULL", memoize);
     }
 
     /**
