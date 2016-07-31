@@ -12,6 +12,7 @@ import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.hashCodeKeyFu
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.intBinaryOperatorHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.longBinaryOperatorHashCodeKeyFunction;
 import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objDoubleConsumerHashCodeKeyFunction;
+import static de.xn__ho_hia.memoization.shared.MemoizationDefaults.objIntConsumerHashCodeKeyFunction;
 import static java.util.function.Function.identity;
 
 import java.util.function.BiConsumer;
@@ -45,6 +46,7 @@ import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
+import java.util.function.ObjIntConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
@@ -62,6 +64,7 @@ import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
 import de.xn__ho_hia.memoization.shared.LongBinaryFunction;
 import de.xn__ho_hia.memoization.shared.MemoizationDefaults;
 import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
+import de.xn__ho_hia.memoization.shared.ObjIntFunction;
 
 /**
  * <p>
@@ -119,6 +122,7 @@ import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
  * @see LongToIntFunction
  * @see LongUnaryOperator
  * @see ObjDoubleConsumer
+ * @see ObjIntConsumer
  * @see Predicate
  * @see Supplier
  * @see ToDoubleBiFunction
@@ -2857,6 +2861,94 @@ public final class GuavaMemoize {
             final ObjDoubleConsumer<FIRST> objDoubleConsumer,
             final Cache<String, String> cache) {
         return objDoubleConsumer(objDoubleConsumer, objDoubleConsumerHashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param objIntConsumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static final <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> objIntConsumer) {
+        return objIntConsumer(objIntConsumer, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param objIntConsumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjIntFunction} to compute the cache key.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static final <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> objIntConsumer,
+            final ObjIntFunction<INPUT, KEY> keyFunction) {
+        return objIntConsumer(objIntConsumer, keyFunction, CacheBuilder.newBuilder().build());
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjIntConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param objIntConsumer
+     *            The {@link ObjIntConsumer} to memoize.
+     * @param keyFunction
+     *            The {@link ObjIntFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjIntConsumer}.
+     */
+    public static final <FIRST, KEY> ObjIntConsumer<FIRST> objIntConsumer(
+            final ObjIntConsumer<FIRST> objIntConsumer,
+            final ObjIntFunction<FIRST, KEY> keyFunction,
+            final Cache<KEY, KEY> cache) {
+        return new GuavaCacheBasedObjIntConsumerMemoizer<>(cache, keyFunction, objIntConsumer);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ObjDoubleConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param objIntConsumer
+     *            The {@link ObjDoubleConsumer} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ObjDoubleConsumer}.
+     */
+    public static final <FIRST> ObjIntConsumer<FIRST> objIntConsumer(
+            final ObjIntConsumer<FIRST> objIntConsumer,
+            final Cache<String, String> cache) {
+        return objIntConsumer(objIntConsumer, objIntConsumerHashCodeKeyFunction(), cache);
     }
 
     /**
