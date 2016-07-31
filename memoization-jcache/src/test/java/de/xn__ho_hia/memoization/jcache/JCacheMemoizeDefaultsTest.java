@@ -33,6 +33,7 @@ import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
+import java.util.function.LongToDoubleFunction;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
@@ -459,6 +460,21 @@ public class JCacheMemoizeDefaultsTest {
 
         // then
         Assert.assertNotNull("Memoized LongSupplier is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeLongToDoubleFunction() {
+        // given
+        final LongToDoubleFunction function = a -> 123;
+
+        // when
+        final LongToDoubleFunction memoize = JCacheMemoize.longToDoubleFunction(function);
+
+        // then
+        Assert.assertNotNull("Memoized LongToDoubleFunction is NULL", memoize);
     }
 
     /**

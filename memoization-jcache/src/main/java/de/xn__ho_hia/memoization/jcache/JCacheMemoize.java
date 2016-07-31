@@ -45,6 +45,7 @@ import java.util.function.LongConsumer;
 import java.util.function.LongFunction;
 import java.util.function.LongPredicate;
 import java.util.function.LongSupplier;
+import java.util.function.LongToDoubleFunction;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
@@ -122,6 +123,7 @@ import de.xn__ho_hia.memoization.shared.ObjLongFunction;
  * @see LongFunction
  * @see LongPredicate
  * @see LongSupplier
+ * @see LongToDoubleFunction
  * @see ObjDoubleConsumer
  * @see ObjIntConsumer
  * @see ObjLongConsumer
@@ -2497,6 +2499,93 @@ public final class JCacheMemoize {
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Long> cache) {
         return new JCacheBasedLongSupplierMemoizer<>(cache, keySupplier, longSupplier);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longToDoubleFunction
+     *            The {@link LongToDoubleFunction} to memoize.
+     * @return The wrapped {@link LongToDoubleFunction}.
+     */
+    public static final LongToDoubleFunction longToDoubleFunction(final LongToDoubleFunction longToDoubleFunction) {
+        return longToDoubleFunction(longToDoubleFunction, createCache(LongToDoubleFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param longToDoubleFunction
+     *            The {@link LongToDoubleFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongToDoubleFunction}.
+     */
+    public static final LongToDoubleFunction longToDoubleFunction(
+            final LongToDoubleFunction longToDoubleFunction,
+            final Cache<Long, Double> cache) {
+        return longToDoubleFunction(longToDoubleFunction, Long::valueOf, cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longToDoubleFunction
+     *            The {@link LongToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @return The wrapped {@link LongToDoubleFunction}.
+     */
+    public static final <KEY> LongToDoubleFunction longToDoubleFunction(
+            final LongToDoubleFunction longToDoubleFunction,
+            final LongFunction<KEY> keyFunction) {
+        return longToDoubleFunction(longToDoubleFunction, keyFunction, createCache(LongToDoubleFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link LongToDoubleFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param longToDoubleFunction
+     *            The {@link LongToDoubleFunction} to memoize.
+     * @param keyFunction
+     *            The {@link LongFunction} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link LongToDoubleFunction}.
+     */
+    public static final <KEY> LongToDoubleFunction longToDoubleFunction(
+            final LongToDoubleFunction longToDoubleFunction,
+            final LongFunction<KEY> keyFunction,
+            final Cache<KEY, Double> cache) {
+        return new JCacheBasedLongToDoubleFunctionMemoizer<>(cache, keyFunction, longToDoubleFunction);
     }
 
     /**
