@@ -36,6 +36,7 @@ import java.util.function.LongSupplier;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
+import java.util.function.ObjDoubleConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
@@ -51,6 +52,7 @@ import org.junit.Test;
 import de.xn__ho_hia.memoization.shared.DoubleBinaryFunction;
 import de.xn__ho_hia.memoization.shared.IntBinaryFunction;
 import de.xn__ho_hia.memoization.shared.LongBinaryFunction;
+import de.xn__ho_hia.memoization.shared.ObjDoubleFunction;
 import de.xn__ho_hia.quality.suppression.CompilerWarnings;
 
 /**
@@ -538,6 +540,22 @@ public class GuavaMemoizeCustomKeyTest {
 
         // then
         Assert.assertNotNull("Memoized LongUnaryOperator is NULL", memoize);
+    }
+
+    /**
+    *
+    */
+    @Test
+    public void shouldMemoizeObjDoubleConsumerWithKeyFunction() {
+        // given
+        final ObjDoubleConsumer<String> consumer = (a, b) -> System.out.println(a + b);
+        final ObjDoubleFunction<String> keyFunction = (a, b) -> "key";
+
+        // when
+        final ObjDoubleConsumer<String> memoize = GuavaMemoize.objDoubleConsumer(consumer, keyFunction);
+
+        // then
+        Assert.assertNotNull("Memoized ObjDoubleConsumer is NULL", memoize);
     }
 
     /**
