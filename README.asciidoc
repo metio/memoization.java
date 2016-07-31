@@ -266,7 +266,7 @@ _Java link:https://en.wikipedia.org/wiki/Memoization[memoization] library - trad
 | link:{jdk-api}/java/util/function/ToIntFunction.html[ToIntFunction]
 | ✓
 | ✓
-| link:{issue}/158[#158]
+| ✓
 | ✓
 
 | link:{jdk-api}/java/util/function/ToLongBiFunction.html[ToLongBiFunction]

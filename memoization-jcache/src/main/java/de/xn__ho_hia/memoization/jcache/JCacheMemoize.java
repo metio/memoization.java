@@ -47,6 +47,7 @@ import java.util.function.Supplier;
 import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntBiFunction;
+import java.util.function.ToIntFunction;
 import java.util.function.ToLongBiFunction;
 
 import javax.cache.Cache;
@@ -2531,7 +2532,7 @@ public final class JCacheMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleBiFunction} in a JCache {@link Cache}.
+     * Memoizes a {@link ToDoubleFunction} in a JCache {@link Cache}.
      * </p>
      * <h3>Features</h3>
      * <ul>
@@ -2540,12 +2541,12 @@ public final class JCacheMemoize {
      * </ul>
      *
      * @param toDoubleFunction
-     *            The {@link ToDoubleBiFunction} to memoize.
+     *            The {@link ToDoubleFunction} to memoize.
      * @param keyFunction
      *            The {@link Function} to compute the cache key.
      * @param cache
      *            The {@link Cache} to use.
-     * @return The wrapped {@link ToDoubleBiFunction}.
+     * @return The wrapped {@link ToDoubleFunction}.
      */
     public static final <FIRST, KEY> ToDoubleFunction<FIRST> toDoubleFunction(
             final ToDoubleFunction<FIRST> toDoubleFunction,
@@ -2662,6 +2663,94 @@ public final class JCacheMemoize {
             final ToIntBiFunction<FIRST, SECOND> toIntBiFunction,
             final Cache<String, Integer> cache) {
         return toIntBiFunction(toIntBiFunction, hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toIntFunction
+     *            The {@link ToIntFunction} to memoize.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static final <FIRST> ToIntFunction<FIRST> toIntFunction(
+            final ToIntFunction<FIRST> toIntFunction) {
+        return toIntFunction(toIntFunction, createCache(ToIntFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Default cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toIntFunction
+     *            The {@link ToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static final <FIRST, KEY> ToIntFunction<FIRST> toIntFunction(
+            final ToIntFunction<FIRST> toIntFunction,
+            final Function<FIRST, KEY> keyFunction) {
+        return toIntFunction(toIntFunction, keyFunction, createCache(ToIntFunction.class));
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Custom cache key</li>
+     * </ul>
+     *
+     * @param toIntFunction
+     *            The {@link ToIntFunction} to memoize.
+     * @param keyFunction
+     *            The {@link Function} to compute the cache key.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static final <FIRST, KEY> ToIntFunction<FIRST> toIntFunction(
+            final ToIntFunction<FIRST> toIntFunction,
+            final Function<FIRST, KEY> keyFunction,
+            final Cache<KEY, Integer> cache) {
+        return new JCacheBasedToIntFunctionMemoizer<>(cache, keyFunction, toIntFunction);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link ToIntFunction} in a JCache {@link Cache}.
+     * </p>
+     * <h3>Features</h3>
+     * <ul>
+     * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param toIntFunction
+     *            The {@link ToIntFunction} to memoize.
+     * @param cache
+     *            The {@link Cache} to use.
+     * @return The wrapped {@link ToIntFunction}.
+     */
+    public static final <FIRST> ToIntFunction<FIRST> toIntFunction(
+            final ToIntFunction<FIRST> toIntFunction,
+            final Cache<FIRST, Integer> cache) {
+        return toIntFunction(toIntFunction, identity(), cache);
     }
 
     /**
