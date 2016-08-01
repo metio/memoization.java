@@ -538,7 +538,7 @@ public final class JCacheMemoize {
     public static final <INPUT> Consumer<INPUT> consumer(
             final Consumer<INPUT> consumer,
             final Cache<INPUT, INPUT> cache) {
-        return consumer(consumer, Function.identity(), cache);
+        return consumer(consumer, identity(), cache);
     }
 
     /**
@@ -1322,7 +1322,7 @@ public final class JCacheMemoize {
     public static final <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(
             final Function<INPUT, OUTPUT> function,
             final Cache<INPUT, OUTPUT> cache) {
-        return function(function, Function.identity(), cache);
+        return function(function, identity(), cache);
     }
 
     /**
@@ -3067,7 +3067,7 @@ public final class JCacheMemoize {
     public static final <INPUT> Predicate<INPUT> predicate(
             final Predicate<INPUT> predicate,
             final Cache<INPUT, Boolean> cache) {
-        return predicate(predicate, Function.identity(), cache);
+        return predicate(predicate, identity(), cache);
     }
 
     /**
