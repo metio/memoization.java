@@ -453,6 +453,7 @@ In order to use this project, declare the following inside your POM:
 ----
 
 Replace `${version.memoization}` with the pass:[<a href="https://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
+Popular JCache implementations are link:http://www.ehcache.org/[Ehcache], link:http://commons.apache.org/proper/commons-jcs/[Commons JCS], link:https://hazelcast.org/[Hazelcast], link:http://infinispan.org/[Infinispan] and link:http://www.alachisoft.com/tayzgrid/[TayzGrid].
 
 === Compatibility
 
