@@ -136,6 +136,7 @@
         <artifactId>flatten-maven-plugin</artifactId>
         <version>1.0.0</version>
         <configuration>
+          <flattenMode>oss</flattenMode>
         </configuration>
         <executions>
           <!-- enable flattening -->
