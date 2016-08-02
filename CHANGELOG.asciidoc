@@ -3,9 +3,9 @@
 
 All notable changes to this project will be documented in this file.
 
-== link:++https://github.com/sebhoss/memoization.java/compare/memoization.java-1.0.0-20160715205956...master++[Unreleased]
+== link:++https://github.com/sebhoss/memoization.java/compare/memoization.java-2.0.0-20160802182936...master++[Unreleased]
 
-== link:++https://github.com/sebhoss/memoization.java/compare/memoization.java-1.0.0-20160715205956...master++[2.0.0] - TBD
+== link:++https://github.com/sebhoss/memoization.java/compare/memoization.java-1.0.0-20160715205956...memoization.java-2.0.0-20160802182936++[2.0.0] - 2016-08-02
 
 === Added
 
