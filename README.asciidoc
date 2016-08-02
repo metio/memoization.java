@@ -478,6 +478,7 @@ This project is compatible with the following Java versions:
 * link:https://clojuredocs.org/clojure.core/memoize[Clojure's `(memoize f)`]
 * link:http://docs.groovy-lang.org/latest/html/gapi/groovy/transform/Memoized.html[Groovy's `@Memoized`]
 * link:https://github.com/cb372/scalacache#memoization-of-method-results[ScalaCache's `memoize`]
+* link:https://github.com/aol/cyclops/tree/master/cyclops-javaslang#memoization-with-a-guava-cache[Cyclops javaslang module]
 
 == License
 
