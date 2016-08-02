@@ -5,7 +5,7 @@
  * in the LICENSE file.
  */
 /**
- * Shared interfaces & utilities.
+ * Shared interfaces and utilities.
  *
  * @see de.xn__ho_hia.memoization.shared.MemoizationDefaults
  */

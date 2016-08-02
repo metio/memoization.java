@@ -159,6 +159,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @return The wrapped {@link BiConsumer}.
@@ -178,6 +182,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param keyFunction
@@ -200,6 +210,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param keyFunction
@@ -225,6 +241,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param cache
@@ -247,6 +267,12 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
@@ -266,6 +292,14 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param keyFunction
@@ -288,6 +322,14 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param keyFunction
@@ -313,6 +355,12 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param cache
@@ -335,6 +383,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biPredicate
      *            The {@link BiPredicate} to memoize.
      * @return The wrapped {@link BiPredicate}.
@@ -354,6 +406,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biPredicate
      *            The {@link BiPredicate} to memoize.
      * @param keyFunction
@@ -376,6 +434,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biPredicate
      *            The {@link BiPredicate} to memoize.
      * @param keyFunction
@@ -401,6 +465,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biPredicate
      *            The {@link BiPredicate} to memoize.
      * @param cache
@@ -464,6 +532,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param booleanSupplier
      *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
@@ -486,6 +556,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param booleanSupplier
      *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
@@ -511,6 +583,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
@@ -529,6 +603,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param cache
@@ -551,6 +627,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param keyFunction
@@ -573,6 +653,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param keyFunction
@@ -638,6 +722,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleBinaryOperator
      *            The {@link DoubleBinaryOperator} to memoize.
      * @param keyFunction
@@ -660,6 +746,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleBinaryOperator
      *            The {@link DoubleBinaryOperator} to memoize.
      * @param keyFunction
@@ -725,6 +813,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleConsumer
      *            The {@link DoubleConsumer} to memoize.
      * @param keyFunction
@@ -747,6 +837,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleConsumer
      *            The {@link DoubleConsumer} to memoize.
      * @param keyFunction
@@ -772,6 +864,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @return The wrapped {@link DoubleFunction}.
@@ -790,6 +884,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param cache
@@ -812,13 +908,17 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param keyFunction
      *            The {@link DoubleFunction} to compute the cache key.
      * @return The wrapped {@link DoubleFunction}.
      */
-    public static final <OUTPUT, KEY> DoubleFunction<OUTPUT> doubleFunction(
+    public static final <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
             final DoubleFunction<OUTPUT> function,
             final DoubleFunction<KEY> keyFunction) {
         return doubleFunction(function, keyFunction, createCache(DoubleFunction.class));
@@ -834,6 +934,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param keyFunction
@@ -842,7 +946,7 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link DoubleFunction}.
      */
-    public static final <OUTPUT, KEY> DoubleFunction<OUTPUT> doubleFunction(
+    public static final <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
             final DoubleFunction<OUTPUT> function,
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
@@ -899,6 +1003,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doublePredicate
      *            The {@link DoublePredicate} to memoize.
      * @param keyFunction
@@ -921,6 +1027,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doublePredicate
      *            The {@link DoublePredicate} to memoize.
      * @param keyFunction
@@ -987,6 +1095,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleSupplier
      *            The {@link DoubleSupplier} to memoize.
      * @param keySupplier
@@ -1009,6 +1119,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleSupplier
      *            The {@link DoubleSupplier} to memoize.
      * @param keySupplier
@@ -1074,6 +1186,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleToIntFunction
      *            The {@link DoubleToIntFunction} to memoize.
      * @param keyFunction
@@ -1096,6 +1210,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleToIntFunction
      *            The {@link DoubleToIntFunction} to memoize.
      * @param keyFunction
@@ -1161,6 +1277,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleToLongFunction
      *            The {@link DoubleToLongFunction} to memoize.
      * @param keyFunction
@@ -1183,6 +1301,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleToLongFunction
      *            The {@link DoubleToLongFunction} to memoize.
      * @param keyFunction
@@ -1248,6 +1368,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleUnaryOperator
      *            The {@link DoubleUnaryOperator} to memoize.
      * @param keyFunction
@@ -1270,6 +1392,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleUnaryOperator
      *            The {@link DoubleUnaryOperator} to memoize.
      * @param keyFunction
@@ -1295,6 +1419,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
@@ -1313,6 +1441,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param cache
@@ -1335,13 +1467,19 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param keyFunction
      *            The {@link Function} to compute the cache key.
      * @return The wrapped {@link Function}.
      */
-    public static final <INPUT, OUTPUT, KEY> Function<INPUT, OUTPUT> function(
+    public static final <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
             final Function<INPUT, OUTPUT> function,
             final Function<INPUT, KEY> keyFunction) {
         return function(function, keyFunction, createCache(Function.class));
@@ -1357,6 +1495,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param keyFunction
@@ -1365,7 +1509,7 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link Function}.
      */
-    public static final <INPUT, OUTPUT, KEY> Function<INPUT, OUTPUT> function(
+    public static final <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
             final Function<INPUT, OUTPUT> function,
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
@@ -1422,6 +1566,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intBinaryOperator
      *            The {@link IntBinaryOperator} to memoize.
      * @param keyFunction
@@ -1444,6 +1590,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intBinaryOperator
      *            The {@link IntBinaryOperator} to memoize.
      * @param keyFunction
@@ -1509,6 +1657,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intConsumer
      *            The {@link IntConsumer} to memoize.
      * @param keyFunction
@@ -1531,6 +1681,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intConsumer
      *            The {@link IntConsumer} to memoize.
      * @param keyFunction
@@ -1556,6 +1708,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @return The wrapped {@link IntFunction}.
@@ -1574,6 +1728,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param cache
@@ -1596,13 +1752,17 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param keyFunction
      *            The {@link IntFunction} to compute the cache key.
      * @return The wrapped {@link IntFunction}.
      */
-    public static final <OUTPUT, KEY> IntFunction<OUTPUT> intFunction(
+    public static final <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
             final IntFunction<OUTPUT> function,
             final IntFunction<KEY> keyFunction) {
         return intFunction(function, keyFunction, createCache(IntFunction.class));
@@ -1618,6 +1778,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param keyFunction
@@ -1626,7 +1790,7 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link IntFunction}.
      */
-    public static final <OUTPUT, KEY> IntFunction<OUTPUT> intFunction(
+    public static final <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
             final IntFunction<OUTPUT> function,
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
@@ -1683,6 +1847,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intPredicate
      *            The {@link IntPredicate} to memoize.
      * @param keyFunction
@@ -1705,6 +1871,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intPredicate
      *            The {@link IntPredicate} to memoize.
      * @param keyFunction
@@ -1771,6 +1939,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intSupplier
      *            The {@link IntSupplier} to memoize.
      * @param keySupplier
@@ -1793,6 +1963,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intSupplier
      *            The {@link IntSupplier} to memoize.
      * @param keySupplier
@@ -1858,6 +2030,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intToDoubleFunction
      *            The {@link IntToDoubleFunction} to memoize.
      * @param keyFunction
@@ -1880,6 +2054,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intToDoubleFunction
      *            The {@link IntToDoubleFunction} to memoize.
      * @param keyFunction
@@ -1945,6 +2121,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intToLongFunction
      *            The {@link IntToLongFunction} to memoize.
      * @param keyFunction
@@ -1967,6 +2145,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intToLongFunction
      *            The {@link IntToLongFunction} to memoize.
      * @param keyFunction
@@ -2032,6 +2212,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intUnaryOperator
      *            The {@link IntUnaryOperator} to memoize.
      * @param keyFunction
@@ -2054,6 +2236,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intUnaryOperator
      *            The {@link IntUnaryOperator} to memoize.
      * @param keyFunction
@@ -2119,6 +2303,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longBinaryOperator
      *            The {@link LongBinaryOperator} to memoize.
      * @param keyFunction
@@ -2141,6 +2327,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longBinaryOperator
      *            The {@link LongBinaryOperator} to memoize.
      * @param keyFunction
@@ -2206,6 +2394,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longConsumer
      *            The {@link LongConsumer} to memoize.
      * @param keyFunction
@@ -2228,6 +2418,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longConsumer
      *            The {@link LongConsumer} to memoize.
      * @param keyFunction
@@ -2253,6 +2445,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @return The wrapped {@link LongFunction}.
@@ -2271,6 +2465,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param cache
@@ -2293,13 +2489,17 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param keyFunction
      *            The {@link LongFunction} to compute the cache key.
      * @return The wrapped {@link LongFunction}.
      */
-    public static final <OUTPUT, KEY> LongFunction<OUTPUT> longFunction(
+    public static final <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
             final LongFunction<OUTPUT> function,
             final LongFunction<KEY> keyFunction) {
         return longFunction(function, keyFunction, createCache(LongFunction.class));
@@ -2315,6 +2515,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param keyFunction
@@ -2323,7 +2527,7 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link LongFunction}.
      */
-    public static final <OUTPUT, KEY> LongFunction<OUTPUT> longFunction(
+    public static final <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
             final LongFunction<OUTPUT> function,
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
@@ -2380,6 +2584,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longPredicate
      *            The {@link LongPredicate} to memoize.
      * @param keyFunction
@@ -2402,6 +2608,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longPredicate
      *            The {@link LongPredicate} to memoize.
      * @param keyFunction
@@ -2468,6 +2676,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longSupplier
      *            The {@link LongSupplier} to memoize.
      * @param keySupplier
@@ -2490,6 +2700,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longSupplier
      *            The {@link LongSupplier} to memoize.
      * @param keySupplier
@@ -2555,6 +2767,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longToDoubleFunction
      *            The {@link LongToDoubleFunction} to memoize.
      * @param keyFunction
@@ -2577,6 +2791,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longToDoubleFunction
      *            The {@link LongToDoubleFunction} to memoize.
      * @param keyFunction
@@ -2642,6 +2858,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longToIntFunction
      *            The {@link LongToIntFunction} to memoize.
      * @param keyFunction
@@ -2664,6 +2882,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longToIntFunction
      *            The {@link LongToIntFunction} to memoize.
      * @param keyFunction
@@ -2729,6 +2949,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longUnaryOperator
      *            The {@link LongUnaryOperator} to memoize.
      * @param keyFunction
@@ -2751,6 +2973,8 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longUnaryOperator
      *            The {@link LongUnaryOperator} to memoize.
      * @param keyFunction
@@ -2776,12 +3000,14 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objDoubleConsumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static final <FIRST> ObjDoubleConsumer<FIRST> objDoubleConsumer(
-            final ObjDoubleConsumer<FIRST> objDoubleConsumer) {
+    public static final <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> objDoubleConsumer) {
         return objDoubleConsumer(objDoubleConsumer, createCache(ObjDoubleConsumer.class));
     }
 
@@ -2795,15 +3021,19 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objDoubleConsumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param keyFunction
      *            The {@link ObjDoubleFunction} to compute the cache key.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static final <FIRST, KEY> ObjDoubleConsumer<FIRST> objDoubleConsumer(
-            final ObjDoubleConsumer<FIRST> objDoubleConsumer,
-            final ObjDoubleFunction<FIRST, KEY> keyFunction) {
+    public static final <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> objDoubleConsumer,
+            final ObjDoubleFunction<INPUT, KEY> keyFunction) {
         return objDoubleConsumer(objDoubleConsumer, keyFunction, createCache(ObjDoubleConsumer.class));
     }
 
@@ -2817,6 +3047,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objDoubleConsumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param keyFunction
@@ -2825,9 +3059,9 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static final <FIRST, KEY> ObjDoubleConsumer<FIRST> objDoubleConsumer(
-            final ObjDoubleConsumer<FIRST> objDoubleConsumer,
-            final ObjDoubleFunction<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> objDoubleConsumer,
+            final ObjDoubleFunction<INPUT, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
         return new JCacheBasedObjDoubleConsumerMemoizer<>(cache, keyFunction, objDoubleConsumer);
     }
@@ -2842,14 +3076,16 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objDoubleConsumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static final <FIRST> ObjDoubleConsumer<FIRST> objDoubleConsumer(
-            final ObjDoubleConsumer<FIRST> objDoubleConsumer,
+    public static final <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> objDoubleConsumer,
             final Cache<String, String> cache) {
         return objDoubleConsumer(objDoubleConsumer, objDoubleConsumerHashCodeKeyFunction(), cache);
     }
@@ -2864,12 +3100,14 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objIntConsumer
      *            The {@link ObjIntConsumer} to memoize.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static final <FIRST> ObjIntConsumer<FIRST> objIntConsumer(
-            final ObjIntConsumer<FIRST> objIntConsumer) {
+    public static final <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> objIntConsumer) {
         return objIntConsumer(objIntConsumer, createCache(ObjIntConsumer.class));
     }
 
@@ -2883,15 +3121,19 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objIntConsumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param keyFunction
      *            The {@link ObjIntFunction} to compute the cache key.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static final <FIRST, KEY> ObjIntConsumer<FIRST> objIntConsumer(
-            final ObjIntConsumer<FIRST> objIntConsumer,
-            final ObjIntFunction<FIRST, KEY> keyFunction) {
+    public static final <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> objIntConsumer,
+            final ObjIntFunction<INPUT, KEY> keyFunction) {
         return objIntConsumer(objIntConsumer, keyFunction, createCache(ObjIntConsumer.class));
     }
 
@@ -2905,6 +3147,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objIntConsumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param keyFunction
@@ -2913,9 +3159,9 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static final <FIRST, KEY> ObjIntConsumer<FIRST> objIntConsumer(
-            final ObjIntConsumer<FIRST> objIntConsumer,
-            final ObjIntFunction<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> objIntConsumer,
+            final ObjIntFunction<INPUT, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
         return new JCacheBasedObjIntConsumerMemoizer<>(cache, keyFunction, objIntConsumer);
     }
@@ -2930,14 +3176,16 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objIntConsumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static final <FIRST> ObjIntConsumer<FIRST> objIntConsumer(
-            final ObjIntConsumer<FIRST> objIntConsumer,
+    public static final <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> objIntConsumer,
             final Cache<String, String> cache) {
         return objIntConsumer(objIntConsumer, objIntConsumerHashCodeKeyFunction(), cache);
     }
@@ -2952,12 +3200,14 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objLongConsumer
      *            The {@link ObjLongConsumer} to memoize.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static final <FIRST> ObjLongConsumer<FIRST> objLongConsumer(
-            final ObjLongConsumer<FIRST> objLongConsumer) {
+    public static final <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> objLongConsumer) {
         return objLongConsumer(objLongConsumer, createCache(ObjLongConsumer.class));
     }
 
@@ -2971,15 +3221,19 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objLongConsumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param keyFunction
      *            The {@link ObjDoubleFunction} to compute the cache key.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static final <FIRST, KEY> ObjLongConsumer<FIRST> objLongConsumer(
-            final ObjLongConsumer<FIRST> objLongConsumer,
-            final ObjLongFunction<FIRST, KEY> keyFunction) {
+    public static final <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> objLongConsumer,
+            final ObjLongFunction<INPUT, KEY> keyFunction) {
         return objLongConsumer(objLongConsumer, keyFunction, createCache(ObjLongConsumer.class));
     }
 
@@ -2993,6 +3247,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objLongConsumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param keyFunction
@@ -3001,9 +3259,9 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static final <FIRST, KEY> ObjLongConsumer<FIRST> objLongConsumer(
-            final ObjLongConsumer<FIRST> objLongConsumer,
-            final ObjLongFunction<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> objLongConsumer,
+            final ObjLongFunction<INPUT, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
         return new JCacheBasedObjLongConsumerMemoizer<>(cache, keyFunction, objLongConsumer);
     }
@@ -3018,14 +3276,16 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objLongConsumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static final <FIRST> ObjLongConsumer<FIRST> objLongConsumer(
-            final ObjLongConsumer<FIRST> objLongConsumer,
+    public static final <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> objLongConsumer,
             final Cache<String, String> cache) {
         return objLongConsumer(objLongConsumer, objLongConsumerHashCodeKeyFunction(), cache);
     }
@@ -3040,6 +3300,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @return The wrapped {@link Predicate}.
@@ -3058,6 +3320,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param cache
@@ -3080,6 +3344,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param keyFunction
@@ -3102,6 +3370,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param keyFunction
@@ -3127,6 +3399,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
@@ -3145,6 +3419,8 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param cache
@@ -3167,6 +3443,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param keySupplier
@@ -3189,6 +3469,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param keySupplier
@@ -3214,6 +3498,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toDoubleBiFunction
      *            The {@link ToDoubleBiFunction} to memoize.
      * @return The wrapped {@link ToDoubleBiFunction}.
@@ -3233,6 +3521,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toDoubleBiFunction
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param keyFunction
@@ -3255,6 +3549,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toDoubleBiFunction
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param keyFunction
@@ -3280,6 +3580,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toDoubleBiFunction
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param cache
@@ -3302,12 +3606,14 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toDoubleFunction
      *            The {@link ToDoubleFunction} to memoize.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static final <FIRST> ToDoubleFunction<FIRST> toDoubleFunction(
-            final ToDoubleFunction<FIRST> toDoubleFunction) {
+    public static final <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> toDoubleFunction) {
         return toDoubleFunction(toDoubleFunction, createCache(ToDoubleFunction.class));
     }
 
@@ -3321,15 +3627,19 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toDoubleFunction
      *            The {@link ToDoubleFunction} to memoize.
      * @param keyFunction
      *            The {@link Function} to compute the cache key.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static final <FIRST, KEY> ToDoubleFunction<FIRST> toDoubleFunction(
-            final ToDoubleFunction<FIRST> toDoubleFunction,
-            final Function<FIRST, KEY> keyFunction) {
+    public static final <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> toDoubleFunction,
+            final Function<INPUT, KEY> keyFunction) {
         return toDoubleFunction(toDoubleFunction, keyFunction, createCache(ToDoubleFunction.class));
     }
 
@@ -3343,6 +3653,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toDoubleFunction
      *            The {@link ToDoubleFunction} to memoize.
      * @param keyFunction
@@ -3351,9 +3665,9 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static final <FIRST, KEY> ToDoubleFunction<FIRST> toDoubleFunction(
-            final ToDoubleFunction<FIRST> toDoubleFunction,
-            final Function<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> toDoubleFunction,
+            final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Double> cache) {
         return new JCacheBasedToDoubleFunctionMemoizer<>(cache, keyFunction, toDoubleFunction);
     }
@@ -3368,15 +3682,17 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toDoubleFunction
      *            The {@link ToDoubleFunction} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToDoubleFunction}.
      */
-    public static final <FIRST> ToDoubleFunction<FIRST> toDoubleFunction(
-            final ToDoubleFunction<FIRST> toDoubleFunction,
-            final Cache<FIRST, Double> cache) {
+    public static final <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(
+            final ToDoubleFunction<INPUT> toDoubleFunction,
+            final Cache<INPUT, Double> cache) {
         return toDoubleFunction(toDoubleFunction, identity(), cache);
     }
 
@@ -3390,6 +3706,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toIntBiFunction
      *            The {@link ToIntBiFunction} to memoize.
      * @return The wrapped {@link ToIntBiFunction}.
@@ -3409,6 +3729,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toIntBiFunction
      *            The {@link ToIntBiFunction} to memoize.
      * @param keyFunction
@@ -3431,6 +3757,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toIntBiFunction
      *            The {@link ToIntBiFunction} to memoize.
      * @param keyFunction
@@ -3456,6 +3788,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toIntBiFunction
      *            The {@link ToIntBiFunction} to memoize.
      * @param cache
@@ -3478,12 +3814,14 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toIntFunction
      *            The {@link ToIntFunction} to memoize.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static final <FIRST> ToIntFunction<FIRST> toIntFunction(
-            final ToIntFunction<FIRST> toIntFunction) {
+    public static final <INPUT> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> toIntFunction) {
         return toIntFunction(toIntFunction, createCache(ToIntFunction.class));
     }
 
@@ -3497,15 +3835,19 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toIntFunction
      *            The {@link ToIntFunction} to memoize.
      * @param keyFunction
      *            The {@link Function} to compute the cache key.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static final <FIRST, KEY> ToIntFunction<FIRST> toIntFunction(
-            final ToIntFunction<FIRST> toIntFunction,
-            final Function<FIRST, KEY> keyFunction) {
+    public static final <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> toIntFunction,
+            final Function<INPUT, KEY> keyFunction) {
         return toIntFunction(toIntFunction, keyFunction, createCache(ToIntFunction.class));
     }
 
@@ -3519,6 +3861,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toIntFunction
      *            The {@link ToIntFunction} to memoize.
      * @param keyFunction
@@ -3527,9 +3873,9 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static final <FIRST, KEY> ToIntFunction<FIRST> toIntFunction(
-            final ToIntFunction<FIRST> toIntFunction,
-            final Function<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> toIntFunction,
+            final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
         return new JCacheBasedToIntFunctionMemoizer<>(cache, keyFunction, toIntFunction);
     }
@@ -3544,15 +3890,17 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toIntFunction
      *            The {@link ToIntFunction} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static final <FIRST> ToIntFunction<FIRST> toIntFunction(
-            final ToIntFunction<FIRST> toIntFunction,
-            final Cache<FIRST, Integer> cache) {
+    public static final <INPUT> ToIntFunction<INPUT> toIntFunction(
+            final ToIntFunction<INPUT> toIntFunction,
+            final Cache<INPUT, Integer> cache) {
         return toIntFunction(toIntFunction, identity(), cache);
     }
 
@@ -3566,6 +3914,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toLongBiFunction
      *            The {@link ToLongBiFunction} to memoize.
      * @return The wrapped {@link ToLongBiFunction}.
@@ -3585,6 +3937,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toLongBiFunction
      *            The {@link ToLongBiFunction} to memoize.
      * @param keyFunction
@@ -3607,6 +3965,12 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toLongBiFunction
      *            The {@link ToLongBiFunction} to memoize.
      * @param keyFunction
@@ -3632,6 +3996,10 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toLongBiFunction
      *            The {@link ToLongBiFunction} to memoize.
      * @param cache
@@ -3654,12 +4022,14 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toLongFunction
      *            The {@link ToLongFunction} to memoize.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static final <FIRST> ToLongFunction<FIRST> toLongFunction(
-            final ToLongFunction<FIRST> toLongFunction) {
+    public static final <INPUT> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> toLongFunction) {
         return toLongFunction(toLongFunction, createCache(ToLongFunction.class));
     }
 
@@ -3673,15 +4043,19 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toLongFunction
      *            The {@link ToLongFunction} to memoize.
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static final <FIRST, KEY> ToLongFunction<FIRST> toLongFunction(
-            final ToLongFunction<FIRST> toLongFunction,
-            final Function<FIRST, KEY> keyFunction) {
+    public static final <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> toLongFunction,
+            final Function<INPUT, KEY> keyFunction) {
         return toLongFunction(toLongFunction, keyFunction, createCache(ToLongFunction.class));
     }
 
@@ -3695,6 +4069,10 @@ public final class JCacheMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toLongFunction
      *            The {@link ToLongFunction} to memoize.
      * @param keyFunction
@@ -3703,9 +4081,9 @@ public final class JCacheMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static final <FIRST, KEY> ToLongFunction<FIRST> toLongFunction(
-            final ToLongFunction<FIRST> toLongFunction,
-            final Function<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> toLongFunction,
+            final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Long> cache) {
         return new JCacheBasedToLongFunctionMemoizer<>(cache, keyFunction, toLongFunction);
     }
@@ -3720,15 +4098,17 @@ public final class JCacheMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toLongFunction
      *            The {@link ToLongFunction} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static final <FIRST> ToLongFunction<FIRST> toLongFunction(
-            final ToLongFunction<FIRST> toLongFunction,
-            final Cache<FIRST, Long> cache) {
+    public static final <INPUT> ToLongFunction<INPUT> toLongFunction(
+            final ToLongFunction<INPUT> toLongFunction,
+            final Cache<INPUT, Long> cache) {
         return toLongFunction(toLongFunction, identity(), cache);
     }
 

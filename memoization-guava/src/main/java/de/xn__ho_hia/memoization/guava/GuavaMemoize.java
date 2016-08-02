@@ -153,6 +153,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @return The wrapped {@link BiConsumer}.
@@ -172,6 +176,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param keyFunction
@@ -194,6 +204,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param keyFunction
@@ -219,6 +235,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param cache
@@ -241,6 +261,12 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
@@ -260,6 +286,14 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param keyFunction
@@ -282,6 +316,14 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param keyFunction
@@ -307,6 +349,12 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param cache
@@ -329,6 +377,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biPredicate
      *            The {@link BiPredicate} to memoize.
      * @return The wrapped {@link BiPredicate}.
@@ -348,6 +400,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biPredicate
      *            The {@link BiPredicate} to memoize.
      * @param keyFunction
@@ -370,6 +428,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biPredicate
      *            The {@link BiPredicate} to memoize.
      * @param keyFunction
@@ -395,6 +459,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biPredicate
      *            The {@link BiPredicate} to memoize.
      * @param cache
@@ -457,6 +525,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param booleanSupplier
      *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
@@ -479,6 +549,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param booleanSupplier
      *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
@@ -504,6 +576,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
@@ -523,6 +597,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param cache
@@ -545,6 +621,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param keyFunction
@@ -567,6 +647,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param keyFunction
@@ -633,6 +717,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleBinaryOperator
      *            The {@link DoubleBinaryOperator} to memoize.
      * @param keyFunction
@@ -655,6 +741,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleBinaryOperator
      *            The {@link DoubleBinaryOperator} to memoize.
      * @param keyFunction
@@ -721,6 +809,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleConsumer
      *            The {@link DoubleConsumer} to memoize.
      * @param keyFunction
@@ -743,6 +833,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleConsumer
      *            The {@link DoubleConsumer} to memoize.
      * @param keyFunction
@@ -768,6 +860,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @return The wrapped {@link DoubleFunction}.
@@ -787,6 +881,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param cache
@@ -809,6 +905,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param keyFunction
@@ -831,6 +931,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param keyFunction
@@ -897,6 +1001,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doublePredicate
      *            The {@link DoublePredicate} to memoize.
      * @param keyFunction
@@ -919,6 +1025,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doublePredicate
      *            The {@link DoublePredicate} to memoize.
      * @param keyFunction
@@ -984,6 +1092,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleSupplier
      *            The {@link DoubleSupplier} to memoize.
      * @param keySupplier
@@ -1006,6 +1116,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleSupplier
      *            The {@link DoubleSupplier} to memoize.
      * @param keySupplier
@@ -1072,6 +1184,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleToIntFunction
      *            The {@link DoubleToIntFunction} to memoize.
      * @param keyFunction
@@ -1094,6 +1208,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleToIntFunction
      *            The {@link DoubleToIntFunction} to memoize.
      * @param keyFunction
@@ -1160,6 +1276,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleToLongFunction
      *            The {@link DoubleToLongFunction} to memoize.
      * @param keyFunction
@@ -1182,6 +1300,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleToLongFunction
      *            The {@link DoubleToLongFunction} to memoize.
      * @param keyFunction
@@ -1248,6 +1368,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleUnaryOperator
      *            The {@link DoubleUnaryOperator} to memoize.
      * @param keyFunction
@@ -1270,6 +1392,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param doubleUnaryOperator
      *            The {@link DoubleUnaryOperator} to memoize.
      * @param keyFunction
@@ -1295,6 +1419,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
@@ -1314,6 +1442,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param cache
@@ -1336,6 +1468,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param keyFunction
@@ -1358,6 +1496,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param keyFunction
@@ -1424,6 +1568,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intBinaryOperator
      *            The {@link IntBinaryOperator} to memoize.
      * @param keyFunction
@@ -1446,6 +1592,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intBinaryOperator
      *            The {@link IntBinaryOperator} to memoize.
      * @param keyFunction
@@ -1512,6 +1660,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intConsumer
      *            The {@link IntConsumer} to memoize.
      * @param keyFunction
@@ -1534,6 +1684,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intConsumer
      *            The {@link IntConsumer} to memoize.
      * @param keyFunction
@@ -1559,6 +1711,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @return The wrapped {@link IntFunction}.
@@ -1578,6 +1732,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param cache
@@ -1600,6 +1756,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param keyFunction
@@ -1622,6 +1782,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param keyFunction
@@ -1688,6 +1852,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intPredicate
      *            The {@link IntPredicate} to memoize.
      * @param keyFunction
@@ -1710,6 +1876,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intPredicate
      *            The {@link IntPredicate} to memoize.
      * @param keyFunction
@@ -1775,6 +1943,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intSupplier
      *            The {@link IntSupplier} to memoize.
      * @param keySupplier
@@ -1797,6 +1967,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intSupplier
      *            The {@link IntSupplier} to memoize.
      * @param keySupplier
@@ -1863,6 +2035,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intToDoubleFunction
      *            The {@link IntToDoubleFunction} to memoize.
      * @param keyFunction
@@ -1885,6 +2059,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intToDoubleFunction
      *            The {@link IntToDoubleFunction} to memoize.
      * @param keyFunction
@@ -1951,6 +2127,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intToLongFunction
      *            The {@link IntToLongFunction} to memoize.
      * @param keyFunction
@@ -1973,6 +2151,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intToLongFunction
      *            The {@link IntToLongFunction} to memoize.
      * @param keyFunction
@@ -2039,6 +2219,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intUnaryOperator
      *            The {@link IntUnaryOperator} to memoize.
      * @param keyFunction
@@ -2061,6 +2243,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param intUnaryOperator
      *            The {@link IntUnaryOperator} to memoize.
      * @param keyFunction
@@ -2127,6 +2311,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longBinaryOperator
      *            The {@link LongBinaryOperator} to memoize.
      * @param keyFunction
@@ -2149,6 +2335,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longBinaryOperator
      *            The {@link LongBinaryOperator} to memoize.
      * @param keyFunction
@@ -2215,6 +2403,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longConsumer
      *            The {@link LongConsumer} to memoize.
      * @param keyFunction
@@ -2237,6 +2427,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longConsumer
      *            The {@link LongConsumer} to memoize.
      * @param keyFunction
@@ -2262,6 +2454,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @return The wrapped {@link LongFunction}.
@@ -2281,6 +2475,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param cache
@@ -2303,6 +2499,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param keyFunction
@@ -2325,6 +2525,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param keyFunction
@@ -2391,6 +2595,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longPredicate
      *            The {@link LongPredicate} to memoize.
      * @param keyFunction
@@ -2413,6 +2619,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longPredicate
      *            The {@link LongPredicate} to memoize.
      * @param keyFunction
@@ -2478,6 +2686,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longSupplier
      *            The {@link LongSupplier} to memoize.
      * @param keySupplier
@@ -2500,6 +2710,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longSupplier
      *            The {@link LongSupplier} to memoize.
      * @param keySupplier
@@ -2566,6 +2778,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longToDoubleFunction
      *            The {@link LongToDoubleFunction} to memoize.
      * @param keyFunction
@@ -2588,6 +2802,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longToDoubleFunction
      *            The {@link LongToDoubleFunction} to memoize.
      * @param keyFunction
@@ -2654,6 +2870,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longToIntFunction
      *            The {@link LongToIntFunction} to memoize.
      * @param keyFunction
@@ -2676,6 +2894,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longToIntFunction
      *            The {@link LongToIntFunction} to memoize.
      * @param keyFunction
@@ -2742,6 +2962,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longUnaryOperator
      *            The {@link LongUnaryOperator} to memoize.
      * @param keyFunction
@@ -2764,6 +2986,8 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param longUnaryOperator
      *            The {@link LongUnaryOperator} to memoize.
      * @param keyFunction
@@ -2789,6 +3013,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objDoubleConsumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @return The wrapped {@link ObjDoubleConsumer}.
@@ -2808,6 +3034,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objDoubleConsumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param keyFunction
@@ -2830,6 +3060,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objDoubleConsumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param keyFunction
@@ -2838,9 +3072,9 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static final <FIRST, KEY> ObjDoubleConsumer<FIRST> objDoubleConsumer(
-            final ObjDoubleConsumer<FIRST> objDoubleConsumer,
-            final ObjDoubleFunction<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> objDoubleConsumer,
+            final ObjDoubleFunction<INPUT, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
         return new GuavaCacheBasedObjDoubleConsumerMemoizer<>(cache, keyFunction, objDoubleConsumer);
     }
@@ -2855,14 +3089,16 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objDoubleConsumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static final <FIRST> ObjDoubleConsumer<FIRST> objDoubleConsumer(
-            final ObjDoubleConsumer<FIRST> objDoubleConsumer,
+    public static final <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> objDoubleConsumer,
             final Cache<String, String> cache) {
         return objDoubleConsumer(objDoubleConsumer, objDoubleConsumerHashCodeKeyFunction(), cache);
     }
@@ -2877,6 +3113,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objIntConsumer
      *            The {@link ObjIntConsumer} to memoize.
      * @return The wrapped {@link ObjIntConsumer}.
@@ -2896,6 +3134,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objIntConsumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param keyFunction
@@ -2918,6 +3160,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objIntConsumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param keyFunction
@@ -2926,9 +3172,9 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static final <FIRST, KEY> ObjIntConsumer<FIRST> objIntConsumer(
-            final ObjIntConsumer<FIRST> objIntConsumer,
-            final ObjIntFunction<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> objIntConsumer,
+            final ObjIntFunction<INPUT, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
         return new GuavaCacheBasedObjIntConsumerMemoizer<>(cache, keyFunction, objIntConsumer);
     }
@@ -2943,14 +3189,16 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objIntConsumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static final <FIRST> ObjIntConsumer<FIRST> objIntConsumer(
-            final ObjIntConsumer<FIRST> objIntConsumer,
+    public static final <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> objIntConsumer,
             final Cache<String, String> cache) {
         return objIntConsumer(objIntConsumer, objIntConsumerHashCodeKeyFunction(), cache);
     }
@@ -2965,6 +3213,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objLongConsumer
      *            The {@link ObjLongConsumer} to memoize.
      * @return The wrapped {@link ObjLongConsumer}.
@@ -2984,6 +3234,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objLongConsumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param keyFunction
@@ -3006,6 +3260,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param objLongConsumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param keyFunction
@@ -3014,9 +3272,9 @@ public final class GuavaMemoize {
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static final <FIRST, KEY> ObjLongConsumer<FIRST> objLongConsumer(
-            final ObjLongConsumer<FIRST> objLongConsumer,
-            final ObjLongFunction<FIRST, KEY> keyFunction,
+    public static final <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> objLongConsumer,
+            final ObjLongFunction<INPUT, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
         return new GuavaCacheBasedObjLongConsumerMemoizer<>(cache, keyFunction, objLongConsumer);
     }
@@ -3031,14 +3289,16 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param objLongConsumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param cache
      *            The {@link Cache} to use.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static final <FIRST> ObjLongConsumer<FIRST> objLongConsumer(
-            final ObjLongConsumer<FIRST> objLongConsumer,
+    public static final <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> objLongConsumer,
             final Cache<String, String> cache) {
         return objLongConsumer(objLongConsumer, objLongConsumerHashCodeKeyFunction(), cache);
     }
@@ -3053,6 +3313,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @return The wrapped {@link Predicate}.
@@ -3072,6 +3334,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param cache
@@ -3094,6 +3358,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param keyFunction
@@ -3116,6 +3384,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param keyFunction
@@ -3141,6 +3413,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
@@ -3159,6 +3433,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param cache
@@ -3181,6 +3457,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param keySupplier
@@ -3203,6 +3483,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param keySupplier
@@ -3228,6 +3512,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toDoubleBiFunction
      *            The {@link ToDoubleBiFunction} to memoize.
      * @return The wrapped {@link ToDoubleBiFunction}.
@@ -3247,6 +3535,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toDoubleBiFunction
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param keyFunction
@@ -3269,6 +3563,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toDoubleBiFunction
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param keyFunction
@@ -3294,6 +3594,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toDoubleBiFunction
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param cache
@@ -3316,6 +3620,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toDoubleFunction
      *            The {@link ToDoubleFunction} to memoize.
      * @return The wrapped {@link ToDoubleFunction}.
@@ -3335,6 +3641,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toDoubleFunction
      *            The {@link ToDoubleFunction} to memoize.
      * @param cache
@@ -3357,6 +3665,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toDoubleFunction
      *            The {@link ToDoubleFunction} to memoize.
      * @param keyFunction
@@ -3379,6 +3691,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toDoubleFunction
      *            The {@link ToDoubleFunction} to memoize.
      * @param keyFunction
@@ -3404,6 +3720,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toIntBiFunction
      *            The {@link ToIntBiFunction} to memoize.
      * @return The wrapped {@link ToIntBiFunction}.
@@ -3423,6 +3743,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toIntBiFunction
      *            The {@link ToIntBiFunction} to memoize.
      * @param keyFunction
@@ -3445,6 +3771,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toIntBiFunction
      *            The {@link ToIntBiFunction} to memoize.
      * @param keyFunction
@@ -3470,6 +3802,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toIntBiFunction
      *            The {@link ToIntBiFunction} to memoize.
      * @param cache
@@ -3492,6 +3828,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toIntFunction
      *            The {@link ToIntFunction} to memoize.
      * @return The wrapped {@link ToIntFunction}.
@@ -3511,6 +3849,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toIntFunction
      *            The {@link ToIntFunction} to memoize.
      * @param cache
@@ -3533,6 +3873,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toIntFunction
      *            The {@link ToIntFunction} to memoize.
      * @param keyFunction
@@ -3555,6 +3899,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toIntFunction
      *            The {@link ToIntFunction} to memoize.
      * @param keyFunction
@@ -3580,6 +3928,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toLongBiFunction
      *            The {@link ToLongBiFunction} to memoize.
      * @return The wrapped {@link ToLongBiFunction}.
@@ -3599,6 +3951,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toLongBiFunction
      *            The {@link ToLongBiFunction} to memoize.
      * @param keyFunction
@@ -3621,6 +3979,12 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toLongBiFunction
      *            The {@link ToLongBiFunction} to memoize.
      * @param keyFunction
@@ -3646,6 +4010,10 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param toLongBiFunction
      *            The {@link ToLongBiFunction} to memoize.
      * @param cache
@@ -3668,6 +4036,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toLongFunction
      *            The {@link ToLongFunction} to memoize.
      * @return The wrapped {@link ToLongFunction}.
@@ -3687,6 +4057,8 @@ public final class GuavaMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param toLongFunction
      *            The {@link ToLongFunction} to memoize.
      * @param cache
@@ -3709,6 +4081,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toLongFunction
      *            The {@link ToLongFunction} to memoize.
      * @param keyFunction
@@ -3731,6 +4107,10 @@ public final class GuavaMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param toLongFunction
      *            The {@link ToLongFunction} to memoize.
      * @param keyFunction

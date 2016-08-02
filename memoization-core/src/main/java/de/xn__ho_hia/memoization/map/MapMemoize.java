@@ -156,6 +156,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @return The wrapped {@link BiConsumer}.
@@ -174,6 +178,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param keyFunction
@@ -196,6 +206,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param keyFunction
@@ -221,6 +237,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param biConsumer
      *            The {@link BiConsumer} to memoize.
      * @param cache
@@ -243,12 +263,18 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction) {
+    public static <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction) {
         return biFunction(biFunction, emptyMap());
     }
 
@@ -262,14 +288,22 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param keyFunction
      *            The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+    public static <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
         return biFunction(biFunction, keyFunction, emptyMap());
     }
@@ -284,6 +318,14 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param keyFunction
@@ -292,10 +334,10 @@ public final class MapMemoize {
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, KEY, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
+    public static <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
-            final Map<KEY, VALUE> cache) {
+            final Map<KEY, OUTPUT> cache) {
         return new ConcurrentMapBasedBiFunctionMemoizer<>(asConcurrentMap(cache), keyFunction, biFunction);
     }
 
@@ -309,15 +351,21 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param biFunction
      *            The {@link BiFunction} to memoize.
      * @param cache
      *            The {@link Map} based cache to use.
      * @return The wrapped {@link BiFunction}.
      */
-    public static <FIRST, SECOND, VALUE> BiFunction<FIRST, SECOND, VALUE> biFunction(
-            final BiFunction<FIRST, SECOND, VALUE> biFunction,
-            final Map<String, VALUE> cache) {
+    public static <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+            final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
+            final Map<String, OUTPUT> cache) {
         return biFunction(biFunction, hashCodeKeyFunction(), cache);
     }
 
@@ -331,6 +379,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param predicate
      *            The {@link BiPredicate} to memoize.
      * @return The wrapped {@link BiPredicate}.
@@ -349,6 +401,12 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link BiPredicate} to memoize.
      * @param keyFunction
@@ -371,6 +429,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link BiPredicate} to memoize.
      * @param keyFunction
@@ -396,6 +460,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param predicate
      *            The {@link BiPredicate} to memoize.
      * @param cache
@@ -458,6 +526,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
@@ -480,6 +550,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param supplier
      *            The {@link BooleanSupplier} to memoize.
      * @param keySupplier
@@ -505,6 +577,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @return The wrapped {@link Consumer}.
@@ -523,6 +597,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param keyFunction
@@ -545,6 +623,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param keyFunction
@@ -570,6 +652,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link Consumer} to memoize.
      * @param cache
@@ -610,6 +694,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link DoubleBinaryOperator} to memoize.
      * @param keyFunction
@@ -632,6 +718,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link DoubleBinaryOperator} to memoize.
      * @param keyFunction
@@ -697,6 +785,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link DoubleConsumer} to memoize.
      * @param keyFunction
@@ -719,6 +809,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link DoubleConsumer} to memoize.
      * @param keyFunction
@@ -766,6 +858,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @return The wrapped {@link DoubleFunction}.
@@ -784,6 +878,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param keyFunction
@@ -806,6 +904,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param keyFunction
@@ -831,6 +933,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output.
      * @param function
      *            The {@link DoubleFunction} to memoize.
      * @param cache
@@ -871,6 +975,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link DoublePredicate} to memoize.
      * @param keyFunction
@@ -893,6 +999,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link DoublePredicate} to memoize.
      * @param keyFunction
@@ -980,6 +1088,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
      * @param keySupplier
@@ -1002,6 +1112,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param supplier
      *            The {@link DoubleSupplier} to memoize.
      * @param keySupplier
@@ -1045,6 +1157,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link DoubleToIntFunction} to memoize.
      * @param keyFunction
@@ -1067,6 +1181,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link DoubleToIntFunction} to memoize.
      * @param keyFunction
@@ -1132,6 +1248,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link DoubleToLongFunction} to memoize.
      * @param keyFunction
@@ -1154,6 +1272,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link DoubleToLongFunction} to memoize.
      * @param keyFunction
@@ -1219,6 +1339,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link DoubleUnaryOperator} to memoize.
      * @param keyFunction
@@ -1241,6 +1363,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link DoubleUnaryOperator} to memoize.
      * @param keyFunction
@@ -1288,6 +1412,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @return The wrapped {@link Function}.
@@ -1306,6 +1434,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param keyFunction
@@ -1328,6 +1462,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param keyFunction
@@ -1353,6 +1493,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link Function} to memoize.
      * @param cache
@@ -1393,6 +1537,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
      * @param keyFunction
@@ -1415,6 +1561,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link IntBinaryOperator} to memoize.
      * @param keyFunction
@@ -1480,6 +1628,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link IntConsumer} to memoize.
      * @param keyFunction
@@ -1502,6 +1652,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link IntConsumer} to memoize.
      * @param keyFunction
@@ -1549,6 +1701,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @return The wrapped {@link IntFunction}.
@@ -1567,6 +1721,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param keyFunction
@@ -1589,6 +1747,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param keyFunction
@@ -1614,6 +1776,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link IntFunction} to memoize.
      * @param cache
@@ -1654,6 +1818,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link IntPredicate} to memoize.
      * @param keyFunction
@@ -1676,6 +1842,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link IntPredicate} to memoize.
      * @param keyFunction
@@ -1763,6 +1931,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param supplier
      *            The {@link IntSupplier} to memoize.
      * @param keySupplier
@@ -1785,6 +1955,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param supplier
      *            The {@link IntSupplier} to memoize.
      * @param keySupplier
@@ -1828,6 +2000,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link IntToDoubleFunction} to memoize.
      * @param keyFunction
@@ -1850,6 +2024,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link IntToDoubleFunction} to memoize.
      * @param keyFunction
@@ -1915,6 +2091,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link IntToLongFunction} to memoize.
      * @param keyFunction
@@ -1937,6 +2115,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link IntToLongFunction} to memoize.
      * @param keyFunction
@@ -2002,6 +2182,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link IntUnaryOperator} to memoize.
      * @param keyFunction
@@ -2024,6 +2206,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link IntUnaryOperator} to memoize.
      * @param keyFunction
@@ -2089,6 +2273,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link LongBinaryOperator} to memoize.
      * @param keyFunction
@@ -2111,6 +2297,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link LongBinaryOperator} to memoize.
      * @param keyFunction
@@ -2176,6 +2364,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link LongConsumer} to memoize.
      * @param keyFunction
@@ -2198,6 +2388,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link LongConsumer} to memoize.
      * @param keyFunction
@@ -2245,6 +2437,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @return The wrapped {@link LongFunction}.
@@ -2263,6 +2457,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param keyFunction
@@ -2285,6 +2483,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param keyFunction
@@ -2310,6 +2512,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param function
      *            The {@link LongFunction} to memoize.
      * @param cache
@@ -2350,6 +2554,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link LongPredicate} to memoize.
      * @param keyFunction
@@ -2372,6 +2578,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link LongPredicate} to memoize.
      * @param keyFunction
@@ -2459,6 +2667,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param supplier
      *            The {@link LongSupplier} to memoize.
      * @param keySupplier
@@ -2481,6 +2691,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param supplier
      *            The {@link LongSupplier} to memoize.
      * @param keySupplier
@@ -2524,6 +2736,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link LongToDoubleFunction} to memoize.
      * @param keyFunction
@@ -2546,6 +2760,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link LongToDoubleFunction} to memoize.
      * @param keyFunction
@@ -2611,6 +2827,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link LongToIntFunction} to memoize.
      * @param keyFunction
@@ -2633,6 +2851,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link LongToIntFunction} to memoize.
      * @param keyFunction
@@ -2698,6 +2918,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link LongUnaryOperator} to memoize.
      * @param keyFunction
@@ -2720,6 +2942,8 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
      * @param operator
      *            The {@link LongUnaryOperator} to memoize.
      * @param keyFunction
@@ -2767,6 +2991,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @return The wrapped {@link ObjDoubleConsumer}.
@@ -2785,6 +3011,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param cache
@@ -2807,6 +3035,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param keyFunction
@@ -2829,6 +3061,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link ObjDoubleConsumer} to memoize.
      * @param keyFunction
@@ -2854,6 +3090,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
      * @return The wrapped {@link ObjIntConsumer}.
@@ -2872,6 +3110,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param cache
@@ -2894,6 +3134,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param keyFunction
@@ -2916,6 +3160,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link ObjIntConsumer} to memoize.
      * @param keyFunction
@@ -2941,6 +3189,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
      * @return The wrapped {@link ObjLongConsumer}.
@@ -2959,6 +3209,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param cache
@@ -2981,6 +3233,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param keyFunction
@@ -3003,6 +3259,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param consumer
      *            The {@link ObjLongConsumer} to memoize.
      * @param keyFunction
@@ -3028,6 +3288,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @return The wrapped {@link Predicate}.
@@ -3046,6 +3308,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param keyFunction
@@ -3068,6 +3334,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param keyFunction
@@ -3093,6 +3363,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param predicate
      *            The {@link Predicate} to memoize.
      * @param cache
@@ -3115,6 +3387,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
@@ -3133,6 +3407,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param cache
@@ -3155,6 +3431,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param keySupplier
@@ -3177,6 +3457,10 @@ public final class MapMemoize {
      * <li>Custom cache</li>
      * </ul>
      *
+     * @param <KEY>
+     *            The type of the cache key.
+     * @param <OUTPUT>
+     *            The type of the output/cache value.
      * @param supplier
      *            The {@link Supplier} to memoize.
      * @param keySupplier
@@ -3202,6 +3486,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
      * @return The wrapped {@link ToDoubleBiFunction}.
@@ -3221,6 +3509,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param keyFunction
@@ -3243,6 +3537,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param keyFunction
@@ -3268,6 +3568,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param function
      *            The {@link ToDoubleBiFunction} to memoize.
      * @param cache
@@ -3290,6 +3594,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
      * @return The wrapped {@link ToDoubleFunction}.
@@ -3308,6 +3614,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
      * @param keyFunction
@@ -3330,6 +3640,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
      * @param keyFunction
@@ -3355,6 +3669,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param function
      *            The {@link ToDoubleFunction} to memoize.
      * @param cache
@@ -3377,6 +3693,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
      * @return The wrapped {@link ToIntBiFunction}.
@@ -3396,6 +3716,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
      * @param keyFunction
@@ -3418,6 +3744,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
      * @param keyFunction
@@ -3443,6 +3775,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param function
      *            The {@link ToIntBiFunction} to memoize.
      * @param cache
@@ -3465,6 +3801,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToIntFunction} to memoize.
      * @param keyFunction
@@ -3487,6 +3827,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToIntFunction} to memoize.
      * @param keyFunction
@@ -3512,6 +3856,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param function
      *            The {@link ToIntFunction} to memoize.
      * @param cache
@@ -3534,11 +3880,13 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param function
      *            The {@link ToIntFunction} to memoize.
      * @return The wrapped {@link ToIntFunction}.
      */
-    public static <VALUE> ToIntFunction<VALUE> toIntFunction(final ToIntFunction<VALUE> function) {
+    public static <INPUT> ToIntFunction<INPUT> toIntFunction(final ToIntFunction<INPUT> function) {
         return toIntFunction(function, emptyMap());
     }
 
@@ -3552,6 +3900,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
      * @return The wrapped {@link ToLongBiFunction}.
@@ -3571,6 +3923,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
      * @param keyFunction
@@ -3593,6 +3951,12 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
      * @param keyFunction
@@ -3618,6 +3982,10 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <FIRST>
+     *            The type of the first parameter.
+     * @param <SECOND>
+     *            The type of the second parameter.
      * @param function
      *            The {@link ToLongBiFunction} to memoize.
      * @param cache
@@ -3640,6 +4008,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToLongFunction} to memoize.
      * @param keyFunction
@@ -3662,6 +4034,10 @@ public final class MapMemoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
+     * @param <KEY>
+     *            The type of the cache key.
      * @param function
      *            The {@link ToLongFunction} to memoize.
      * @param keyFunction
@@ -3687,6 +4063,8 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param function
      *            The {@link ToLongFunction} to memoize.
      * @param cache
@@ -3709,11 +4087,13 @@ public final class MapMemoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <INPUT>
+     *            The type of the input.
      * @param function
      *            The {@link ToLongFunction} to memoize.
      * @return The wrapped {@link ToLongFunction}.
      */
-    public static <VALUE> ToLongFunction<VALUE> toLongFunction(final ToLongFunction<VALUE> function) {
+    public static <INPUT> ToLongFunction<INPUT> toLongFunction(final ToLongFunction<INPUT> function) {
         return toLongFunction(function, emptyMap());
     }
 
