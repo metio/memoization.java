@@ -461,7 +461,7 @@ In order to use this project, declare the following inside your POM:
 
 Replace `${version.memoization}` with the pass:[<a href="https://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.memoization">latest release</a>]. This project follows the link:http://semver.org/[semantic versioning guidelines].
 Popular JCache implementations are link:http://www.ehcache.org/[Ehcache], link:http://commons.apache.org/proper/commons-jcs/[Commons JCS], link:https://hazelcast.org/[Hazelcast], link:http://infinispan.org/[Infinispan], link:https://ignite.apache.org/[Apache Ignite] and link:http://www.alachisoft.com/tayzgrid/[TayzGrid].
-Use link:https://github.com/jhalterman/expiringmap[ExpiringMap], link:https://github.com/ben-manes/concurrentlinkedhashmap[ConcurrentLinkedHashMap] or other `ConcurrentMap` implementations as alternatives to the default `ConcurrentHashMap` used in the `MapMemoize` factory. Caches like link:http://cache2k.org/[cache2k] can be used together with both `JCacheMemoize` as a JSR-107 cache and `MapMemoize` by calling `cache.asMap()`.
+Use link:https://github.com/jhalterman/expiringmap[ExpiringMap], link:https://github.com/ben-manes/concurrentlinkedhashmap[ConcurrentLinkedHashMap], link:https://github.com/OpenHFT/Chronicle-Map[Chronicle-Map] or other `ConcurrentMap` implementations as alternatives to the default `ConcurrentHashMap` used in the `MapMemoize` factory. Caches like link:http://cache2k.org/[cache2k] can be used together with both `JCacheMemoize` as a JSR-107 cache and `MapMemoize` by calling `cache.asMap()`.
 
 === Compatibility
 
