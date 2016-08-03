@@ -396,6 +396,8 @@ Map<KEY, OUTPUT> cache                   = ...;
 Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, keySupplier, cache);
 ----
 
+Note that `MapMemoize` does accept any `Map`, however copies the entries in the map to a new `ConcurrentHashMap`in case the provided `Map` is not a `ConcurrentMap` as well. This is done in order to ensure atomic `computeIfAbsent` behavior.
+
 === Integration
 
 In order to use this project, declare the following inside your POM:
