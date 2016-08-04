@@ -489,6 +489,7 @@ This project is compatible with the following Java versions:
 * link:https://github.com/pakoito/RxMemoization[RxMemoization]
 * link:https://github.com/jmorwick/memoized[memoized]
 * link:https://github.com/ggrandes/memoizer[memoizer]
+* link:http://aspects.jcabi.com/annotation-cacheable.html[jcabi's `@Cacheable`]
 
 == License
 
