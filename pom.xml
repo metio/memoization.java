@@ -19,7 +19,7 @@
   <parent>
     <groupId>de.xn--ho-hia.maven.parents</groupId>
     <artifactId>maven-parents-java-stable</artifactId>
-    <version>2016.07.02-120434</version>
+    <version>2016.08.20-000508</version>
   </parent>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
