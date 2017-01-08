@@ -490,6 +490,7 @@ This project is compatible with the following Java versions:
 * link:https://github.com/jmorwick/memoized[memoized]
 * link:https://github.com/ggrandes/memoizer[memoizer]
 * link:http://aspects.jcabi.com/annotation-cacheable.html[jcabi's `@Cacheable`]
+* link:https://github.com/strongh/crache#memoization-client[crache]
 
 == License
 
