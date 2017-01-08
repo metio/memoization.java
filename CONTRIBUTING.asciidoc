@@ -2,6 +2,15 @@
 
 Just send me a pull request or open up a ticket & we will take it from there together.
 
+== Building the project
+
+[source]
+----
+$ git clone https://github.com/sebhoss/memoization.java.git
+$ cd memoization.java
+$ mvn install
+----
+
 == Labels
 
 Labels are divided into categories by colons (":"). In case you want to know what each of them means, read the following:
