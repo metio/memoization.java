@@ -169,7 +169,7 @@ Replace `${version.memoization}` with the latest release. Use [ExpiringMap](http
 * [Clojure's `(memoize f)`](https://clojuredocs.org/clojure.core/memoize)
 * [Groovy's `@Memoized`](http://docs.groovy-lang.org/latest/html/gapi/groovy/transform/Memoized.html)
 * [ScalaCache's `memoize`](https://github.com/cb372/scalacache#memoization-of-method-results)
-* [Cyclops' `Memoize`](https://github.com/aol/cyclops/tree/master/cyclops-javaslang#memoization-with-a-guava-cache)
+* [Cyclops' `Memoize`](https://github.com/aol/cyclops/tree/master/cyclops)
 * [RxMemoization](https://github.com/pakoito/RxMemoization)
 * [memoized](https://github.com/jmorwick/memoized)
 * [memoizer](https://github.com/ggrandes/memoizer)
