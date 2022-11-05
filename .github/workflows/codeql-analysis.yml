@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: The memoization.java Authors
+# SPDX-License-Identifier: 0BSD
+
+name: CodeQL
+on:
+  schedule:
+    - cron: 42 3 * * 1
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ java ]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        java-package: jdk
+        architecture: x64
+        distribution: temurin
+    - name: Cache Maven Artifacts
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2

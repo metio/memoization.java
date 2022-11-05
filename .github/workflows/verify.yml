@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: The memoization.java Authors
+# SPDX-License-Identifier: 0BSD
+
+name: Verify Commits
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/verify.yml
+      - pom.xml
+      - memoization-caffeine/**
+      - memoization-core/**
+      - memoization-guava/**
+      - memoization-jcache/**
+  push:
+    branches: [ main ]
+    paths:
+      - .github/workflows/verify.yml
+      - pom.xml
+      - memoization-caffeine/**
+      - memoization-core/**
+      - memoization-guava/**
+      - memoization-jcache/**
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Git Repository
+        uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          java-package: jdk
+          architecture: x64
+          distribution: temurin
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Build with Maven
+        run: mvn --batch-mode verify

@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: The memoization.java Authors
+# SPDX-License-Identifier: 0BSD
+
+name: Update Parent
+on:
+  schedule:
+    - cron: 0 1 8 * *
+jobs:
+  parent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Git Repository
+        uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          java-package: jdk
+          architecture: x64
+          distribution: temurin
+      - uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Update Parent
+        run: mvn --batch-mode --define generateBackupPoms=false versions:update-parent
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.PAT }}
+          commit-message: Update parent to latest version
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          title: Update parent to latest version
+          body: |
+            `mvn --batch-mode --define generateBackupPoms=false versions:update-parent`
+          labels: |
+            enhancement
+          assignees: |
+            sebhoss
+          draft: false
+          base: main
+          branch: update-parent
+          delete-branch: true
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.PAT }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase

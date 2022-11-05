@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: memoization.java
+Upstream-Contact: Sebastian Hoß <seb@hoß.de>
+Source: https://github.com/metio/memoization.java
+
+Files: .idea/*
+Copyright: The memoization.java Authors
+License: 0BSD

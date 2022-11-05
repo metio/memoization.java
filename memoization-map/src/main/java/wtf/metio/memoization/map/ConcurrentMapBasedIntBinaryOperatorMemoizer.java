@@ -1,0 +1,38 @@
+/*
+ * SPDX-FileCopyrightText: The memoization.java Authors
+ * SPDX-License-Identifier: 0BSD
+ */
+package wtf.metio.memoization.map;
+
+import wtf.metio.memoization.core.IntBinaryFunction;
+
+import java.util.concurrent.ConcurrentMap;
+import java.util.function.IntBinaryOperator;
+
+import static java.util.Objects.requireNonNull;
+
+final class ConcurrentMapBasedIntBinaryOperatorMemoizer<KEY>
+        extends ConcurrentMapBasedMemoizer<KEY, Integer>
+        implements IntBinaryOperator {
+
+    private final IntBinaryFunction<KEY> keyFunction;
+    private final IntBinaryOperator operator;
+
+    public ConcurrentMapBasedIntBinaryOperatorMemoizer(
+            final ConcurrentMap<KEY, Integer> cache,
+            final IntBinaryFunction<KEY> keyFunction,
+            final IntBinaryOperator operator) {
+        super(cache);
+        this.keyFunction = requireNonNull(keyFunction,
+                "Provide a key function, might just be 'MemoizationDefaults.intBinaryOperatorHashCodeKeyFunction()'.");
+        this.operator = requireNonNull(operator,
+                "Cannot memoize a NULL IntBinaryOperator - provide an actual IntBinaryOperator to fix this.");
+    }
+
+    @Override
+    public int applyAsInt(final int left, final int right) {
+        final KEY key = keyFunction.apply(left, right);
+        return computeIfAbsent(key, givenKey -> operator.applyAsInt(left, right));
+    }
+
+}

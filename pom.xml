@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
-    This file is part of memoization.java. It is subject to the license terms in the LICENSE file found in the top-level
-    directory of this distribution and at http://creativecommons.org/publicdomain/zero/1.0/. No part of memoization.java,
-    including this file, may be copied, modified, propagated, or distributed except according to the terms contained
-    in the LICENSE file.
-
--->
+  ~ SPDX-FileCopyrightText: The memoization.java Authors
+  ~ SPDX-License-Identifier: 0BSD
+  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -17,18 +13,18 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#Inheritance -->
   <parent>
-    <groupId>de.xn--ho-hia.maven.parents</groupId>
-    <artifactId>maven-parents-java-stable</artifactId>
-    <version>2016.08.20-000508</version>
+    <groupId>wtf.metio.maven.parents</groupId>
+    <artifactId>maven-parents-java-prototype</artifactId>
+    <version>2022.10.28</version>
   </parent>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                               COORDINATES                               -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
-  <groupId>de.xn--ho-hia.memoization</groupId>
+  <groupId>wtf.metio.memoization</groupId>
   <artifactId>memoization.java</artifactId>
-  <version>2.0.0-${revision}</version>
+  <version>9999.99.99-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -37,7 +33,7 @@
   <!-- https://maven.apache.org/pom.html#More_Project_Information -->
   <name>memoization.java</name>
   <description>Java memoization library</description>
-  <url>http://seb.xn--ho-hia.de/memoization.java</url>
+  <url>https://github.com/metio/memoization.java/</url>
   <inceptionYear>2016</inceptionYear>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -46,9 +42,9 @@
   <!-- https://maven.apache.org/pom.html#Aggregation -->
   <modules>
     <module>memoization-core</module>
+    <module>memoization-map</module>
     <module>memoization-caffeine</module>
     <module>memoization-guava</module>
-    <module>memoization-jcache</module>
   </modules>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -56,10 +52,10 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#SCM -->
   <scm>
-    <connection>scm:git:git://github.com/sebhoss/memoization.java.git</connection>
-    <developerConnection>scm:git:git@github.com:sebhoss/memoization.java.git</developerConnection>
-    <tag>HEAD</tag>
-    <url>https://github.com/sebhoss/memoization.java</url>
+    <connection>scm:git:git://github.com/metio/memoization.java.git</connection>
+    <developerConnection>scm:git:git@github.com:metio/memoization.java.git</developerConnection>
+    <tag>${scmTag}</tag>
+    <url>https://github.com/metio/memoization.java</url>
   </scm>
 
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -68,17 +64,8 @@
   <!-- https://maven.apache.org/pom.html#Issue_Management -->
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/sebhoss/memoization.java/issues</url>
+    <url>https://github.com/metio/memoization.java/issues</url>
   </issueManagement>
-
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--                               CI MANAGEMENT                             -->
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!-- https://maven.apache.org/pom.html#Continuous_Integration_Management -->
-  <ciManagement>
-    <system>Travis</system>
-    <url>https://travis-ci.org/sebhoss/memoization.java</url>
-  </ciManagement>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                          DISTRIBUTION MANAGEMENT                        -->
@@ -86,10 +73,14 @@
   <!-- https://maven.apache.org/pom.html#Distribution_Management -->
   <distributionManagement>
     <site>
-      <id>github</id>
-      <name>GitHub Pages</name>
-      <url>https://seb.xn--ho-hia.de/memoization.java/</url>
+      <id>metio</id>
+      <name>official website</name>
+      <url>https://github.com/metio/memoization.java</url>
     </site>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -97,7 +88,8 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#Properties -->
   <properties>
-    <revision>SNAPSHOT</revision>
+    <version.jdk>${javaVersion}</version.jdk>
+    <scmTag>HEAD</scmTag>
   </properties>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -107,23 +99,23 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>de.xn--ho-hia.memoization</groupId>
+        <groupId>wtf.metio.memoization</groupId>
         <artifactId>memoization-core</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.xn--ho-hia.memoization</groupId>
+        <groupId>wtf.metio.memoization</groupId>
+        <artifactId>memoization-map</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>wtf.metio.memoization</groupId>
         <artifactId>memoization-caffeine</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.xn--ho-hia.memoization</groupId>
+        <groupId>wtf.metio.memoization</groupId>
         <artifactId>memoization-guava</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>de.xn--ho-hia.memoization</groupId>
-        <artifactId>memoization-jcache</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
@@ -133,27 +125,20 @@
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <version>1.0.0</version>
-        <configuration>
-          <flattenMode>oss</flattenMode>
-        </configuration>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>1.1.0</version>
         <executions>
-          <!-- enable flattening -->
           <execution>
-            <id>flatten</id>
-            <phase>process-resources</phase>
+            <phase>initialize</phase>
             <goals>
-              <goal>flatten</goal>
+              <goal>read-project-properties</goal>
             </goals>
-          </execution>
-          <!-- ensure proper cleanup -->
-          <execution>
-            <id>flatten.clean</id>
-            <phase>clean</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
+            <configuration>
+              <quiet>true</quiet>
+              <files>
+                <file>${project.basedir}/../java.properties</file>
+              </files>
+            </configuration>
           </execution>
         </executions>
       </plugin>
