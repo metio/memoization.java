@@ -91,6 +91,7 @@
     <properties>
         <version.jdk>${javaVersion}</version.jdk>
         <scmTag>HEAD</scmTag>
+        <project.build.outputTimestamp>2016-01-01T12:00:00+00:00</project.build.outputTimestamp>
     </properties>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
