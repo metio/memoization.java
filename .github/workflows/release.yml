@@ -59,6 +59,10 @@ jobs:
           fileName: signing.key.asc
           fileDir: ${{ github.workspace}}
           encodedString: ${{ secrets.GPG_SECRET_KEY_BASE64 }}
+      - id: pom-version
+        name: Set Release Version
+        if: steps.commits.outputs.count > 0
+        run: mvn --batch-mode --define newVersion=${{ steps.release.outputs.version }} --define generateBackupPoms=false versions:set
       - id: deploy-maven
         name: Deploy Maven Artifact
         if: steps.commits.outputs.count > 0
@@ -66,7 +70,6 @@ jobs:
           mvn \
             --batch-mode \
             --activate-profiles release \
-            --define revision=${{ steps.release.outputs.version }} \
             --define scmTag=${{ steps.sha.outputs.sha }} \
             --define pgp.secretkey=keyfile:signing.key.asc \
             --define pgp.passphrase=literal:${{ secrets.GPG_SECRET_KEY_PASSWORD }} \
