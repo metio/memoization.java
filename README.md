@@ -10,7 +10,7 @@ Java [memoization](https://en.wikipedia.org/wiki/Memoization) library - trade sp
 ## Features
 
 * Memoize calls to `Consumer`, `Function`, `Predicate`, `Supplier` and other functional interfaces in `java.util.function`
-* Cache values using [Caffeine](https://github.com/ben-manes/caffeine), [Guava](https://github.com/google/guava/wiki/CachesExplained), [JCache](https://jcp.org/en/jsr/detail?id=107) or any [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html).
+* Cache values using [Caffeine](https://github.com/ben-manes/caffeine), [Guava](https://github.com/google/guava/wiki/CachesExplained), or any [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html).
 * Customize caches and the cache keys
 
 ## Usage
@@ -46,7 +46,6 @@ Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier);
 ```java
 wtf.metio.memoization.caffeine.CaffeineMemoize;
 wtf.metio.memoization.guava.GuavaMemoize;
-wtf.metio.memoization.jcache.JCacheMemoize;
 wtf.metio.memoization.map.MapMemoize;
 
 // memoize in Caffeine cache
@@ -59,11 +58,6 @@ Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, KEY> keyFunction         = ...;
 Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function, keyFunction);
 
-// memoize in JCache cache
-Predicate<INPUT> predicate               = ...;
-Function<INPUT, KEY> keyFunction         = ...;
-Predicate<INPUT> memoizedPredicate       = JCacheMemoize.predicate(predicate, keyFunction);
-
 // memoize in ConcurrentMap
 Supplier<OUTPUT> supplier                = ...;
 Supplier<KEY> keySupplier                = ...;
@@ -75,7 +69,6 @@ Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, keySupp
 ```java
 wtf.metio.memoization.caffeine.CaffeineMemoize;
 wtf.metio.memoization.guava.GuavaMemoize;
-wtf.metio.memoization.jcache.JCacheMemoize;
 wtf.metio.memoization.map.MapMemoize;
 
 // memoize in Caffeine cache
@@ -88,11 +81,6 @@ Function<INPUT, OUTPUT> function         = ...;
 Cache<INPUT, OUTPUT> cache               = ...; // com.google.common.cache.Cache
 Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function, cache);
 
-// memoize in JCache cache
-Predicate<INPUT> predicate               = ...;
-Cache<INPUT, Boolean> cache              = ...; // javax.cache.Cache
-Predicate<INPUT> memoizedPredicate       = JCacheMemoize.predicate(predicate, cache);
-
 // memoize in ConcurrentMap
 Supplier<OUTPUT> supplier                = ...;
 Map<String, OUTPUT> cache                = ...;
@@ -104,7 +92,6 @@ Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, cache);
 ```java
 wtf.metio.memoization.caffeine.CaffeineMemoize;
 wtf.metio.memoization.guava.GuavaMemoize;
-wtf.metio.memoization.jcache.JCacheMemoize;
 wtf.metio.memoization.map.MapMemoize;
 
 // memoize in Caffeine cache
@@ -118,12 +105,6 @@ Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, KEY> keyFunction         = ...;
 Cache<KEY, OUTPUT> cache                 = ...; // com.google.common.cache.Cache
 Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function, keyFunction, cache);
-
-// memoize in JCache cache
-Predicate<INPUT> predicate               = ...;
-Function<INPUT, KEY> keyFunction         = ...;
-Cache<KEY, Boolean> cache                = ...; // javax.cache.Cache
-Predicate<INPUT> memoizedPredicate       = JCacheMemoize.predicate(predicate, keyFunction, cache);
 
 // memoize in ConcurrentMap
 Supplier<OUTPUT> supplier                = ...;
@@ -140,13 +121,15 @@ In order to use this project, declare the following dependencies in your project
 
 ```xml
 <dependencies>
+  <!-- ConcurrentMap ONLY -->
   <dependency>
     <groupId>wtf.metio.memoization</groupId>
-    <artifactId>memoization-core</artifactId>
+    <artifactId>memoization-map</artifactId>
     <version>${version.memoization}</version>
   </dependency>
+  <!-- ConcurrentMap ONLY -->
 
-  <!-- CAFFEINE ONLY -->
+  <!-- Caffeine ONLY -->
   <dependency>
     <groupId>wtf.metio.memoization</groupId>
     <artifactId>memoization-caffeine</artifactId>
@@ -157,9 +140,9 @@ In order to use this project, declare the following dependencies in your project
     <artifactId>caffeine</artifactId>
     <version>${version.caffeine}</version>
   </dependency>
-  <!-- CAFFEINE ONLY -->
+  <!-- Caffeine ONLY -->
 
-  <!-- GUAVA ONLY -->
+  <!-- Guava ONLY -->
   <dependency>
     <groupId>wtf.metio.memoization</groupId>
     <artifactId>memoization-guava</artifactId>
@@ -170,31 +153,12 @@ In order to use this project, declare the following dependencies in your project
     <artifactId>guava</artifactId>
     <version>${version.guava}</version>
   </dependency>
-  <!-- GUAVA ONLY -->
-
-  <!-- JCACHE ONLY -->
-  <dependency>
-    <groupId>wtf.metio.memoization</groupId>
-    <artifactId>memoization-jcache</artifactId>
-    <version>${version.memoization}</version>
-  </dependency>
-  <dependency>
-    <groupId>javax.cache</groupId>
-    <artifactId>cache-api</artifactId>
-    <version>${version.jcache}</version>
-  </dependency>
-  <!-- Add your JCache implementation here -->
-  <dependency>
-    <groupId>...</groupId>
-    <artifactId>...</artifactId>
-    <version>...</version>
-  </dependency>
-  <!-- JCACHE ONLY -->
+  <!-- Guava ONLY -->
 
 </dependencies>
 ```
 
-Replace `${version.memoization}` with the latest release. Popular JCache implementations are [Ehcache](http://www.ehcache.org/), [Commons JCS](http://commons.apache.org/proper/commons-jcs/), [Hazelcast](https://hazelcast.org/), [Infinispan](http://infinispan.org/), [Apache Ignite](https://ignite.apache.org/), [TayzGrid](http://www.alachisoft.com/tayzgrid/) and [triava](https://github.com/trivago/triava). Use [ExpiringMap](https://github.com/jhalterman/expiringmap), [ConcurrentLinkedHashMap](https://github.com/ben-manes/concurrentlinkedhashmap), [Chronicle-Map](https://github.com/OpenHFT/Chronicle-Map), [Cacheonix](http://www.cacheonix.org/) or other `ConcurrentMap` implementations as alternatives to the default `ConcurrentHashMap` used in the `MapMemoize` factory. Caches like [cache2k](http://cache2k.org/) can be used together with both JCacheMemoize as a JSR-107 cache and `MapMemoize` by calling `cache.asMap()`.
+Replace `${version.memoization}` with the latest release. Use [ExpiringMap](https://github.com/jhalterman/expiringmap), [ConcurrentLinkedHashMap](https://github.com/ben-manes/concurrentlinkedhashmap), [Chronicle-Map](https://github.com/OpenHFT/Chronicle-Map), [Cacheonix](http://www.cacheonix.org/) or other `ConcurrentMap` implementations as alternatives to the default `ConcurrentHashMap` used in the `MapMemoize` factory. Caches like [cache2k](http://cache2k.org/) can be used together with `MapMemoize` by calling `cache.asMap()`.
 
 ## Alternatives
 
