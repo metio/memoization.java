@@ -30,7 +30,6 @@ class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullCache() {
         // given
         final ConcurrentMap<Double, Double> cache = null;
@@ -44,7 +43,6 @@ class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullOperator() {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
@@ -72,8 +70,8 @@ class ConcurrentMapBasedDoubleUnaryOperatorMemoizerTest {
     }
 
     /**
-    *
-    */
+     *
+     */
     @Test
     void shouldUseSetCacheKeyAndValue() {
         // given

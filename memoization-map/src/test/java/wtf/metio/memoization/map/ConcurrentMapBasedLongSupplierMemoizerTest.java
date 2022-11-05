@@ -46,7 +46,6 @@ class ConcurrentMapBasedLongSupplierMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullKeySupplier() {
         // given
         final ConcurrentMap<String, Long> cache = new ConcurrentHashMap<>();

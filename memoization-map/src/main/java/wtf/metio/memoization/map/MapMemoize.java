@@ -95,7 +95,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -114,7 +114,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -137,7 +137,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -162,7 +162,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -184,7 +184,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -205,7 +205,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -229,7 +229,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -255,7 +255,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -278,7 +278,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -297,7 +297,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -320,7 +320,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -345,7 +345,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BiPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -367,7 +367,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -384,7 +384,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -404,7 +404,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -425,7 +425,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link BooleanSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -448,7 +448,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -466,7 +466,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -488,7 +488,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -512,7 +512,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Consumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -533,7 +533,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -550,7 +550,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -571,7 +571,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -594,7 +594,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -614,7 +614,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -631,7 +631,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -652,7 +652,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -675,7 +675,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -695,7 +695,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -713,7 +713,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -735,7 +735,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -759,7 +759,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -780,7 +780,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -797,7 +797,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -818,7 +818,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -841,7 +841,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoublePredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -861,7 +861,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -878,7 +878,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -898,7 +898,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -919,7 +919,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -942,7 +942,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -959,7 +959,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -980,7 +980,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1003,7 +1003,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1023,7 +1023,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1040,7 +1040,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1061,7 +1061,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1084,7 +1084,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1104,7 +1104,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1121,7 +1121,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1142,7 +1142,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1165,7 +1165,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1185,7 +1185,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1204,7 +1204,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1227,7 +1227,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1252,7 +1252,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Function} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1274,7 +1274,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1291,7 +1291,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1312,7 +1312,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1335,7 +1335,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1355,7 +1355,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1372,7 +1372,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1393,7 +1393,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1416,7 +1416,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1436,7 +1436,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1454,7 +1454,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1476,7 +1476,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1500,7 +1500,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1521,7 +1521,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1538,7 +1538,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1559,7 +1559,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1582,7 +1582,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1602,7 +1602,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1619,7 +1619,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1639,7 +1639,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1660,7 +1660,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1683,7 +1683,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1700,7 +1700,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1721,7 +1721,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1744,7 +1744,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1764,7 +1764,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1781,7 +1781,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1802,7 +1802,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1825,7 +1825,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1845,7 +1845,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1862,7 +1862,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1883,7 +1883,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1906,7 +1906,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link IntUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1926,7 +1926,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1943,7 +1943,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1964,7 +1964,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1987,7 +1987,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongBinaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2007,7 +2007,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2024,7 +2024,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2045,7 +2045,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2068,7 +2068,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2088,7 +2088,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2106,7 +2106,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2128,7 +2128,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2152,7 +2152,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2173,7 +2173,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2190,7 +2190,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2211,7 +2211,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2234,7 +2234,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongPredicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2254,7 +2254,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2271,7 +2271,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2291,7 +2291,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2312,7 +2312,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongSupplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2335,7 +2335,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2352,7 +2352,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2373,7 +2373,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2396,7 +2396,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2416,7 +2416,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2433,7 +2433,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2454,7 +2454,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2477,7 +2477,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2497,7 +2497,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2514,7 +2514,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2535,7 +2535,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2558,7 +2558,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link LongUnaryOperator} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2578,7 +2578,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2596,7 +2596,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2617,7 +2617,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2639,7 +2639,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2663,7 +2663,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2681,7 +2681,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2702,7 +2702,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2724,7 +2724,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjIntConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2748,7 +2748,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2766,7 +2766,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2787,7 +2787,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2809,7 +2809,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ObjLongConsumer} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2833,7 +2833,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2851,7 +2851,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2873,7 +2873,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2897,7 +2897,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Predicate} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2918,7 +2918,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2936,7 +2936,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2957,7 +2957,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2979,7 +2979,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link Supplier} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache key</li>
      * <li>Custom cache</li>
@@ -3003,7 +3003,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3023,7 +3023,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3046,7 +3046,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3071,7 +3071,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3093,7 +3093,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3111,7 +3111,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3133,7 +3133,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3157,7 +3157,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToDoubleFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3178,7 +3178,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3198,7 +3198,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3221,7 +3221,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3246,7 +3246,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToIntBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3268,7 +3268,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3290,7 +3290,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3314,7 +3314,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3335,7 +3335,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToIntFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3353,7 +3353,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3373,7 +3373,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3396,7 +3396,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3421,7 +3421,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToLongBiFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3443,7 +3443,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3465,7 +3465,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3489,7 +3489,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3510,7 +3510,7 @@ public final class MapMemoize {
      * <p>
      * Memoizes a {@link ToLongFunction} in a {@link java.util.concurrent.ConcurrentMap}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>

@@ -62,7 +62,7 @@ class GuavaCacheBasedDoublePredicateMemoizerTest {
 
         // then
         Assertions.assertThrows(MemoizationException.class, () ->
-        memoizer.test(123.456D));
+                memoizer.test(123.456D));
     }
 
     @Test

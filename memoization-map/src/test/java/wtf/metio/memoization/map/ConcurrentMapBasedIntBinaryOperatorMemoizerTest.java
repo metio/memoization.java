@@ -30,7 +30,6 @@ class ConcurrentMapBasedIntBinaryOperatorMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullCache() {
         // given
         final ConcurrentMap<String, Integer> cache = null;
@@ -44,7 +43,6 @@ class ConcurrentMapBasedIntBinaryOperatorMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullKeyFunction() {
         // given
         final ConcurrentMap<String, Integer> cache = new ConcurrentHashMap<>();

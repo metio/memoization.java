@@ -59,7 +59,7 @@ class GuavaCacheBasedFunctionMemoizerTest {
 
         // then
         Assertions.assertThrows(MemoizationException.class, () ->
-        memoizer.apply("test"));
+                memoizer.apply("test"));
     }
 
 }

@@ -30,7 +30,6 @@ class ConcurrentMapBasedIntConsumerMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullCache() {
         // given
         final ConcurrentMap<Integer, Integer> cache = null;
@@ -44,7 +43,6 @@ class ConcurrentMapBasedIntConsumerMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullConsumer() {
         // given
         final ConcurrentMap<Integer, Integer> cache = new ConcurrentHashMap<>();

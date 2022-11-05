@@ -28,7 +28,6 @@ class ConcurrentMapBasedIntFunctionMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullCache() {
         // given
         final ConcurrentMap<String, String> cache = null;
@@ -42,7 +41,6 @@ class ConcurrentMapBasedIntFunctionMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullFunction() {
         // given
         final ConcurrentMap<String, String> cache = new ConcurrentHashMap<>();

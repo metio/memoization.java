@@ -6,7 +6,6 @@ package wtf.metio.memoization.guava;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

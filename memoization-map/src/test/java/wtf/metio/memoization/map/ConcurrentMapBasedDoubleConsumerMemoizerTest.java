@@ -30,7 +30,6 @@ class ConcurrentMapBasedDoubleConsumerMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullCache() {
         // given
         final ConcurrentMap<Double, Double> cache = null;
@@ -44,7 +43,6 @@ class ConcurrentMapBasedDoubleConsumerMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullConsumer() {
         // given
         final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();

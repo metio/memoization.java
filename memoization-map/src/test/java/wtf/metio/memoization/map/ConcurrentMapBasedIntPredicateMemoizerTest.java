@@ -29,7 +29,6 @@ class ConcurrentMapBasedIntPredicateMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullCache() {
         // given
         final ConcurrentMap<Integer, Boolean> cache = null;
@@ -43,7 +42,6 @@ class ConcurrentMapBasedIntPredicateMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullPredicate() {
         // given
         final ConcurrentMap<Integer, Boolean> cache = new ConcurrentHashMap<>();

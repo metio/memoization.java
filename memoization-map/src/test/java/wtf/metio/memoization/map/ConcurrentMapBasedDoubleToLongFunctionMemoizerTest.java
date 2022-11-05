@@ -30,7 +30,6 @@ class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullCache() {
         // given
         final ConcurrentMap<Double, Long> cache = null;
@@ -44,7 +43,6 @@ class ConcurrentMapBasedDoubleToLongFunctionMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullFunction() {
         // given
         final ConcurrentMap<Double, Long> cache = new ConcurrentHashMap<>();

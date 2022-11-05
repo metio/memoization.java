@@ -90,7 +90,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -110,7 +109,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -133,7 +131,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -158,7 +155,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -180,7 +176,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -201,7 +196,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -225,7 +219,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -251,7 +244,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -274,7 +266,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -294,7 +285,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -317,7 +307,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -342,7 +331,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BiPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -364,7 +352,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BooleanSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -381,7 +368,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BooleanSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -401,7 +387,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BooleanSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -422,7 +407,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link BooleanSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -445,7 +429,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Consumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -464,7 +447,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Consumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -485,7 +467,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Consumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -507,7 +488,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Consumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -531,7 +511,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -549,7 +528,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -569,7 +547,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -590,7 +567,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -613,7 +589,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -631,7 +606,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -651,7 +625,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -672,7 +645,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -695,7 +667,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -714,7 +685,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -735,7 +705,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -757,7 +726,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -781,7 +749,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoublePredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -799,7 +766,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoublePredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -819,7 +785,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoublePredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -840,7 +805,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoublePredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -863,7 +827,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -880,7 +843,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -900,7 +862,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -921,7 +882,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -944,7 +904,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -962,7 +921,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -982,7 +940,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1003,7 +960,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1026,7 +982,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1044,7 +999,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1064,7 +1018,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1085,7 +1038,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1108,7 +1060,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1126,7 +1077,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1146,7 +1096,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1167,7 +1116,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link DoubleUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1190,7 +1138,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Function} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1210,7 +1157,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Function} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1232,7 +1178,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Function} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1255,7 +1200,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Function} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1280,7 +1224,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1298,7 +1241,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1318,7 +1260,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1339,7 +1280,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1362,7 +1302,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1380,7 +1319,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1400,7 +1338,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1421,7 +1358,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1444,7 +1380,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1463,7 +1398,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1484,7 +1418,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1506,7 +1439,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1530,7 +1462,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1548,7 +1479,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1568,7 +1498,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1589,7 +1518,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1612,7 +1540,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1629,7 +1556,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1649,7 +1575,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1670,7 +1595,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1693,7 +1617,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1711,7 +1634,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1731,7 +1653,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1752,7 +1673,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1775,7 +1695,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1793,7 +1712,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1813,7 +1731,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1834,7 +1751,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1857,7 +1773,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1875,7 +1790,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1895,7 +1809,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1916,7 +1829,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link IntUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -1939,7 +1851,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -1957,7 +1868,6 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -1977,7 +1887,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -1998,7 +1908,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongBinaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2021,7 +1931,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2039,7 +1949,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2059,7 +1969,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2080,7 +1990,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2103,7 +2013,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2122,7 +2032,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2143,7 +2053,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2165,7 +2075,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2189,7 +2099,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2207,7 +2117,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2227,7 +2137,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2248,7 +2158,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongPredicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2271,7 +2181,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2288,7 +2198,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2308,7 +2218,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2329,7 +2239,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongSupplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2352,7 +2262,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2370,7 +2280,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2390,7 +2300,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2411,7 +2321,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2434,7 +2344,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2452,7 +2362,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2472,7 +2382,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2493,7 +2403,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2516,7 +2426,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2534,7 +2444,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2554,7 +2464,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2575,7 +2485,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link LongUnaryOperator} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2598,7 +2508,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2617,7 +2527,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2639,7 +2549,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2663,7 +2573,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjDoubleConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2684,7 +2594,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjIntConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2703,7 +2613,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjIntConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2725,7 +2635,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjIntConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2749,7 +2659,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjIntConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2770,7 +2680,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjLongConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2789,7 +2699,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjLongConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2811,7 +2721,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjLongConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2835,7 +2745,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ObjLongConsumer} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2856,7 +2766,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Predicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2875,7 +2785,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Predicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2896,7 +2806,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Predicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -2918,7 +2828,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Predicate} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -2942,7 +2852,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Supplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -2960,7 +2870,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Supplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -2981,7 +2891,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Supplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3003,7 +2913,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link Supplier} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3027,7 +2937,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3047,7 +2957,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3070,7 +2980,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3095,7 +3005,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToDoubleBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3117,7 +3027,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3136,7 +3046,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3157,7 +3067,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3179,7 +3089,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToDoubleFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3203,7 +3113,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToIntBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3223,7 +3133,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToIntBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3246,7 +3156,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToIntBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3271,7 +3181,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToIntBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3293,7 +3203,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3312,7 +3222,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3333,7 +3243,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3355,7 +3265,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToIntFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3379,7 +3289,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToLongBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3399,7 +3309,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToLongBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3422,7 +3332,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToLongBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>
@@ -3447,7 +3357,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToLongBiFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3469,7 +3379,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Default cache key</li>
@@ -3488,7 +3398,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Default cache key</li>
@@ -3509,7 +3419,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Default cache</li>
      * <li>Custom cache key</li>
@@ -3531,7 +3441,7 @@ public final class GuavaMemoize {
      * <p>
      * Memoizes a {@link ToLongFunction} in a Guava {@link Cache}.
      * </p>
-     * <h3>Features</h3>
+     *
      * <ul>
      * <li>Custom cache</li>
      * <li>Custom cache key</li>

@@ -43,7 +43,6 @@ class ConcurrentMapBasedObjDoubleConsumerMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullKeyFunction() {
         // given
         final ConcurrentMap<String, String> cache = new ConcurrentHashMap<>();
@@ -57,7 +56,6 @@ class ConcurrentMapBasedObjDoubleConsumerMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullConsumer() {
         // given
         final ConcurrentMap<String, String> cache = new ConcurrentHashMap<>();

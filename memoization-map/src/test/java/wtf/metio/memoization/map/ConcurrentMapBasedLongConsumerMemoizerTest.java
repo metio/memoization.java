@@ -43,7 +43,6 @@ class ConcurrentMapBasedLongConsumerMemoizerTest {
     }
 
     @Test
-    
     void shouldRequireNonNullConsumer() {
         // given
         final ConcurrentMap<Long, Long> cache = new ConcurrentHashMap<>();
