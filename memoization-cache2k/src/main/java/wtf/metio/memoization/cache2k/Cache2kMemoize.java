@@ -1,11 +1,7 @@
-/*
- * SPDX-FileCopyrightText: The memoization.java Authors
- * SPDX-License-Identifier: 0BSD
- */
-package wtf.metio.memoization.caffeine;
+package wtf.metio.memoization.cache2k;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
+import org.cache2k.Cache;
+import org.cache2k.Cache2kBuilder;
 import wtf.metio.memoization.core.*;
 import wtf.metio.memoization.map.MapMemoize;
 
@@ -81,15 +77,15 @@ import static java.util.function.Function.identity;
  * @see ToLongFunction
  * @see <a href="https://en.wikipedia.org/wiki/Memoization">Wikipedia: Memoization</a>
  */
-public final class CaffeineMemoize {
+public final class Cache2kMemoize {
 
-    private CaffeineMemoize() {
+    private Cache2kMemoize() {
         // factory class
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -103,12 +99,12 @@ public final class CaffeineMemoize {
      */
     public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer) {
-        return biConsumer(biConsumer, Caffeine.newBuilder().build());
+        return biConsumer(biConsumer, Cache2kBuilder.of(String.class, String.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -125,12 +121,13 @@ public final class CaffeineMemoize {
     public static <FIRST, SECOND, KEY> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return biConsumer(biConsumer, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return biConsumer(biConsumer, keyFunction, (Cache<KEY, KEY>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -151,7 +148,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link BiConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -175,7 +172,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link BiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -190,12 +187,13 @@ public final class CaffeineMemoize {
      */
     public static <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction) {
-        return biFunction(biFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(String.class, Object.class).build();
+        return biFunction(biFunction, (Cache<String, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -213,12 +211,13 @@ public final class CaffeineMemoize {
     public static <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return biFunction(biFunction, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return biFunction(biFunction, keyFunction, (Cache<KEY, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -240,7 +239,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link BiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -265,7 +264,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -277,13 +276,14 @@ public final class CaffeineMemoize {
      * @param predicate The {@link BiPredicate} to memoize.
      * @return The wrapped {@link BiPredicate}.
      */
-    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(final BiPredicate<FIRST, SECOND> predicate) {
-        return biPredicate(predicate, Caffeine.newBuilder().build());
+    public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
+            final BiPredicate<FIRST, SECOND> predicate) {
+        return biPredicate(predicate, Cache2kBuilder.of(String.class, Boolean.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -300,12 +300,13 @@ public final class CaffeineMemoize {
     public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return biPredicate(predicate, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Boolean.class).build();
+        return biPredicate(predicate, keyFunction, (Cache<KEY, Boolean>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -326,7 +327,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link BiPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BiPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -350,7 +351,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BooleanSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -361,12 +362,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link BooleanSupplier}.
      */
     public static BooleanSupplier booleanSupplier(final BooleanSupplier supplier) {
-        return booleanSupplier(supplier, Caffeine.newBuilder().build());
+        return booleanSupplier(supplier, Cache2kBuilder.of(String.class, Boolean.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BooleanSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -385,7 +386,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BooleanSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -400,12 +401,13 @@ public final class CaffeineMemoize {
     public static <KEY> BooleanSupplier booleanSupplier(
             final BooleanSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return booleanSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Boolean.class).build();
+        return booleanSupplier(supplier, keySupplier, (Cache<KEY, Boolean>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link BooleanSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link BooleanSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -427,7 +429,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Consumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -439,12 +441,13 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Consumer}.
      */
     public static <INPUT> Consumer<INPUT> consumer(final Consumer<INPUT> consumer) {
-        return consumer(consumer, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return consumer(consumer, (Cache<INPUT, INPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Consumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -464,7 +467,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Consumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -480,12 +483,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY> Consumer<INPUT> consumer(
             final Consumer<INPUT> consumer,
             final Function<INPUT, KEY> keyFunction) {
-        return consumer(consumer, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return consumer(consumer, keyFunction, (Cache<KEY, INPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link Consumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Consumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -508,7 +512,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -519,12 +523,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Function}.
      */
     public static DoubleBinaryOperator doubleBinaryOperator(final DoubleBinaryOperator operator) {
-        return doubleBinaryOperator(operator, Caffeine.newBuilder().build());
+        return doubleBinaryOperator(operator, Cache2kBuilder.of(String.class, Double.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -543,7 +547,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -558,12 +562,13 @@ public final class CaffeineMemoize {
     public static <KEY> DoubleBinaryOperator doubleBinaryOperator(
             final DoubleBinaryOperator operator,
             final DoubleBinaryFunction<KEY> keyFunction) {
-        return doubleBinaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return doubleBinaryOperator(operator, keyFunction, (Cache<KEY, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -585,7 +590,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -596,12 +601,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link DoubleConsumer}.
      */
     public static DoubleConsumer doubleConsumer(final DoubleConsumer consumer) {
-        return doubleConsumer(consumer, Caffeine.newBuilder().build());
+        return doubleConsumer(consumer, Cache2kBuilder.of(Double.class, Double.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -620,7 +625,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -635,12 +640,13 @@ public final class CaffeineMemoize {
     public static <KEY> DoubleConsumer doubleConsumer(
             final DoubleConsumer consumer,
             final DoubleFunction<KEY> keyFunction) {
-        return doubleConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return doubleConsumer(consumer, keyFunction, (Cache<KEY, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -662,7 +668,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -674,12 +680,13 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link DoubleFunction}.
      */
     public static <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(final DoubleFunction<OUTPUT> function) {
-        return doubleFunction(function, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Double.class, Object.class).build();
+        return doubleFunction(function, (Cache<Double, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -699,7 +706,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -715,12 +722,13 @@ public final class CaffeineMemoize {
     public static <KEY, OUTPUT> DoubleFunction<OUTPUT> doubleFunction(
             final DoubleFunction<OUTPUT> function,
             final DoubleFunction<KEY> keyFunction) {
-        return doubleFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return doubleFunction(function, keyFunction, (Cache<KEY, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -743,7 +751,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoublePredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -754,12 +762,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link DoublePredicate}.
      */
     public static DoublePredicate doublePredicate(final DoublePredicate predicate) {
-        return doublePredicate(predicate, Caffeine.newBuilder().build());
+        return doublePredicate(predicate, Cache2kBuilder.of(Double.class, Boolean.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoublePredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -778,7 +786,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoublePredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -793,12 +801,13 @@ public final class CaffeineMemoize {
     public static <KEY> DoublePredicate doublePredicate(
             final DoublePredicate predicate,
             final DoubleFunction<KEY> keyFunction) {
-        return doublePredicate(predicate, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Boolean.class).build();
+        return doublePredicate(predicate, keyFunction, (Cache<KEY, Boolean>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoublePredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoublePredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -820,7 +829,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -831,12 +840,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link DoubleSupplier}.
      */
     public static DoubleSupplier doubleSupplier(final DoubleSupplier supplier) {
-        return doubleSupplier(supplier, Caffeine.newBuilder().build());
+        return doubleSupplier(supplier, Cache2kBuilder.of(String.class, Double.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -855,7 +864,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -870,12 +879,13 @@ public final class CaffeineMemoize {
     public static <KEY> DoubleSupplier doubleSupplier(
             final DoubleSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return doubleSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return doubleSupplier(supplier, keySupplier, (Cache<KEY, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -897,7 +907,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -908,12 +918,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Function}.
      */
     public static DoubleToIntFunction doubleToIntFunction(final DoubleToIntFunction function) {
-        return doubleToIntFunction(function, Caffeine.newBuilder().build());
+        return doubleToIntFunction(function, Cache2kBuilder.of(Double.class, Integer.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -932,7 +942,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -947,12 +957,13 @@ public final class CaffeineMemoize {
     public static <KEY> DoubleToIntFunction doubleToIntFunction(
             final DoubleToIntFunction function,
             final DoubleFunction<KEY> keyFunction) {
-        return doubleToIntFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return doubleToIntFunction(function, keyFunction, (Cache<KEY, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -974,7 +985,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -985,12 +996,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Function}.
      */
     public static DoubleToLongFunction doubleToLongFunction(final DoubleToLongFunction function) {
-        return doubleToLongFunction(function, Caffeine.newBuilder().build());
+        return doubleToLongFunction(function, Cache2kBuilder.of(Double.class, Long.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1009,7 +1020,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1024,12 +1035,13 @@ public final class CaffeineMemoize {
     public static <KEY> DoubleToLongFunction doubleToLongFunction(
             final DoubleToLongFunction function,
             final DoubleFunction<KEY> keyFunction) {
-        return doubleToLongFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return doubleToLongFunction(function, keyFunction, (Cache<KEY, Long>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1051,7 +1063,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1062,12 +1074,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Function}.
      */
     public static DoubleUnaryOperator doubleUnaryOperator(final DoubleUnaryOperator operator) {
-        return doubleUnaryOperator(operator, Caffeine.newBuilder().build());
+        return doubleUnaryOperator(operator, Cache2kBuilder.of(Double.class, Double.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1086,7 +1098,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link DoubleUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1101,12 +1113,13 @@ public final class CaffeineMemoize {
     public static <KEY> DoubleUnaryOperator doubleUnaryOperator(
             final DoubleUnaryOperator operator,
             final DoubleFunction<KEY> keyFunction) {
-        return doubleUnaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return doubleUnaryOperator(operator, keyFunction, (Cache<KEY, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link DoubleUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link DoubleUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1128,7 +1141,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Function} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1141,12 +1154,13 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Function}.
      */
     public static <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(final Function<INPUT, OUTPUT> function) {
-        return function(function, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return function(function, (Cache<INPUT, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Function} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1167,7 +1181,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Function} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1184,12 +1198,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(
             final Function<INPUT, OUTPUT> function,
             final Function<INPUT, KEY> keyFunction) {
-        return function(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return function(function, keyFunction, (Cache<KEY, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link Function} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Function} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1213,7 +1228,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1224,12 +1239,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Function}.
      */
     public static IntBinaryOperator intBinaryOperator(final IntBinaryOperator operator) {
-        return intBinaryOperator(operator, Caffeine.newBuilder().build());
+        return intBinaryOperator(operator, Cache2kBuilder.of(String.class, Integer.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1248,7 +1263,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1263,12 +1278,13 @@ public final class CaffeineMemoize {
     public static <KEY> IntBinaryOperator intBinaryOperator(
             final IntBinaryOperator operator,
             final IntBinaryFunction<KEY> keyFunction) {
-        return intBinaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return intBinaryOperator(operator, keyFunction, (Cache<KEY, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1290,7 +1306,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1301,12 +1317,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link IntConsumer}.
      */
     public static IntConsumer intConsumer(final IntConsumer consumer) {
-        return intConsumer(consumer, Caffeine.newBuilder().build());
+        return intConsumer(consumer, Cache2kBuilder.of(Integer.class, Integer.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1325,7 +1341,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1340,12 +1356,13 @@ public final class CaffeineMemoize {
     public static <KEY> IntConsumer intConsumer(
             final IntConsumer consumer,
             final IntFunction<KEY> keyFunction) {
-        return intConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return intConsumer(consumer, keyFunction, (Cache<KEY, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1367,7 +1384,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1379,12 +1396,13 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link IntFunction}.
      */
     public static <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
-        return intFunction(function, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Integer.class, Object.class).build();
+        return intFunction(function, (Cache<Integer, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1404,7 +1422,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1420,12 +1438,13 @@ public final class CaffeineMemoize {
     public static <KEY, OUTPUT> IntFunction<OUTPUT> intFunction(
             final IntFunction<OUTPUT> function,
             final IntFunction<KEY> keyFunction) {
-        return intFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return intFunction(function, keyFunction, (Cache<KEY, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1448,7 +1467,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1459,12 +1478,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link IntPredicate}.
      */
     public static IntPredicate intPredicate(final IntPredicate predicate) {
-        return intPredicate(predicate, Caffeine.newBuilder().build());
+        return intPredicate(predicate, Cache2kBuilder.of(Integer.class, Boolean.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1483,7 +1502,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1498,12 +1517,13 @@ public final class CaffeineMemoize {
     public static <KEY> IntPredicate intPredicate(
             final IntPredicate predicate,
             final IntFunction<KEY> keyFunction) {
-        return intPredicate(predicate, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Boolean.class).build();
+        return intPredicate(predicate, keyFunction, (Cache<KEY, Boolean>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1525,7 +1545,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1535,13 +1555,14 @@ public final class CaffeineMemoize {
      * @param supplier The {@link IntSupplier} to memoize.
      * @return The wrapped {@link IntSupplier}.
      */
-    public static IntSupplier intSupplier(final IntSupplier supplier) {
-        return intSupplier(supplier, Caffeine.newBuilder().build());
+    public static IntSupplier intSupplier(
+            final IntSupplier supplier) {
+        return intSupplier(supplier, Cache2kBuilder.of(String.class, Integer.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1560,7 +1581,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1575,12 +1596,13 @@ public final class CaffeineMemoize {
     public static <KEY> IntSupplier intSupplier(
             final IntSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return intSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return intSupplier(supplier, keySupplier, (Cache<KEY, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1602,7 +1624,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1613,12 +1635,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Function}.
      */
     public static IntToDoubleFunction intToDoubleFunction(final IntToDoubleFunction function) {
-        return intToDoubleFunction(function, Caffeine.newBuilder().build());
+        return intToDoubleFunction(function, Cache2kBuilder.of(Integer.class, Double.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1637,7 +1659,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1652,12 +1674,13 @@ public final class CaffeineMemoize {
     public static <KEY> IntToDoubleFunction intToDoubleFunction(
             final IntToDoubleFunction function,
             final IntFunction<KEY> keyFunction) {
-        return intToDoubleFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return intToDoubleFunction(function, keyFunction, (Cache<KEY, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1679,7 +1702,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1690,12 +1713,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Function}.
      */
     public static IntToLongFunction intToLongFunction(final IntToLongFunction function) {
-        return intToLongFunction(function, Caffeine.newBuilder().build());
+        return intToLongFunction(function, Cache2kBuilder.of(Integer.class, Long.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1714,7 +1737,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1729,12 +1752,13 @@ public final class CaffeineMemoize {
     public static <KEY> IntToLongFunction intToLongFunction(
             final IntToLongFunction function,
             final IntFunction<KEY> keyFunction) {
-        return intToLongFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return intToLongFunction(function, keyFunction, (Cache<KEY, Long>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1756,7 +1780,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1767,12 +1791,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link IntUnaryOperator}.
      */
     public static IntUnaryOperator intUnaryOperator(final IntUnaryOperator operator) {
-        return intUnaryOperator(operator, Caffeine.newBuilder().build());
+        return intUnaryOperator(operator, Cache2kBuilder.of(Integer.class, Integer.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1791,7 +1815,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1806,12 +1830,13 @@ public final class CaffeineMemoize {
     public static <KEY> IntUnaryOperator intUnaryOperator(
             final IntUnaryOperator operator,
             final IntFunction<KEY> keyFunction) {
-        return intUnaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return intUnaryOperator(operator, keyFunction, (Cache<KEY, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link IntUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link IntUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1833,7 +1858,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1844,12 +1869,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link LongBinaryOperator}.
      */
     public static LongBinaryOperator longBinaryOperator(final LongBinaryOperator operator) {
-        return longBinaryOperator(operator, Caffeine.newBuilder().build());
+        return longBinaryOperator(operator, Cache2kBuilder.of(String.class, Long.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1868,7 +1893,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1883,12 +1908,13 @@ public final class CaffeineMemoize {
     public static <KEY> LongBinaryOperator longBinaryOperator(
             final LongBinaryOperator operator,
             final LongBinaryFunction<KEY> keyFunction) {
-        return longBinaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return longBinaryOperator(operator, keyFunction, (Cache<KEY, Long>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongBinaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongBinaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1910,7 +1936,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1921,12 +1947,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link LongConsumer}.
      */
     public static LongConsumer longConsumer(final LongConsumer consumer) {
-        return longConsumer(consumer, Caffeine.newBuilder().build());
+        return longConsumer(consumer, Cache2kBuilder.of(Long.class, Long.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1945,7 +1971,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1960,12 +1986,13 @@ public final class CaffeineMemoize {
     public static <KEY> LongConsumer longConsumer(
             final LongConsumer consumer,
             final LongFunction<KEY> keyFunction) {
-        return longConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return longConsumer(consumer, keyFunction, (Cache<KEY, Long>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -1987,7 +2014,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -1999,12 +2026,13 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link LongFunction}.
      */
     public static <OUTPUT> LongFunction<OUTPUT> longFunction(final LongFunction<OUTPUT> function) {
-        return longFunction(function, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Long.class, Object.class).build();
+        return longFunction(function, (Cache<Long, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2024,7 +2052,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2040,12 +2068,13 @@ public final class CaffeineMemoize {
     public static <KEY, OUTPUT> LongFunction<OUTPUT> longFunction(
             final LongFunction<OUTPUT> function,
             final LongFunction<KEY> keyFunction) {
-        return longFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return longFunction(function, keyFunction, (Cache<KEY, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2068,7 +2097,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2079,12 +2108,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link LongPredicate}.
      */
     public static LongPredicate longPredicate(final LongPredicate predicate) {
-        return longPredicate(predicate, Caffeine.newBuilder().build());
+        return longPredicate(predicate, Cache2kBuilder.of(Long.class, Boolean.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2103,7 +2132,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2118,12 +2147,13 @@ public final class CaffeineMemoize {
     public static <KEY> LongPredicate longPredicate(
             final LongPredicate predicate,
             final LongFunction<KEY> keyFunction) {
-        return longPredicate(predicate, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Boolean.class).build();
+        return longPredicate(predicate, keyFunction, (Cache<KEY, Boolean>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongPredicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongPredicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2145,7 +2175,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2155,13 +2185,14 @@ public final class CaffeineMemoize {
      * @param supplier The {@link LongSupplier} to memoize.
      * @return The wrapped {@link LongSupplier}.
      */
-    public static LongSupplier longSupplier(final LongSupplier supplier) {
-        return longSupplier(supplier, Caffeine.newBuilder().build());
+    public static LongSupplier longSupplier(
+            final LongSupplier supplier) {
+        return longSupplier(supplier, Cache2kBuilder.of(String.class, Long.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2180,7 +2211,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2195,12 +2226,13 @@ public final class CaffeineMemoize {
     public static <KEY> LongSupplier longSupplier(
             final LongSupplier supplier,
             final Supplier<KEY> keySupplier) {
-        return longSupplier(supplier, keySupplier, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return longSupplier(supplier, keySupplier, (Cache<KEY, Long>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongSupplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongSupplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2222,7 +2254,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2233,12 +2265,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link LongToDoubleFunction}.
      */
     public static LongToDoubleFunction longToDoubleFunction(final LongToDoubleFunction function) {
-        return longToDoubleFunction(function, Caffeine.newBuilder().build());
+        return longToDoubleFunction(function, Cache2kBuilder.of(Long.class, Double.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2257,7 +2289,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2272,12 +2304,13 @@ public final class CaffeineMemoize {
     public static <KEY> LongToDoubleFunction longToDoubleFunction(
             final LongToDoubleFunction function,
             final LongFunction<KEY> keyFunction) {
-        return longToDoubleFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return longToDoubleFunction(function, keyFunction, (Cache<KEY, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2299,7 +2332,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2310,12 +2343,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link LongToIntFunction}.
      */
     public static LongToIntFunction longToIntFunction(final LongToIntFunction function) {
-        return longToIntFunction(function, Caffeine.newBuilder().build());
+        return longToIntFunction(function, Cache2kBuilder.of(Long.class, Integer.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2334,7 +2367,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2349,12 +2382,13 @@ public final class CaffeineMemoize {
     public static <KEY> LongToIntFunction longToIntFunction(
             final LongToIntFunction function,
             final LongFunction<KEY> keyFunction) {
-        return longToIntFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return longToIntFunction(function, keyFunction, (Cache<KEY, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2376,7 +2410,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2387,12 +2421,12 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link LongUnaryOperator}.
      */
     public static LongUnaryOperator longUnaryOperator(final LongUnaryOperator operator) {
-        return longUnaryOperator(operator, Caffeine.newBuilder().build());
+        return longUnaryOperator(operator, Cache2kBuilder.of(Long.class, Long.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2411,7 +2445,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2426,12 +2460,13 @@ public final class CaffeineMemoize {
     public static <KEY> LongUnaryOperator longUnaryOperator(
             final LongUnaryOperator operator,
             final LongFunction<KEY> keyFunction) {
-        return longUnaryOperator(operator, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return longUnaryOperator(operator, keyFunction, (Cache<KEY, Long>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link LongUnaryOperator} in a Caffeine {@link Cache}.
+     * Memoizes a {@link LongUnaryOperator} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2453,7 +2488,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjDoubleConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2464,13 +2499,15 @@ public final class CaffeineMemoize {
      * @param consumer The {@link ObjDoubleConsumer} to memoize.
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
-    public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(final ObjDoubleConsumer<INPUT> consumer) {
-        return objDoubleConsumer(consumer, Caffeine.newBuilder().build());
+    public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+            final ObjDoubleConsumer<INPUT> consumer) {
+        final var cache = Cache2kBuilder.of(String.class, Object.class).build();
+        return objDoubleConsumer(consumer, (Cache<String, INPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjDoubleConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2490,7 +2527,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjDoubleConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2506,12 +2543,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
             final ObjDoubleConsumer<INPUT> consumer,
             final ObjDoubleFunction<INPUT, KEY> keyFunction) {
-        return objDoubleConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return objDoubleConsumer(consumer, keyFunction, (Cache<KEY, INPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ObjDoubleConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjDoubleConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2534,7 +2572,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjIntConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2554,7 +2592,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjIntConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2570,12 +2608,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
             final ObjIntConsumer<INPUT> consumer,
             final ObjIntFunction<INPUT, KEY> keyFunction) {
-        return objIntConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return objIntConsumer(consumer, keyFunction, (Cache<KEY, INPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjIntConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2598,7 +2637,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ObjIntConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjIntConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2609,13 +2648,15 @@ public final class CaffeineMemoize {
      * @param consumer The {@link ObjIntConsumer} to memoize.
      * @return The wrapped {@link ObjIntConsumer}.
      */
-    public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(final ObjIntConsumer<INPUT> consumer) {
-        return objIntConsumer(consumer, Caffeine.newBuilder().build());
+    public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
+            final ObjIntConsumer<INPUT> consumer) {
+        final var cache = Cache2kBuilder.of(String.class, Object.class).build();
+        return objIntConsumer(consumer, (Cache<String, INPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjLongConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2626,13 +2667,15 @@ public final class CaffeineMemoize {
      * @param consumer The {@link ObjLongConsumer} to memoize.
      * @return The wrapped {@link ObjLongConsumer}.
      */
-    public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(final ObjLongConsumer<INPUT> consumer) {
-        return objLongConsumer(consumer, Caffeine.newBuilder().build());
+    public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
+            final ObjLongConsumer<INPUT> consumer) {
+        final var cache = Cache2kBuilder.of(String.class, Object.class).build();
+        return objLongConsumer(consumer, (Cache<String, INPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjLongConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2652,7 +2695,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjLongConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2668,12 +2711,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
             final ObjLongConsumer<INPUT> consumer,
             final ObjLongFunction<INPUT, KEY> keyFunction) {
-        return objLongConsumer(consumer, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return objLongConsumer(consumer, keyFunction, (Cache<KEY, INPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ObjLongConsumer} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ObjLongConsumer} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2696,7 +2740,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Predicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2708,12 +2752,13 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link Predicate}.
      */
     public static <INPUT> Predicate<INPUT> predicate(final Predicate<INPUT> predicate) {
-        return predicate(predicate, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Boolean.class).build();
+        return predicate(predicate, (Cache<INPUT, Boolean>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Predicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2733,7 +2778,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Predicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2749,12 +2794,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY> Predicate<INPUT> predicate(
             final Predicate<INPUT> predicate,
             final Function<INPUT, KEY> keyFunction) {
-        return predicate(predicate, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Boolean.class).build();
+        return predicate(predicate, keyFunction, (Cache<KEY, Boolean>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link Predicate} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Predicate} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2777,7 +2823,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Supplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2788,13 +2834,15 @@ public final class CaffeineMemoize {
      * @param supplier The {@link Supplier} to memoize.
      * @return The wrapped {@link Supplier}.
      */
-    public static <OUTPUT> Supplier<OUTPUT> supplier(final Supplier<OUTPUT> supplier) {
-        return supplier(supplier, Caffeine.newBuilder().build());
+    public static <OUTPUT> Supplier<OUTPUT> supplier(
+            final Supplier<OUTPUT> supplier) {
+        final var cache = Cache2kBuilder.of(String.class, Object.class).build();
+        return supplier(supplier, (Cache<String, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Supplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2814,7 +2862,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Supplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2830,12 +2878,13 @@ public final class CaffeineMemoize {
     public static <KEY, OUTPUT> Supplier<OUTPUT> supplier(
             final Supplier<OUTPUT> supplier,
             final Supplier<KEY> keySupplier) {
-        return supplier(supplier, keySupplier, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Object.class).build();
+        return supplier(supplier, keySupplier, (Cache<KEY, OUTPUT>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link Supplier} in a Caffeine {@link Cache}.
+     * Memoizes a {@link Supplier} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2858,7 +2907,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToDoubleBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2872,12 +2921,12 @@ public final class CaffeineMemoize {
      */
     public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function) {
-        return toDoubleBiFunction(function, Caffeine.newBuilder().build());
+        return toDoubleBiFunction(function, Cache2kBuilder.of(String.class, Double.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToDoubleBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2894,12 +2943,13 @@ public final class CaffeineMemoize {
     public static <FIRST, SECOND, KEY> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return toDoubleBiFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return toDoubleBiFunction(function, keyFunction, (Cache<KEY, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToDoubleBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2923,7 +2973,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToDoubleBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2944,7 +2994,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2956,12 +3006,13 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link ToDoubleFunction}.
      */
     public static <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(final ToDoubleFunction<INPUT> function) {
-        return toDoubleFunction(function, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return toDoubleFunction(function, (Cache<INPUT, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -2981,7 +3032,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -2997,12 +3048,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
             final ToDoubleFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction) {
-        return toDoubleFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Double.class).build();
+        return toDoubleFunction(function, keyFunction, (Cache<KEY, Double>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToDoubleFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToDoubleFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3025,7 +3077,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToIntBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToIntBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -3039,12 +3091,12 @@ public final class CaffeineMemoize {
      */
     public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function) {
-        return toIntBiFunction(function, Caffeine.newBuilder().build());
+        return toIntBiFunction(function, Cache2kBuilder.of(String.class, Integer.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToIntBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToIntBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -3061,12 +3113,13 @@ public final class CaffeineMemoize {
     public static <FIRST, SECOND, KEY> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return toIntBiFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return toIntBiFunction(function, keyFunction, (Cache<KEY, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToIntBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToIntBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3090,7 +3143,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToIntBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToIntBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3111,7 +3164,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -3123,12 +3176,13 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link ToIntFunction}.
      */
     public static <INPUT> ToIntFunction<INPUT> toIntFunction(final ToIntFunction<INPUT> function) {
-        return toIntFunction(function, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return toIntFunction(function, (Cache<INPUT, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3148,7 +3202,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -3164,12 +3218,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
             final ToIntFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction) {
-        return toIntFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Integer.class).build();
+        return toIntFunction(function, keyFunction, (Cache<KEY, Integer>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToIntFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToIntFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3192,7 +3247,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToLongBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToLongBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -3206,12 +3261,12 @@ public final class CaffeineMemoize {
      */
     public static <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function) {
-        return toLongBiFunction(function, Caffeine.newBuilder().build());
+        return toLongBiFunction(function, Cache2kBuilder.of(String.class, Long.class).build());
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToLongBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToLongBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -3228,12 +3283,13 @@ public final class CaffeineMemoize {
     public static <FIRST, SECOND, KEY> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
-        return toLongBiFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return toLongBiFunction(function, keyFunction, (Cache<KEY, Long>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToLongBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToLongBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3257,7 +3313,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToLongBiFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToLongBiFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3278,7 +3334,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3298,7 +3354,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -3314,12 +3370,13 @@ public final class CaffeineMemoize {
     public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
             final ToLongFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction) {
-        return toLongFunction(function, keyFunction, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return toLongFunction(function, keyFunction, (Cache<KEY, Long>) cache);
     }
 
     /**
      * <p>
-     * Memoizes a {@link ToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Custom cache</li>
@@ -3342,7 +3399,7 @@ public final class CaffeineMemoize {
 
     /**
      * <p>
-     * Memoizes a {@link ToLongFunction} in a Caffeine {@link Cache}.
+     * Memoizes a {@link ToLongFunction} in a cache2k {@link Cache}.
      * </p>
      * <ul>
      * <li>Default cache</li>
@@ -3354,7 +3411,8 @@ public final class CaffeineMemoize {
      * @return The wrapped {@link ToLongFunction}.
      */
     public static <INPUT> ToLongFunction<INPUT> toLongFunction(final ToLongFunction<INPUT> function) {
-        return toLongFunction(function, Caffeine.newBuilder().build());
+        final var cache = Cache2kBuilder.of(Object.class, Long.class).build();
+        return toLongFunction(function, (Cache<INPUT, Long>) cache);
     }
 
 }

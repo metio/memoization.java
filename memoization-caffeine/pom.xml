@@ -45,6 +45,11 @@
             <artifactId>memoization-map</artifactId>
         </dependency>
         <dependency>
+            <groupId>wtf.metio.memoization</groupId>
+            <artifactId>memoization-tck</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
         </dependency>
