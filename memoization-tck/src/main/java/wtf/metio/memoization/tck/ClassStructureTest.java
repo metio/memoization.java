@@ -1,3 +1,7 @@
+/*
+ * SPDX-FileCopyrightText: The memoization.java Authors
+ * SPDX-License-Identifier: 0BSD
+ */
 package wtf.metio.memoization.tck;
 
 import org.junit.jupiter.api.Assertions;

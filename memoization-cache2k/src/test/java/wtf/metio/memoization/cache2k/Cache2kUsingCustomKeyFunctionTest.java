@@ -1,3 +1,7 @@
+/*
+ * SPDX-FileCopyrightText: The memoization.java Authors
+ * SPDX-License-Identifier: 0BSD
+ */
 package wtf.metio.memoization.cache2k;
 
 import wtf.metio.memoization.core.*;
