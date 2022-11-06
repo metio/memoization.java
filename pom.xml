@@ -43,9 +43,11 @@
     <!-- https://maven.apache.org/pom.html#Aggregation -->
     <modules>
         <module>memoization-core</module>
+        <module>memoization-tck</module>
         <module>memoization-map</module>
         <module>memoization-caffeine</module>
         <module>memoization-guava</module>
+        <module>memoization-cache2k</module>
     </modules>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -107,6 +109,11 @@
             </dependency>
             <dependency>
                 <groupId>wtf.metio.memoization</groupId>
+                <artifactId>memoization-tck</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>wtf.metio.memoization</groupId>
                 <artifactId>memoization-map</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -118,6 +125,11 @@
             <dependency>
                 <groupId>wtf.metio.memoization</groupId>
                 <artifactId>memoization-guava</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>wtf.metio.memoization</groupId>
+                <artifactId>memoization-cache2k</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
