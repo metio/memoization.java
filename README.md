@@ -31,8 +31,8 @@ wtf.metio.memoization.guava.GuavaMemoize;
 wtf.metio.memoization.map.MapMemoize;
 
 // memoize in cache2k cache
-Consumer<INPUT> consumer                 = ...;
-Consumer<INPUT> memoizedConsumer         = Cache2kMemoize.consumer(consumer);
+Consumer<INPUT> predicate                = ...;
+Consumer<INPUT> memoizedPredicate        = Cache2kMemoize.predicate(predicate);
 
 // memoize in Caffeine cache
 Consumer<INPUT> consumer                 = ...;
@@ -56,9 +56,9 @@ wtf.metio.memoization.guava.GuavaMemoize;
 wtf.metio.memoization.map.MapMemoize;
 
 // memoize in cache2k cache
-Consumer<INPUT> consumer                 = ...;
+Consumer<INPUT> predicate                = ...;
 Function<INPUT, KEY> keyFunction         = ...;
-Consumer<INPUT> memoizedConsumer         = Cache2kMemoize.consumer(consumer, keyFunction);
+Consumer<INPUT> memoizedPredicate        = Cache2kMemoize.predicate(predicate, keyFunction);
 
 // memoize in Caffeine cache
 Consumer<INPUT> consumer                 = ...;
@@ -85,9 +85,9 @@ wtf.metio.memoization.guava.GuavaMemoize;
 wtf.metio.memoization.map.MapMemoize;
 
 // memoize in cache2k cache
-Consumer<INPUT> consumer                 = ...;
+Consumer<INPUT> predicate                = ...;
 Cache<INPUT, INPUT> cache                = ...; // org.cache2k.Cache
-Consumer<INPUT> memoizedConsumer         = Cache2kMemoize.consumer(consumer, cache);
+Consumer<INPUT> memoizedPredicate        = Cache2kMemoize.predicate(predicate, cache);
 
 // memoize in Caffeine cache
 Consumer<INPUT> consumer                 = ...;
@@ -114,10 +114,10 @@ wtf.metio.memoization.guava.GuavaMemoize;
 wtf.metio.memoization.map.MapMemoize;
 
 // memoize in cache2k cache
-Consumer<INPUT> consumer                 = ...;
+Consumer<INPUT> predicate                = ...;
 Function<INPUT, KEY> keyFunction         = ...;
 Cache<KEY, INPUT> cache                  = ...; // org.cache2k.Cache
-Consumer<INPUT> memoizedConsumer         = CaffeineMemoize.consumer(consumer, keyFunction, cache);
+Consumer<INPUT> memoizedPredicate        = Cache2kMemoize.predicate(predicate, keyFunction, cache);
 
 // memoize in Caffeine cache
 Consumer<INPUT> consumer                 = ...;
