@@ -5,22 +5,8 @@ name: Verify Commits
 on:
   pull_request:
     branches: [ main ]
-    paths:
-      - .github/workflows/verify.yml
-      - pom.xml
-      - memoization-caffeine/**
-      - memoization-core/**
-      - memoization-guava/**
-      - memoization-jcache/**
   push:
     branches: [ main ]
-    paths:
-      - .github/workflows/verify.yml
-      - pom.xml
-      - memoization-caffeine/**
-      - memoization-core/**
-      - memoization-guava/**
-      - memoization-jcache/**
 jobs:
   verify:
     runs-on: ubuntu-latest
