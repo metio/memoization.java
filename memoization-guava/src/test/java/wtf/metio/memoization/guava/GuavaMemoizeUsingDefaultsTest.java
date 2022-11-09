@@ -2,221 +2,221 @@
  * SPDX-FileCopyrightText: The memoization.java Authors
  * SPDX-License-Identifier: 0BSD
  */
-package wtf.metio.memoization.caffeine;
+package wtf.metio.memoization.guava;
 
 import wtf.metio.memoization.tck.UsingDefaultsTCK;
 
 import java.util.function.*;
 
-class CaffeineUsingDefaultsTest extends UsingDefaultsTCK {
+class GuavaMemoizeUsingDefaultsTest extends UsingDefaultsTCK {
 
     @Override
     protected <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(final Function<INPUT, OUTPUT> function) {
-        return CaffeineMemoize.function(function);
+        return GuavaMemoize.function(function);
     }
 
     @Override
     protected <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
-        return CaffeineMemoize.intFunction(function);
+        return GuavaMemoize.intFunction(function);
     }
 
     @Override
     protected <OUTPUT> LongFunction<OUTPUT> longFunction(final LongFunction<OUTPUT> function) {
-        return CaffeineMemoize.longFunction(function);
+        return GuavaMemoize.longFunction(function);
     }
 
     @Override
     protected <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(final DoubleFunction<OUTPUT> function) {
-        return CaffeineMemoize.doubleFunction(function);
+        return GuavaMemoize.doubleFunction(function);
     }
 
     @Override
     protected DoubleToIntFunction doubleToIntFunction(final DoubleToIntFunction function) {
-        return CaffeineMemoize.doubleToIntFunction(function);
+        return GuavaMemoize.doubleToIntFunction(function);
     }
 
     @Override
     protected DoubleToLongFunction doubleToLongFunction(final DoubleToLongFunction function) {
-        return CaffeineMemoize.doubleToLongFunction(function);
+        return GuavaMemoize.doubleToLongFunction(function);
     }
 
     @Override
     protected DoubleUnaryOperator doubleUnaryOperator(final DoubleUnaryOperator operator) {
-        return CaffeineMemoize.doubleUnaryOperator(operator);
+        return GuavaMemoize.doubleUnaryOperator(operator);
     }
 
     @Override
     protected DoubleBinaryOperator doubleBinaryOperator(final DoubleBinaryOperator operator) {
-        return CaffeineMemoize.doubleBinaryOperator(operator);
+        return GuavaMemoize.doubleBinaryOperator(operator);
     }
 
     @Override
     protected IntBinaryOperator intBinaryOperator(final IntBinaryOperator operator) {
-        return CaffeineMemoize.intBinaryOperator(operator);
+        return GuavaMemoize.intBinaryOperator(operator);
     }
 
     @Override
     protected IntToDoubleFunction intToDoubleFunction(final IntToDoubleFunction function) {
-        return CaffeineMemoize.intToDoubleFunction(function);
+        return GuavaMemoize.intToDoubleFunction(function);
     }
 
     @Override
     protected IntToLongFunction intToLongFunction(final IntToLongFunction function) {
-        return CaffeineMemoize.intToLongFunction(function);
+        return GuavaMemoize.intToLongFunction(function);
     }
 
     @Override
     protected IntUnaryOperator intUnaryOperator(final IntUnaryOperator operator) {
-        return CaffeineMemoize.intUnaryOperator(operator);
+        return GuavaMemoize.intUnaryOperator(operator);
     }
 
     @Override
     protected LongBinaryOperator longBinaryOperator(final LongBinaryOperator operator) {
-        return CaffeineMemoize.longBinaryOperator(operator);
+        return GuavaMemoize.longBinaryOperator(operator);
     }
 
     @Override
     protected LongToDoubleFunction longToDoubleFunction(final LongToDoubleFunction function) {
-        return CaffeineMemoize.longToDoubleFunction(function);
+        return GuavaMemoize.longToDoubleFunction(function);
     }
 
     @Override
     protected LongToIntFunction longToIntFunction(final LongToIntFunction function) {
-        return CaffeineMemoize.longToIntFunction(function);
+        return GuavaMemoize.longToIntFunction(function);
     }
 
     @Override
     protected LongUnaryOperator longUnaryOperator(final LongUnaryOperator operator) {
-        return CaffeineMemoize.longUnaryOperator(operator);
+        return GuavaMemoize.longUnaryOperator(operator);
     }
 
     @Override
     protected <OUTPUT> Supplier<OUTPUT> supplier(final Supplier<OUTPUT> supplier) {
-        return CaffeineMemoize.supplier(supplier);
+        return GuavaMemoize.supplier(supplier);
     }
 
     @Override
     protected BooleanSupplier booleanSupplier(final BooleanSupplier supplier) {
-        return CaffeineMemoize.booleanSupplier(supplier);
+        return GuavaMemoize.booleanSupplier(supplier);
     }
 
     @Override
     protected DoubleSupplier doubleSupplier(final DoubleSupplier supplier) {
-        return CaffeineMemoize.doubleSupplier(supplier);
+        return GuavaMemoize.doubleSupplier(supplier);
     }
 
     @Override
     protected IntSupplier intSupplier(final IntSupplier supplier) {
-        return CaffeineMemoize.intSupplier(supplier);
+        return GuavaMemoize.intSupplier(supplier);
     }
 
     @Override
     protected LongSupplier longSupplier(final LongSupplier supplier) {
-        return CaffeineMemoize.longSupplier(supplier);
+        return GuavaMemoize.longSupplier(supplier);
     }
 
     @Override
     protected <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function) {
-        return CaffeineMemoize.toDoubleBiFunction(function);
+        return GuavaMemoize.toDoubleBiFunction(function);
     }
 
     @Override
     protected <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function) {
-        return CaffeineMemoize.toIntBiFunction(function);
+        return GuavaMemoize.toIntBiFunction(function);
     }
 
     @Override
     protected <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function) {
-        return CaffeineMemoize.toLongBiFunction(function);
+        return GuavaMemoize.toLongBiFunction(function);
     }
 
     @Override
     protected <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(final ToDoubleFunction<INPUT> function) {
-        return CaffeineMemoize.toDoubleFunction(function);
+        return GuavaMemoize.toDoubleFunction(function);
     }
 
     @Override
     protected <INPUT> ToIntFunction<INPUT> toIntFunction(final ToIntFunction<INPUT> function) {
-        return CaffeineMemoize.toIntFunction(function);
+        return GuavaMemoize.toIntFunction(function);
     }
 
     @Override
     protected <INPUT> ToLongFunction<INPUT> toLongFunction(final ToLongFunction<INPUT> function) {
-        return CaffeineMemoize.toLongFunction(function);
+        return GuavaMemoize.toLongFunction(function);
     }
 
     @Override
     protected <INPUT> Predicate<INPUT> predicate(final Predicate<INPUT> predicate) {
-        return CaffeineMemoize.predicate(predicate);
+        return GuavaMemoize.predicate(predicate);
     }
 
     @Override
     protected LongPredicate longPredicate(final LongPredicate predicate) {
-        return CaffeineMemoize.longPredicate(predicate);
+        return GuavaMemoize.longPredicate(predicate);
     }
 
     @Override
     protected IntPredicate intPredicate(final IntPredicate predicate) {
-        return CaffeineMemoize.intPredicate(predicate);
+        return GuavaMemoize.intPredicate(predicate);
     }
 
     @Override
     protected DoublePredicate doublePredicate(final DoublePredicate predicate) {
-        return CaffeineMemoize.doublePredicate(predicate);
+        return GuavaMemoize.doublePredicate(predicate);
     }
 
     @Override
     protected <INPUT> Consumer<INPUT> consumer(final Consumer<INPUT> consumer) {
-        return CaffeineMemoize.consumer(consumer);
+        return GuavaMemoize.consumer(consumer);
     }
 
     @Override
     protected DoubleConsumer doubleConsumer(final DoubleConsumer consumer) {
-        return CaffeineMemoize.doubleConsumer(consumer);
+        return GuavaMemoize.doubleConsumer(consumer);
     }
 
     @Override
     protected IntConsumer intConsumer(final IntConsumer consumer) {
-        return CaffeineMemoize.intConsumer(consumer);
+        return GuavaMemoize.intConsumer(consumer);
     }
 
     @Override
     protected LongConsumer longConsumer(final LongConsumer consumer) {
-        return CaffeineMemoize.longConsumer(consumer);
+        return GuavaMemoize.longConsumer(consumer);
     }
 
     @Override
     protected <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(final BiPredicate<FIRST, SECOND> predicate) {
-        return CaffeineMemoize.biPredicate(predicate);
+        return GuavaMemoize.biPredicate(predicate);
     }
 
     @Override
     protected <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction) {
-        return CaffeineMemoize.biFunction(biFunction);
+        return GuavaMemoize.biFunction(biFunction);
     }
 
     @Override
     protected <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(final BiConsumer<FIRST, SECOND> biConsumer) {
-        return CaffeineMemoize.biConsumer(biConsumer);
+        return GuavaMemoize.biConsumer(biConsumer);
     }
 
     @Override
     protected <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(final ObjDoubleConsumer<INPUT> consumer) {
-        return CaffeineMemoize.objDoubleConsumer(consumer);
+        return GuavaMemoize.objDoubleConsumer(consumer);
     }
 
     @Override
     protected <INPUT> ObjIntConsumer<INPUT> objIntConsumer(final ObjIntConsumer<INPUT> consumer) {
-        return CaffeineMemoize.objIntConsumer(consumer);
+        return GuavaMemoize.objIntConsumer(consumer);
     }
 
     @Override
     protected <INPUT> ObjLongConsumer<INPUT> objLongConsumer(final ObjLongConsumer<INPUT> consumer) {
-        return CaffeineMemoize.objLongConsumer(consumer);
+        return GuavaMemoize.objLongConsumer(consumer);
     }
 
 }

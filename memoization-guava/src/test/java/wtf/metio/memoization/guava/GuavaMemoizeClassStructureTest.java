@@ -2,15 +2,15 @@
  * SPDX-FileCopyrightText: The memoization.java Authors
  * SPDX-License-Identifier: 0BSD
  */
-package wtf.metio.memoization.caffeine;
+package wtf.metio.memoization.guava;
 
 import wtf.metio.memoization.tck.ClassStructureTCK;
 
-class CaffeineClassStructureTest extends ClassStructureTCK {
+class GuavaMemoizeClassStructureTest extends ClassStructureTCK {
 
     @Override
     protected Class<?> getMemoizerClass() {
-        return CaffeineMemoize.class;
+        return GuavaMemoize.class;
     }
 
 }

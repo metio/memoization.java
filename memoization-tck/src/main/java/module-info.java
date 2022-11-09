@@ -8,6 +8,8 @@
 module wtf.metio.memoization.tck {
 
     requires org.junit.jupiter.api;
+    requires org.mockito;
+    requires concurrentunit;
     requires wtf.metio.memoization.core;
 
     exports wtf.metio.memoization.tck;
