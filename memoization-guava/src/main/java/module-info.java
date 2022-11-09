@@ -9,6 +9,7 @@ module wtf.metio.memoization.guava {
 
     requires com.google.common;
     requires wtf.metio.memoization.core;
+    requires wtf.metio.memoization.map;
 
     exports wtf.metio.memoization.guava;
 

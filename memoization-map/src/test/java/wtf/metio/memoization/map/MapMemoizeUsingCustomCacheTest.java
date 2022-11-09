@@ -2,221 +2,223 @@
  * SPDX-FileCopyrightText: The memoization.java Authors
  * SPDX-License-Identifier: 0BSD
  */
-package wtf.metio.memoization.caffeine;
+
+package wtf.metio.memoization.map;
 
 import wtf.metio.memoization.tck.UsingDefaultsTCK;
 
+import java.util.Collections;
 import java.util.function.*;
 
-class CaffeineUsingDefaultsTest extends UsingDefaultsTCK {
+class MapMemoizeUsingCustomCacheTest extends UsingDefaultsTCK {
 
     @Override
     protected <INPUT, OUTPUT> Function<INPUT, OUTPUT> function(final Function<INPUT, OUTPUT> function) {
-        return CaffeineMemoize.function(function);
+        return MapMemoize.function(function, Collections.emptyMap());
     }
 
     @Override
     protected <OUTPUT> IntFunction<OUTPUT> intFunction(final IntFunction<OUTPUT> function) {
-        return CaffeineMemoize.intFunction(function);
+        return MapMemoize.intFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected <OUTPUT> LongFunction<OUTPUT> longFunction(final LongFunction<OUTPUT> function) {
-        return CaffeineMemoize.longFunction(function);
+        return MapMemoize.longFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected <OUTPUT> DoubleFunction<OUTPUT> doubleFunction(final DoubleFunction<OUTPUT> function) {
-        return CaffeineMemoize.doubleFunction(function);
+        return MapMemoize.doubleFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected DoubleToIntFunction doubleToIntFunction(final DoubleToIntFunction function) {
-        return CaffeineMemoize.doubleToIntFunction(function);
+        return MapMemoize.doubleToIntFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected DoubleToLongFunction doubleToLongFunction(final DoubleToLongFunction function) {
-        return CaffeineMemoize.doubleToLongFunction(function);
+        return MapMemoize.doubleToLongFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected DoubleUnaryOperator doubleUnaryOperator(final DoubleUnaryOperator operator) {
-        return CaffeineMemoize.doubleUnaryOperator(operator);
+        return MapMemoize.doubleUnaryOperator(operator, Collections.emptyMap());
     }
 
     @Override
     protected DoubleBinaryOperator doubleBinaryOperator(final DoubleBinaryOperator operator) {
-        return CaffeineMemoize.doubleBinaryOperator(operator);
+        return MapMemoize.doubleBinaryOperator(operator, Collections.emptyMap());
     }
 
     @Override
     protected IntBinaryOperator intBinaryOperator(final IntBinaryOperator operator) {
-        return CaffeineMemoize.intBinaryOperator(operator);
+        return MapMemoize.intBinaryOperator(operator, Collections.emptyMap());
     }
 
     @Override
     protected IntToDoubleFunction intToDoubleFunction(final IntToDoubleFunction function) {
-        return CaffeineMemoize.intToDoubleFunction(function);
+        return MapMemoize.intToDoubleFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected IntToLongFunction intToLongFunction(final IntToLongFunction function) {
-        return CaffeineMemoize.intToLongFunction(function);
+        return MapMemoize.intToLongFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected IntUnaryOperator intUnaryOperator(final IntUnaryOperator operator) {
-        return CaffeineMemoize.intUnaryOperator(operator);
+        return MapMemoize.intUnaryOperator(operator, Collections.emptyMap());
     }
 
     @Override
     protected LongBinaryOperator longBinaryOperator(final LongBinaryOperator operator) {
-        return CaffeineMemoize.longBinaryOperator(operator);
+        return MapMemoize.longBinaryOperator(operator, Collections.emptyMap());
     }
 
     @Override
     protected LongToDoubleFunction longToDoubleFunction(final LongToDoubleFunction function) {
-        return CaffeineMemoize.longToDoubleFunction(function);
+        return MapMemoize.longToDoubleFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected LongToIntFunction longToIntFunction(final LongToIntFunction function) {
-        return CaffeineMemoize.longToIntFunction(function);
+        return MapMemoize.longToIntFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected LongUnaryOperator longUnaryOperator(final LongUnaryOperator operator) {
-        return CaffeineMemoize.longUnaryOperator(operator);
+        return MapMemoize.longUnaryOperator(operator, Collections.emptyMap());
     }
 
     @Override
     protected <OUTPUT> Supplier<OUTPUT> supplier(final Supplier<OUTPUT> supplier) {
-        return CaffeineMemoize.supplier(supplier);
+        return MapMemoize.supplier(supplier, Collections.emptyMap());
     }
 
     @Override
     protected BooleanSupplier booleanSupplier(final BooleanSupplier supplier) {
-        return CaffeineMemoize.booleanSupplier(supplier);
+        return MapMemoize.booleanSupplier(supplier, Collections.emptyMap());
     }
 
     @Override
     protected DoubleSupplier doubleSupplier(final DoubleSupplier supplier) {
-        return CaffeineMemoize.doubleSupplier(supplier);
+        return MapMemoize.doubleSupplier(supplier, Collections.emptyMap());
     }
 
     @Override
     protected IntSupplier intSupplier(final IntSupplier supplier) {
-        return CaffeineMemoize.intSupplier(supplier);
+        return MapMemoize.intSupplier(supplier, Collections.emptyMap());
     }
 
     @Override
     protected LongSupplier longSupplier(final LongSupplier supplier) {
-        return CaffeineMemoize.longSupplier(supplier);
+        return MapMemoize.longSupplier(supplier, Collections.emptyMap());
     }
 
     @Override
     protected <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function) {
-        return CaffeineMemoize.toDoubleBiFunction(function);
+        return MapMemoize.toDoubleBiFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function) {
-        return CaffeineMemoize.toIntBiFunction(function);
+        return MapMemoize.toIntBiFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function) {
-        return CaffeineMemoize.toLongBiFunction(function);
+        return MapMemoize.toLongBiFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected <INPUT> ToDoubleFunction<INPUT> toDoubleFunction(final ToDoubleFunction<INPUT> function) {
-        return CaffeineMemoize.toDoubleFunction(function);
+        return MapMemoize.toDoubleFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected <INPUT> ToIntFunction<INPUT> toIntFunction(final ToIntFunction<INPUT> function) {
-        return CaffeineMemoize.toIntFunction(function);
+        return MapMemoize.toIntFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected <INPUT> ToLongFunction<INPUT> toLongFunction(final ToLongFunction<INPUT> function) {
-        return CaffeineMemoize.toLongFunction(function);
+        return MapMemoize.toLongFunction(function, Collections.emptyMap());
     }
 
     @Override
     protected <INPUT> Predicate<INPUT> predicate(final Predicate<INPUT> predicate) {
-        return CaffeineMemoize.predicate(predicate);
+        return MapMemoize.predicate(predicate, Collections.emptyMap());
     }
 
     @Override
     protected LongPredicate longPredicate(final LongPredicate predicate) {
-        return CaffeineMemoize.longPredicate(predicate);
+        return MapMemoize.longPredicate(predicate, Collections.emptyMap());
     }
 
     @Override
     protected IntPredicate intPredicate(final IntPredicate predicate) {
-        return CaffeineMemoize.intPredicate(predicate);
+        return MapMemoize.intPredicate(predicate, Collections.emptyMap());
     }
 
     @Override
     protected DoublePredicate doublePredicate(final DoublePredicate predicate) {
-        return CaffeineMemoize.doublePredicate(predicate);
+        return MapMemoize.doublePredicate(predicate, Collections.emptyMap());
     }
 
     @Override
     protected <INPUT> Consumer<INPUT> consumer(final Consumer<INPUT> consumer) {
-        return CaffeineMemoize.consumer(consumer);
+        return MapMemoize.consumer(consumer, Collections.emptyMap());
     }
 
     @Override
     protected DoubleConsumer doubleConsumer(final DoubleConsumer consumer) {
-        return CaffeineMemoize.doubleConsumer(consumer);
+        return MapMemoize.doubleConsumer(consumer, Collections.emptyMap());
     }
 
     @Override
     protected IntConsumer intConsumer(final IntConsumer consumer) {
-        return CaffeineMemoize.intConsumer(consumer);
+        return MapMemoize.intConsumer(consumer, Collections.emptyMap());
     }
 
     @Override
     protected LongConsumer longConsumer(final LongConsumer consumer) {
-        return CaffeineMemoize.longConsumer(consumer);
+        return MapMemoize.longConsumer(consumer, Collections.emptyMap());
     }
 
     @Override
     protected <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(final BiPredicate<FIRST, SECOND> predicate) {
-        return CaffeineMemoize.biPredicate(predicate);
+        return MapMemoize.biPredicate(predicate, Collections.emptyMap());
     }
 
     @Override
     protected <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction) {
-        return CaffeineMemoize.biFunction(biFunction);
+        return MapMemoize.biFunction(biFunction, Collections.emptyMap());
     }
 
     @Override
     protected <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(final BiConsumer<FIRST, SECOND> biConsumer) {
-        return CaffeineMemoize.biConsumer(biConsumer);
+        return MapMemoize.biConsumer(biConsumer, Collections.emptyMap());
     }
 
     @Override
     protected <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(final ObjDoubleConsumer<INPUT> consumer) {
-        return CaffeineMemoize.objDoubleConsumer(consumer);
+        return MapMemoize.objDoubleConsumer(consumer, Collections.emptyMap());
     }
 
     @Override
     protected <INPUT> ObjIntConsumer<INPUT> objIntConsumer(final ObjIntConsumer<INPUT> consumer) {
-        return CaffeineMemoize.objIntConsumer(consumer);
+        return MapMemoize.objIntConsumer(consumer, Collections.emptyMap());
     }
 
     @Override
     protected <INPUT> ObjLongConsumer<INPUT> objLongConsumer(final ObjLongConsumer<INPUT> consumer) {
-        return CaffeineMemoize.objLongConsumer(consumer);
+        return MapMemoize.objLongConsumer(consumer, Collections.emptyMap());
     }
 
 }

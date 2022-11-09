@@ -23,7 +23,6 @@ final class ConcurrentMaps {
         return new ConcurrentHashMap<>(nullsafe(map));
     }
 
-    // TODO: remove?
     static <MAP extends Map<?, ?>> MAP nullsafe(final MAP map) {
         return requireNonNull(map, "Provide an empty map instead of NULL.");
     }

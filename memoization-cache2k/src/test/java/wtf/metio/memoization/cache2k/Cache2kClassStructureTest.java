@@ -4,9 +4,9 @@
  */
 package wtf.metio.memoization.cache2k;
 
-import wtf.metio.memoization.tck.ClassStructureTest;
+import wtf.metio.memoization.tck.ClassStructureTCK;
 
-class Cache2kClassStructureTest extends ClassStructureTest {
+class Cache2kClassStructureTest extends ClassStructureTCK {
 
     @Override
     protected Class<?> getMemoizerClass() {

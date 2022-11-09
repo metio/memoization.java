@@ -7,6 +7,7 @@ package wtf.metio.memoization.guava;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import wtf.metio.memoization.core.*;
+import wtf.metio.memoization.map.MapMemoize;
 
 import java.util.function.*;
 
@@ -133,6 +134,27 @@ public final class GuavaMemoize {
      * </p>
      * <ul>
      * <li>Custom cache</li>
+     * <li>Default cache key</li>
+     * </ul>
+     *
+     * @param <FIRST>    The type of the first parameter.
+     * @param <SECOND>   The type of the second parameter.
+     * @param biConsumer The {@link BiConsumer} to memoize.
+     * @param cache      The {@link Cache} to use.
+     * @return The wrapped {@link BiConsumer}.
+     */
+    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
+            final BiConsumer<FIRST, SECOND> biConsumer,
+            final Cache<String, String> cache) {
+        return biConsumer(biConsumer, MemoizationDefaults.hashCodeKeyFunction(), cache);
+    }
+
+    /**
+     * <p>
+     * Memoizes a {@link BiConsumer} in a Guava {@link Cache}.
+     * </p>
+     * <ul>
+     * <li>Custom cache</li>
      * <li>Custom cache key</li>
      * </ul>
      *
@@ -148,28 +170,7 @@ public final class GuavaMemoize {
             final BiConsumer<FIRST, SECOND> biConsumer,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, KEY> cache) {
-        return new GuavaCacheBasedBiConsumerMemoizer<>(cache, keyFunction, biConsumer);
-    }
-
-    /**
-     * <p>
-     * Memoizes a {@link BiConsumer} in a Guava {@link Cache}.
-     * </p>
-     * <ul>
-     * <li>Custom cache</li>
-     * <li>Default cache key</li>
-     * </ul>
-     *
-     * @param <FIRST>    The type of the first parameter.
-     * @param <SECOND>   The type of the second parameter.
-     * @param biConsumer The {@link BiConsumer} to memoize.
-     * @param cache      The {@link Cache} to use.
-     * @return The wrapped {@link BiConsumer}.
-     */
-    public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
-            final BiConsumer<FIRST, SECOND> biConsumer,
-            final Cache<String, String> cache) {
-        return biConsumer(biConsumer, MemoizationDefaults.hashCodeKeyFunction(), cache);
+        return MapMemoize.biConsumer(biConsumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -237,7 +238,7 @@ public final class GuavaMemoize {
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
-        return new GuavaCacheBasedBiFunctionMemoizer<>(cache, keyFunction, biFunction);
+        return MapMemoize.biFunction(biFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -324,7 +325,7 @@ public final class GuavaMemoize {
             final BiPredicate<FIRST, SECOND> biPredicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
-        return new GuavaCacheBasedBiPredicateMemoizer<>(cache, keyFunction, biPredicate);
+        return MapMemoize.biPredicate(biPredicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -422,7 +423,7 @@ public final class GuavaMemoize {
             final BooleanSupplier booleanSupplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Boolean> cache) {
-        return new GuavaCacheBasedBooleanSupplierMemoizer<>(cache, keySupplier, booleanSupplier);
+        return MapMemoize.booleanSupplier(booleanSupplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -504,7 +505,7 @@ public final class GuavaMemoize {
             final Consumer<INPUT> consumer,
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, INPUT> cache) {
-        return new GuavaCacheBasedConsumerMemoizer<>(cache, keyFunction, consumer);
+        return MapMemoize.consumer(consumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -582,7 +583,7 @@ public final class GuavaMemoize {
             final DoubleBinaryOperator doubleBinaryOperator,
             final DoubleBinaryFunction<KEY> keyFunction,
             final Cache<KEY, Double> cache) {
-        return new GuavaCacheBasedDoubleBinaryOperatorMemoizer<>(cache, keyFunction, doubleBinaryOperator);
+        return MapMemoize.doubleBinaryOperator(doubleBinaryOperator, keyFunction, cache.asMap());
     }
 
     /**
@@ -660,7 +661,7 @@ public final class GuavaMemoize {
             final DoubleConsumer doubleConsumer,
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, Double> cache) {
-        return new GuavaCacheBasedDoubleConsumerMemoizer<>(cache, keyFunction, doubleConsumer);
+        return MapMemoize.doubleConsumer(doubleConsumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -742,7 +743,7 @@ public final class GuavaMemoize {
             final DoubleFunction<OUTPUT> function,
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
-        return new GuavaCacheBasedDoubleFunctionMemoizer<>(cache, keyFunction, function);
+        return MapMemoize.doubleFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -820,7 +821,7 @@ public final class GuavaMemoize {
             final DoublePredicate doublePredicate,
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
-        return new GuavaCacheBasedDoublePredicateMemoizer<>(cache, keyFunction, doublePredicate);
+        return MapMemoize.doublePredicate(doublePredicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -897,7 +898,7 @@ public final class GuavaMemoize {
             final DoubleSupplier doubleSupplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Double> cache) {
-        return new GuavaCacheBasedDoubleSupplierMemoizer<>(cache, keySupplier, doubleSupplier);
+        return MapMemoize.doubleSupplier(doubleSupplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -975,7 +976,7 @@ public final class GuavaMemoize {
             final DoubleToIntFunction doubleToIntFunction,
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
-        return new GuavaCacheBasedDoubleToIntFunctionMemoizer<>(cache, keyFunction, doubleToIntFunction);
+        return MapMemoize.doubleToIntFunction(doubleToIntFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -1053,7 +1054,7 @@ public final class GuavaMemoize {
             final DoubleToLongFunction doubleToLongFunction,
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, Long> cache) {
-        return new GuavaCacheBasedDoubleToLongFunctionMemoizer<>(cache, keyFunction, doubleToLongFunction);
+        return MapMemoize.doubleToLongFunction(doubleToLongFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -1131,7 +1132,7 @@ public final class GuavaMemoize {
             final DoubleUnaryOperator doubleUnaryOperator,
             final DoubleFunction<KEY> keyFunction,
             final Cache<KEY, Double> cache) {
-        return new GuavaCacheBasedDoubleUnaryOperatorMemoizer<>(cache, keyFunction, doubleUnaryOperator);
+        return MapMemoize.doubleUnaryOperator(doubleUnaryOperator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1217,7 +1218,7 @@ public final class GuavaMemoize {
             final Function<INPUT, OUTPUT> function,
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
-        return new GuavaCacheBasedFunctionMemoizer<>(cache, keyFunction, function);
+        return MapMemoize.function(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1295,7 +1296,7 @@ public final class GuavaMemoize {
             final IntBinaryOperator intBinaryOperator,
             final IntBinaryFunction<KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
-        return new GuavaCacheBasedIntBinaryOperatorMemoizer<>(cache, keyFunction, intBinaryOperator);
+        return MapMemoize.intBinaryOperator(intBinaryOperator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1373,7 +1374,7 @@ public final class GuavaMemoize {
             final IntConsumer intConsumer,
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
-        return new GuavaCacheBasedIntConsumerMemoizer<>(cache, keyFunction, intConsumer);
+        return MapMemoize.intConsumer(intConsumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -1455,7 +1456,7 @@ public final class GuavaMemoize {
             final IntFunction<OUTPUT> function,
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
-        return new GuavaCacheBasedIntFunctionMemoizer<>(cache, keyFunction, function);
+        return MapMemoize.intFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -1533,7 +1534,7 @@ public final class GuavaMemoize {
             final IntPredicate intPredicate,
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
-        return new GuavaCacheBasedIntPredicateMemoizer<>(cache, keyFunction, intPredicate);
+        return MapMemoize.intPredicate(intPredicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -1610,7 +1611,7 @@ public final class GuavaMemoize {
             final IntSupplier intSupplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Integer> cache) {
-        return new GuavaCacheBasedIntSupplierMemoizer<>(cache, keySupplier, intSupplier);
+        return MapMemoize.intSupplier(intSupplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -1688,7 +1689,7 @@ public final class GuavaMemoize {
             final IntToDoubleFunction intToDoubleFunction,
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Double> cache) {
-        return new GuavaCacheBasedIntToDoubleFunctionMemoizer<>(cache, keyFunction, intToDoubleFunction);
+        return MapMemoize.intToDoubleFunction(intToDoubleFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -1766,7 +1767,7 @@ public final class GuavaMemoize {
             final IntToLongFunction intToLongFunction,
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Long> cache) {
-        return new GuavaCacheBasedIntToLongFunctionMemoizer<>(cache, keyFunction, intToLongFunction);
+        return MapMemoize.intToLongFunction(intToLongFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -1844,7 +1845,7 @@ public final class GuavaMemoize {
             final IntUnaryOperator intUnaryOperator,
             final IntFunction<KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
-        return new GuavaCacheBasedIntUnaryOperatorMemoizer<>(cache, keyFunction, intUnaryOperator);
+        return MapMemoize.intUnaryOperator(intUnaryOperator, keyFunction, cache.asMap());
     }
 
     /**
@@ -1924,7 +1925,7 @@ public final class GuavaMemoize {
             final LongBinaryOperator longBinaryOperator,
             final LongBinaryFunction<KEY> keyFunction,
             final Cache<KEY, Long> cache) {
-        return new GuavaCacheBasedLongBinaryOperatorMemoizer<>(cache, keyFunction, longBinaryOperator);
+        return MapMemoize.longBinaryOperator(longBinaryOperator, keyFunction, cache.asMap());
     }
 
     /**
@@ -2006,7 +2007,7 @@ public final class GuavaMemoize {
             final LongConsumer longConsumer,
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, Long> cache) {
-        return new GuavaCacheBasedLongConsumerMemoizer<>(cache, keyFunction, longConsumer);
+        return MapMemoize.longConsumer(longConsumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -2092,7 +2093,7 @@ public final class GuavaMemoize {
             final LongFunction<OUTPUT> function,
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, OUTPUT> cache) {
-        return new GuavaCacheBasedLongFunctionMemoizer<>(cache, keyFunction, function);
+        return MapMemoize.longFunction(function, keyFunction, cache.asMap());
     }
 
     /**
@@ -2174,7 +2175,7 @@ public final class GuavaMemoize {
             final LongPredicate longPredicate,
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
-        return new GuavaCacheBasedLongPredicateMemoizer<>(cache, keyFunction, longPredicate);
+        return MapMemoize.longPredicate(longPredicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -2255,7 +2256,7 @@ public final class GuavaMemoize {
             final LongSupplier longSupplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, Long> cache) {
-        return new GuavaCacheBasedLongSupplierMemoizer<>(cache, keySupplier, longSupplier);
+        return MapMemoize.longSupplier(longSupplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -2337,7 +2338,7 @@ public final class GuavaMemoize {
             final LongToDoubleFunction longToDoubleFunction,
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, Double> cache) {
-        return new GuavaCacheBasedLongToDoubleFunctionMemoizer<>(cache, keyFunction, longToDoubleFunction);
+        return MapMemoize.longToDoubleFunction(longToDoubleFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -2419,7 +2420,7 @@ public final class GuavaMemoize {
             final LongToIntFunction longToIntFunction,
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
-        return new GuavaCacheBasedLongToIntFunctionMemoizer<>(cache, keyFunction, longToIntFunction);
+        return MapMemoize.longToIntFunction(longToIntFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -2501,7 +2502,7 @@ public final class GuavaMemoize {
             final LongUnaryOperator longUnaryOperator,
             final LongFunction<KEY> keyFunction,
             final Cache<KEY, Long> cache) {
-        return new GuavaCacheBasedLongUnaryOperatorMemoizer<>(cache, keyFunction, longUnaryOperator);
+        return MapMemoize.longUnaryOperator(longUnaryOperator, keyFunction, cache.asMap());
     }
 
     /**
@@ -2565,8 +2566,8 @@ public final class GuavaMemoize {
     public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
             final ObjDoubleConsumer<INPUT> objDoubleConsumer,
             final ObjDoubleFunction<INPUT, KEY> keyFunction,
-            final Cache<KEY, KEY> cache) {
-        return new GuavaCacheBasedObjDoubleConsumerMemoizer<>(cache, keyFunction, objDoubleConsumer);
+            final Cache<KEY, INPUT> cache) {
+        return MapMemoize.objDoubleConsumer(objDoubleConsumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -2586,7 +2587,7 @@ public final class GuavaMemoize {
      */
     public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
             final ObjDoubleConsumer<INPUT> objDoubleConsumer,
-            final Cache<String, String> cache) {
+            final Cache<String, INPUT> cache) {
         return objDoubleConsumer(objDoubleConsumer, MemoizationDefaults.objDoubleConsumerHashCodeKeyFunction(), cache);
     }
 
@@ -2651,8 +2652,8 @@ public final class GuavaMemoize {
     public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
             final ObjIntConsumer<INPUT> objIntConsumer,
             final ObjIntFunction<INPUT, KEY> keyFunction,
-            final Cache<KEY, KEY> cache) {
-        return new GuavaCacheBasedObjIntConsumerMemoizer<>(cache, keyFunction, objIntConsumer);
+            final Cache<KEY, INPUT> cache) {
+        return MapMemoize.objIntConsumer(objIntConsumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -2672,7 +2673,7 @@ public final class GuavaMemoize {
      */
     public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
             final ObjIntConsumer<INPUT> objIntConsumer,
-            final Cache<String, String> cache) {
+            final Cache<String, INPUT> cache) {
         return objIntConsumer(objIntConsumer, MemoizationDefaults.objIntConsumerHashCodeKeyFunction(), cache);
     }
 
@@ -2737,8 +2738,8 @@ public final class GuavaMemoize {
     public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
             final ObjLongConsumer<INPUT> objLongConsumer,
             final ObjLongFunction<INPUT, KEY> keyFunction,
-            final Cache<KEY, KEY> cache) {
-        return new GuavaCacheBasedObjLongConsumerMemoizer<>(cache, keyFunction, objLongConsumer);
+            final Cache<KEY, INPUT> cache) {
+        return MapMemoize.objLongConsumer(objLongConsumer, keyFunction, cache.asMap());
     }
 
     /**
@@ -2758,7 +2759,7 @@ public final class GuavaMemoize {
      */
     public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
             final ObjLongConsumer<INPUT> objLongConsumer,
-            final Cache<String, String> cache) {
+            final Cache<String, INPUT> cache) {
         return objLongConsumer(objLongConsumer, MemoizationDefaults.objLongConsumerHashCodeKeyFunction(), cache);
     }
 
@@ -2845,7 +2846,7 @@ public final class GuavaMemoize {
             final Predicate<INPUT> predicate,
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Boolean> cache) {
-        return new GuavaCacheBasedPredicateMemoizer<>(cache, keyFunction, predicate);
+        return MapMemoize.predicate(predicate, keyFunction, cache.asMap());
     }
 
     /**
@@ -2930,7 +2931,7 @@ public final class GuavaMemoize {
             final Supplier<OUTPUT> supplier,
             final Supplier<KEY> keySupplier,
             final Cache<KEY, OUTPUT> cache) {
-        return new GuavaCacheBasedSupplierMemoizer<>(cache, keySupplier, supplier);
+        return MapMemoize.supplier(supplier, keySupplier, cache.asMap());
     }
 
     /**
@@ -2998,7 +2999,7 @@ public final class GuavaMemoize {
             final ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Double> cache) {
-        return new GuavaCacheBasedToDoubleBiFunctionMemoizer<>(cache, keyFunction, toDoubleBiFunction);
+        return MapMemoize.toDoubleBiFunction(toDoubleBiFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -3106,7 +3107,7 @@ public final class GuavaMemoize {
             final ToDoubleFunction<INPUT> toDoubleFunction,
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Double> cache) {
-        return new GuavaCacheBasedToDoubleFunctionMemoizer<>(cache, keyFunction, toDoubleFunction);
+        return MapMemoize.toDoubleFunction(toDoubleFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -3174,7 +3175,7 @@ public final class GuavaMemoize {
             final ToIntBiFunction<FIRST, SECOND> toIntBiFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
-        return new GuavaCacheBasedToIntBiFunctionMemoizer<>(cache, keyFunction, toIntBiFunction);
+        return MapMemoize.toIntBiFunction(toIntBiFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -3282,7 +3283,7 @@ public final class GuavaMemoize {
             final ToIntFunction<INPUT> toIntFunction,
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Integer> cache) {
-        return new GuavaCacheBasedToIntFunctionMemoizer<>(cache, keyFunction, toIntFunction);
+        return MapMemoize.toIntFunction(toIntFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -3350,7 +3351,7 @@ public final class GuavaMemoize {
             final ToLongBiFunction<FIRST, SECOND> toLongBiFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Cache<KEY, Long> cache) {
-        return new GuavaCacheBasedToLongBiFunctionMemoizer<>(cache, keyFunction, toLongBiFunction);
+        return MapMemoize.toLongBiFunction(toLongBiFunction, keyFunction, cache.asMap());
     }
 
     /**
@@ -3458,7 +3459,7 @@ public final class GuavaMemoize {
             final ToLongFunction<INPUT> toLongFunction,
             final Function<INPUT, KEY> keyFunction,
             final Cache<KEY, Long> cache) {
-        return new GuavaCacheBasedToLongFunctionMemoizer<>(cache, keyFunction, toLongFunction);
+        return MapMemoize.toLongFunction(toLongFunction, keyFunction, cache.asMap());
     }
 
 }

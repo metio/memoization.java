@@ -5,11 +5,11 @@
 package wtf.metio.memoization.cache2k;
 
 import wtf.metio.memoization.core.*;
-import wtf.metio.memoization.tck.UsingCustomKeyFunctionTest;
+import wtf.metio.memoization.tck.UsingCustomKeyFunctionTCK;
 
 import java.util.function.*;
 
-class Cache2kUsingCustomKeyFunctionTest extends UsingCustomKeyFunctionTest {
+class Cache2kUsingCustomKeyFunctionTest extends UsingCustomKeyFunctionTCK {
 
     @Override
     protected <INPUT, KEY, OUTPUT> Function<INPUT, OUTPUT> function(final Function<INPUT, OUTPUT> function, final Function<INPUT, KEY> keyFunction) {

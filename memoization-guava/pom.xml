@@ -38,16 +38,16 @@
     <dependencies>
         <dependency>
             <groupId>wtf.metio.memoization</groupId>
-            <artifactId>memoization-core</artifactId>
+            <artifactId>memoization-map</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>wtf.metio.memoization</groupId>
+            <artifactId>memoization-tck</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
