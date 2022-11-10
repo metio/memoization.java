@@ -4,9 +4,10 @@
  */
 package wtf.metio.memoization.core;
 
+import java.util.Arrays;
 import java.util.Objects;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * Defaults used throughout the library.
@@ -18,92 +19,25 @@ public final class MemoizationDefaults {
     }
 
     /**
+     * A cache key supplier that always returns the same cache key.
+     *
      * @return The default key supplier used throughout the library.
      */
-    public static Supplier<String> defaultKeySupplier() {
+    public static Supplier<String> staticKey() {
         return () -> "SUPPLIED";
     }
 
     /**
-     * @param <T> the type of the first argument to the function
-     * @param <U> the type of the second argument to the function
-     * @return The default key function used throughout the library.
+     * Generic cache key function that uses the hash codes of its given arguments to construct a cache key.
+     *
+     * @param values The values to use.
+     * @return The constructed cache key.
      */
-    public static <T, U> BiFunction<T, U, String> hashCodeKeyFunction() {
-        return (first, second) -> {
-            final int firstHashCode = Objects.hashCode(first);
-            final int secondHashCode = Objects.hashCode(second);
-            return firstHashCode + " " + secondHashCode;
-        };
-    }
-
-    /**
-     * @param <INPUT> the type of the first argument to the function
-     * @return The default key function for {@link java.util.function.ObjDoubleConsumer}.
-     */
-    public static <INPUT> ObjDoubleFunction<INPUT, String> objDoubleConsumerHashCodeKeyFunction() {
-        return (first, second) -> {
-            final int firstHashCode = Objects.hashCode(first);
-            final int secondHashCode = Double.valueOf(second).hashCode();
-            return firstHashCode + " " + secondHashCode;
-        };
-    }
-
-    /**
-     * @param <INPUT> the type of the first argument to the function
-     * @return The default key function for {@link java.util.function.ObjIntConsumer}.
-     */
-    public static <INPUT> ObjIntFunction<INPUT, String> objIntConsumerHashCodeKeyFunction() {
-        return (first, second) -> {
-            final int firstHashCode = Objects.hashCode(first);
-            final int secondHashCode = Integer.valueOf(second).hashCode();
-            return firstHashCode + " " + secondHashCode;
-        };
-    }
-
-    /**
-     * @param <INPUT> the type of the first argument to the function
-     * @return The default key function for {@link java.util.function.ObjLongConsumer}.
-     */
-    public static <INPUT> ObjLongFunction<INPUT, String> objLongConsumerHashCodeKeyFunction() {
-        return (first, second) -> {
-            final int firstHashCode = Objects.hashCode(first);
-            final int secondHashCode = Long.valueOf(second).hashCode();
-            return firstHashCode + " " + secondHashCode;
-        };
-    }
-
-    /**
-     * @return The default key function for {@link java.util.function.DoubleBinaryOperator}.
-     */
-    public static DoubleBinaryFunction<String> doubleBinaryOperatorHashCodeKeyFunction() {
-        return (first, second) -> {
-            final int firstHashCode = Double.valueOf(first).hashCode();
-            final int secondHashCode = Double.valueOf(second).hashCode();
-            return firstHashCode + " " + secondHashCode;
-        };
-    }
-
-    /**
-     * @return The default key function for {@link java.util.function.IntBinaryOperator}.
-     */
-    public static IntBinaryFunction<String> intBinaryOperatorHashCodeKeyFunction() {
-        return (first, second) -> {
-            final int firstHashCode = Integer.valueOf(first).hashCode();
-            final int secondHashCode = Integer.valueOf(second).hashCode();
-            return firstHashCode + " " + secondHashCode;
-        };
-    }
-
-    /**
-     * @return The default key function for {@link java.util.function.LongBinaryOperator}.
-     */
-    public static LongBinaryFunction<String> longBinaryOperatorHashCodeKeyFunction() {
-        return (first, second) -> {
-            final int firstHashCode = Long.valueOf(first).hashCode();
-            final int secondHashCode = Long.valueOf(second).hashCode();
-            return firstHashCode + " " + secondHashCode;
-        };
+    public static String hashCodes(final Object... values) {
+        return Arrays.stream(values)
+                .map(Object::hashCode)
+                .map(Objects::toString)
+                .collect(Collectors.joining(" "));
     }
 
 }

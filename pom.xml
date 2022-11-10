@@ -16,7 +16,7 @@
     <parent>
         <groupId>wtf.metio.maven.parents</groupId>
         <artifactId>maven-parents-java-prototype</artifactId>
-        <version>2022.11.4</version>
+        <version>2022.11.11</version>
     </parent>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -44,10 +44,8 @@
     <modules>
         <module>memoization-core</module>
         <module>memoization-tck</module>
-        <module>memoization-map</module>
-        <module>memoization-caffeine</module>
-        <module>memoization-guava</module>
-        <module>memoization-cache2k</module>
+        <module>memoization-jdk</module>
+        <module>memoization-jool</module>
     </modules>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
