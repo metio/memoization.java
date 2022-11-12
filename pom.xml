@@ -46,6 +46,7 @@
         <module>memoization-tck</module>
         <module>memoization-jdk</module>
         <module>memoization-jool</module>
+        <module>memoization-lambda</module>
     </modules>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

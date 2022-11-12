@@ -3,14 +3,14 @@
  * SPDX-License-Identifier: 0BSD
  */
 
-package wtf.metio.memoization.jool;
+package wtf.metio.memoization.lambda;
 
 import org.cache2k.Cache;
 import org.cache2k.Cache2kBuilder;
 
 import java.util.Map;
 
-class MemoizeJoolUsingCache2kCacheTest extends MemoizeJoolUsingCustomCacheTCK {
+public class MemoizeLambdaUsingCache2kCacheTest extends MemoizeLambdaUsingCustomCacheTCK {
 
     @Override
     protected <K, V> Map<K, V> cache() {

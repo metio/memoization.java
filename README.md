@@ -11,6 +11,7 @@ Java [memoization](https://en.wikipedia.org/wiki/Memoization) library - trade sp
 
 * Memoize calls to JDK interfaces like `Consumer`, `Function`, `Predicate`, `Supplier`, and more
 * Memoize calls to [jOOL](https://github.com/jOOQ/jOOL) interfaces like `Consumer0..16` and `Function0..16`
+* Memoize calls to [lambda](https://github.com/palatable/lambda) interfaces like `Fn0..8`
 * Use custom caches like [Caffeine](https://github.com/ben-manes/caffeine), [Guava](https://github.com/google/guava/wiki/CachesExplained), [cache2k](https://cache2k.org/), or any other [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html).
 * Use custom cache keys for fine-tuning
 
@@ -20,12 +21,14 @@ Memoize any of the supported types by using the static factory methods supplied 
 
 * `Memoize` if you want to memoize JDK interfaces.
 * `MemoizeJool` if you want to memoize jOOL interfaces.
+* `MemoizeLambda` if you want to memoize lambda interfaces.
 
 ### Default cache with default cache keys
 
 ```java
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
+wtf.metio.memoization.jool.MemoizeLambda;
 
 Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function);
@@ -36,8 +39,8 @@ Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier);
 Function3<T1, T2, T3, OUTPUT> function         = ...;
 Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function);
 
-Consumer4<T1, T2, T3, T4> consumer             = ...;
-Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer);
+Fn4<T1, T2, T3, T4, OUTPUT> function         = ...;
+Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function);
 ```
 
 ### Default cache with custom cache keys
@@ -45,6 +48,7 @@ Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer)
 ```java
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
+wtf.metio.memoization.jool.MemoizeLambda;
 
 Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, KEY> keyFunction         = ...;
@@ -58,9 +62,9 @@ Function3<T1, T2, T3, OUTPUT> function         = ...;
 Function3<T1, T2, T3, KEY> keyFunction         = ...;
 Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function, keyFunction);
 
-Consumer4<T1, T2, T3, T4> consumer             = ...;
-Function3<T1, T2, T3, T4, KEY> keyFunction     = ...;
-Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer, keyFunction);
+Fn4<T1, T2, T3, T4, OUTPUT> function         = ...;
+Fn4<T1, T2, T3, T4, KEY> keyFunction         = ...;
+Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, keyFunction);
 ```
 
 ### Custom cache with default cache keys
@@ -68,6 +72,7 @@ Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer,
 ```java
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
+wtf.metio.memoization.jool.MemoizeLambda;
 
 // memoize in cache2k cache
 Function<INPUT, OUTPUT> function         = ...;
@@ -85,9 +90,9 @@ Cache<String, OUTPUT> cache                    = ...; // com.google.common.cache
 Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function, cache.asMap());
 
 // memoize in ConcurrentMap
-Consumer4<T1, T2, T3, T4> consumer             = ...;
-Map<String, String> cache                      = ...;
-Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer, cache);
+Fn4<T1, T2, T3, T4, OUTPUT> function         = ...;
+Map<String, OUTPUT> cache                    = ...;
+Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, cache);
 ```
 
 ### Custom cache with custom cache keys
@@ -95,6 +100,7 @@ Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer,
 ```java
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
+wtf.metio.memoization.jool.MemoizeLambda;
 
 // memoize in cache2k cache
 Function<INPUT, OUTPUT> function         = ...;
@@ -115,10 +121,10 @@ Cache<KEY, OUTPUT> cache                       = ...; // com.google.common.cache
 Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function, keyFunction, cache.asMap());
 
 // memoize in ConcurrentMap
-Consumer4<T1, T2, T3, T4> consumer             = ...;
-Function4<T1, T2, T3, T4, KEY> keyFunction     = ...;
-Map<KEY, KEY> cache                            = ...;
-Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer, keyFunction, cache);
+Fn4<T1, T2, T3, T4, OUTPUT> function         = ...;
+Fn4<T1, T2, T3, T4, KEY> keyFunction         = ...;
+Map<KEY, OUTPUT> cache                       = ...;
+Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, keyFunction, cache);
 ```
 
 Note that `Memoize` and `MemoizeJool` do accept any `Map`, however they copy the entries in the map to a new `ConcurrentHashMap` in case the provided `Map` is not a `ConcurrentMap`. This is done in order to ensure atomic `computeIfAbsent` behavior.
@@ -145,6 +151,13 @@ In order to use this project, declare the following dependencies in your project
     </dependency>
     <!-- support for jOOL interfaces -->
 
+    <!-- support for lambda interfaces -->
+    <dependency>
+        <groupId>wtf.metio.memoization</groupId>
+        <artifactId>memoization-lambda</artifactId>
+        <version>${version.memoization}</version>
+    </dependency>
+    <!-- support for lambda interfaces -->
 </dependencies>
 ```
 

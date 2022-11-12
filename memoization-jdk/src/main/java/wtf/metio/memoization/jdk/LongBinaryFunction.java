@@ -8,7 +8,7 @@ package wtf.metio.memoization.jdk;
  * @param <RESULT> The resulting type.
  */
 @FunctionalInterface
-interface LongBinaryFunction<RESULT> {
+public interface LongBinaryFunction<RESULT> {
 
     /**
      * @param first  The first long to apply.

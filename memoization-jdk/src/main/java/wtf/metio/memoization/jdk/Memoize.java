@@ -105,7 +105,7 @@ public final class Memoize {
      * <li>Default cache key</li>
      * </ul>
      *
-     * @param <OUTPUT> The type of the output parameter.
+     * @param <OUTPUT> The type of the output.
      * @param callable The {@link Callable} to memoize.
      * @return The wrapped {@link Callable}.
      */
@@ -124,7 +124,7 @@ public final class Memoize {
      * <li>Default cache key</li>
      * </ul>
      *
-     * @param <OUTPUT> The type of the output parameter.
+     * @param <OUTPUT> The type of the output.
      * @param callable The {@link Callable} to memoize.
      * @param cache    The {@link Map} based cache to use.
      * @return The wrapped {@link Callable}.
@@ -146,14 +146,14 @@ public final class Memoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param <OUTPUT>    The type of the output parameter.
      * @param <KEY>       The type of the cache key.
+     * @param <OUTPUT>    The type of the output.
      * @param callable    The {@link Callable} to memoize.
      * @param keySupplier The {@link Supplier} to supply the cache key.
      * @return The wrapped {@link Callable}.
      */
     @CheckReturnValue
-    public static <OUTPUT, KEY> Callable<OUTPUT> callable(
+    public static <KEY, OUTPUT> Callable<OUTPUT> callable(
             final Callable<OUTPUT> callable,
             final Supplier<KEY> keySupplier) {
         return callable(callable, keySupplier, emptyMap());
@@ -169,15 +169,15 @@ public final class Memoize {
      * <li>Custom cache key</li>
      * </ul>
      *
-     * @param <OUTPUT>    The type of the output parameter.
      * @param <KEY>       The type of the cache key.
+     * @param <OUTPUT>    The type of the output.
      * @param callable    The {@link Callable} to memoize.
      * @param keySupplier The {@link Supplier} to supply the cache key.
      * @param cache       The {@link Map} based cache to use.
      * @return The wrapped {@link Callable}.
      */
     @CheckReturnValue
-    public static <OUTPUT, KEY> Callable<OUTPUT> callable(
+    public static <KEY, OUTPUT> Callable<OUTPUT> callable(
             final Callable<OUTPUT> callable,
             final Supplier<KEY> keySupplier,
             final Map<KEY, OUTPUT> cache) {
@@ -394,16 +394,16 @@ public final class Memoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>       The type of the cache key.
      * @param <FIRST>     The type of the first parameter.
      * @param <SECOND>    The type of the second parameter.
-     * @param <KEY>       The type of the cache key.
      * @param <OUTPUT>    The type of the output/cache value.
      * @param biFunction  The {@link BiFunction} to memoize.
      * @param keyFunction The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiFunction}.
      */
     @CheckReturnValue
-    public static <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+    public static <KEY, FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
         return biFunction(biFunction, keyFunction, emptyMap());
@@ -419,9 +419,9 @@ public final class Memoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>       The type of the cache key.
      * @param <FIRST>     The type of the first parameter.
      * @param <SECOND>    The type of the second parameter.
-     * @param <KEY>       The type of the cache key.
      * @param <OUTPUT>    The type of the output/cache value.
      * @param biFunction  The {@link BiFunction} to memoize.
      * @param keyFunction The {@link BiFunction} to compute the cache key.
@@ -429,7 +429,7 @@ public final class Memoize {
      * @return The wrapped {@link BiFunction}.
      */
     @CheckReturnValue
-    public static <FIRST, SECOND, KEY, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
+    public static <KEY, FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, OUTPUT> cache) {
@@ -490,15 +490,15 @@ public final class Memoize {
      * <li>Default cache key</li>
      * </ul>
      *
+     * @param <KEY>       The type of the cache key.
      * @param <FIRST>     The type of the first parameter.
      * @param <SECOND>    The type of the second parameter.
-     * @param <KEY>       The type of the cache key.
      * @param predicate   The {@link BiPredicate} to memoize.
      * @param keyFunction The {@link BiFunction} to compute the cache key.
      * @return The wrapped {@link BiPredicate}.
      */
     @CheckReturnValue
-    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
+    public static <KEY, FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction) {
         return biPredicate(predicate, keyFunction, emptyMap());
@@ -514,16 +514,16 @@ public final class Memoize {
      * <li>Custom cache key</li>
      * </ul>
      *
+     * @param <KEY>       The type of the cache key.
      * @param <FIRST>     The type of the first parameter.
      * @param <SECOND>    The type of the second parameter.
-     * @param <KEY>       The type of the cache key.
      * @param predicate   The {@link BiPredicate} to memoize.
      * @param keyFunction The {@link BiFunction} to compute the cache key.
      * @param cache       The {@link Map} based cache to use.
      * @return The wrapped {@link BiPredicate}.
      */
     @CheckReturnValue
-    public static <FIRST, SECOND, KEY> BiPredicate<FIRST, SECOND> biPredicate(
+    public static <KEY, FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final Map<KEY, Boolean> cache) {
@@ -674,7 +674,7 @@ public final class Memoize {
      * @return The wrapped {@link Consumer}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> Consumer<INPUT> consumer(
+    public static <KEY, INPUT> Consumer<INPUT> consumer(
             final Consumer<INPUT> consumer,
             final Function<INPUT, KEY> keyFunction) {
         return consumer(consumer, keyFunction, emptyMap());
@@ -698,7 +698,7 @@ public final class Memoize {
      * @return The wrapped {@link Consumer}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> Consumer<INPUT> consumer(
+    public static <KEY, INPUT> Consumer<INPUT> consumer(
             final Consumer<INPUT> consumer,
             final Function<INPUT, KEY> keyFunction,
             final Map<KEY, KEY> cache) {
@@ -2930,7 +2930,7 @@ public final class Memoize {
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+    public static <KEY, INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
             final ObjDoubleConsumer<INPUT> consumer,
             final ObjDoubleFunction<INPUT, KEY> keyFunction) {
         return objDoubleConsumer(consumer, keyFunction, emptyMap());
@@ -2954,7 +2954,7 @@ public final class Memoize {
      * @return The wrapped {@link ObjDoubleConsumer}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ObjDoubleConsumer<INPUT> objDoubleConsumer(
+    public static <KEY, INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
             final ObjDoubleConsumer<INPUT> consumer,
             final ObjDoubleFunction<INPUT, KEY> keyFunction,
             final Map<KEY, KEY> cache) {
@@ -3019,7 +3019,7 @@ public final class Memoize {
      * @return The wrapped {@link ObjIntConsumer}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+    public static <KEY, INPUT> ObjIntConsumer<INPUT> objIntConsumer(
             final ObjIntConsumer<INPUT> consumer,
             final ObjIntFunction<INPUT, KEY> keyFunction) {
         return objIntConsumer(consumer, keyFunction, emptyMap());
@@ -3043,7 +3043,7 @@ public final class Memoize {
      * @return The wrapped {@link ObjIntConsumer}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ObjIntConsumer<INPUT> objIntConsumer(
+    public static <KEY, INPUT> ObjIntConsumer<INPUT> objIntConsumer(
             final ObjIntConsumer<INPUT> consumer,
             final ObjIntFunction<INPUT, KEY> keyFunction,
             final Map<KEY, KEY> cache) {
@@ -3108,7 +3108,7 @@ public final class Memoize {
      * @return The wrapped {@link ObjLongConsumer}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+    public static <KEY, INPUT> ObjLongConsumer<INPUT> objLongConsumer(
             final ObjLongConsumer<INPUT> consumer,
             final ObjLongFunction<INPUT, KEY> keyFunction) {
         return objLongConsumer(consumer, keyFunction, emptyMap());
@@ -3132,7 +3132,7 @@ public final class Memoize {
      * @return The wrapped {@link ObjLongConsumer}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ObjLongConsumer<INPUT> objLongConsumer(
+    public static <KEY, INPUT> ObjLongConsumer<INPUT> objLongConsumer(
             final ObjLongConsumer<INPUT> consumer,
             final ObjLongFunction<INPUT, KEY> keyFunction,
             final Map<KEY, KEY> cache) {
@@ -3175,7 +3175,7 @@ public final class Memoize {
      * @return The wrapped {@link Predicate}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> Predicate<INPUT> predicate(
+    public static <KEY, INPUT> Predicate<INPUT> predicate(
             final Predicate<INPUT> predicate,
             final Function<INPUT, KEY> keyFunction) {
         return predicate(predicate, keyFunction, emptyMap());
@@ -3199,7 +3199,7 @@ public final class Memoize {
      * @return The wrapped {@link Predicate}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> Predicate<INPUT> predicate(
+    public static <KEY, INPUT> Predicate<INPUT> predicate(
             final Predicate<INPUT> predicate,
             final Function<INPUT, KEY> keyFunction,
             final Map<KEY, Boolean> cache) {
@@ -3447,7 +3447,7 @@ public final class Memoize {
      * @return The wrapped {@link ToDoubleFunction}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
+    public static <KEY, INPUT> ToDoubleFunction<INPUT> toDoubleFunction(
             final ToDoubleFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction) {
         return toDoubleFunction(function, keyFunction, emptyMap());
@@ -3471,7 +3471,7 @@ public final class Memoize {
      * @return The wrapped {@link ToDoubleFunction}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ToDoubleFunction<INPUT> toDoubleFunction(
+    public static <KEY, INPUT> ToDoubleFunction<INPUT> toDoubleFunction(
             final ToDoubleFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction,
             final Map<KEY, Double> cache) {
@@ -3611,7 +3611,7 @@ public final class Memoize {
      * @return The wrapped {@link ToIntFunction}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+    public static <KEY, INPUT> ToIntFunction<INPUT> toIntFunction(
             final ToIntFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction) {
         return toIntFunction(function, keyFunction, emptyMap());
@@ -3635,7 +3635,7 @@ public final class Memoize {
      * @return The wrapped {@link ToIntFunction}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ToIntFunction<INPUT> toIntFunction(
+    public static <KEY, INPUT> ToIntFunction<INPUT> toIntFunction(
             final ToIntFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction,
             final Map<KEY, Integer> cache) {
@@ -3794,7 +3794,7 @@ public final class Memoize {
      * @return The wrapped {@link ToLongFunction}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
+    public static <KEY, INPUT> ToLongFunction<INPUT> toLongFunction(
             final ToLongFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction) {
         return toLongFunction(function, keyFunction, emptyMap());
@@ -3818,7 +3818,7 @@ public final class Memoize {
      * @return The wrapped {@link ToLongFunction}.
      */
     @CheckReturnValue
-    public static <INPUT, KEY> ToLongFunction<INPUT> toLongFunction(
+    public static <KEY, INPUT> ToLongFunction<INPUT> toLongFunction(
             final ToLongFunction<INPUT> function,
             final Function<INPUT, KEY> keyFunction,
             final Map<KEY, Long> cache) {

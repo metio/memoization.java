@@ -16,7 +16,7 @@ import java.util.function.*;
 
 import static wtf.metio.memoization.tck.TestSupport.*;
 
-public abstract class UsingDefaultsTCK {
+abstract class UsingDefaultsTCK {
 
     private Waiter waiter;
 
