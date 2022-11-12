@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 
 import static wtf.metio.memoization.tck.TestSupport.*;
 
-public abstract class UsingCustomKeyFunctionTCK {
+abstract class UsingCustomKeyFunctionTCK {
 
     private Waiter waiter;
 

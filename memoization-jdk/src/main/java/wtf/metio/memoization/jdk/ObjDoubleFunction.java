@@ -9,7 +9,7 @@ package wtf.metio.memoization.jdk;
  * @param <RESULT> The type of the result.
  */
 @FunctionalInterface
-interface ObjDoubleFunction<VALUE, RESULT> {
+public interface ObjDoubleFunction<VALUE, RESULT> {
 
     /**
      * @param value The value to apply.

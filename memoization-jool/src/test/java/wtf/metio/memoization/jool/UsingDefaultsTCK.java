@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
 
 import static wtf.metio.memoization.tck.TestSupport.*;
 
-public abstract class UsingDefaultsTCK {
+abstract class UsingDefaultsTCK {
 
     private Waiter waiter;
 

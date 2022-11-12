@@ -8,7 +8,7 @@ package wtf.metio.memoization.jdk;
  * @param <RESULT> The resulting type.
  */
 @FunctionalInterface
-interface DoubleBinaryFunction<RESULT> {
+public interface DoubleBinaryFunction<RESULT> {
 
     /**
      * @param first  The first double to apply.
