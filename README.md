@@ -9,136 +9,119 @@ Java [memoization](https://en.wikipedia.org/wiki/Memoization) library - trade sp
 
 ## Features
 
-* Memoize calls to `Consumer`, `Function`, `Predicate`, `Supplier` and other functional interfaces in `java.util.function`
-* Cache values using [Caffeine](https://github.com/ben-manes/caffeine), [Guava](https://github.com/google/guava/wiki/CachesExplained), [cache2k](https://cache2k.org/), or any [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html).
-* Customize caches and the cache keys
+* Memoize calls to JDK interfaces like `Consumer`, `Function`, `Predicate`, `Supplier`, and more
+* Memoize calls to [jOOL](https://github.com/jOOQ/jOOL) interfaces like `Consumer0..16` and `Function0..16`
+* Use custom caches like [Caffeine](https://github.com/ben-manes/caffeine), [Guava](https://github.com/google/guava/wiki/CachesExplained), [cache2k](https://cache2k.org/), or any other [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html).
+* Use custom cache keys for fine-tuning
 
 ## Usage
 
 Memoize any of the supported types by using the static factory methods supplied by:
 
-* `Cache2kMemoize` if you want to use [cache2k](https://cache2k.org/) caches.
-* `CaffeineMemoize` if you want to use [Caffeine](https://github.com/ben-manes/caffeine) caches.
-* `GuavaMemoize` if you want to use [Guava](https://github.com/google/guava/wiki/CachesExplained) caches.
-* `MapMemoize` if you want to use any [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html) as cache.
+* `Memoize` if you want to memoize JDK interfaces.
+* `MemoizeJool` if you want to memoize jOOL interfaces.
 
 ### Default cache with default cache keys
 
 ```java
-wtf.metio.memoization.cache2k.Cache2kMemoize;
-wtf.metio.memoization.caffeine.CaffeineMemoize;
-wtf.metio.memoization.guava.GuavaMemoize;
-wtf.metio.memoization.map.MapMemoize;
+wtf.metio.memoization.jdk.Memoize;
+wtf.metio.memoization.jool.MemoizeJool;
 
-// memoize in cache2k cache
-Consumer<INPUT> predicate                = ...;
-Consumer<INPUT> memoizedPredicate        = Cache2kMemoize.predicate(predicate);
-
-// memoize in Caffeine cache
-Consumer<INPUT> consumer                 = ...;
-Consumer<INPUT> memoizedConsumer         = CaffeineMemoize.consumer(consumer);
-
-// memoize in Guava cache
 Function<INPUT, OUTPUT> function         = ...;
-Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function);
+Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function);
 
-// memoize in ConcurrentMap
 Supplier<OUTPUT> supplier                = ...;
-Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier);
+Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier);
+
+Function3<T1, T2, T3, OUTPUT> function         = ...;
+Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function);
+
+Consumer4<T1, T2, T3, T4> consumer             = ...;
+Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer);
 ```
 
 ### Default cache with custom cache keys
 
 ```java
-wtf.metio.memoization.cache2k.Cache2kMemoize;
-wtf.metio.memoization.caffeine.CaffeineMemoize;
-wtf.metio.memoization.guava.GuavaMemoize;
-wtf.metio.memoization.map.MapMemoize;
+wtf.metio.memoization.jdk.Memoize;
+wtf.metio.memoization.jool.MemoizeJool;
 
-// memoize in cache2k cache
-Consumer<INPUT> predicate                = ...;
-Function<INPUT, KEY> keyFunction         = ...;
-Consumer<INPUT> memoizedPredicate        = Cache2kMemoize.predicate(predicate, keyFunction);
-
-// memoize in Caffeine cache
-Consumer<INPUT> consumer                 = ...;
-Function<INPUT, KEY> keyFunction         = ...;
-Consumer<INPUT> memoizedConsumer         = CaffeineMemoize.consumer(consumer, keyFunction);
-
-// memoize in Guava cache
 Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, KEY> keyFunction         = ...;
-Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function, keyFunction);
+Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function, keyFunction);
 
-// memoize in ConcurrentMap
 Supplier<OUTPUT> supplier                = ...;
 Supplier<KEY> keySupplier                = ...;
-Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, keySupplier);
+Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier, keySupplier);
+
+Function3<T1, T2, T3, OUTPUT> function         = ...;
+Function3<T1, T2, T3, KEY> keyFunction         = ...;
+Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function, keyFunction);
+
+Consumer4<T1, T2, T3, T4> consumer             = ...;
+Function3<T1, T2, T3, T4, KEY> keyFunction     = ...;
+Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer, keyFunction);
 ```
 
 ### Custom cache with default cache keys
 
 ```java
-wtf.metio.memoization.cache2k.Cache2kMemoize;
-wtf.metio.memoization.caffeine.CaffeineMemoize;
-wtf.metio.memoization.guava.GuavaMemoize;
-wtf.metio.memoization.map.MapMemoize;
+wtf.metio.memoization.jdk.Memoize;
+wtf.metio.memoization.jool.MemoizeJool;
 
 // memoize in cache2k cache
-Consumer<INPUT> predicate                = ...;
-Cache<INPUT, INPUT> cache                = ...; // org.cache2k.Cache
-Consumer<INPUT> memoizedPredicate        = Cache2kMemoize.predicate(predicate, cache);
+Function<INPUT, OUTPUT> function         = ...;
+Cache<INPUT, OUTPUT> cache               = ...; // org.cache2k.Cache
+Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function, cache.asMap());
 
 // memoize in Caffeine cache
-Consumer<INPUT> consumer                 = ...;
-Cache<INPUT, INPUT> cache                = ...; // com.github.benmanes.caffeine.cache.Cache
-Consumer<INPUT> memoizedConsumer         = CaffeineMemoize.consumer(consumer, cache);
+Supplier<OUTPUT> supplier                = ...;
+Cache<String, OUTPUT> cache              = ...; // com.github.benmanes.caffeine.cache.Cache
+Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier, cache.asMap());
 
 // memoize in Guava cache
-Function<INPUT, OUTPUT> function         = ...;
-Cache<INPUT, OUTPUT> cache               = ...; // com.google.common.cache.Cache
-Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function, cache);
+Function3<T1, T2, T3, OUTPUT> function         = ...;
+Cache<String, OUTPUT> cache                    = ...; // com.google.common.cache.Cache
+Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function, cache.asMap());
 
 // memoize in ConcurrentMap
-Supplier<OUTPUT> supplier                = ...;
-Map<String, OUTPUT> cache                = ...;
-Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, cache);
+Consumer4<T1, T2, T3, T4> consumer             = ...;
+Map<String, String> cache                      = ...;
+Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer, cache);
 ```
 
 ### Custom cache with custom cache keys
 
 ```java
-wtf.metio.memoization.cache2k.Cache2kMemoize;
-wtf.metio.memoization.caffeine.CaffeineMemoize;
-wtf.metio.memoization.guava.GuavaMemoize;
-wtf.metio.memoization.map.MapMemoize;
+wtf.metio.memoization.jdk.Memoize;
+wtf.metio.memoization.jool.MemoizeJool;
 
 // memoize in cache2k cache
-Consumer<INPUT> predicate                = ...;
-Function<INPUT, KEY> keyFunction         = ...;
-Cache<KEY, INPUT> cache                  = ...; // org.cache2k.Cache
-Consumer<INPUT> memoizedPredicate        = Cache2kMemoize.predicate(predicate, keyFunction, cache);
-
-// memoize in Caffeine cache
-Consumer<INPUT> consumer                 = ...;
-Function<INPUT, KEY> keyFunction         = ...;
-Cache<KEY, INPUT> cache                  = ...; // com.github.benmanes.caffeine.cache.Cache
-Consumer<INPUT> memoizedConsumer         = CaffeineMemoize.consumer(consumer, keyFunction, cache);
-
-// memoize in Guava cache
 Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, KEY> keyFunction         = ...;
-Cache<KEY, OUTPUT> cache                 = ...; // com.google.common.cache.Cache
-Function<INPUT, OUTPUT> memoizedFunction = GuavaMemoize.function(function, keyFunction, cache);
+Cache<KEY, OUTPUT> cache                 = ...; // org.cache2k.Cache
+Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function, keyFunction, cache.asMap());
 
-// memoize in ConcurrentMap
+// memoize in Caffeine cache
 Supplier<OUTPUT> supplier                = ...;
 Supplier<KEY> keySupplier                = ...;
-Map<KEY, OUTPUT> cache                   = ...;
-Supplier<OUTPUT> memoizedSupplier        = MapMemoize.supplier(supplier, keySupplier, cache);
+Cache<KEY, OUTPUT> cache                 = ...; // com.github.benmanes.caffeine.cache.Cache
+Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier, keySupplier, cache.asMap());
+
+// memoize in Guava cache
+Function3<T1, T2, T3, OUTPUT> function         = ...;
+Function3<T1, T2, T3, KEY> keyFunction         = ...;
+Cache<KEY, OUTPUT> cache                       = ...; // com.google.common.cache.Cache
+Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function, keyFunction, cache.asMap());
+
+// memoize in ConcurrentMap
+Consumer4<T1, T2, T3, T4> consumer             = ...;
+Function4<T1, T2, T3, T4, KEY> keyFunction     = ...;
+Map<KEY, KEY> cache                            = ...;
+Consumer4<T1, T2, T3, T4> memoizedConsumer     = MemoizeJool.consumer4(consumer, keyFunction, cache);
 ```
 
-Note that `MapMemoize` does accept any `Map`, however copies the entries in the map to a new `ConcurrentHashMap` in case the provided `Map` is not a `ConcurrentMap` as well. This is done in order to ensure atomic `computeIfAbsent` behavior.
+Note that `Memoize` and `MemoizeJool` do accept any `Map`, however they copy the entries in the map to a new `ConcurrentHashMap` in case the provided `Map` is not a `ConcurrentMap`. This is done in order to ensure atomic `computeIfAbsent` behavior.
 
 ## Integration
 
@@ -146,63 +129,26 @@ In order to use this project, declare the following dependencies in your project
 
 ```xml
 <dependencies>
-    <!-- ConcurrentMap ONLY -->
+    <!-- support for JDK interfaces -->
     <dependency>
         <groupId>wtf.metio.memoization</groupId>
-        <artifactId>memoization-map</artifactId>
+        <artifactId>memoization-jdk</artifactId>
         <version>${version.memoization}</version>
     </dependency>
-    <!-- ConcurrentMap ONLY -->
+    <!-- support for JDK interfaces -->
 
-    <!-- cache2k ONLY -->
+    <!-- support for jOOL interfaces -->
     <dependency>
         <groupId>wtf.metio.memoization</groupId>
-        <artifactId>memoization-cache2k</artifactId>
+        <artifactId>memoization-jool</artifactId>
         <version>${version.memoization}</version>
     </dependency>
-    <dependency>
-        <groupId>org.cache2k</groupId>
-        <artifactId>cache2k-api</artifactId>
-        <version>${version.cache2k}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.cache2k</groupId>
-        <artifactId>cache2k-core</artifactId>
-        <version>${version.cache2k}</version>
-        <scope>runtime</scope>
-    </dependency>
-    <!-- cache2k ONLY -->
-
-    <!-- Caffeine ONLY -->
-    <dependency>
-        <groupId>wtf.metio.memoization</groupId>
-        <artifactId>memoization-caffeine</artifactId>
-        <version>${version.memoization}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.ben-manes.caffeine</groupId>
-        <artifactId>caffeine</artifactId>
-        <version>${version.caffeine}</version>
-    </dependency>
-    <!-- Caffeine ONLY -->
-
-    <!-- Guava ONLY -->
-    <dependency>
-        <groupId>wtf.metio.memoization</groupId>
-        <artifactId>memoization-guava</artifactId>
-        <version>${version.memoization}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${version.guava}</version>
-    </dependency>
-    <!-- Guava ONLY -->
+    <!-- support for jOOL interfaces -->
 
 </dependencies>
 ```
 
-Replace `${version.memoization}` with the latest release. Use [ExpiringMap](https://github.com/jhalterman/expiringmap), [ConcurrentLinkedHashMap](https://github.com/ben-manes/concurrentlinkedhashmap), [Chronicle-Map](https://github.com/OpenHFT/Chronicle-Map), [Cacheonix](http://www.cacheonix.org/) or other `ConcurrentMap` implementations as alternatives to the default `ConcurrentHashMap` used in the `MapMemoize` factory.
+Replace `${version.memoization}` with the latest release.
 
 ## Alternatives
 
