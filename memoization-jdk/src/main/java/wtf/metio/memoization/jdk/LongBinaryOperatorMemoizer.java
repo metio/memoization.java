@@ -18,7 +18,7 @@ final class LongBinaryOperatorMemoizer<KEY>
     private final LongBinaryFunction<KEY> keyFunction;
     private final LongBinaryOperator operator;
 
-    public LongBinaryOperatorMemoizer(
+    LongBinaryOperatorMemoizer(
             final ConcurrentMap<KEY, Long> cache,
             final LongBinaryFunction<KEY> keyFunction,
             final LongBinaryOperator operator) {

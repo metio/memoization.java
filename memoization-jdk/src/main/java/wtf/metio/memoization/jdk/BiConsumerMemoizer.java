@@ -19,7 +19,7 @@ final class BiConsumerMemoizer<FIRST, SECOND, KEY>
     private final BiFunction<FIRST, SECOND, KEY> keyFunction;
     private final BiConsumer<FIRST, SECOND> biConsumer;
 
-    public BiConsumerMemoizer(
+    BiConsumerMemoizer(
             final ConcurrentMap<KEY, KEY> cache,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final BiConsumer<FIRST, SECOND> biConsumer) {

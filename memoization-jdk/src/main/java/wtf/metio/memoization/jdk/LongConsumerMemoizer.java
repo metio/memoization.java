@@ -19,14 +19,14 @@ final class LongConsumerMemoizer<KEY>
     private final LongFunction<KEY> keyFunction;
     private final LongConsumer consumer;
 
-    public LongConsumerMemoizer(
+    LongConsumerMemoizer(
             final ConcurrentMap<KEY, KEY> cache,
             final LongFunction<KEY> keyFunction,
             final LongConsumer consumer) {
         super(cache);
         this.keyFunction = requireNonNull(keyFunction, "Provide a key function.");
         this.consumer = requireNonNull(consumer,
-                "Cannot memoize a NULL Consumer - provide an actual Consumer to fix this.");
+                "Cannot memoize a NULL LongConsumer - provide an actual LongConsumer to fix this.");
     }
 
     @Override

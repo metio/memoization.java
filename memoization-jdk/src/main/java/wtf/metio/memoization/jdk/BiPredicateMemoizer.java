@@ -19,7 +19,7 @@ final class BiPredicateMemoizer<FIRST, SECOND, KEY>
     private final BiFunction<FIRST, SECOND, KEY> keyFunction;
     private final BiPredicate<FIRST, SECOND> biPredicate;
 
-    public BiPredicateMemoizer(
+    BiPredicateMemoizer(
             final ConcurrentMap<KEY, Boolean> cache,
             final BiFunction<FIRST, SECOND, KEY> keyFunction,
             final BiPredicate<FIRST, SECOND> biPredicate) {

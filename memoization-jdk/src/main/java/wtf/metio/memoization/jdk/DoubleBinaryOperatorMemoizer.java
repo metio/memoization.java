@@ -18,7 +18,7 @@ final class DoubleBinaryOperatorMemoizer<KEY>
     private final DoubleBinaryFunction<KEY> keyFunction;
     private final DoubleBinaryOperator operator;
 
-    public DoubleBinaryOperatorMemoizer(
+    DoubleBinaryOperatorMemoizer(
             final ConcurrentMap<KEY, Double> cache,
             final DoubleBinaryFunction<KEY> keyFunction,
             final DoubleBinaryOperator operator) {

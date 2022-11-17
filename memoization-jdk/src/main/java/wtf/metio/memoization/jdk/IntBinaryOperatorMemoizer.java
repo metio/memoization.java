@@ -18,7 +18,7 @@ final class IntBinaryOperatorMemoizer<KEY>
     private final IntBinaryFunction<KEY> keyFunction;
     private final IntBinaryOperator operator;
 
-    public IntBinaryOperatorMemoizer(
+    IntBinaryOperatorMemoizer(
             final ConcurrentMap<KEY, Integer> cache,
             final IntBinaryFunction<KEY> keyFunction,
             final IntBinaryOperator operator) {
