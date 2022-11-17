@@ -32,9 +32,9 @@ final class ConsumerMemoizer<INPUT, KEY>
 
     @Override
     public void accept(final INPUT input) {
-        computeIfAbsent(keyFunction.apply(input), givenKey -> {
+        computeIfAbsent(keyFunction.apply(input), key -> {
             consumer.accept(input);
-            return givenKey;
+            return key;
         });
     }
 

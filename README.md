@@ -12,6 +12,7 @@ Java [memoization](https://en.wikipedia.org/wiki/Memoization) library - trade sp
 * Memoize calls to JDK interfaces like `Consumer`, `Function`, `Predicate`, `Supplier`, and more
 * Memoize calls to [jOOL](https://github.com/jOOQ/jOOL) interfaces like `Consumer0..16` and `Function0..16`
 * Memoize calls to [lambda](https://github.com/palatable/lambda) interfaces like `Fn0..8`
+* Memoize calls to [RxJava](https://github.com/ReactiveX/RxJava) interfaces like `Action`, `Cancellable`, and more
 * Use custom caches like [Caffeine](https://github.com/ben-manes/caffeine), [Guava](https://github.com/google/guava/wiki/CachesExplained), [cache2k](https://cache2k.org/), or any other [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html).
 * Use custom cache keys for fine-tuning
 
@@ -22,6 +23,7 @@ Memoize any of the supported types by using the static factory methods supplied 
 * `Memoize` if you want to memoize JDK interfaces.
 * `MemoizeJool` if you want to memoize jOOL interfaces.
 * `MemoizeLambda` if you want to memoize lambda interfaces.
+* `MemoizeRx` if you want to memoize RxJava interfaces.
 
 ### Default cache with default cache keys
 
@@ -29,12 +31,13 @@ Memoize any of the supported types by using the static factory methods supplied 
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
 wtf.metio.memoization.jool.MemoizeLambda;
+wtf.metio.memoization.rxjava.MemoizeRx;
 
 Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function);
 
 Supplier<OUTPUT> supplier                = ...;
-Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier);
+Supplier<OUTPUT> memoizedSupplier        = MemoizeRx.supplier(supplier);
 
 Function3<T1, T2, T3, OUTPUT> function         = ...;
 Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function);
@@ -49,6 +52,7 @@ Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function);
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
 wtf.metio.memoization.jool.MemoizeLambda;
+wtf.metio.memoization.rxjava.MemoizeRx;
 
 Function<INPUT, OUTPUT> function         = ...;
 Function<INPUT, KEY> keyFunction         = ...;
@@ -56,7 +60,7 @@ Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function, keyFunctio
 
 Supplier<OUTPUT> supplier                = ...;
 Supplier<KEY> keySupplier                = ...;
-Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier, keySupplier);
+Supplier<OUTPUT> memoizedSupplier        = MemoizeRx.supplier(supplier, keySupplier);
 
 Function3<T1, T2, T3, OUTPUT> function         = ...;
 Function3<T1, T2, T3, KEY> keyFunction         = ...;
@@ -73,6 +77,7 @@ Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, keyFu
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
 wtf.metio.memoization.jool.MemoizeLambda;
+wtf.metio.memoization.rxjava.MemoizeRx;
 
 // memoize in cache2k cache
 Function<INPUT, OUTPUT> function         = ...;
@@ -82,7 +87,7 @@ Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function, cache.asMa
 // memoize in Caffeine cache
 Supplier<OUTPUT> supplier                = ...;
 Cache<String, OUTPUT> cache              = ...; // com.github.benmanes.caffeine.cache.Cache
-Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier, cache.asMap());
+Supplier<OUTPUT> memoizedSupplier        = MemoizeRx.supplier(supplier, cache.asMap());
 
 // memoize in Guava cache
 Function3<T1, T2, T3, OUTPUT> function         = ...;
@@ -101,6 +106,7 @@ Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, cache
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
 wtf.metio.memoization.jool.MemoizeLambda;
+wtf.metio.memoization.rxjava.MemoizeRx;
 
 // memoize in cache2k cache
 Function<INPUT, OUTPUT> function         = ...;
@@ -112,7 +118,7 @@ Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function, keyFunctio
 Supplier<OUTPUT> supplier                = ...;
 Supplier<KEY> keySupplier                = ...;
 Cache<KEY, OUTPUT> cache                 = ...; // com.github.benmanes.caffeine.cache.Cache
-Supplier<OUTPUT> memoizedSupplier        = Memoize.supplier(supplier, keySupplier, cache.asMap());
+Supplier<OUTPUT> memoizedSupplier        = MemoizeRx.supplier(supplier, keySupplier, cache.asMap());
 
 // memoize in Guava cache
 Function3<T1, T2, T3, OUTPUT> function         = ...;
@@ -158,6 +164,14 @@ In order to use this project, declare the following dependencies in your project
         <version>${version.memoization}</version>
     </dependency>
     <!-- support for lambda interfaces -->
+
+    <!-- support for RxJava interfaces -->
+    <dependency>
+        <groupId>wtf.metio.memoization</groupId>
+        <artifactId>memoization-rxjava</artifactId>
+        <version>${version.memoization}</version>
+    </dependency>
+    <!-- support for RxJava interfaces -->
 </dependencies>
 ```
 

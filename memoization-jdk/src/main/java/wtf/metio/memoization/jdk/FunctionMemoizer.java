@@ -30,7 +30,7 @@ final class FunctionMemoizer<INPUT, KEY, OUTPUT>
 
     @Override
     public OUTPUT apply(final INPUT input) {
-        return computeIfAbsent(keyFunction.apply(input), givenKey -> function.apply(input));
+        return computeIfAbsent(keyFunction.apply(input), key -> function.apply(input));
     }
 
 }

@@ -19,13 +19,13 @@ final class RunnableMemoizer<KEY>
     private final Supplier<KEY> keySupplier;
     private final Runnable runnable;
 
-    public RunnableMemoizer(
+    RunnableMemoizer(
             final ConcurrentMap<KEY, KEY> cache,
             final Supplier<KEY> keySupplier,
             final Runnable runnable) {
         super(cache);
         this.keySupplier = requireNonNull(keySupplier,
-                "Provide a key function, might just be 'MemoizationDefaults.staticKey()'.");
+                "Provide a key supplier, might just be 'MemoizationDefaults.staticKey()'.");
         this.runnable = requireNonNull(runnable,
                 "Cannot memoize a NULL Runnable - provide an actual Runnable to fix this.");
     }

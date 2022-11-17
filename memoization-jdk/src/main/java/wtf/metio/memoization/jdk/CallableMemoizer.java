@@ -21,13 +21,13 @@ final class CallableMemoizer<OUTPUT, KEY>
     private final Supplier<KEY> keySupplier;
     private final Callable<OUTPUT> callable;
 
-    public CallableMemoizer(
+    CallableMemoizer(
             final ConcurrentMap<KEY, OUTPUT> cache,
             final Supplier<KEY> keySupplier,
             final Callable<OUTPUT> callable) {
         super(cache);
         this.keySupplier = requireNonNull(keySupplier,
-                "Provide a key function, might just be 'MemoizationDefaults.staticKey()'.");
+                "Provide a key supplier, might just be 'MemoizationDefaults.staticKey()'.");
         this.callable = requireNonNull(callable,
                 "Cannot memoize a NULL Callable - provide an actual Callable to fix this.");
     }
@@ -35,7 +35,7 @@ final class CallableMemoizer<OUTPUT, KEY>
     @Override
     public OUTPUT call() throws Exception {
         try {
-            return computeIfAbsent(keySupplier.get(), givenKey -> {
+            return computeIfAbsent(keySupplier.get(), key -> {
                 try {
                     return callable.call();
                 } catch (final Exception exception) {

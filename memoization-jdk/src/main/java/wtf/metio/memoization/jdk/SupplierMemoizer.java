@@ -24,7 +24,7 @@ final class SupplierMemoizer<KEY, VALUE>
             final Supplier<VALUE> supplier) {
         super(cache);
         this.keySupplier = requireNonNull(keySupplier,
-                "Provide a key function, might just be 'MemoizationDefaults.staticKey()'.");
+                "Provide a key supplier, might just be 'MemoizationDefaults.staticKey()'.");
         this.supplier = requireNonNull(supplier,
                 "Cannot memoize a NULL Supplier - provide an actual Supplier to fix this.");
     }

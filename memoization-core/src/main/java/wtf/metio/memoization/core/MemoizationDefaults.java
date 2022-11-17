@@ -34,6 +34,8 @@ public final class MemoizationDefaults {
      * @return The constructed cache key.
      */
     public static String hashCodes(final Object... values) {
+//        return Arrays.hashCode(values);
+
         return Arrays.stream(values)
                 .map(Object::hashCode)
                 .map(Objects::toString)

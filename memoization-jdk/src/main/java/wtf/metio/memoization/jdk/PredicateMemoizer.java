@@ -19,7 +19,7 @@ final class PredicateMemoizer<INPUT, KEY>
     private final Function<INPUT, KEY> keyFunction;
     private final Predicate<INPUT> predicate;
 
-    public PredicateMemoizer(
+    PredicateMemoizer(
             final ConcurrentMap<KEY, Boolean> cache,
             final Function<INPUT, KEY> keyFunction,
             final Predicate<INPUT> predicate) {
