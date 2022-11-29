@@ -106,8 +106,8 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static Action action(
             final Action action,
-            final Map<String, String> cache) {
-        return action(action, () -> "SUPPLIED", cache);
+            final Map<Integer, Integer> cache) {
+        return action(action, () -> 1, cache);
     }
 
     /**
@@ -191,8 +191,8 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static Cancellable cancellable(
             final Cancellable cancellable,
-            final Map<String, String> cache) {
-        return cancellable(cancellable, () -> "SUPPLIED", cache);
+            final Map<Integer, Integer> cache) {
+        return cancellable(cancellable, () -> 1, cache);
     }
 
     /**
@@ -361,8 +361,8 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static BooleanSupplier booleanSupplier(
             final BooleanSupplier supplier,
-            final Map<String, Boolean> cache) {
-        return booleanSupplier(supplier, () -> "SUPPLIED", cache);
+            final Map<Integer, Boolean> cache) {
+        return booleanSupplier(supplier, () -> 1, cache);
     }
 
     /**
@@ -548,7 +548,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, OUTPUT> Function3<TYPE1, TYPE2, TYPE3, OUTPUT> function3(
             final Function3<TYPE1, TYPE2, TYPE3, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function3(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -652,7 +652,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> Function4<TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> function4(
             final Function4<TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function4(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -760,7 +760,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> Function5<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> function5(
             final Function5<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function5(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -872,7 +872,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> Function6<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> function6(
             final Function6<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function6(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -988,7 +988,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> Function7<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> function7(
             final Function7<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function7(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1108,7 +1108,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> Function8<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> function8(
             final Function8<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function8(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1232,7 +1232,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, OUTPUT> Function9<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, OUTPUT> function9(
             final Function9<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function9(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1517,8 +1517,8 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <OUTPUT> Supplier<OUTPUT> supplier(
             final Supplier<OUTPUT> supplier,
-            final Map<String, OUTPUT> cache) {
-        return supplier(supplier, () -> "SUPPLIED", asConcurrentMap(cache));
+            final Map<Integer, OUTPUT> cache) {
+        return supplier(supplier, () -> 1, asConcurrentMap(cache));
     }
 
     /**
@@ -1721,7 +1721,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
-            final Map<String, Boolean> cache) {
+            final Map<Integer, Boolean> cache) {
         return biPredicate(predicate, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1818,7 +1818,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return biFunction(biFunction, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1912,7 +1912,7 @@ public final class MemoizeRx {
     @CheckReturnValue
     public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return biConsumer(biConsumer, MemoizationDefaults::hashCodes, cache);
     }
 

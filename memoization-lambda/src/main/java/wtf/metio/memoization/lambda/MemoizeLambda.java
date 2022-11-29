@@ -98,7 +98,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <OUTPUT> Fn0<OUTPUT> fn0(
             final Fn0<OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn0(function, staticKey(), cache);
     }
 
@@ -189,7 +189,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <INPUT, OUTPUT> Fn1<INPUT, OUTPUT> fn1(
             final Fn1<INPUT, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn1(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -284,7 +284,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <TYPE1, TYPE2, OUTPUT> Fn2<TYPE1, TYPE2, OUTPUT> fn2(
             final Fn2<TYPE1, TYPE2, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn2(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -383,7 +383,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, OUTPUT> Fn3<TYPE1, TYPE2, TYPE3, OUTPUT> fn3(
             final Fn3<TYPE1, TYPE2, TYPE3, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn3(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -487,7 +487,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> Fn4<TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> fn4(
             final Fn4<TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn4(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -595,7 +595,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> Fn5<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> fn5(
             final Fn5<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn5(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -707,7 +707,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> Fn6<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> fn6(
             final Fn6<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn6(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -823,7 +823,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> Fn7<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> fn7(
             final Fn7<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn7(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -943,7 +943,7 @@ public final class MemoizeLambda {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> Fn8<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> fn8(
             final Fn8<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return fn8(function, MemoizationDefaults::hashCodes, cache);
     }
 

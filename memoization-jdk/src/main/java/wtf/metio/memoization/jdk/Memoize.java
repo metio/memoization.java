@@ -132,7 +132,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <OUTPUT> Callable<OUTPUT> callable(
             final Callable<OUTPUT> callable,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return callable(callable, staticKey(), cache);
     }
 
@@ -219,7 +219,7 @@ public final class Memoize {
     @CheckReturnValue
     public static Runnable runnable(
             final Runnable runnable,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return runnable(runnable, staticKey(), cache);
     }
 
@@ -332,7 +332,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return biConsumer(biConsumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -429,7 +429,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <FIRST, SECOND, OUTPUT> BiFunction<FIRST, SECOND, OUTPUT> biFunction(
             final BiFunction<FIRST, SECOND, OUTPUT> biFunction,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return biFunction(biFunction, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -523,7 +523,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <FIRST, SECOND> BiPredicate<FIRST, SECOND> biPredicate(
             final BiPredicate<FIRST, SECOND> predicate,
-            final Map<String, Boolean> cache) {
+            final Map<Integer, Boolean> cache) {
         return biPredicate(predicate, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -588,7 +588,7 @@ public final class Memoize {
     @CheckReturnValue
     public static BooleanSupplier booleanSupplier(
             final BooleanSupplier supplier,
-            final Map<String, Boolean> cache) {
+            final Map<Integer, Boolean> cache) {
         return booleanSupplier(supplier, staticKey(), cache);
     }
 
@@ -808,7 +808,7 @@ public final class Memoize {
     @CheckReturnValue
     public static DoubleBinaryOperator doubleBinaryOperator(
             final DoubleBinaryOperator operator,
-            final Map<String, Double> cache) {
+            final Map<Integer, Double> cache) {
         return doubleBinaryOperator(operator, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1106,7 +1106,7 @@ public final class Memoize {
     @CheckReturnValue
     public static DoubleSupplier doubleSupplier(
             final DoubleSupplier supplier,
-            final Map<String, Double> cache) {
+            final Map<Integer, Double> cache) {
         return doubleSupplier(supplier, staticKey(), cache);
     }
 
@@ -1585,7 +1585,7 @@ public final class Memoize {
     @CheckReturnValue
     public static IntBinaryOperator intBinaryOperator(
             final IntBinaryOperator operator,
-            final Map<String, Integer> cache) {
+            final Map<Integer, Integer> cache) {
         return intBinaryOperator(operator, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1883,7 +1883,7 @@ public final class Memoize {
     @CheckReturnValue
     public static IntSupplier intSupplier(
             final IntSupplier supplier,
-            final Map<String, Integer> cache) {
+            final Map<Integer, Integer> cache) {
         return intSupplier(supplier, staticKey(), cache);
     }
 
@@ -2269,7 +2269,7 @@ public final class Memoize {
     @CheckReturnValue
     public static LongBinaryOperator longBinaryOperator(
             final LongBinaryOperator operator,
-            final Map<String, Long> cache) {
+            final Map<Integer, Long> cache) {
         return longBinaryOperator(operator, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2567,7 +2567,7 @@ public final class Memoize {
     @CheckReturnValue
     public static LongSupplier longSupplier(
             final LongSupplier supplier,
-            final Map<String, Long> cache) {
+            final Map<Integer, Long> cache) {
         return longSupplier(supplier, staticKey(), cache);
     }
 
@@ -2909,7 +2909,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <INPUT> ObjDoubleConsumer<INPUT> objDoubleConsumer(
             final ObjDoubleConsumer<INPUT> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return objDoubleConsumer(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2998,7 +2998,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <INPUT> ObjIntConsumer<INPUT> objIntConsumer(
             final ObjIntConsumer<INPUT> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return objIntConsumer(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3087,7 +3087,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <INPUT> ObjLongConsumer<INPUT> objLongConsumer(
             final ObjLongConsumer<INPUT> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return objLongConsumer(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3265,7 +3265,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <OUTPUT> Supplier<OUTPUT> supplier(
             final Supplier<OUTPUT> supplier,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return supplier(supplier, staticKey(), asConcurrentMap(cache));
     }
 
@@ -3407,7 +3407,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <FIRST, SECOND> ToDoubleBiFunction<FIRST, SECOND> toDoubleBiFunction(
             final ToDoubleBiFunction<FIRST, SECOND> function,
-            final Map<String, Double> cache) {
+            final Map<Integer, Double> cache) {
         return toDoubleBiFunction(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3590,7 +3590,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <FIRST, SECOND> ToIntBiFunction<FIRST, SECOND> toIntBiFunction(
             final ToIntBiFunction<FIRST, SECOND> function,
-            final Map<String, Integer> cache) {
+            final Map<Integer, Integer> cache) {
         return toIntBiFunction(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3773,7 +3773,7 @@ public final class Memoize {
     @CheckReturnValue
     public static <FIRST, SECOND> ToLongBiFunction<FIRST, SECOND> toLongBiFunction(
             final ToLongBiFunction<FIRST, SECOND> function,
-            final Map<String, Long> cache) {
+            final Map<Integer, Long> cache) {
         return toLongBiFunction(function, MemoizationDefaults::hashCodes, cache);
     }
 

@@ -130,7 +130,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static Consumer0 consumer0(
             final Consumer0 consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer0(consumer, staticKey(), cache);
     }
 
@@ -308,7 +308,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2> Consumer2<TYPE1, TYPE2> consumer2(
             final Consumer2<TYPE1, TYPE2> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer2(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -404,7 +404,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3> Consumer3<TYPE1, TYPE2, TYPE3> consumer3(
             final Consumer3<TYPE1, TYPE2, TYPE3> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer3(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -504,7 +504,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4> Consumer4<TYPE1, TYPE2, TYPE3, TYPE4> consumer4(
             final Consumer4<TYPE1, TYPE2, TYPE3, TYPE4> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer4(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -608,7 +608,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5> Consumer5<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5> consumer5(
             final Consumer5<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer5(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -716,7 +716,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6> Consumer6<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6> consumer6(
             final Consumer6<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer6(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -828,7 +828,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7> Consumer7<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7> consumer7(
             final Consumer7<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer7(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -944,7 +944,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8> Consumer8<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8> consumer8(
             final Consumer8<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer8(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1064,7 +1064,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9> Consumer9<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9> consumer9(
             final Consumer9<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer9(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1188,7 +1188,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10> Consumer10<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10> consumer10(
             final Consumer10<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer10(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1316,7 +1316,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11> Consumer11<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11> consumer11(
             final Consumer11<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer11(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1448,7 +1448,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12> Consumer12<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12> consumer12(
             final Consumer12<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer12(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1584,7 +1584,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13> Consumer13<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13> consumer13(
             final Consumer13<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer13(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1724,7 +1724,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14> Consumer14<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14> consumer14(
             final Consumer14<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer14(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -1868,7 +1868,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15> Consumer15<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15> consumer15(
             final Consumer15<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer15(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2016,7 +2016,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, TYPE16> Consumer16<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, TYPE16> consumer16(
             final Consumer16<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, TYPE16> consumer,
-            final Map<String, String> cache) {
+            final Map<Integer, Integer> cache) {
         return consumer16(consumer, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2135,7 +2135,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <OUTPUT> Function0<OUTPUT> function0(
             final Function0<OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function0(function, staticKey(), cache);
     }
 
@@ -2319,7 +2319,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, OUTPUT> Function2<TYPE1, TYPE2, OUTPUT> function2(
             final Function2<TYPE1, TYPE2, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function2(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2419,7 +2419,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, OUTPUT> Function3<TYPE1, TYPE2, TYPE3, OUTPUT> function3(
             final Function3<TYPE1, TYPE2, TYPE3, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function3(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2523,7 +2523,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> Function4<TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> function4(
             final Function4<TYPE1, TYPE2, TYPE3, TYPE4, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function4(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2631,7 +2631,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> Function5<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> function5(
             final Function5<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function5(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2743,7 +2743,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> Function6<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> function6(
             final Function6<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function6(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2859,7 +2859,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> Function7<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> function7(
             final Function7<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function7(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -2979,7 +2979,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> Function8<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> function8(
             final Function8<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function8(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3103,7 +3103,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, OUTPUT> Function9<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, OUTPUT> function9(
             final Function9<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function9(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3231,7 +3231,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, OUTPUT> Function10<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, OUTPUT> function10(
             final Function10<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function10(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3363,7 +3363,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, OUTPUT> Function11<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, OUTPUT> function11(
             final Function11<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function11(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3499,7 +3499,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, OUTPUT> Function12<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, OUTPUT> function12(
             final Function12<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function12(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3639,7 +3639,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, OUTPUT> Function13<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, OUTPUT> function13(
             final Function13<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function13(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3783,7 +3783,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, OUTPUT> Function14<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, OUTPUT> function14(
             final Function14<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function14(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -3931,7 +3931,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, OUTPUT> Function15<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, OUTPUT> function15(
             final Function15<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function15(function, MemoizationDefaults::hashCodes, cache);
     }
 
@@ -4083,7 +4083,7 @@ public final class MemoizeJool {
     @CheckReturnValue
     public static <TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, TYPE16, OUTPUT> Function16<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, TYPE16, OUTPUT> function16(
             final Function16<TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6, TYPE7, TYPE8, TYPE9, TYPE10, TYPE11, TYPE12, TYPE13, TYPE14, TYPE15, TYPE16, OUTPUT> function,
-            final Map<String, OUTPUT> cache) {
+            final Map<Integer, OUTPUT> cache) {
         return function16(function, MemoizationDefaults::hashCodes, cache);
     }
 
