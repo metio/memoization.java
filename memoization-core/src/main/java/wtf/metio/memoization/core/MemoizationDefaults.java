@@ -4,6 +4,8 @@
  */
 package wtf.metio.memoization.core;
 
+import edu.umd.cs.findbugs.annotations.CheckReturnValue;
+
 import java.util.Arrays;
 import java.util.function.Supplier;
 
@@ -21,6 +23,7 @@ public final class MemoizationDefaults {
      *
      * @return The default key supplier used throughout the library.
      */
+    @CheckReturnValue
     public static Supplier<Integer> staticKey() {
         return () -> 1;
     }
@@ -31,6 +34,7 @@ public final class MemoizationDefaults {
      * @param values The values to use.
      * @return The constructed cache key.
      */
+    @CheckReturnValue
     public static int hashCodes(final Object... values) {
         return Arrays.hashCode(values);
     }

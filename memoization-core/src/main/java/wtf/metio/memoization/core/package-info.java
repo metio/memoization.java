@@ -4,7 +4,5 @@
  */
 /**
  * Core interfaces and utilities.
- *
- * @see wtf.metio.memoization.core.MemoizationDefaults
  */
 package wtf.metio.memoization.core;
