@@ -86,17 +86,17 @@ Function<INPUT, OUTPUT> memoizedFunction = Memoize.function(function, cache.asMa
 
 // memoize in Caffeine cache
 Supplier<OUTPUT> supplier                = ...;
-Cache<String, OUTPUT> cache              = ...; // com.github.benmanes.caffeine.cache.Cache
+Cache<Integer, OUTPUT> cache             = ...; // com.github.benmanes.caffeine.cache.Cache
 Supplier<OUTPUT> memoizedSupplier        = MemoizeRx.supplier(supplier, cache.asMap());
 
 // memoize in Guava cache
 Function3<T1, T2, T3, OUTPUT> function         = ...;
-Cache<String, OUTPUT> cache                    = ...; // com.google.common.cache.Cache
+Cache<Integer, OUTPUT> cache                   = ...; // com.google.common.cache.Cache
 Function3<T1, T2, T3, OUTPUT> memoizedFunction = MemoizeJool.function3(function, cache.asMap());
 
 // memoize in ConcurrentMap
 Fn4<T1, T2, T3, T4, OUTPUT> function         = ...;
-Map<String, OUTPUT> cache                    = ...;
+Map<Integer, OUTPUT> cache                   = ...;
 Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, cache);
 ```
 

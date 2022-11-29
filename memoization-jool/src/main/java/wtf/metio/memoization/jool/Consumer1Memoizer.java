@@ -26,7 +26,7 @@ final class Consumer1Memoizer<KEY, TYPE1>
             final Consumer1<TYPE1> consumer) {
         super(cache);
         this.keyFunction = requireNonNull(keyFunction,
-                "Provide a key function, might just be 'MemoizationDefaults.defaultKeySupplier()'.");
+                "Provide a key function, might just be 'MemoizationDefaults.staticKey()'.");
         this.consumer = requireNonNull(consumer,
                 "Cannot memoize a NULL Consumer1 - provide an actual Consumer1 to fix this.");
     }

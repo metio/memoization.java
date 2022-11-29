@@ -5,9 +5,7 @@
 package wtf.metio.memoization.core;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 /**
  * Defaults used throughout the library.
@@ -23,8 +21,8 @@ public final class MemoizationDefaults {
      *
      * @return The default key supplier used throughout the library.
      */
-    public static Supplier<String> staticKey() {
-        return () -> "SUPPLIED";
+    public static Supplier<Integer> staticKey() {
+        return () -> 1;
     }
 
     /**
@@ -33,13 +31,8 @@ public final class MemoizationDefaults {
      * @param values The values to use.
      * @return The constructed cache key.
      */
-    public static String hashCodes(final Object... values) {
-//        return Arrays.hashCode(values);
-
-        return Arrays.stream(values)
-                .map(Object::hashCode)
-                .map(Objects::toString)
-                .collect(Collectors.joining(" "));
+    public static int hashCodes(final Object... values) {
+        return Arrays.hashCode(values);
     }
 
 }

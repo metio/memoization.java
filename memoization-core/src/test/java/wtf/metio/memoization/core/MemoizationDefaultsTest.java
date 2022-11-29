@@ -17,7 +17,7 @@ class MemoizationDefaultsTest {
     @Test
     void shouldDefineDefaultKeySupplier() {
         // given
-        Supplier<String> keySupplier;
+        Supplier<Integer> keySupplier;
 
         // when
         keySupplier = MemoizationDefaults.staticKey();
@@ -29,24 +29,14 @@ class MemoizationDefaultsTest {
     @Test
     void shouldDefineDefaultKey() {
         // given
-        final Supplier<String> keySupplier = MemoizationDefaults.staticKey();
+        final Supplier<Integer> keySupplier = MemoizationDefaults.staticKey();
 
         // when
-        final String defaultSuppliedKey = keySupplier.get();
+        final Integer defaultSuppliedKey = keySupplier.get();
 
         // then
         Assertions.assertNotNull(defaultSuppliedKey);
-        Assertions.assertEquals("SUPPLIED", defaultSuppliedKey);
-    }
-
-    @Test
-    void shouldConcatHashCodesWithWhitespaceInbetween() {
-        // given
-        // when
-        final String calculatedKey = MemoizationDefaults.hashCodes(1, 2);
-
-        // when
-        Assertions.assertEquals("1 2", calculatedKey);
+        Assertions.assertEquals(1, defaultSuppliedKey);
     }
 
     @Test
