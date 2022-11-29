@@ -13,7 +13,7 @@ Java [memoization](https://en.wikipedia.org/wiki/Memoization) library - trade sp
 * Memoize calls to [jOOL](https://github.com/jOOQ/jOOL) interfaces like `Consumer0..16` and `Function0..16`
 * Memoize calls to [lambda](https://github.com/palatable/lambda) interfaces like `Fn0..8`
 * Memoize calls to [RxJava](https://github.com/ReactiveX/RxJava) interfaces like `Action`, `Cancellable`, and more
-* Use custom caches like [Caffeine](https://github.com/ben-manes/caffeine), [Guava](https://github.com/google/guava/wiki/CachesExplained), [cache2k](https://cache2k.org/), or any other [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html).
+* Use custom caches like [Caffeine](https://github.com/ben-manes/caffeine), [Guava](https://github.com/google/guava/wiki/CachesExplained), [cache2k](https://cache2k.org/), or any [`ConcurrentMap`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ConcurrentMap.html).
 * Use custom cache keys for fine-tuning
 
 ## Usage
@@ -133,7 +133,7 @@ Map<KEY, OUTPUT> cache                       = ...;
 Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, keyFunction, cache);
 ```
 
-Note that `Memoize` and `MemoizeJool` do accept any `Map`, however they copy the entries in the map to a new `ConcurrentHashMap` in case the provided `Map` is not a `ConcurrentMap`. This is done in order to ensure atomic `computeIfAbsent` behavior.
+Note that the static factory methods do accept any `Map`, however they copy the entries in the map to a new `ConcurrentHashMap` in case the provided `Map` is not a `ConcurrentMap`. This is done in order to ensure atomic `computeIfAbsent` behavior.
 
 ## Integration
 
