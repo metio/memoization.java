@@ -5,11 +5,13 @@
 /**
  * The lambda module contains the implementation covering lambda interfaces.
  */
+@org.jspecify.nullness.NullMarked
 module wtf.metio.memoization.lambda {
 
-    requires lambda;
-    requires com.github.spotbugs.annotations;
     requires wtf.metio.memoization.core;
+    requires com.github.spotbugs.annotations;
+    requires org.jspecify;
+    requires lambda;
 
     exports wtf.metio.memoization.lambda;
 

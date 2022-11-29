@@ -5,6 +5,8 @@
 
 package wtf.metio.memoization.core;
 
+import edu.umd.cs.findbugs.annotations.CheckReturnValue;
+
 import java.io.Serial;
 
 public final class WrappedThrowable extends RuntimeException {
@@ -18,6 +20,7 @@ public final class WrappedThrowable extends RuntimeException {
         this.wrappedThrowable = wrappedThrowable;
     }
 
+    @CheckReturnValue
     public Throwable wrappedThrowable() {
         return wrappedThrowable;
     }

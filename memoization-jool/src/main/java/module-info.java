@@ -5,11 +5,13 @@
 /**
  * The jOOL module contains the implementation covering jOOL interfaces.
  */
+@org.jspecify.nullness.NullMarked
 module wtf.metio.memoization.jool {
 
-    requires org.jooq.jool;
     requires wtf.metio.memoization.core;
     requires com.github.spotbugs.annotations;
+    requires org.jspecify;
+    requires org.jooq.jool;
 
     exports wtf.metio.memoization.jool;
 
