@@ -192,6 +192,7 @@ Replace `${version.memoization}` with the latest release.
 * [memoizer](https://github.com/ggrandes/memoizer)
 * [jcabi's `@Cacheable`](http://aspects.jcabi.com/annotation-cacheable.html)
 * [crache](https://github.com/strongh/crache#memoization-client)
+* [memento](https://github.com/RokLenarcic/memento)
 
 ## License
 
