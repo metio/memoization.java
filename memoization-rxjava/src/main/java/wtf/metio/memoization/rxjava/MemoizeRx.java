@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.function.LongFunction;
 
 import static java.util.Collections.emptyMap;
-import static java.util.function.Function.identity;
 import static wtf.metio.memoization.core.ConcurrentMaps.asConcurrentMap;
 
 /**
