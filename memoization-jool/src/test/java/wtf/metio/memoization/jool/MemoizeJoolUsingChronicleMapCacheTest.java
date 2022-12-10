@@ -9,7 +9,6 @@ import net.openhft.chronicle.map.ChronicleMap;
 import net.openhft.chronicle.map.ChronicleMapBuilder;
 import org.junit.jupiter.api.Disabled;
 
-import java.util.Collections;
 import java.util.Map;
 
 @Disabled("Chronicle does run with jigsaw modules yet")
