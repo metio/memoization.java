@@ -400,6 +400,30 @@ abstract class UsingDefaultsTCK {
             BiFunction<FIRST, SECOND, OUTPUT> biFunction);
 
     @Test
+    final void shouldMemoizeConsumer() throws Throwable {
+        // given
+        final Consumer<String> consumer = Mockito.mock(Consumer.class);
+
+        // when
+        final Consumer<String> memoize = consumer(consumer);
+
+        // then
+        Assertions.assertNotNull(memoize);
+        threadedRun(DEFAULT_RUNS, () -> {
+            try {
+                memoize.accept("test");
+            } catch (Throwable e) {
+                waiter.fail(e);
+            }
+            waiter.resume();
+        });
+        waiter.await(DEFAULT_WAIT, DEFAULT_RUNS);
+        Mockito.verify(consumer).accept("test");
+    }
+
+    protected abstract <VALUE> Consumer<VALUE> consumer(Consumer<VALUE> consumer);
+
+    @Test
     final void shouldMemoizeBiConsumer() throws Throwable {
         // given
         final BiConsumer<Long, Long> consumer = Mockito.mock(BiConsumer.class);

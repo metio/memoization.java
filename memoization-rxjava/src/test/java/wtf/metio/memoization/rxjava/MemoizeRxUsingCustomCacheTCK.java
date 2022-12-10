@@ -34,6 +34,11 @@ abstract class MemoizeRxUsingCustomCacheTCK extends UsingDefaultsTCK {
     }
 
     @Override
+    protected final <VALUE> Consumer<VALUE> consumer(final Consumer<VALUE> consumer) {
+        return MemoizeRx.consumer(consumer, cache());
+    }
+
+    @Override
     protected final <TYPE1, OUTPUT> Function<TYPE1, OUTPUT> function(final Function<TYPE1, OUTPUT> function) {
         return MemoizeRx.function(function, cache());
     }

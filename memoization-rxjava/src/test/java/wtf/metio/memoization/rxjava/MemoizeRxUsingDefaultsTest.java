@@ -94,6 +94,11 @@ class MemoizeRxUsingDefaultsTest extends UsingDefaultsTCK {
     }
 
     @Override
+    protected final <VALUE> Consumer<VALUE> consumer(final Consumer<VALUE> consumer) {
+        return MemoizeRx.consumer(consumer);
+    }
+
+    @Override
     protected final <FIRST, SECOND> BiConsumer<FIRST, SECOND> biConsumer(
             final BiConsumer<FIRST, SECOND> biConsumer) {
         return MemoizeRx.biConsumer(biConsumer);
