@@ -30,18 +30,8 @@ jobs:
         name: Build Timestamp
         if: steps.commits.outputs.count > 0
         run: echo "iso8601=$(date --utc --iso-8601=seconds)" >> $GITHUB_OUTPUT
-      - id: setup-java
-        name: Set up Java
+      - uses: ./.github/actions/managed-maven
         if: steps.commits.outputs.count > 0
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          java-package: jdk
-          architecture: x64
-          distribution: temurin
-          server-id: ossrh
-          server-username: MAVEN_CENTRAL_USERNAME
-          server-password: MAVEN_CENTRAL_TOKEN
       - id: cache
         name: Cache Dependencies
         if: steps.commits.outputs.count > 0
@@ -99,9 +89,9 @@ jobs:
           server_port: ${{ secrets.MAIL_PORT }}
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: release ${{ steps.release.outputs.version }}
+          subject: ${{ github.event.repository.name }} version ${{ steps.release.outputs.version }} published
           body: See ${{ steps.create_release.outputs.url }} for details.
-          to: announcements@metio.groups.io
+          to: ${{ secrets.MAIL_RECIPIENT }}
           from: ${{ secrets.MAIL_SENDER }}
       - id: matrix
         name: Send Matrix Message
@@ -111,4 +101,4 @@ jobs:
           room_id: ${{ secrets.MATRIX_ROOM_ID }}
           access_token: ${{ secrets.MATRIX_ACCESS_TOKEN }}
           message: ${{ github.event.repository.name }} version [${{ steps.release.outputs.version }}](${{ steps.create_release.outputs.url }}) published
-          server: matrix.org
+          server: ${{ secrets.MATRIX_SERVER }}
