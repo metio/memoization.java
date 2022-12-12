@@ -61,7 +61,7 @@ jobs:
             --batch-mode \
             --activate-profiles release \
             --define scmTag=${{ steps.sha.outputs.sha }} \
-            --define pgp.secretkey=keyfile:signing.key.asc \
+            --define pgp.secretkey=keyfile:${{ steps.gpg.outputs.filePath }} \
             --define pgp.passphrase=literal:${{ secrets.GPG_SECRET_KEY_PASSWORD }} \
             --define project.build.outputTimestamp=${{ steps.timestamp.outputs.iso8601 }} \
             deploy
