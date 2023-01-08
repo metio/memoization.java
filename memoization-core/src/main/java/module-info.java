@@ -5,7 +5,7 @@
 /**
  * The core module contains the core interfaces and utilities of memoization.java
  */
-@org.jspecify.nullness.NullMarked
+@org.jspecify.annotations.NullMarked
 module wtf.metio.memoization.core {
 
     requires com.github.spotbugs.annotations;

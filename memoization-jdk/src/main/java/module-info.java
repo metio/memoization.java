@@ -5,7 +5,7 @@
 /**
  * The JDK module contains the implementation covering JDK interfaces.
  */
-@org.jspecify.nullness.NullMarked
+@org.jspecify.annotations.NullMarked
 module wtf.metio.memoization.jdk {
 
     requires wtf.metio.memoization.core;
