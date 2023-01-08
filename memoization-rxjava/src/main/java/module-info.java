@@ -5,7 +5,7 @@
 /**
  * The RxJava module contains the implementation covering RxJava interfaces.
  */
-@org.jspecify.nullness.NullMarked
+@org.jspecify.annotations.NullMarked
 module wtf.metio.memoization.rxjava {
 
     requires wtf.metio.memoization.core;
