@@ -19,26 +19,13 @@ jobs:
         language: [ java ]
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        java-version: 17
-        java-package: jdk
-        architecture: x64
-        distribution: temurin
-    - name: Cache Maven Artifacts
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
+      uses: actions/checkout@v4
+    - uses: ./.github/actions/managed-java
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
