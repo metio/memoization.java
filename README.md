@@ -30,7 +30,7 @@ Memoize any of the supported types by using the static factory methods supplied 
 ```java
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
-wtf.metio.memoization.jool.MemoizeLambda;
+wtf.metio.memoization.lambda.MemoizeLambda;
 wtf.metio.memoization.rxjava.MemoizeRx;
 
 Function<INPUT, OUTPUT> function         = ...;
@@ -51,7 +51,7 @@ Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function);
 ```java
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
-wtf.metio.memoization.jool.MemoizeLambda;
+wtf.metio.memoization.lambda.MemoizeLambda;
 wtf.metio.memoization.rxjava.MemoizeRx;
 
 Function<INPUT, OUTPUT> function         = ...;
@@ -76,7 +76,7 @@ Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, keyFu
 ```java
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
-wtf.metio.memoization.jool.MemoizeLambda;
+wtf.metio.memoization.lambda.MemoizeLambda;
 wtf.metio.memoization.rxjava.MemoizeRx;
 
 // memoize in cache2k cache
@@ -105,7 +105,7 @@ Fn4<T1, T2, T3, T4, OUTPUT> memoizedFunction = MemoizeLambda.fn4(function, cache
 ```java
 wtf.metio.memoization.jdk.Memoize;
 wtf.metio.memoization.jool.MemoizeJool;
-wtf.metio.memoization.jool.MemoizeLambda;
+wtf.metio.memoization.lambda.MemoizeLambda;
 wtf.metio.memoization.rxjava.MemoizeRx;
 
 // memoize in cache2k cache
@@ -175,7 +175,7 @@ In order to use this project, declare the following dependencies in your project
 </dependencies>
 ```
 
-Replace `${version.memoization}` with the latest release.
+Replace `${version.memoization}` with the [latest release](https://central.sonatype.com/namespace/wtf.metio.memoization).
 
 ## Alternatives
 
@@ -208,10 +208,3 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ```
-
-## Mirrors
-
-- https://github.com/metio/memoization.java
-- https://gitlab.com/metio.wtf/memoization.java
-- https://bitbucket.org/metio-wtf/memoization.java
-- https://codeberg.org/metio.wtf/memoization.java
