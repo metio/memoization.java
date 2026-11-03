@@ -9,7 +9,7 @@ authors:
 - family-names: Hoß
   given-names: Sebastian
   email: seb@hoß.de
-url: https://github.com/metio/memoization.java
+url: https://github.com/metio/memoization.java/
 license: 0BSD
 keywords:
   - cache
@@ -17,3 +17,4 @@ keywords:
   - make
   - maven
   - memoization
+  - memoize
